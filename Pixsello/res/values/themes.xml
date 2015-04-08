@@ -1,0 +1,13 @@
+<resources>
+
+    <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+			<item name="android:background">@color/actionbar_background</item>
+            <item name="android:icon">@android:color/transparent</item>        
+    </style>
+
+</resources>

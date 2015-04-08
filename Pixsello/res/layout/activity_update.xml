@@ -1,0 +1,249 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.UpdateActivity" >
+
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbar_background" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/report_item"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:onClick="doSubmitItem"
+            android:visibility="invisible"
+            android:text="Submit" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DATE"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_report_date"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:drawableEnd="@android:drawable/ic_menu_today"
+            android:drawableRight="@android:drawable/ic_menu_today"
+            android:editable="false"
+            android:inputType="number"
+            android:text="12-4-2015"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="TIME"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edit_report_time"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:background="@android:drawable/editbox_background"
+            android:editable="false"
+            android:inputType="number"
+            android:text="12-4-2015"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/lbl_description"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/lbl_location"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/lbl_description"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/lbl_staff"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/lbl_date_guest_stay"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="450dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:drawable/editbox_background"
+                android:inputType="text"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/edit_location"
+                android:layout_width="450dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:drawable/editbox_background"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/lbl_room_num"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_room"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edit_staff_name"
+                android:layout_width="450dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="25dp"
+                android:background="@android:drawable/editbox_background"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/stay_from_date"
+                    android:layout_width="210dp"
+                    android:layout_height="45dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:editable="false"
+                    android:inputType="date"
+                    android:onClick="setStayFromDate" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="to"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/stay_to_date"
+                    android:layout_width="210dp"
+                    android:layout_height="45dp"
+                    android:onClick="setStayToDate"
+                    android:background="@android:drawable/editbox_background"
+                    android:inputType="date" >
+                </EditText>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    
+      <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/submit_selector"
+            android:onClick="doSubmitItem"
+            android:text="Submit" />
+
+</LinearLayout>

@@ -1,0 +1,169 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.training.StaffProfileActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionbar_background" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="STAFF PROFILE"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/submit_selector"
+            android:onClick="showSearchOptions"
+            android:text="Search" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="10dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/text_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="99dp"
+            android:layout_marginTop="54dp"
+            android:text="Search By:"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/search_spinner"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="54dp"
+            android:layout_toRightOf="@+id/text_search"
+            android:background="@android:drawable/btn_dropdown"
+            android:entries="@array/staff_search_types" />
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="430dp"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/text_search"
+            android:layout_below="@+id/search_spinner"
+            android:layout_marginTop="20dp"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/search_spinner"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/edit_search"
+            android:onClick="doSearch"
+            android:text="Search" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="29dp"
+            android:layout_marginTop="30dp"
+            android:onClick="showAllData"
+            android:src="@drawable/arrow_up" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/list_header_background"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp" >
+
+        <TextView
+            android:id="@+id/item_trainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="TRAINER"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_trainee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="TRAINEE"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="Date and Time"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_training"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="Training"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_training_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:text="Type"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_staff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+
+</LinearLayout>

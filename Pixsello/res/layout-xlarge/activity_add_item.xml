@@ -1,0 +1,199 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.action.AddItemActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionbar_background" >
+        
+         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:onClick="goBack"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/arrow" />
+        
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/add_item"
+            android:textColor="@android:color/white"
+            android:layout_marginRight="10dp"
+            android:textSize="35sp" />
+
+        <!-- <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="doSubmitItem"
+            android:text="Submit" /> -->
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="45dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DATE"
+            android:textSize="30sp"
+            android:textColor="@android:color/black"
+             />
+
+        <EditText
+            android:id="@+id/edit_item_date"
+            android:layout_width="170dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:background="@android:drawable/editbox_background"
+            android:drawableEnd="@android:drawable/ic_menu_today"
+            android:drawableRight="@android:drawable/ic_menu_today"
+            android:inputType="number"
+            android:text="12-4-2015"
+            android:textSize="20sp"
+             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="TIME"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+             />
+
+        <EditText
+            android:id="@+id/edit_item_time"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="20dp"
+            android:background="@android:drawable/editbox_background"
+            android:inputType="number"
+            android:text="14.50"
+            android:textSize="20sp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Description with quantity"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="120dp"
+                android:text="@string/lbl_where"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/lbl_reported"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/lbl_responsibility"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="470dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_location"
+                android:layout_width="470dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:singleLine="true"
+                android:background="@android:drawable/editbox_background"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_staff_name"
+                android:layout_width="470dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:singleLine="true"
+                android:background="@android:drawable/editbox_background"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_responsibility"
+                    android:layout_width="470dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="45dp"
+                    android:textSize="25sp"
+                    android:singleLine="true"
+                    android:background="@android:drawable/editbox_background"
+                    android:inputType="text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_submit"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center"
+        android:onClick="doSubmitItem"
+        android:background="@drawable/submit_selector"
+        android:text="Submit" />
+
+</LinearLayout>

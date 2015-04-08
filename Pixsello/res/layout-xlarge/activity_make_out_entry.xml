@@ -1,0 +1,163 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.guest.MakeOutEntryActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionbar_background" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:id="@+id/lbl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lbl_make_out"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_out_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <EditText
+                android:id="@+id/edit_time"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@android:drawable/editbox_background"
+                android:hint="TIME"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:onClick="updateTime"
+                android:text="Update" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible" >
+
+            <EditText
+                android:id="@+id/edit_room"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="220dp"
+                android:background="@android:drawable/editbox_background"
+                android:hint="Room Number"
+                android:inputType="number"
+                android:visibility="gone"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/list_header_background"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp" >
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="DATE"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:text="TIME"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:text="GUEST NAME"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="COMPANY"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="GENDER"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="PHOTO"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="IN TIME"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="OUT TIME"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/active_items_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+
+</LinearLayout>

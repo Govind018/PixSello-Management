@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/list_item_background"
+    android:paddingLeft="25dp" >
+
+    <TextView
+        android:id="@+id/closed_item_date"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="12-4-2015"
+        android:textColor="@android:color/black"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/closed_item_time"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:text="15.23"
+        android:textColor="@android:color/black"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/closed_item_description"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="SOAP"
+        android:layout_weight="0.20"
+        android:textColor="@android:color/black"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/closed_item_where"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15"
+        android:text="BATHROOM"
+        android:textColor="@android:color/black"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/closed_item_reported"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:text="RAGHU"
+        android:textColor="@android:color/black"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/closed_item_respo"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:text="OWNER"
+        android:textColor="@android:color/black"
+        android:textSize="23sp" />
+
+    <TextView
+        android:id="@+id/closed_item_action_taken"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:text="INGPDSD DADADAD da d"
+        android:textColor="@android:color/black"
+        android:textSize="23sp" />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="23sp"
+        android:text="Closed"
+        />
+    
+</LinearLayout>

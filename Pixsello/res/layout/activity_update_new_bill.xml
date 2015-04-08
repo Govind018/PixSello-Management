@@ -1,0 +1,181 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.spundhan.pixsello.payment.UpdateNewBIllActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionbar_background" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Update New Bill"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Name of Service"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/spinner_services"
+            android:layout_width="190dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="60dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Identity"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/spinner_identity"
+            android:layout_width="190dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="60dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Bill No"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/edit_bill_number"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
+            android:background="@android:drawable/editbox_background"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Bill Date"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/edit_bill_date"
+            android:layout_width="190dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
+            android:background="@android:drawable/editbox_background"
+            android:drawableRight="@android:drawable/ic_menu_today"
+            android:onClick="pickBillDate"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Due Date"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/edit_due_date"
+            android:layout_width="190dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="60dp"
+            android:onClick="pickDueDate"
+            android:background="@android:drawable/editbox_background"
+            android:drawableRight="@android:drawable/ic_menu_today"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="Amount"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+        
+        <EditText
+            android:id="@+id/edit_amount"
+            android:layout_width="190dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="40dp"
+            android:background="@android:drawable/editbox_background"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+        
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:text="Payment For this"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:background="@drawable/submit_selector"
+            android:onClick="showPayment"
+            android:textSize="30sp" />
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+			android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:text="Submit"
+            android:textSize="30sp"
+            android:layout_weight="1"
+            android:background="@drawable/submit_selector"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+</LinearLayout>

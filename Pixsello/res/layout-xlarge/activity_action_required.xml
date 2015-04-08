@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context="com.pixsello.management.action.ActionRequiredActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionbar_background" >
+        
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:id="@+id/lbl_type_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lbl_action"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/layout_background" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center" >
+
+            <RelativeLayout
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:background="@drawable/contact_back"
+                android:clickable="true"
+                android:onClick="doAddItem" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_add_item"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/guest_back"
+                android:onClick="showActiveItems"
+                android:clickable="true"
+                 >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_see_active_list"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/lost_back"
+                android:onClick="showClosedItems"
+                android:clickable="true"
+                 >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_list_closed"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

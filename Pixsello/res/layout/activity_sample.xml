@@ -1,0 +1,208 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.HomeScreenActivity" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbar_background" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lbl_manager_controls"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+    </RelativeLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:shrinkColumns="*"
+        android:stretchColumns="*" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/lost_back"
+                android:clickable="true"
+                android:onClick="showLostFoundDetails" >
+
+                <TextView
+                    android:id="@+id/lable_lost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/lost_found"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/lost_found" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/contact_back"
+                android:clickable="true"
+                android:onClick="showContactDetails" >
+
+                <TextView
+                    android:id="@+id/lable_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/contact_details"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/contact_details" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_weight="1"
+                android:background="@drawable/guest_back"
+                android:clickable="true"
+                android:onClick="showGuestVisitors" >
+
+                <TextView
+                    android:id="@+id/lable_guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/guest_visitor"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/guest" />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/action_back"
+                android:clickable="true"
+                android:onClick="showActionRequired" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/attantaion"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/action_required" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/training_back"
+                android:clickable="true"
+                android:onClick="showTrainingUpdates" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/training_updates"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/traiining" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_weight="1"
+                android:background="@drawable/payment_back"
+                android:clickable="true"
+                android:onClick="showPaymentDetails" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/payment_details"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/payment" />
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

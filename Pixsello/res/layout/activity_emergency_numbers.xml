@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.contact.EmergencyNumbersActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbar_background" >
+        
+         <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:id="@+id/lbl_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lbl_emergency_number"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="addEmergencyNumber"
+            android:layout_marginRight="10dp"
+            android:text="Add Number" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E6E6FA"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lbl_services"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lbl_contact_person"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/lbl_contact_number"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+    </LinearLayout>
+    
+    <ListView 
+        android:id="@+id/contact_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></ListView>
+
+</LinearLayout>

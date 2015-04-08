@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E6E6FA"
+    android:orientation="horizontal"
+    android:paddingLeft="25dp" >
+
+    <TextView
+        android:id="@+id/active_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12-4-2015"
+        android:layout_weight="0.10"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/active_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:text="15.23"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/active_item_dispersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.30"
+        android:text="SOAP"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/active_item_where"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.15"
+        android:text="BATHROOM"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/active_item_reported"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.30"
+        android:text="RAGHU"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/active_item_respo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.30"
+        android:text="OWNER"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/active_item_action_taken"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.30"
+        android:gravity="center"
+        android:text="INGPDSD DADADAD da d"
+        android:textColor="@android:color/black"
+        android:textSize="15sp" />
+    
+    <Button 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UPDATE"
+        
+        />
+
+</LinearLayout>

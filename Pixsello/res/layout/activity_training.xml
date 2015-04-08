@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pixsello.management.training.TrainingActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/actionbar_background" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/lbl_training"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="60dp"
+        android:background="@android:color/darker_gray" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center" >
+
+            <RelativeLayout
+                android:layout_width="250dp"
+                android:layout_height="210dp"
+                android:background="@drawable/contact_back"
+                android:clickable="true"
+                android:onClick="doUpdate" >
+
+                <TextView
+                    android:id="@+id/lable_guest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_update"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="250dp"
+                android:layout_height="210dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/guest_back"
+                android:clickable="true"
+                android:onClick="showProfile" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_staff_profile"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="250dp"
+                android:layout_height="210dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/lost_back"
+                android:clickable="true"
+                android:onClick="showVideos" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_videos"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

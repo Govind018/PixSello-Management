@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MBC_Pixsello</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="lost_found">LOST &amp; FOUND</string>
+    <string name="contact_details">CONTACT DETAILS</string>
+    <string name="guest_visitor">GUEST VISITOR</string>
+    <string name="attantaion">ACTION REQUIRED</string>
+    <string name="training_updates">TRAINING UPDATES</string>
+    <string name="payment_details">PAYMENT DETAILS</string>
+    <string name="report_item">REPORT AN ITEM</string>
+    <string name="find_item">FIND AN ITEM</string>
+    <string name="add_item">ADD AN ITEM</string>
+    <string name="lbl_description">Description of item found</string>
+    <string name="lbl_location">Location where found</string>
+    <string name="lbl_room_num">Room No</string>
+    <string name="lbl_staff">Staff who found it</string>
+    <string name="lbl_date_guest_stay">Approx date of guest stay</string>
+    <string name="lbl_request_visitors">REQUEST OF GUEST VISITORS</string>
+    <string name="lbl_make_in">MAKE IN-TIME ENTRIES</string>
+    <string name="lbl_make_out">MAKE OUT-TIME ENTRIES</string>
+    <string name="lbl_past_visitors">SEE PAST VISITORS</string>
+    <string name="lbl_lost_found">LOST &amp; FOUND REGISTER</string>
+    <string name="lbl_guest_name">Guest Name</string>
+    <string name="lbl_company">Company</string>
+    <string name="lbl_visiting_guest_name">Visiting Guest Name</string>
+    <string name="lbl_Gendar">Gendar</string>
+    <string name="lbl_manager_controls">MANAGER BOOK OF CONTROLS</string>
+    <string name="lbl_emergency_number">EMERGENCY NUMBER</string>
+    <string name="lbl_vendor_number">VENDORS NUMBER</string>
+    <string name="lbl_search">SEARCH</string>
+    <string name="lbl_services">SERVICES DESCRIPTION</string>
+    <string name="lbl_action">ACTION REQUIRED</string>
+    <string name="lbl_contact_person">CONTACT PERSON</string>
+    <string name="lbl_contact_number">CONTACT NUMBER</string>
+    <string name="lbl_add_item">ADD ITEM</string>
+    <string name="lbl_see_active_list">SEE ACTIVE LIST</string>
+    <string name="lbl_list_closed">SEE LIST OF CLOSED ITEMS</string>
+    <string name="lbl_dispersion">Dispersion with quality</string>
+    <string name="lbl_where">Where</string>
+    <string name="lbl_reported">Reported By</string>
+    <string name="lbl_responsibility">Responsibility</string>
+    <string name="lbl_training">TRAINING UPDATES</string>
+    <string name="lbl_update">UPDATE</string>
+    <string name="lbl_staff_profile">STAFF PROFILE</string>
+    <string name="lbl_videos">TRAINING VIDEOS</string>
+    <string name="lbl_trainee">Trainee</string>
+    <string name="lbl_trainer">Trainer</string>
+    <string name="lbl_type">Type</string>
+    <string name="lbl_time_training">Time of Training</string>
+    <string name="lbl_trainee_assessment">Trainee Assessment</string>
+    <string name="title_activity_lost_and_found">LostAndFoundActivity</string>
+    <string name="title_activity_contact_details">ContactDetailsActivity</string>
+    <string name="title_activity_guest_visitor">GuestVisitorActivity</string>
+    <string name="title_activity_action_required">ActionRequiredActivity</string>
+    <string name="title_activity_training_updates">TrainingUpdatesActivity</string>
+    <string name="title_activity_payment_details">PaymentDetailsActivity</string>
+    <string name="title_activity_report_item">ReportItemActivity</string>
+    <string name="title_activity_find_item">FindItemActivity</string>
+    <string name="title_activity_make_in_entry">MakeInEntryActivity</string>
+    <string name="title_activity_make_out_entry">MakeOutEntryActivity</string>
+    <string name="title_activity_past_visitors">PastVisitorsActivity</string>
+    <string name="title_activity_add_contact_number">AddContactNumberActivity</string>
+    <string name="title_activity_emergency_numbers">EmergencyNumbersActivity</string>
+    <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="title_activity_training">TrainingActivity</string>
+    <string name="title_activity_update">UpdateActivity</string>
+    <string name="title_activity_staff_profile">StaffProfileActivity</string>
+    <string name="title_activity_training_videos">TrainingVideosActivity</string>
+    <string name="title_activity_active_items_list">ActiveItemsListActivity</string>
+    <string name="title_activity_closed_items">ClosedItemsActivity</string>
+
+    <string-array name="search_options">
+        <item>Service Description</item>
+        <item>Contact Person</item>
+        <item>Contact Number</item>
+    </string-array>
+    <string-array name="training_types">
+        <item>Long Term</item>
+        <item>Short Term</item>
+        <item>Week</item>
+    </string-array>
+    <string-array name="payment_types">
+        <item>Month</item>
+        <item>Quatar</item>
+        <item>Year</item>
+    </string-array>
+
+    <string-array name="staff_search_types">
+        <item>Trainer</item>
+        <item>Trainee</item>
+        <item>Type</item>
+    </string-array>
+    
+    <string name="title_activity_add_services">AddServicesActivity</string>
+    <string name="title_activity_update_new_bill">UpdateNewBIllActivity</string>
+    <string name="title_activity_payment">PaymentActivity</string>
+    <string name="title_activity_payment_status">PaymentStatusActivity</string>
+
+</resources>

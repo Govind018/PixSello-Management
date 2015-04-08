@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="silver">#D3D3D3</color>
+    <color name="blue">#338cb6</color>
+    <color name="green">#759f57</color>
+    <color name="orange">#f2a905</color>
+    <color name="pink">#b12a76</color>
+    <color name="ligh_green">#1bbc9b</color>
+    <color name="red">#e84c3d</color>
+    
+    <color name="actionbar_background">#4DC1BB</color>
+    
+    <color name="pressed_color">#ADD8E6</color>
+    <color name="layout_background">#E6E6E6</color>
+    <color name="list_item_background">#FAF0E6</color>
+    <color name="list_header_background">#E6E6FA</color>
+    
+    
+</resources>
