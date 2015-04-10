@@ -21,7 +21,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.pixsello.management.PaymentActivity;
 import com.pixsello.management.R;
 import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
@@ -165,8 +164,6 @@ public class UpdateNewBIllActivity extends Activity {
 		billAmount = editAmount.getText().toString();
 		int serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		int identityID = spinnerIdentity.getSelectedItemPosition() + 1;
-		
-		Uttilities.showToast(getApplicationContext(), serviceId + "");
 		
 		
 //		if(!billNumber.isEmpty() || !billDate.isEmpty() || !billDueDate.isEmpty() || !billAmount.isEmpty()){
