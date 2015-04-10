@@ -103,7 +103,7 @@
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/payment_back"
                 android:clickable="true"
-                android:onClick="showPaymentStatus" >
+                android:onClick="doSearch" >
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -87,16 +87,16 @@
         <item>Quatar</item>
         <item>Year</item>
     </string-array>
-
     <string-array name="staff_search_types">
         <item>Trainer</item>
         <item>Trainee</item>
         <item>Type</item>
     </string-array>
-    
+
     <string name="title_activity_add_services">AddServicesActivity</string>
     <string name="title_activity_update_new_bill">UpdateNewBIllActivity</string>
     <string name="title_activity_payment">PaymentActivity</string>
     <string name="title_activity_payment_status">PaymentStatusActivity</string>
+    <string name="title_activity_payment_search">PaymentSearchActivity</string>
 
 </resources>

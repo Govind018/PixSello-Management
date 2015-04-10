@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pixsello.management.PaymentStatusActivity" >
+    tools:context="com.spundhan.pixsello.payment.PaymentStatusActivity" >
 
     <RelativeLayout
         android:layout_width="match_parent"
