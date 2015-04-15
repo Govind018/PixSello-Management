@@ -74,6 +74,7 @@ public class AddItemActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("Where", location));
 			nameValuePair.add(new BasicNameValuePair("Reported", staffName));
 			nameValuePair.add(new BasicNameValuePair("Responsibility", respo));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 
 			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
 

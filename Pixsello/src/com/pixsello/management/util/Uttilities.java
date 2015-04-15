@@ -48,16 +48,20 @@ public class Uttilities {
 	public static String STAFF_SEARCH_TRAINEE = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/searchTainee";
 	
 	public static String PAST_VISITORS_SEARCH = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getPastVisitors";
-	
-	public static String PAYMENT_ADD_SERVICES_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addService";
 
-	public static String PAYMENT_GET_SERVICES_IDENTITY = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getAllserviceIdentity";
+	public static String PAYMENT_ADD_NEW_SERVICES_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addService";
+
+	public static String PAYMENT_ADD_SERVICES_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addPaymentservice";
+
+	public static String PAYMENT_GET_SERVICES_IDENTITY = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getServiceIdentity";
 	
 	public static String PAYMENT_UPDATE_NEW_BILL_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/UpdateNewBill";
 
 	public static String PAYMENT_BILL_PAYMENT_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/BillPayment";
 
-	public static String PAYMENT_STATUS = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getPaymentStatus";
+	public static String PAYMENT_STATUS = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/newPayment";
+
+	public static final String PROPERTY_ID = "property1";
 	
 	public static void showToast(Context context, String message) {
 

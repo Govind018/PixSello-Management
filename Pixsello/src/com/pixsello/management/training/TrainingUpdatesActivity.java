@@ -8,9 +8,9 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -22,9 +22,11 @@ import com.pixsello.management.util.Uttilities;
 public class TrainingUpdatesActivity extends Activity {
 
 	EditText editTrainingDate, editTrainigTime, editTrainee, editTrainer,
-			editOther, editHrs, editMins, editAssement;
+			editOther,editAssement;
 
 	Spinner editTrainingType;
+	
+	Spinner editHrs,editMins;
 
 	private String trainingDate;
 	private String trainingTime;
@@ -35,10 +37,14 @@ public class TrainingUpdatesActivity extends Activity {
 	private String trainingHrs;
 	private String trainingMins;
 
+	String[] types;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_training_updates);
+
+		types = getResources().getStringArray(R.array.training_types);
 
 		editTrainingDate = (EditText) findViewById(R.id.edit_training_date);
 		editTrainigTime = (EditText) findViewById(R.id.edit_training_time);
@@ -46,9 +52,32 @@ public class TrainingUpdatesActivity extends Activity {
 		editTrainer = (EditText) findViewById(R.id.edit_trainer);
 		editTrainingType = (Spinner) findViewById(R.id.spinner_type);
 		editOther = (EditText) findViewById(R.id.edit_other);
-		editHrs = (EditText) findViewById(R.id.edit_hrs);
-		editMins = (EditText) findViewById(R.id.edit_mins);
+		editHrs = (Spinner) findViewById(R.id.edit_hrs);
+		editMins = (Spinner) findViewById(R.id.edit_mins);
 
+		editTrainingType
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> parent,
+							View view, int position, long id) {
+
+						String type = types[position];
+
+						if (type.equalsIgnoreCase("Other")) {
+
+							editOther.setVisibility(View.VISIBLE);
+
+						} else {
+							editOther.setVisibility(View.INVISIBLE);
+						}
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> parent) {
+
+					}
+				});
 	}
 
 	@Override
@@ -67,10 +96,11 @@ public class TrainingUpdatesActivity extends Activity {
 		trainerName = editTrainer.getText().toString();
 		trainingType = editTrainingType.getSelectedItem().toString();
 		other = editOther.getText().toString();
-		trainingHrs = editHrs.getText().toString();
-		trainingMins = editMins.getText().toString();
+		trainingHrs = editHrs.getSelectedItem().toString();
+		trainingMins = editMins.getSelectedItem().toString();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
+		nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
 		nameValuePair.add(new BasicNameValuePair("Date", trainingDate));
 		nameValuePair.add(new BasicNameValuePair("Time", trainingTime));
 		nameValuePair.add(new BasicNameValuePair("Trainee", traineeName));
@@ -97,24 +127,5 @@ public class TrainingUpdatesActivity extends Activity {
 
 	public void goBack(View v) {
 		finish();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.training_updates, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }

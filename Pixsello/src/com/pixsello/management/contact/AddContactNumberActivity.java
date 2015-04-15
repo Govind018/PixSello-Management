@@ -88,12 +88,16 @@ public class AddContactNumberActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("ContactNumber",
 					contactNumber));
 			
-			
 			if(emergency){
 				nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));	
 			}else{
 				nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));	
 			}
+			
+			nameValuePair.add(new BasicNameValuePair("quickinfo",
+					"test"));
+			nameValuePair.add(new BasicNameValuePair("PropertyID",
+					Uttilities.PROPERTY_ID));
 			
 			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
 

@@ -12,11 +12,15 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import com.pixsello.management.R;
 import com.pixsello.management.connectivity.IWebRequest;
@@ -30,26 +34,32 @@ public class AddServicesActivity extends Activity {
 	private int month;
 	private int day;
 
-	EditText editService, editIdentity, editDueDate;
+	EditText editIdentity, editDueDate;
 
 	RadioButton radioRegular, radioRecurring;
 
 	boolean regular;
 
 	boolean recuring;
+	
+	Spinner spinnerServices;
 
 	String service;
 	String identity;
 	String dueDate;
 	String regularPay;
 	String recurring;
+	
+	int serviceId;
+	
+	ArrayList<String> listOfServices;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_services);
 
-		editService = (EditText) findViewById(R.id.edit_service);
+		spinnerServices = (Spinner) findViewById(R.id.edit_service);
 		editIdentity = (EditText) findViewById(R.id.edit_identity);
 		editDueDate = (EditText) findViewById(R.id.due_date);
 		radioRegular = (RadioButton) findViewById(R.id.radio_type_payment_regular);
@@ -58,15 +68,65 @@ public class AddServicesActivity extends Activity {
 		radioRegular.setOnCheckedChangeListener(Regularlistener);
 		radioRecurring.setOnCheckedChangeListener(Recurringlistener);
 
+		listOfServices = new ArrayList<String>();
+		
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
 	}
+	
+	
+	public void addNewService(View v){
+		
+		final Dialog d = new Dialog(AddServicesActivity.this);
+		d.setContentView(R.layout.new_service_dialog);
+		d.setTitle("Add New Service.");
+		
+		final EditText editServiceName = (EditText) d.findViewById(R.id.edit_service_name);
+		Button btn = (Button) d.findViewById(R.id.btn_add_service);
+		
+		btn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				String name = editServiceName.getText().toString();
+				postNewService(name);
+				d.cancel();
+				
+			}
+		});
+		d.show();
+	}
+	
+	
+	public void postNewService(final String nameOfService){
+
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("Nameofservice", nameOfService));
+		
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+			
+			@Override
+			public void onDataArrived(String data) {
+				
+				Uttilities.showToast(getApplicationContext(), data);
+				listOfServices.add(nameOfService);
+				ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, listOfServices);
+				spinnerServices.setAdapter(adapter);
+				
+			}
+		}, nameValuePair);
+		
+		post.execute(Uttilities.PAYMENT_ADD_NEW_SERVICES_URL);
+	}
 
 	public void doSubmitItem(View v){
 
-		service = editService.getText().toString();
+		service = spinnerServices.getSelectedItem().toString();
+		serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		identity = editIdentity.getText().toString();
 		dueDate = editDueDate.getText().toString();
 		regularPay = (regular) ? "1":"0";
@@ -74,7 +134,9 @@ public class AddServicesActivity extends Activity {
 
 		if(!service.isEmpty() || !identity.isEmpty() || !dueDate.isEmpty()){
 
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
+			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("ServiceID",String.valueOf(serviceId)));
 			nameValuePair.add(new BasicNameValuePair("Nameofservice",service));
 			nameValuePair.add(new BasicNameValuePair("Identity",identity));
 			nameValuePair.add(new BasicNameValuePair("PaymentType",regularPay));
@@ -102,7 +164,6 @@ public class AddServicesActivity extends Activity {
 
 	private void resetFields() {
 
-		editService.setText("");
 		editIdentity.setText("");
 		editDueDate.setText("");
 		radioRegular.setChecked(false);

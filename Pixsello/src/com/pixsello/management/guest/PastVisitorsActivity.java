@@ -138,6 +138,7 @@ public class PastVisitorsActivity extends Activity {
 		{
 			List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 					1);
+			nameValuePairSearch.add(new BasicNameValuePair("propertyID",Uttilities.PROPERTY_ID));
 			nameValuePairSearch.add(new BasicNameValuePair("date_from",fromDate));
 			nameValuePairSearch.add(new BasicNameValuePair("date_to",toDate));
 			

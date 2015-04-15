@@ -10,11 +10,15 @@ import org.apache.http.message.BasicNameValuePair;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
@@ -24,25 +28,28 @@ public class ReportItemActivity extends ActionBarActivity {
 
 	EditText editReportDate;
 	EditText editReportTime, editReportDescription, editReportLocation,
-			editRoomNum, editStaffName, editStayFromDate, editStayToDate;
+			editStaffName, editStayFromDate, editStayToDate;
+	
+	ImageView image;
 
 	private String reportDate;
 	private String reportTime;
 	private String reportDescription;
 	private String reportLocation;
-	private String roomNum;
 	private String staffName;
 	private String stayFromDate;
 	private String stayToDate;
 
 	static final int DATE_DIALOG_ID = 999;
 
+	int REQUEST_IMAGE_CAPTURE = 101;
+
 	private int year;
 	private int month;
 	private int day;
 
 	private boolean stayDate;
-	
+
 	ProgressDialog dialog;
 
 	@Override
@@ -51,16 +58,23 @@ public class ReportItemActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_report_item);
 
 		initLayout();
-		
+
 		dialog = new ProgressDialog(ReportItemActivity.this);
 		dialog.setMessage("Please wait..!");
 
-		
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
 
+	}
+
+	public void capturePhoto(View v) {
+
+		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+			startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+		}
 	}
 
 	public void setStayFromDate(View v) {
@@ -90,37 +104,35 @@ public class ReportItemActivity extends ActionBarActivity {
 
 	private void initLayout() {
 
-		editReportDate = (EditText) findViewById(R.id.edit_report_date);     
+		editReportDate = (EditText) findViewById(R.id.edit_report_date);
 		editReportTime = (EditText) findViewById(R.id.edit_report_time);
 		editReportDescription = (EditText) findViewById(R.id.edit_description);
 		editReportLocation = (EditText) findViewById(R.id.edit_location);
-		editRoomNum = (EditText) findViewById(R.id.edit_room);
 		editStaffName = (EditText) findViewById(R.id.edit_staff_name);
-		editStayFromDate = (EditText) findViewById(R.id.stay_from_date);     
+		editStayFromDate = (EditText) findViewById(R.id.stay_from_date);
 		editStayToDate = (EditText) findViewById(R.id.stay_to_date);
-
+		image = (ImageView) findViewById(R.id.image);
 	}
 
 	public void doSubmitItem(View v) {
-		
-//		if(Uttilities.isNetworkAvailable(getApplicationContext())){
-//			Uttilities.showToast(getApplicationContext(), "ava");
-//		}else{
-//			Uttilities.showToast(getApplicationContext(), "not");
-//		}
+
+		// if(Uttilities.isNetworkAvailable(getApplicationContext())){
+		// Uttilities.showToast(getApplicationContext(), "ava");
+		// }else{
+		// Uttilities.showToast(getApplicationContext(), "not");
+		// }
 		// showDialog(DATE_DIALOG_ID);
 		reportDate = editReportDate.getText().toString();
 		reportTime = editReportTime.getText().toString();
 		reportDescription = editReportDescription.getText().toString();
 		reportLocation = editReportLocation.getText().toString();
-		roomNum = editRoomNum.getText().toString();
 		staffName = editStaffName.getText().toString();
 		stayFromDate = editStayFromDate.getText().toString();
 		stayToDate = editStayToDate.getText().toString();
 
 		if (stayFromDate.isEmpty() || stayToDate.isEmpty()
 				|| reportDescription.isEmpty() || reportLocation.isEmpty()
-				|| roomNum.isEmpty() || staffName.isEmpty()) {
+				|| staffName.isEmpty()) {
 
 			Uttilities.showToast(getApplicationContext(),
 					"Please Fill all fields");
@@ -128,15 +140,15 @@ public class ReportItemActivity extends ActionBarActivity {
 		} else {
 
 			dialog.show();
-			
+
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(8);
+			nameValuePair.add(new BasicNameValuePair("PropertyID", "property1"));
 			nameValuePair.add(new BasicNameValuePair("Date", reportDate));
 			nameValuePair.add(new BasicNameValuePair("Time", reportTime));
 			nameValuePair.add(new BasicNameValuePair("Discriptionofitem",
 					reportDescription));
 			nameValuePair.add(new BasicNameValuePair("Locationwherefound",
 					reportLocation));
-			nameValuePair.add(new BasicNameValuePair("Roomno", roomNum));
 			nameValuePair
 					.add(new BasicNameValuePair("Staffwhofound", staffName));
 			nameValuePair.add(new BasicNameValuePair("Gueststaydatefrom",
@@ -151,21 +163,31 @@ public class ReportItemActivity extends ActionBarActivity {
 
 					dialog.cancel();
 					Uttilities.showToast(getApplicationContext(), data);
-					
+
 					resetTextFields();
 				}
 			}, nameValuePair);
 
 			post.execute(Uttilities.REPORT_ITEM_URL);
 		}
-
 	}
 	
-	private void resetTextFields() {
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 		
+		if(resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE){
+			
+			Bitmap map = (Bitmap) data.getExtras().get("data");
+			image.setImageBitmap(map);
+			
+		}
+	}
+
+	private void resetTextFields() {
+
 		editReportDescription.setText("");
 		editReportLocation.setText("");
-		editRoomNum.setText("");
 		editStaffName.setText("");
 		editStayFromDate.setText("");
 		editStayToDate.setText("");
@@ -214,5 +236,4 @@ public class ReportItemActivity extends ActionBarActivity {
 
 		}
 	};
-
 }

@@ -32,7 +32,7 @@ public class MakeInEntryActivity extends Activity {
 	EditText editDate, editTime, editGuestName, editCompany, editVisitingGuest,editInTIme;
 
 	String date;
-	String time;
+	String time;                 
 	String guestName;
 	String companyName;
 	String visitingGuest;
@@ -125,7 +125,8 @@ public class MakeInEntryActivity extends Activity {
 
 		} else {
 
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(9);
+			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
 			nameValuePair.add(new BasicNameValuePair("Date", date));
 			nameValuePair.add(new BasicNameValuePair("Time", time));
 			nameValuePair.add(new BasicNameValuePair("GuestName", guestName));
@@ -135,9 +136,9 @@ public class MakeInEntryActivity extends Activity {
 					visitingGuest));
 			nameValuePair.add(new BasicNameValuePair("InTime",
 					time));
-//			nameValuePair.add(new BasicNameValuePair("Photo",
-//					"test.png"));
-			nameValuePair.add(new BasicNameValuePair("Photo",image_str));
+			nameValuePair.add(new BasicNameValuePair("Photo",
+					"test.png"));
+//			nameValuePair.add(new BasicNameValuePair("Photo",image_str));
 			
 			if (genderMale) {
 

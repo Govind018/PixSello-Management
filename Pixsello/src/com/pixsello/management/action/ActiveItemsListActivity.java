@@ -76,7 +76,11 @@ public class ActiveItemsListActivity extends Activity {
 
 	private void getActiveItemsList() {
 
-		GetDataFromServer getData = new GetDataFromServer(new IWebRequest() {
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+
+		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
@@ -123,11 +127,10 @@ public class ActiveItemsListActivity extends Activity {
 					}
 
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-		});
+		}, nameValuePair);
 
 		getData.execute(Uttilities.ACTION_ACTIVE_ITEMS_URL);
 	}

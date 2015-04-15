@@ -128,8 +128,11 @@ public class MakeOutEntryActivity extends Activity {
 	}
 
 	private void getDataFromServer() {
+		
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 
-		GetDataFromServer getData = new GetDataFromServer(new IWebRequest() {
+		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
@@ -179,7 +182,7 @@ public class MakeOutEntryActivity extends Activity {
 					e.printStackTrace();
 				}
 			}
-		});
+		},nameValuePair);
 
 		getData.execute(Uttilities.GUEST_VISITOR_LIST_URL);
 	}

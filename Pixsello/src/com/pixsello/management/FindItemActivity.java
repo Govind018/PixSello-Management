@@ -121,6 +121,7 @@ public class FindItemActivity extends Activity {
 
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+			nameValuePair.add(new BasicNameValuePair("PropertyID","property1"));
 			nameValuePair.add(new BasicNameValuePair("Discriptionofitem", item
 					.getText().toString()));
 			nameValuePair.add(new BasicNameValuePair("Locationwherefound",
@@ -133,9 +134,10 @@ public class FindItemActivity extends Activity {
 			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
 
 				@Override
-				public void onDataArrived(String data) {
+				public void onDataArrived(String data) {   
 
 					try {
+						                           
 						
 						Entity item;
 						JSONObject obj = new JSONObject(data);
@@ -143,7 +145,7 @@ public class FindItemActivity extends Activity {
 						if (obj.has("error_message")) {
 							dialog.cancel();
 							Uttilities.showToast(getApplicationContext(), obj.getString("error_message"));
-							
+							      
 						}else{
 							
 							JSONArray jsonArray = obj.getJSONArray("result");
@@ -159,7 +161,6 @@ public class FindItemActivity extends Activity {
 										.getString("Discriptionofitem"));
 								item.setLocation(jsonObj
 										.getString("Locationwherefound"));
-								item.setRoomNumber(jsonObj.getString("Roomno"));
 								item.setStaffName(jsonObj
 										.getString("Staffwhofound"));
 								item.setStayDateFrom(jsonObj

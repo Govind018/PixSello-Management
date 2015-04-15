@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.spundhan.pixsello.payment.AddServicesActivity;
+import com.spundhan.pixsello.payment.NewPaymentsActivity;
 import com.spundhan.pixsello.payment.PaymentSearchActivity;
 import com.spundhan.pixsello.payment.PaymentStatusActivity;
 import com.spundhan.pixsello.payment.UpdateNewBIllActivity;
@@ -34,7 +35,7 @@ public class PaymentDetailsActivity extends Activity {
 
 	public void doNewPayment(View v) {
 
-		startActivity(new Intent(getApplicationContext(), PaymentStatusActivity.class));
+		startActivity(new Intent(getApplicationContext(), NewPaymentsActivity.class));
 		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
 	}
 

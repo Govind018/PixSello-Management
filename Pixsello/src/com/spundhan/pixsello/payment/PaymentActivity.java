@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -15,8 +16,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.pixsello.management.R;
-import com.pixsello.management.R.id;
-import com.pixsello.management.R.layout;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
@@ -27,10 +26,14 @@ public class PaymentActivity extends Activity {
 	EditText editChequeNumber, editOtherDetail;
 	String serviceName;
 	String identity;
+	String serviceId;
+	String identityName;
 	String billNumber;
 	String amount;
 	String chequeNumber;
 	String othrDetail;
+	String billDate;
+	String dueDate;
 
 	RadioButton radioCash, radioCheque, radioOther;
 
@@ -49,10 +52,25 @@ public class PaymentActivity extends Activity {
 		editAmount = (EditText) findViewById(R.id.edit_amount);
 		editChequeNumber = (EditText) findViewById(R.id.edit_cheque_number);
 		editOtherDetail = (EditText) findViewById(R.id.edit_other_detail);
-
 		radioCash = (RadioButton) findViewById(R.id.radio_cash);
 		radioCheque = (RadioButton) findViewById(R.id.radio_cheque);
 		radioOther = (RadioButton) findViewById(R.id.radio_other);
+		
+		Intent intent = getIntent();
+		
+		billNumber = intent.getStringExtra("BillNo");
+		billDate = intent.getStringExtra("BillDate");
+		identityName= intent.getStringExtra("IdentityName");
+		serviceName = intent.getStringExtra("ServiceName");
+		identity = intent.getStringExtra("Identity");
+		serviceId = intent.getStringExtra("ServiceID");
+		amount = intent.getStringExtra("Amount");
+		dueDate = intent.getStringExtra("Billduedate");
+
+		editSeviceName.setText(serviceName);
+		editIdentity.setText(identityName);
+		editBillNum.setText(billNumber);
+		editAmount.setText(amount);
 
 		radioCash.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -108,7 +126,7 @@ public class PaymentActivity extends Activity {
 	public void doSubmit(View v) {
 
 		serviceName = editSeviceName.getText().toString();
-		identity = editIdentity.getText().toString();
+//		identity = editIdentity.getText().toString();
 		billNumber = editBillNum.getText().toString();
 		amount = editAmount.getText().toString();
 		chequeNumber = editChequeNumber.getText().toString().isEmpty() ? "" : editChequeNumber.getText().toString();
@@ -128,9 +146,12 @@ public class PaymentActivity extends Activity {
 				|| !billNumber.isEmpty() || !amount.isEmpty()) {
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(4);
-			nameValuePair.add(new BasicNameValuePair("ServiceID", serviceName));
-			nameValuePair.add(new BasicNameValuePair("Identity", identity));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("ServiceID", serviceId));
+			nameValuePair.add(new BasicNameValuePair("IdentityID", identity));
 			nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
+			nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
+			nameValuePair.add(new BasicNameValuePair("Billduedate", dueDate));
 			nameValuePair.add(new BasicNameValuePair("Amount", amount));
 			nameValuePair
 					.add(new BasicNameValuePair("Paymentmode",paymentMode));

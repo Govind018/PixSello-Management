@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.pixsello.management.R;
-import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.guest.Entity;
@@ -49,7 +49,7 @@ public class UpdateNewBIllActivity extends Activity {
 	ArrayAdapter<String> serviceAdapter;
 
 	ArrayAdapter<String> identityAdapter;
-	
+
 	static final int DATE_DIALOG_ID = 999;
 
 	private int year;
@@ -61,7 +61,7 @@ public class UpdateNewBIllActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_update_new_bill);  
+		setContentView(R.layout.activity_update_new_bill);
 
 		editBillNumber = (EditText) findViewById(R.id.edit_bill_number);
 		editBillDate = (EditText) findViewById(R.id.edit_bill_date);
@@ -74,21 +74,20 @@ public class UpdateNewBIllActivity extends Activity {
 
 		servicesList = new ArrayList<String>();
 		identityList = new ArrayList<String>();
-		
-		
+
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
 
 	}
-	
-	public void pickBillDate(View v){
+
+	public void pickBillDate(View v) {
 		billDateVal = true;
 		showDialog(DATE_DIALOG_ID);
 	}
-	
-	public void pickDueDate(View v){
+
+	public void pickDueDate(View v) {
 		billDateVal = false;
 		showDialog(DATE_DIALOG_ID);
 	}
@@ -102,7 +101,15 @@ public class UpdateNewBIllActivity extends Activity {
 
 	private void getServicesAndIdentity() {
 
-		GetDataFromServer get = new GetDataFromServer(new IWebRequest() {
+		final ProgressDialog dialog = new ProgressDialog(UpdateNewBIllActivity.this);
+		dialog.setMessage("Please Wait..");
+		dialog.show();
+
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+
+		WebRequestPost get = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
@@ -128,20 +135,19 @@ public class UpdateNewBIllActivity extends Activity {
 							item.setIdentity(obj.getString("Identity"));
 
 							servicesList.add(obj.getString("Nameofservice"));
-							identityList.add(obj.getString("Identity"));  
+							identityList.add(obj.getString("Identity"));
 							listOfServices.add(item);
 						}
 
+						dialog.cancel();
 						serviceAdapter = new ArrayAdapter<String>(
-								getApplicationContext(),
-							R.layout.spinner_item,
+								getApplicationContext(), R.layout.spinner_item,
 								servicesList);
 
 						identityAdapter = new ArrayAdapter<String>(
-								getApplicationContext(),
-								R.layout.spinner_item,
+								getApplicationContext(), R.layout.spinner_item,
 								identityList);
-						    
+
 						spinnerServices.setAdapter(serviceAdapter);
 						spinnerIdentity.setAdapter(identityAdapter);
 
@@ -150,7 +156,7 @@ public class UpdateNewBIllActivity extends Activity {
 					e.printStackTrace();
 				}
 			}
-		});
+		}, nameValuePair);
 
 		get.execute(Uttilities.PAYMENT_GET_SERVICES_IDENTITY);
 
@@ -158,38 +164,57 @@ public class UpdateNewBIllActivity extends Activity {
 
 	public void showPayment(View v) {
 
-		billNumber =  editBillNumber.getText().toString();
+		billNumber = editBillNumber.getText().toString();
 		billDate = editBillDate.getText().toString();
 		billDueDate = editDueDate.getText().toString();
 		billAmount = editAmount.getText().toString();
 		int serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		int identityID = spinnerIdentity.getSelectedItemPosition() + 1;
+
+		// if(!billNumber.isEmpty() || !billDate.isEmpty() ||
+		// !billDueDate.isEmpty() || !billAmount.isEmpty()){
+
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("ServiceID", String
+				.valueOf(serviceId)));
+		nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
+		nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
+		nameValuePair.add(new BasicNameValuePair("Billduedate", billDueDate));
+		nameValuePair.add(new BasicNameValuePair("Amount", billAmount));
+
+//		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+//
+//			@Override
+//			public void onDataArrived(String data) {
+//
+//			}
+//		}, nameValuePair);
+//
+//		post.execute(Uttilities.PAYMENT_UPDATE_NEW_BILL_URL);
+		
+		Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
+		intent.putExtra("ServiceID",String
+				.valueOf(serviceId));
+		intent.putExtra("Identity",String
+				.valueOf(identityID));
+		intent.putExtra("ServiceName", spinnerServices.getSelectedItem().toString());
+		intent.putExtra("IdentityName", spinnerIdentity.getSelectedItem().toString());
+		intent.putExtra("BillNo", billNumber);
+		intent.putExtra("BillDate", billDate);
+		intent.putExtra("Billduedate", billDueDate);
+		intent.putExtra("Amount", billAmount);
+
+		startActivity(intent);
 		
 		
-//		if(!billNumber.isEmpty() || !billDate.isEmpty() || !billDueDate.isEmpty() || !billAmount.isEmpty()){
-			
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
-			nameValuePair.add(new BasicNameValuePair("ServiceID", String.valueOf(serviceId)));
-			nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
-			nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
-			nameValuePair.add(new BasicNameValuePair("Billduedate", billDueDate));
-			nameValuePair.add(new BasicNameValuePair("Amount", billAmount));
-			
-			WebRequestPost post = new WebRequestPost(new IWebRequest() {
-				
-				@Override
-				public void onDataArrived(String data) {
-					
-				}
-			}, nameValuePair);
-			
-			post.execute(Uttilities.PAYMENT_UPDATE_NEW_BILL_URL);
-			
-			startActivity(new Intent(getApplicationContext(), PaymentActivity.class));
-//		}else{
 		
-//			Uttilities.showToast(getApplicationContext(), "Please Fill all fields.");
-//		}
+		// }else{
+
+		// Uttilities.showToast(getApplicationContext(),
+		// "Please Fill all fields.");
+		// }
 	}
 
 	public void goBack(View v) {
@@ -224,9 +249,10 @@ public class UpdateNewBIllActivity extends Activity {
 
 			} else {
 
-				editDueDate.setText(new StringBuilder().append(day)
-						.append("-").append(month + 1).append("-").append(year)
-						.append(" "));
+				editDueDate
+						.setText(new StringBuilder().append(day).append("-")
+								.append(month + 1).append("-").append(year)
+								.append(" "));
 			}
 
 			// set selected date into textview

@@ -60,8 +60,6 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.found_item_description);
 			holder.textLocation = (TextView) convertView
 					.findViewById(R.id.found_item_location);
-			holder.textRoomNum = (TextView) convertView
-					.findViewById(R.id.found_item_room);
 			holder.textStaff = (TextView) convertView
 					.findViewById(R.id.found_item_staff);
 			holder.textFromDate = (TextView) convertView
@@ -81,7 +79,6 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		holder.textTime.setText(item.getTime());
 		holder.textDescription.setText(item.getDescription());
 		holder.textLocation.setText(item.getLocation());
-		holder.textRoomNum.setText(item.getRoomNumber());
 		holder.textStaff.setText(item.getStaffName());
 		holder.textFromDate.setText(item.getStayDateFrom());
 		holder.textToDate.setText(item.getStayDateTo());
@@ -95,7 +92,6 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		TextView textTime;
 		TextView textDescription;
 		TextView textLocation;
-		TextView textRoomNum;
 		TextView textStaff;
 		TextView textFromDate;
 		TextView textToDate;

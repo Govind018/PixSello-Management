@@ -147,8 +147,11 @@ public class StaffProfileActivity extends Activity {
 	}
 
 	private void getDataFromServer() {
+		
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 
-		GetDataFromServer getData = new GetDataFromServer(new IWebRequest() {
+		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
@@ -190,7 +193,7 @@ public class StaffProfileActivity extends Activity {
 					e.printStackTrace();
 				}
 			}
-		});
+		},nameValuePair);
 
 		getData.execute(Uttilities.TRAINING_STAFF_URL);
 	}

@@ -92,9 +92,11 @@ public class EmergencyNumbersActivity extends Activity {
 			title.setText(getResources().getString(
 					R.string.lbl_emergency_number));
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 		} else {
 			title.setText(getResources().getString(R.string.lbl_vendor_number));
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 		}
 	}
 
@@ -127,7 +129,8 @@ public class EmergencyNumbersActivity extends Activity {
 		String searchValue = editSearch.getText().toString();
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 				1);
-		nameValuePairSearch.add(new BasicNameValuePair(searchKey, searchValue));
+		nameValuePairSearch.add(new BasicNameValuePair("searchkey", searchValue));
+		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 
 		dialog.show();
 		getDataFromServer(Uttilities.CONTACT_SEARCH_URL, nameValuePairSearch);
@@ -136,6 +139,7 @@ public class EmergencyNumbersActivity extends Activity {
 
 	public void showAllData(View v) {
 		searchLayout.setVisibility(View.GONE);
+		search.setVisibility(View.VISIBLE);
 		dialog.show();
 		getDataFromServer(Uttilities.CONTACT_GET_URL, nameValuePair);
 	}
@@ -143,6 +147,7 @@ public class EmergencyNumbersActivity extends Activity {
 	public void showSearchOptions(View v){
 		
 		searchLayout.setVisibility(View.VISIBLE);
+		search.setVisibility(View.INVISIBLE);
 		
 	}
 
