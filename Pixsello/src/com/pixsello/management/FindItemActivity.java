@@ -119,7 +119,6 @@ public class FindItemActivity extends Activity {
 
 	public void doSubmitItem(View v) {
 
-
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
 			nameValuePair.add(new BasicNameValuePair("PropertyID","property1"));
 			nameValuePair.add(new BasicNameValuePair("Discriptionofitem", item
@@ -185,25 +184,6 @@ public class FindItemActivity extends Activity {
 				}
 			}, nameValuePair);
 
-			postData.execute(Uttilities.REPORT_FIND_ITEM_URL);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.find_item, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+			postData.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getReportanitem");
 	}
 }

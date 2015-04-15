@@ -103,12 +103,15 @@ public class NewPaymentsActivity extends Activity {
 						for (int i = 0; i < jsonArray.length(); i++) {
 							entity = new Entity();
 							JSONObject obj = jsonArray.getJSONObject(i);
-							entity.setServiceName(obj.getString(""));
-							entity.setIdentity(obj.getString(""));
-							entity.setType(obj.getString(""));
-							entity.setAmount(obj.getString(""));
-							entity.setDueDate(obj.getString(""));
-							entity.setStatus(obj.getString(""));
+							entity.setServiceName(obj.getString("Nameofservice"));
+							entity.setIdentity(obj.getString("Identity"));
+							
+							
+							
+							entity.setType(getPaymentType(Integer.parseInt(obj.getString("Paymentmode"))));
+							entity.setAmount(obj.getString("Amount"));
+							entity.setDueDate(obj.getString("BillDate"));
+							entity.setStatus(obj.getString("BillingStatus"));
 
 							statusDetails.add(entity);
 
@@ -128,6 +131,22 @@ public class NewPaymentsActivity extends Activity {
 
 		post.execute(Uttilities.PAYMENT_STATUS);
 
+	}
+	
+	public String getPaymentType(int number){
+		
+		switch (number) {
+		case 1:
+			return "Cash";
+		case 2:
+			return "Cheque";
+		case 3:
+			return "Other";
+		default:
+			break;
+		}
+		
+		return "";
 	}
 
 	private void getServicesAndIdentity() {

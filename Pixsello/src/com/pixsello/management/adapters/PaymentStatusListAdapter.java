@@ -65,12 +65,21 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 		
 		guestDetail = details.get(position);
 		
-		holder.textService.setText(guestDetail.getDate());
-		holder.textIdentity.setText(guestDetail.getTime());
-		holder.textType.setText(guestDetail.getGuestName());
-		holder.textAmount.setText(guestDetail.getCompanyName());
-		holder.textDueDate.setText(guestDetail.getGender());
-		holder.textStatus.setText(guestDetail.getOutTime());
+		holder.textService.setText(guestDetail.getServiceName());
+		holder.textIdentity.setText(guestDetail.getIdentity());
+		holder.textType.setText(guestDetail.getType());
+		holder.textAmount.setText(guestDetail.getAmount());
+		holder.textDueDate.setText(guestDetail.getDueDate());
+		
+		if(guestDetail.getStatus().equalsIgnoreCase("0")){
+			holder.textStatus.setText("OPEN");	
+			holder.btnPay.setVisibility(View.VISIBLE);
+		}else{
+			holder.textStatus.setText("PAID");
+			holder.btnPay.setVisibility(View.INVISIBLE);
+		}
+		
+		
 		
 		return convertView;
 	}

@@ -22,7 +22,6 @@ import android.widget.TimePicker;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.OutEntryListAdapter;
-import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
@@ -71,11 +70,12 @@ public class MakeOutEntryActivity extends Activity {
 
 		if (!time.isEmpty()) {
 
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(4);
 			nameValuePair.add(new BasicNameValuePair("ID", ID));
-			nameValuePair.add(new BasicNameValuePair("Roomno", ""));
+			nameValuePair.add(new BasicNameValuePair("Roomno", room));
 			nameValuePair.add(new BasicNameValuePair("OutTime", time));
-
+			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
+			
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 				@Override

@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.pixsello.management.R;
-import com.pixsello.management.adapters.PaymentStatusListAdapter;
+import com.pixsello.management.adapters.PaymentSearchListAdapter;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.guest.Entity;
@@ -29,6 +29,8 @@ public class PaymentSearchActivity extends Activity {
 	ListView listOfSearchItems;
 
 	ArrayList<Entity> searchItems;
+	
+	PaymentSearchListAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,8 @@ public class PaymentSearchActivity extends Activity {
 		if (!searchKey.isEmpty()) {
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-			nameValuePair.add(new BasicNameValuePair("", searchKey));
+			nameValuePair.add(new BasicNameValuePair("searchkey", searchKey));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -70,22 +73,23 @@ public class PaymentSearchActivity extends Activity {
 							for (int i = 0; i < jsonArray.length(); i++) {
 								entity = new Entity();
 								JSONObject obj = jsonArray.getJSONObject(i);
-								entity.setServiceName(obj.getString(""));
-								entity.setIdentity(obj.getString(""));
-								entity.setType(obj.getString(""));
-								entity.setAmount(obj.getString(""));
-								entity.setDueDate(obj.getString(""));
-								entity.setStatus(obj.getString(""));
+//								entity.setServiceName(obj.getString(""));
+//								entity.setIdentity(obj.getString(""));
+								entity.setBillNum(obj.getString("BillNo"));
+								entity.setBillDate(obj.getString("BillDate"));
+								entity.setAmount(obj.getString("Amount"));
+								entity.setDueDate(obj.getString("Billduedate"));
+								entity.setStatus(obj.getString("BillingStatus"));
 
 								searchItems.add(entity);
 
 							}
 
-							// adapter = new PaymentStatusListAdapter(
-							// getApplicationContext(),
-							// R.layout.payment_status_list_item,
-							// statusDetails);
-							// list.setAdapter(adapter);
+							 adapter = new PaymentSearchListAdapter(
+							 getApplicationContext(),
+							 R.layout.payment_search_list_item,
+							 searchItems);
+							 listOfSearchItems.setAdapter(adapter);
 
 						}
 					} catch (JSONException e) {
@@ -94,9 +98,8 @@ public class PaymentSearchActivity extends Activity {
 				}
 			}, nameValuePair);
 			
-			post.execute("");
+			post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/billSearch");
 		}
-
 	}
 
 	public void goBack(View v) {

@@ -97,7 +97,8 @@ public class StaffProfileActivity extends Activity {
 		String searchValue = editSearch.getText().toString();
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 				1);
-		nameValuePairSearch.add(new BasicNameValuePair(searchKey, searchValue));
+		nameValuePairSearch.add(new BasicNameValuePair("Trainer", searchValue));
+		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 		
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 			
