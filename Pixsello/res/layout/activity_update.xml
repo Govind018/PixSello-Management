@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:text="DATE"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/black"/>
 
         <EditText
             android:id="@+id/edit_report_date"
@@ -63,7 +63,7 @@
             android:inputType="number"
             android:text="12-4-2015"
             android:textSize="20sp"
-            android:textStyle="bold" />
+             />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +71,8 @@
             android:layout_marginLeft="10dp"
             android:text="TIME"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textColor="@android:color/black"
+             />
 
         <EditText
             android:id="@+id/edit_report_time"
@@ -83,7 +84,7 @@
             android:inputType="number"
             android:text="12-4-2015"
             android:textSize="20sp"
-            android:textStyle="bold" />
+             />
     </LinearLayout>
 
     <LinearLayout
