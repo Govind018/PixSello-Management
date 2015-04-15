@@ -57,7 +57,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
-            <TextView  
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -81,19 +81,31 @@
             android:layout_weight="1"
             android:orientation="vertical" >
 
-            <EditText
-                android:id="@+id/edit_service"
-                android:layout_width="470dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:drawable/editbox_background"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textSize="25sp" >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
-                <requestFocus />
-            </EditText>
+                <Spinner
+                    android:id="@+id/edit_service"
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" >
+                </Spinner>
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/submit_selector"
+                    android:onClick="addNewService"
+                    android:text="Add Service" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/edit_identity"

@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -53,14 +53,16 @@
 
         <EditText
             android:id="@+id/edit_report_date"
-            android:layout_width="180dp"
+            android:layout_width="190dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:background="@android:drawable/editbox_background"
             android:drawableEnd="@android:drawable/ic_menu_today"
             android:drawableRight="@android:drawable/ic_menu_today"
             android:editable="false"
             android:inputType="number"
+            android:paddingLeft="10dp"
+            android:paddingRight="5dp"
             android:textColor="@android:color/black"
             android:text="12-4-2015"
             android:textSize="23sp"
@@ -69,7 +71,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:text="TIME"
             android:textColor="@android:color/black"
             android:textSize="30sp"
@@ -77,11 +79,13 @@
 
         <EditText
             android:id="@+id/edit_report_time"
-            android:layout_width="150dp"
+            android:layout_width="160dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:background="@android:drawable/editbox_background"
             android:editable="false"
+            android:paddingLeft="15dp"
+            android:paddingRight="5dp"
             android:inputType="number"
             android:text="12-4-2015"
             android:textColor="@android:color/black"
@@ -121,15 +125,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="@string/lbl_description"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:visibility="invisible" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="55dp"
                 android:text="@string/lbl_staff"
                 android:textColor="@android:color/black"
@@ -147,7 +142,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.75"
             android:orientation="vertical" >
 
             <EditText
@@ -179,25 +174,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/lbl_room_num"
-                    android:textColor="@android:color/black"
-                    android:textSize="25sp" />
-
-                <EditText
-                    android:id="@+id/edit_room"
-                    android:layout_width="170dp"
-                    android:layout_height="45dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:singleLine="true"
-                    android:textSize="25sp"
-                    android:background="@android:drawable/editbox_background"
-                     />
             </LinearLayout>
 
             <EditText
@@ -223,6 +199,7 @@
                     android:background="@android:drawable/editbox_background"
                     android:editable="false"
                     android:singleLine="true"
+                    android:textSize="23sp"
                     android:inputType="date"
                     android:drawableRight="@android:drawable/ic_menu_today"
                     android:onClick="setStayFromDate" />
@@ -241,12 +218,49 @@
                     android:layout_height="45dp"
                     android:onClick="setStayToDate"
                     android:singleLine="true"
+                    android:textSize="23sp"
                     android:background="@android:drawable/editbox_background"
                     android:drawableRight="@android:drawable/ic_menu_today"
                     android:inputType="date" >
                 </EditText>
             </LinearLayout>
         </LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:id="@+id/frame"
+                android:layout_width="210dp"
+                android:layout_height="210dp"
+                android:layout_marginTop="30dp"
+                android:contentDescription="@null"
+                android:src="@drawable/frame"
+                android:text="Photo" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="140dp"
+                android:layout_height="190dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="40dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/profile"
+                android:text="Photo" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frame"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/submit_selector"
+                android:onClick="capturePhoto"
+                android:text="Take Photo" />
+        </RelativeLayout>
     </LinearLayout>
       <Button 
             

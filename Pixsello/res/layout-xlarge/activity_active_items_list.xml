@@ -68,17 +68,19 @@
 
             <Button
                 android:id="@+id/btn_submit"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="30dp"
                 android:onClick="updateItem"
+                android:background="@drawable/submit_selector"
                 android:text="Submit" />
 
             <Button
                 android:id="@+id/btn_close"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="30dp"
+                android:background="@drawable/submit_selector"
                 android:text="Close Item" />
         </LinearLayout>
     </RelativeLayout>

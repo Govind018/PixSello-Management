@@ -50,13 +50,22 @@
                 android:background="@drawable/contact_back"
                 android:clickable="true"
                 android:onClick="showEmergencyNumbers" >
+                
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/emergency_number" />
 
                 <TextView
                     android:id="@+id/lable_guest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_emergency_number"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />
@@ -69,12 +78,21 @@
                 android:background="@drawable/guest_back"
                 android:clickable="true"
                 android:onClick="showVendorNumbers" >
+                
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/vendors_number" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_vendor_number"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />
@@ -92,8 +110,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_search"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />

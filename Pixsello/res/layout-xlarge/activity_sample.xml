@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/white"
     tools:context="com.pixsello.management.HomeScreenActivity" >
     
     <RelativeLayout
@@ -19,6 +20,11 @@
             android:textSize="35sp" />
 
     </RelativeLayout>
+    
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
     <TableLayout
         android:layout_width="match_parent"
@@ -26,6 +32,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_marginBottom="200dp"
         android:shrinkColumns="*"
         android:stretchColumns="*" >
 
@@ -53,12 +60,12 @@
                     android:textSize="30sp" />
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/lost_found1" />
+                    android:src="@drawable/lost_found_new" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -81,12 +88,12 @@
                     android:textSize="30sp" />
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/contact_details" />
+                    android:src="@drawable/contact_details_new" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -109,12 +116,12 @@
                     android:textSize="30sp" />
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="270dp"
+                    android:layout_height="270dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/guest" />
+                    android:src="@drawable/guest_new" />
             </RelativeLayout>
         </TableRow>
 
@@ -141,12 +148,13 @@
                     android:textSize="30sp" />
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="270dp"
+                    android:layout_height="270dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/action_required" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/action_required_new" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -168,12 +176,13 @@
                     android:textSize="30sp" />
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="270dp"
+                    android:layout_height="270dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/traiining" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/traiining_new" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -195,14 +204,106 @@
                     android:textSize="30sp" />
 
                 <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/payment" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/payment_new" />
+            </RelativeLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="70dp" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/contact_back"
+                android:clickable="true"
+                android:onClick="showAparangiDetails" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="APARANJI"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="270dp"
+                    android:layout_height="270dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/action_required_new" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/training_back"
+                android:clickable="true"
+                android:visibility="invisible"
+                android:onClick="showTrainingUpdates" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/training_updates"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="270dp"
+                    android:layout_height="270dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/traiining_new" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:layout_weight="1"
+                android:background="@drawable/payment_back"
+                android:clickable="true"
+                android:visibility="invisible"
+                android:onClick="showPaymentDetails" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp"
+                    android:text="@string/payment_details"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp" />
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/payment_new" />
             </RelativeLayout>
         </TableRow>
     </TableLayout>
-
+    </ScrollView>
 </LinearLayout>

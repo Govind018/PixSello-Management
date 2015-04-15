@@ -49,13 +49,22 @@
                 android:background="@drawable/contact_back"
                 android:clickable="true"
                 android:onClick="doReportItem" >
+                
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/report_an_item" />
 
                 <TextView
                     android:id="@+id/lable_guest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/report_item"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />
@@ -68,12 +77,21 @@
                 android:background="@drawable/guest_back"
                 android:clickable="true"
                 android:onClick="doFindItem" >
+                
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/find_an_item" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/find_item"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />

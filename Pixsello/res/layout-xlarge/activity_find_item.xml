@@ -132,7 +132,7 @@
             android:layout_weight="0.50"
             android:onClick="doSubmitItem"
             android:background="@drawable/submit_selector"
-            android:text="Sell items from this property" />
+            android:text="See items from this property" />
     </LinearLayout>
 
     <LinearLayout
@@ -177,13 +177,6 @@
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/found_item_room"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Room No"
-            android:textColor="@android:color/black"
-            android:textSize="25sp" />
 
         <TextView
             android:id="@+id/found_item_staff"

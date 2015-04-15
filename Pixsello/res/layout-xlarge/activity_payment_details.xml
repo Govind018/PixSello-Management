@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@android:color/white"
+    android:orientation="vertical"
     tools:context="com.pixsello.management.PaymentDetailsActivity" >
 
     <RelativeLayout
@@ -15,8 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:onClick="goBack"
             android:layout_marginLeft="10dp"
+            android:onClick="goBack"
             android:src="@drawable/arrow" />
 
         <TextView
@@ -26,15 +26,14 @@
             android:text="VENDOR PAYMENT"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:background="@color/layout_background" >
 
@@ -51,12 +50,21 @@
                 android:clickable="true"
                 android:onClick="doAddService" >
 
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/add_services" />
+
                 <TextView
                     android:id="@+id/lable_add_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="ADD SERVICE"
                     android:textColor="@android:color/white"
                     android:textSize="27sp" />
@@ -70,11 +78,20 @@
                 android:clickable="true"
                 android:onClick="doUpdateNewBill" >
 
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/update_new_bill" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="UPDATE NEW BILL"
                     android:textColor="@android:color/white"
                     android:textSize="26sp" />
@@ -88,15 +105,25 @@
                 android:clickable="true"
                 android:onClick="doNewPayment" >
 
+                <!-- <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/payment"  -->/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="PAYMENT STATUS"
+                    android:layout_marginBottom="20dp"
+                    android:text="NEW PAYMENT"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="280dp"
                 android:layout_height="280dp"
@@ -105,11 +132,20 @@
                 android:clickable="true"
                 android:onClick="doSearch" >
 
+<!--                 <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/report_an_item" />
+ -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="SEARCH"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />

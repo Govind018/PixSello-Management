@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
+            android:visibility="invisible"
             android:text="Submit" />
     </RelativeLayout>
 

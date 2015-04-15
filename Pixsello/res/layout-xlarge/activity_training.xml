@@ -48,13 +48,22 @@
                 android:background="@drawable/contact_back"
                 android:clickable="true"
                 android:onClick="doUpdate" >
+                
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/update_training" />
 
                 <TextView
                     android:id="@+id/lable_guest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                   android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_update"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />
@@ -67,12 +76,21 @@
                 android:background="@drawable/guest_back"
                 android:clickable="true"
                 android:onClick="showProfile" >
+                
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/staff_profile" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_staff_profile"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />
@@ -85,12 +103,21 @@
                 android:background="@drawable/lost_back"
                 android:clickable="true"
                 android:onClick="showVideos" >
+                
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/training_videos" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_videos"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />

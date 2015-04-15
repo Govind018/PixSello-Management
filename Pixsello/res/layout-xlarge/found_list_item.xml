@@ -39,14 +39,6 @@
         android:textSize="20sp" />
     
     <TextView
-        android:id="@+id/found_item_room"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Room No"
-        android:textColor="@android:color/black"
-        android:textSize="20sp" />
-    
-    <TextView
         android:id="@+id/found_item_staff"
         android:layout_width="170dp"
         android:layout_height="wrap_content"

@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context="com.pixsello.management.action.AddItemActivity" >
 
@@ -55,15 +54,17 @@
 
         <EditText
             android:id="@+id/edit_item_date"
-            android:layout_width="170dp"
+            android:layout_width="190dp"
             android:layout_height="45dp"
             android:layout_marginLeft="20dp"
             android:background="@android:drawable/editbox_background"
             android:drawableEnd="@android:drawable/ic_menu_today"
             android:drawableRight="@android:drawable/ic_menu_today"
-            android:inputType="number"
             android:text="12-4-2015"
-            android:textSize="20sp"
+            android:editable="false"
+            android:focusableInTouchMode="true"
+            android:paddingLeft="10dp"
+            android:textSize="23sp"
              />
 
         <TextView
@@ -77,13 +78,15 @@
 
         <EditText
             android:id="@+id/edit_item_time"
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="45dp"
             android:layout_marginLeft="20dp"
             android:background="@android:drawable/editbox_background"
-            android:inputType="number"
             android:text="14.50"
-            android:textSize="20sp"
+            android:paddingLeft="10dp"
+            android:editable="false"
+            android:focusableInTouchMode="true"
+            android:textSize="23sp"
             />
     </LinearLayout>
 
@@ -112,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="70dp"
                 android:text="@string/lbl_where"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
@@ -144,14 +147,16 @@
             <EditText
                 android:id="@+id/edit_description"
                 android:layout_width="470dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginTop="5dp"
                 android:background="@android:drawable/editbox_background"
                 android:gravity="top|left"
-                android:inputType="textMultiLine"
-                android:lines="3"
+                android:inputType="text"
+				android:singleLine="true"
                 android:textColor="@android:color/black"
-                android:textSize="25sp" />
+                android:textSize="25sp" >
+                <requestFocus />
+                </EditText>
 
             <EditText
                 android:id="@+id/edit_location"
@@ -190,7 +195,7 @@
         android:id="@+id/button_submit"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="55dp"
         android:layout_gravity="center"
         android:onClick="doSubmitItem"
         android:background="@drawable/submit_selector"

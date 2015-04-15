@@ -29,10 +29,11 @@
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/submit_selector"
             android:onClick="showSearchOptions"
@@ -93,6 +94,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/edit_search"
+            android:background="@drawable/submit_selector"
             android:onClick="doSearch"
             android:text="Search" />
 

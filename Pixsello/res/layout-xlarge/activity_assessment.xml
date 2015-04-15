@@ -1,0 +1,388 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.ReportItemActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionbar_background" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="EMPLOYEE DETAILS"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ASSESSEMENT FOR"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/btn_dropdown" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:text="For The Month OF"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <Spinner
+                    android:layout_width="250dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/btn_dropdown" />
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp" >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UNDERTAKING RESPONSIBILITIES,EFFICIENCY"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CLEANLINESS OF JOB"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PERSONAL HYGIENE"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GUEST INTERACTION/CARE"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HABITS-ALCOHOL/TOBACCO/OTHERS"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TIMINGINGS"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CO_OPERATION WITH OTHER STAFF"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MANNERISMS,BODY LANGUAGE"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HONESTY/INTEGRITY"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ASSESSEMT DONE BY"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Spinner
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:entries="@array/assessment" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TOTAL"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <EditText
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/editbox_background" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MONTHLY REMARK/COMMENTS"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <EditText
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/editbox_background" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ASSESSEMENT DONE BY"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <EditText
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/editbox_background" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DATE OF ASSESSMENT"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <EditText
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:background="@android:drawable/editbox_background" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:layout_marginTop="30dp" >
+
+                    <Button
+                        android:layout_width="250dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:text="Submit"
+                        android:background="@drawable/submit_selector" />
+                    
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -14,8 +14,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:onClick="goBack"
             android:layout_marginLeft="10dp"
+            android:onClick="goBack"
             android:src="@drawable/arrow" />
 
         <TextView
@@ -25,16 +25,15 @@
             android:text="REQUEST OF GUEST VISITOR"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="80dp"
         android:background="@color/layout_background" >
 
         <LinearLayout
@@ -50,12 +49,21 @@
                 android:clickable="true"
                 android:onClick="makeInTimeEntries" >
 
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/in_time" />
+
                 <TextView
                     android:id="@+id/lable_guest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_make_in"
                     android:textColor="@android:color/white"
                     android:textSize="27sp" />
@@ -68,12 +76,21 @@
                 android:background="@drawable/guest_back"
                 android:clickable="true"
                 android:onClick="makeOutTimeEntries" >
+                
+                 <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/out_time" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_make_out"
                     android:textColor="@android:color/white"
                     android:textSize="26sp" />
@@ -87,11 +104,21 @@
                 android:clickable="true"
                 android:onClick="showPastVisitors" >
 
+                 <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@null"
+                    android:src="@drawable/see_past_visitors" />
+                
+                
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/lbl_past_visitors"
                     android:textColor="@android:color/white"
                     android:textSize="30sp" />
