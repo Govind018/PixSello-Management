@@ -15,8 +15,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -73,6 +71,32 @@ public class FindItemActivity extends Activity {
 		initLayout();
 	}
 	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+		getAllItems();
+		
+	}
+	
+	private void getAllItems() {
+		
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
+		nameValuePair.add(new BasicNameValuePair("PropertyID","property1"));
+		
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+			
+			@Override
+			public void onDataArrived(String data) {
+				
+				populateDate(data);
+				
+			}
+		}, nameValuePair);
+		
+		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getReportanitem");
+	}
+
 	public void showDate(View v){
 		
 		showDialog(DATE_DIALOG_ID);
@@ -136,7 +160,6 @@ public class FindItemActivity extends Activity {
 				public void onDataArrived(String data) {   
 
 					try {
-						                           
 						
 						Entity item;
 						JSONObject obj = new JSONObject(data);
@@ -184,6 +207,55 @@ public class FindItemActivity extends Activity {
 				}
 			}, nameValuePair);
 
-			postData.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getReportanitem");
+			postData.execute(Uttilities.REPORT_FIND_ITEM_URL);
+	}
+	
+	public void populateDate(String data){
+		
+		try {
+			
+			Entity item;
+			JSONObject obj = new JSONObject(data);
+			
+			if (obj.has("error_message")) {
+				dialog.cancel();
+				Uttilities.showToast(getApplicationContext(), obj.getString("error_message"));
+				      
+			}else{
+				
+				JSONArray jsonArray = obj.getJSONArray("result");
+
+				foundItems.clear();
+				for (int i = 0; i < jsonArray.length(); i++) {
+					item = new Entity();
+					JSONObject jsonObj = jsonArray.getJSONObject(i);
+					item.setItemID(jsonObj.getString("ID"));
+					item.setDate(jsonObj.getString("Date"));
+					item.setTime(jsonObj.getString("Time"));
+					item.setDescription(jsonObj
+							.getString("Discriptionofitem"));
+					item.setLocation(jsonObj
+							.getString("Locationwherefound"));
+					item.setStaffName(jsonObj
+							.getString("Staffwhofound"));
+					item.setStayDateFrom(jsonObj
+							.getString("Gueststaydatefrom"));
+					item.setStayDateTo(jsonObj
+							.getString("Gueststaydateto"));
+
+					foundItems.add(item);
+				}
+				layoutHeader.setVisibility(View.VISIBLE);
+
+				dialog.cancel();
+				adapter = new FoundItemsListAdapter(
+						getApplicationContext(),
+						R.layout.found_list_item, foundItems);
+				list.setAdapter(adapter);
+				
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

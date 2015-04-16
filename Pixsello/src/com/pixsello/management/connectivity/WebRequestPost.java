@@ -68,7 +68,6 @@ public class WebRequestPost extends AsyncTask<String, Integer, String> {
 				JSONObject json = new JSONObject(json_obj);
 				result = json.has("status") ? json.getString("status") : json_obj ;
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 

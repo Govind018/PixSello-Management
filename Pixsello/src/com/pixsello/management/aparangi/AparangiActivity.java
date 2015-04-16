@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.pixsello.management.AssessmentActivity;
-import com.pixsello.management.EmploymentDetailsActivity;
 import com.pixsello.management.R;
 
 public class AparangiActivity extends Activity {

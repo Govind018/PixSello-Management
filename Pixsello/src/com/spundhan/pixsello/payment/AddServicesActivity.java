@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -53,6 +56,10 @@ public class AddServicesActivity extends Activity {
 	int serviceId;
 	
 	ArrayList<String> listOfServices;
+	
+	ArrayAdapter<String> servicesAdapter;
+	
+	ArrayList<String> existingServices;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +71,11 @@ public class AddServicesActivity extends Activity {
 		editDueDate = (EditText) findViewById(R.id.due_date);
 		radioRegular = (RadioButton) findViewById(R.id.radio_type_payment_regular);
 		radioRecurring = (RadioButton) findViewById(R.id.radio_type_payment_recurring);
-
 		radioRegular.setOnCheckedChangeListener(Regularlistener);
 		radioRecurring.setOnCheckedChangeListener(Recurringlistener);
 
 		listOfServices = new ArrayList<String>();
+		existingServices = new ArrayList<String>();
 		
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
@@ -77,6 +84,49 @@ public class AddServicesActivity extends Activity {
 	}
 	
 	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
+		getAllservices();
+	}
+	
+	
+	private void getAllservices() {
+
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+			
+			@Override
+			public void onDataArrived(String data) {
+				
+				try {
+					existingServices.clear();
+					JSONObject obj = new JSONObject(data);
+					JSONArray jsonArray = obj.getJSONArray("result");
+					
+					for(int i = 0; i < jsonArray.length(); i++){
+						
+						JSONObject jsonObj = jsonArray.getJSONObject(i);
+						existingServices.add(jsonObj.getString("Nameofservice"));
+					}
+					
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				
+				servicesAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, existingServices);
+				spinnerServices.setAdapter(servicesAdapter);
+				
+			}
+		}, nameValuePair);
+		
+		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getAllservice");
+	}
+
+
 	public void addNewService(View v){
 		
 		final Dialog d = new Dialog(AddServicesActivity.this);
