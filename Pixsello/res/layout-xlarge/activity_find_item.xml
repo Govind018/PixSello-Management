@@ -182,7 +182,7 @@
             android:id="@+id/found_item_staff"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:text="Staff"
+            android:text="STAFF"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -190,7 +190,7 @@
             android:id="@+id/found_item_from"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="From"
+            android:text="FROM"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -198,7 +198,7 @@
             android:id="@+id/found_item_to"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="To"
+            android:text="TO"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
     </LinearLayout>

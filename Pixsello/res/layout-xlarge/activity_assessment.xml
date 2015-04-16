@@ -90,11 +90,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_respo"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -111,11 +120,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_cleanliness"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -132,11 +150,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_personal"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -153,11 +180,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_guest_interaction"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -174,11 +210,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_habits"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -190,16 +235,25 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TIMINGINGS"
+                        android:text="TIMINGS"
                         android:textColor="@android:color/black"
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_timings"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -216,11 +270,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_coOp"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -237,11 +300,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_body_langauage"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -258,18 +330,28 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_honesty"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="30dp" >
+                    android:layout_marginTop="30dp"
+                    android:visibility="gone" >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -279,11 +361,20 @@
                         android:textSize="25sp" />
 
                     <Spinner
+                        android:id="@+id/spinner_assesment"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/btn_dropdown"
                         android:entries="@array/assessment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="1-10"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
                 </TableRow>
 
                 <TableRow
@@ -300,6 +391,7 @@
                         android:textSize="25sp" />
 
                     <EditText
+                        android:id="@+id/edit_total"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
@@ -320,6 +412,7 @@
                         android:textSize="25sp" />
 
                     <EditText
+                        android:id="@+id/edit_remarks"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
@@ -340,6 +433,7 @@
                         android:textSize="25sp" />
 
                     <EditText
+                        android:id="@+id/edit_done_by"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
@@ -370,16 +464,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:gravity="center"
-                    android:layout_marginTop="30dp" >
+                    android:layout_marginTop="30dp"
+                    android:gravity="center" >
 
                     <Button
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
-                        android:text="Submit"
-                        android:background="@drawable/submit_selector" />
-                    
+                        android:background="@drawable/submit_selector"
+                        android:onClick="doSubmitData"
+                        android:text="Submit" />
                 </TableRow>
             </TableLayout>
         </RelativeLayout>

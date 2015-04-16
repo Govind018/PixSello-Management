@@ -49,6 +49,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_employer"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -69,6 +70,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_previous_empl"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -89,6 +91,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_employed_on"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -109,6 +112,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_docs_verified"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -129,6 +133,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_docs_given"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -149,6 +154,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_scan_docs"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -169,6 +175,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_employed_in"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -191,6 +198,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_department"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -211,6 +219,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_interviewedby"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -231,6 +240,7 @@
                     android:textSize="25sp" />
 
                 <EditText
+                    android:id="@+id/edit_reffered"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -249,6 +259,7 @@
                     android:layout_width="250dp"
                     android:layout_height="50dp"
                     android:background="@drawable/submit_selector"
+                    android:onClick="doSubmitData"
                     android:text="Submit" />
             </TableRow> 
         </TableLayout>
