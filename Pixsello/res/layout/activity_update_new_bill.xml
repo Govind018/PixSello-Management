@@ -44,7 +44,7 @@
         <Spinner
             android:id="@+id/spinner_services"
             android:layout_width="190dp"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="60dp"
             android:background="@android:drawable/btn_dropdown"
             android:textColor="@android:color/black" />
@@ -60,7 +60,7 @@
         <Spinner
             android:id="@+id/spinner_identity"
             android:layout_width="190dp"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="60dp"
             android:background="@android:drawable/btn_dropdown"
             android:textColor="@android:color/black" />

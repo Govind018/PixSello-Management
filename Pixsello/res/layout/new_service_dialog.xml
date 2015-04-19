@@ -7,8 +7,9 @@
     <EditText
         android:id="@+id/edit_service_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
+        android:background="@android:drawable/editbox_background"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:ems="10" >
@@ -18,9 +19,12 @@
 
     <Button
         android:id="@+id/btn_add_service"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/submit_selector"
         android:layout_marginTop="10dp"
         android:text="Add" />
 
