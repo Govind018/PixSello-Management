@@ -40,7 +40,9 @@ public class PaymentDetailsActivity extends Activity {
 	}
 
 	public void showPaymentStatus(View v) {
-
+		
+		startActivity(new Intent(getApplicationContext(), PaymentStatusActivity.class));
+		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
 	}
 	
 	public void doSearch(View v){

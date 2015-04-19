@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,6 +68,10 @@ public class AddItemActivity extends Activity {
 
 		} else {
 
+			final ProgressDialog dialog = new ProgressDialog(AddItemActivity.this);
+			dialog.setMessage("Please Wait..");
+			dialog.show();
+			
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
 			nameValuePair.add(new BasicNameValuePair("Date", date));
 			nameValuePair.add(new BasicNameValuePair("Time", time));
@@ -82,8 +87,10 @@ public class AddItemActivity extends Activity {
 				public void onDataArrived(String data) {
 					
 					Uttilities.showToast(getApplicationContext(), data);
+					dialog.cancel();
 					
-					resetData();
+					finish();
+//					resetData();
 
 				}
 			}, nameValuePair);

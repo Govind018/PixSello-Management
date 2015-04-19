@@ -50,27 +50,23 @@ public class WebRequestPost extends AsyncTask<String, Integer, String> {
 		// Creating HTTP Post
 		HttpPost httpPost = new HttpPost(params[0]);
 
-		// List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-		// nameValuePair.add(new BasicNameValuePair("name", "user@gmail.com"));
-		// nameValuePair.add(new BasicNameValuePair("age", "21"));
-
 		// Url Encoding the POST parameters
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
 
-			// Making HTTP Request
+			// Making HTTP Request                                                         
 			HttpResponse response = httpClient.execute(httpPost);
 
 			String json_obj = convertStreamToString(response.getEntity()
 					.getContent());
 			
-			try {
+			try {     
 				JSONObject json = new JSONObject(json_obj);
 				result = json.has("status") ? json.getString("status") : json_obj ;
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-
+                   
 			// writing response to log
 			Log.d("Http Response:", response.toString());
 

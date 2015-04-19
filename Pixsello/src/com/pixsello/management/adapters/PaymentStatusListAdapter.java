@@ -2,9 +2,12 @@ package com.pixsello.management.adapters;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,6 +16,8 @@ import android.widget.TextView;
 
 import com.pixsello.management.R;
 import com.pixsello.management.guest.Entity;
+import com.pixsello.management.util.Uttilities;
+import com.spundhan.pixsello.payment.PaymentActivity;
 
 public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 
@@ -41,7 +46,7 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 	}
 	
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		
 		ViewHolder holder = null;
 		
@@ -79,7 +84,30 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 			holder.btnPay.setVisibility(View.INVISIBLE);
 		}
 		
-		
+		holder.btnPay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				Entity en = details.get(position);
+				
+				Uttilities.showToast(thisContext, en.getServiceName());
+
+				Intent intent = new Intent(thisContext, PaymentActivity.class);
+				intent.putExtra("ServiceID",en.getServiceId());
+				intent.putExtra("IdentityID",en.getServiceId());
+				intent.putExtra("ServiceName", en.getServiceName());
+				intent.putExtra("IdentityName", en.getIdentity());
+				intent.putExtra("BillNo", en.getBillNum());
+				intent.putExtra("BillDate", en.getBillDate());
+				intent.putExtra("Billduedate", en.getDueDate());
+				intent.putExtra("Amount", en.getAmount());
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+				thisContext.startActivity(intent);
+				
+			}
+		});
 		
 		return convertView;
 	}

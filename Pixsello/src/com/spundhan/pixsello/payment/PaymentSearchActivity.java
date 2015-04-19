@@ -43,7 +43,7 @@ public class PaymentSearchActivity extends Activity {
 		searchItems = new ArrayList<Entity>();
 
 	}
-
+	
 	public void doSubmit(View v) {
 
 		String searchKey = editSearch.getText().toString();

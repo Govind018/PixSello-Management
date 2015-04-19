@@ -27,10 +27,14 @@ public class AddContactNumberActivity extends Activity {
 	EditText editServiceDesc;
 	EditText editContactPerson;
 	EditText editContactNum;
+	EditText editQuickInfo;
 
+	TextView textQuickInfo;
+	
 	String serviceDesc;
 	String contactPerson;
 	String contactNumber;
+	String quickInfo;
 
 	List<NameValuePair> nameValuePair;
 	
@@ -48,6 +52,8 @@ public class AddContactNumberActivity extends Activity {
 		editServiceDesc = (EditText) findViewById(R.id.edit_services_description);
 		editContactPerson = (EditText) findViewById(R.id.edit_contact_person);
 		editContactNum = (EditText) findViewById(R.id.edit_contact_number);
+		editQuickInfo = (EditText) findViewById(R.id.edit_contact_quickinfo);
+		textQuickInfo = (TextView) findViewById(R.id.text_quick_info);
 		
 		Intent in = getIntent();
 
@@ -56,9 +62,13 @@ public class AddContactNumberActivity extends Activity {
 		if (type.equalsIgnoreCase("emergency")) {
 			typeOfContact.setText("EMERGENCY NUMBER (ADD NEW)");
 			emergency = true;
+			editQuickInfo.setVisibility(View.GONE);
+			textQuickInfo.setVisibility(View.GONE);
 		} else if (type.equalsIgnoreCase("vendor")) {
 			typeOfContact.setText("VENDOR NUMBER (ADD NEW)");
 			emergency = false;
+			editQuickInfo.setVisibility(View.VISIBLE);
+			textQuickInfo.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -74,6 +84,7 @@ public class AddContactNumberActivity extends Activity {
 		serviceDesc = editServiceDesc.getText().toString();
 		contactNumber = editContactNum.getText().toString();
 		contactPerson = editContactPerson.getText().toString();
+		quickInfo = editQuickInfo.getText().toString();
 
 		if (serviceDesc.isEmpty() || contactNumber.isEmpty()
 				|| contactPerson.isEmpty()) {
@@ -89,13 +100,13 @@ public class AddContactNumberActivity extends Activity {
 					contactNumber));
 			
 			if(emergency){
-				nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));	
+				nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
+				//emergency number
 			}else{
-				nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));	
+				nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));	// vendor number
+				nameValuePair.add(new BasicNameValuePair("quickinfo",quickInfo));
 			}
 			
-			nameValuePair.add(new BasicNameValuePair("quickinfo",
-					"test"));
 			nameValuePair.add(new BasicNameValuePair("PropertyID",
 					Uttilities.PROPERTY_ID));
 			
@@ -103,6 +114,8 @@ public class AddContactNumberActivity extends Activity {
 
 				@Override
 				public void onDataArrived(String data) {
+					
+					finish();
 					
 					Uttilities.showToast(getApplicationContext(), data);
 

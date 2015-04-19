@@ -36,6 +36,7 @@ public class TrainingUpdatesActivity extends Activity {
 	private String other;
 	private String trainingHrs;
 	private String trainingMins;
+	private String assessment;
 
 	String[] types;
 
@@ -54,7 +55,8 @@ public class TrainingUpdatesActivity extends Activity {
 		editOther = (EditText) findViewById(R.id.edit_other);
 		editHrs = (Spinner) findViewById(R.id.edit_hrs);
 		editMins = (Spinner) findViewById(R.id.edit_mins);
-
+		editAssement = (EditText) findViewById(R.id.stay_from_date); 
+		
 		editTrainingType
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -98,6 +100,7 @@ public class TrainingUpdatesActivity extends Activity {
 		other = editOther.getText().toString();
 		trainingHrs = editHrs.getSelectedItem().toString();
 		trainingMins = editMins.getSelectedItem().toString();
+		assessment = editAssement.getText().toString();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
 		nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
@@ -111,6 +114,8 @@ public class TrainingUpdatesActivity extends Activity {
 				trainingHrs));
 		nameValuePair.add(new BasicNameValuePair("Timeoftraineemin",
 				trainingMins));
+		nameValuePair.add(new BasicNameValuePair("Traineeassessment",
+				assessment));
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -118,6 +123,8 @@ public class TrainingUpdatesActivity extends Activity {
 			public void onDataArrived(String data) {
 
 				Uttilities.showToast(getApplicationContext(), data);
+				
+				finish();
 
 			}
 		}, nameValuePair);

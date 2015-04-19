@@ -55,6 +55,86 @@ public class Entity {
 	private String  status;
 	
 	private String type;
+	
+	private String empName;
+	
+	private String empDesignation;
+	
+	private String empDepartment;
+	
+	private String empStatus;
+	
+	private String empHighLights;
+	
+	private String empId;
+
+	private String visitorName;
+	
+	private String identityID;
+	
+	public String getIdentityID() {
+		return identityID;
+	}
+
+	public void setIdentityID(String identityID) {
+		this.identityID = identityID;
+	}
+
+	public String getVisitorName() {
+		return visitorName;
+	}
+
+	public void setVisitorName(String visitorName) {
+		this.visitorName = visitorName;
+	}
+
+	public String getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+
+	public String getEmpName() {
+		return empName;
+	}
+
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+
+	public String getEmpDesignation() {
+		return empDesignation;
+	}
+
+	public void setEmpDesignation(String empDesignation) {
+		this.empDesignation = empDesignation;
+	}
+
+	public String getEmpDepartment() {
+		return empDepartment;
+	}
+
+	public void setEmpDepartment(String empDepartment) {
+		this.empDepartment = empDepartment;
+	}
+
+	public String getEmpStatus() {
+		return empStatus;
+	}
+
+	public void setEmpStatus(String empStatus) {
+		this.empStatus = empStatus;
+	}
+
+	public String getEmpHighLights() {
+		return empHighLights;
+	}
+
+	public void setEmpHighLights(String empHighLights) {
+		this.empHighLights = empHighLights;
+	}
 
 	public String getType() {
 		return type;

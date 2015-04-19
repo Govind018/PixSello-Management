@@ -29,7 +29,7 @@ import com.pixsello.management.util.Uttilities;
 
 public class MakeInEntryActivity extends Activity {
 
-	EditText editDate, editTime, editGuestName, editCompany, editVisitingGuest,editInTIme;
+	EditText editDate, editTime, editGuestName, editCompany, editVisitingGuest,editInTIme,editRoomNum;
 
 	String date;
 	String time;                 
@@ -37,6 +37,7 @@ public class MakeInEntryActivity extends Activity {
 	String companyName;
 	String visitingGuest;
 	String inTime;
+	String roomNum;
 
 	CheckBox chkMale, chkFemale;
 
@@ -59,6 +60,7 @@ public class MakeInEntryActivity extends Activity {
 		chkMale = (CheckBox) findViewById(R.id.chk_male);
 		chkFemale = (CheckBox) findViewById(R.id.chk_female);
 		editInTIme = (EditText) findViewById(R.id.edit_in_time);
+		editRoomNum = (EditText) findViewById(R.id.edit_visiting_room);
 		
 		image = (ImageView) findViewById(R.id.image);
 
@@ -110,6 +112,7 @@ public class MakeInEntryActivity extends Activity {
 		companyName = editCompany.getText().toString();
 		visitingGuest = editVisitingGuest.getText().toString();
 		inTime = editInTIme.getText().toString();
+		roomNum = editRoomNum.getText().toString();
 		InputStream inputStream;
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
@@ -135,9 +138,11 @@ public class MakeInEntryActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("Visitor",
 					visitingGuest));
 			nameValuePair.add(new BasicNameValuePair("InTime",
-					time));
+					time));                      
 			nameValuePair.add(new BasicNameValuePair("Photo",
-					"test.png"));
+					image_str));
+			nameValuePair.add(new BasicNameValuePair("Roomno",
+					roomNum));
 //			nameValuePair.add(new BasicNameValuePair("Photo",image_str));
 			
 			if (genderMale) {
@@ -155,6 +160,7 @@ public class MakeInEntryActivity extends Activity {
 				public void onDataArrived(String data) {
 					
 					Uttilities.showToast(getApplicationContext(), data);
+					finish();
 
 				}
 			}, nameValuePair);

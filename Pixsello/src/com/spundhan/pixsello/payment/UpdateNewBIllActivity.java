@@ -80,6 +80,13 @@ public class UpdateNewBIllActivity extends Activity {
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
 
+		
+	}
+	
+	public void doSubmit(View v){
+		
+		finish();
+		
 	}
 
 	public void pickBillDate(View v) {

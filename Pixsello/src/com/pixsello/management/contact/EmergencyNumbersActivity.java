@@ -51,6 +51,8 @@ public class EmergencyNumbersActivity extends Activity {
 	RelativeLayout searchLayout;
 	
 	Button search;
+	
+	TextView quickInfo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,8 @@ public class EmergencyNumbersActivity extends Activity {
 		searchSpinner = (Spinner) findViewById(R.id.search_spinner);
 		searchLayout = (RelativeLayout) findViewById(R.id.layout_search);
 		search = (Button) findViewById(R.id.button_search);
-
+		quickInfo = (TextView) findViewById(R.id.text_quickinfo);
+		
 		dialog = new ProgressDialog(EmergencyNumbersActivity.this);
 		dialog.setMessage("Please Wait..!");
 
@@ -91,9 +94,11 @@ public class EmergencyNumbersActivity extends Activity {
 		if (type.equalsIgnoreCase("emr")) {
 			title.setText(getResources().getString(
 					R.string.lbl_emergency_number));
+			quickInfo.setVisibility(View.INVISIBLE);
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
 			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 		} else {
+			quickInfo.setVisibility(View.VISIBLE);
 			title.setText(getResources().getString(R.string.lbl_vendor_number));
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));
 			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
@@ -174,12 +179,14 @@ public class EmergencyNumbersActivity extends Activity {
 						for (int i = 0; i < jsonArray.length(); i++) {
 							contact = new ContactDetails();
 							JSONObject jsonObj = jsonArray.getJSONObject(i);
+							contact.setTypeOfPerson(jsonObj.getString("Typeofperson"));
 							contact.setServiceDescription(jsonObj
 									.getString("ServiceDescription"));
 							contact.setContactPerson(jsonObj
 									.getString("Contactperson"));
 							contact.setContactNumber(jsonObj
 									.getString("ContactNumber"));
+							contact.setQuickInfo(jsonObj.getString("quickinfo"));
 							details.add(contact);
 						}
 

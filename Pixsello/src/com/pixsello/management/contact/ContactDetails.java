@@ -7,6 +7,26 @@ public class ContactDetails {
 	private String contactPerson;
 	
 	private String contactNumber;
+	
+	private String quickInfo;
+	
+	private String typeOfPerson;
+
+	public String getTypeOfPerson() {
+		return typeOfPerson;
+	}
+
+	public void setTypeOfPerson(String typeOfPerson) {
+		this.typeOfPerson = typeOfPerson;
+	}
+
+	public String getQuickInfo() {
+		return quickInfo;
+	}
+
+	public void setQuickInfo(String quickInfo) {
+		this.quickInfo = quickInfo;
+	}
 
 	public String getServiceDescription() {
 		return serviceDescription;

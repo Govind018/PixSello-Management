@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pixsello.management.R;
@@ -66,6 +69,7 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.found_item_from);
 			holder.textToDate = (TextView) convertView
 					.findViewById(R.id.found_item_to);
+			holder.image = (ImageView) convertView.findViewById(R.id.found_item_photo);
 
 		} else {
 
@@ -82,6 +86,13 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		holder.textStaff.setText(item.getStaffName());
 		holder.textFromDate.setText(item.getStayDateFrom());
 		holder.textToDate.setText(item.getStayDateTo());
+		
+		
+		byte[] imageAsBytes = Base64.decode(item.getPhoto().getBytes(), Base64.DEFAULT);
+	    holder.image.setImageBitmap(
+	            BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length)
+	    );
+
 
 		return convertView;
 	}
@@ -95,6 +106,7 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		TextView textStaff;
 		TextView textFromDate;
 		TextView textToDate;
+		ImageView image;
 
 	}
 }

@@ -61,9 +61,9 @@ public class Uttilities {
 
 	public static String PAYMENT_STATUS = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/newPayment";
 
-	public static String EMPLOYEE_ADD_DETAILS = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addEmployeedetails";
+	public static String EMPLOYEE_ADD_DETAILS = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addEmployee_Employment";
 	
-	public static final String PROPERTY_ID = "property1";
+	public static String PROPERTY_ID = "property1";
 	
 	public static void showToast(Context context, String message) {
 
@@ -90,7 +90,7 @@ public class Uttilities {
 	}
 
 	public static String getDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
 		String currentDateandTime = sdf.format(new Date());
 
 		return currentDateandTime;

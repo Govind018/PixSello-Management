@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.ActiveItemsListAdapter;
-import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
@@ -57,8 +56,7 @@ public class ActiveItemsListActivity extends Activity {
 		lbl = (TextView) findViewById(R.id.lbl_title);
 
 		dailog = new ProgressDialog(ActiveItemsListActivity.this);
-		dailog.setMessage("Please Wait..");
-		;
+		dailog.setMessage("Please Wait..");;
 	}
 
 	@Override
@@ -111,7 +109,7 @@ public class ActiveItemsListActivity extends Activity {
 									.getString("Responsibility"));
 							item.setActionTaken(jsonObj
 									.getString("Actiontaken"));
-
+                                      
 							itemsData.add(item);
 						}
 
@@ -151,6 +149,7 @@ public class ActiveItemsListActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("ID", ID));
 			nameValuePair.add(new BasicNameValuePair("Actiontaken",
 					editActionTaken.getText().toString()));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -175,5 +174,27 @@ public class ActiveItemsListActivity extends Activity {
 		} else {
 
 		}
+	}
+	
+	public void closeItem(View v){
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+		nameValuePair.add(new BasicNameValuePair("ID", ID));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		
+		
+		dailog.show();
+		WebRequestPost post  = new WebRequestPost(new IWebRequest() {
+			
+			@Override
+			public void onDataArrived(String data) {
+				
+				dailog.cancel();
+				Uttilities.showToast(getApplicationContext(), data);
+				
+			}
+		}, nameValuePair);
+		
+		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/closeActionItem");
+		
 	}
 }

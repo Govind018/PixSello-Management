@@ -19,7 +19,6 @@ import android.widget.Spinner;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.PaymentStatusListAdapter;
-import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.guest.Entity;
@@ -73,6 +72,63 @@ public class NewPaymentsActivity extends Activity {
 		super.onStart();
 
 		getServicesAndIdentity();
+		
+		getAllData();
+	}
+
+	private void getAllData() {
+		
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+//		nameValuePair.add(new BasicNameValuePair("Nameofservice", sertviceId));
+//		nameValuePair.add(new BasicNameValuePair("Identity", identity));
+
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+			@Override
+			public void onDataArrived(String data) {
+
+				Entity entity;
+				JSONObject jsonObj;
+
+				statusDetails.clear();
+				try {
+					jsonObj = new JSONObject(data);
+					if (jsonObj.has("error_message")) {
+						Uttilities.showToast(getApplicationContext(),
+								jsonObj.getString("error_message"));
+					} else {
+						JSONArray jsonArray = jsonObj.getJSONArray("result");
+						for (int i = 0; i < jsonArray.length(); i++) {
+							entity = new Entity();
+							JSONObject obj = jsonArray.getJSONObject(i);
+							entity.setServiceName(obj.getString("Nameofservice"));
+							entity.setIdentity(obj.getString("Identity"));
+							entity.setType(getPaymentType(Integer.parseInt(obj.getString("Paymentmode"))));
+							entity.setAmount(obj.getString("Amount"));
+							entity.setDueDate(obj.getString("BillDate"));
+							entity.setStatus(obj.getString("BillingStatus"));
+							entity.setServiceId(obj.getString("ServiceID"));
+							entity.setIdentityID(obj.getString("IdentityID"));
+							entity.setBillNum(obj.getString("BillNo"));
+
+							statusDetails.add(entity);
+
+						}
+
+						adapter = new PaymentStatusListAdapter(
+								getApplicationContext(),
+								R.layout.payment_status_list_item,
+								statusDetails);
+						list.setAdapter(adapter);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, nameValuePair);
+
+		post.execute(Uttilities.PAYMENT_STATUS);
 	}
 
 	public void doSubmit(View v) {
@@ -105,13 +161,13 @@ public class NewPaymentsActivity extends Activity {
 							JSONObject obj = jsonArray.getJSONObject(i);
 							entity.setServiceName(obj.getString("Nameofservice"));
 							entity.setIdentity(obj.getString("Identity"));
-							
-							
-							
 							entity.setType(getPaymentType(Integer.parseInt(obj.getString("Paymentmode"))));
 							entity.setAmount(obj.getString("Amount"));
 							entity.setDueDate(obj.getString("BillDate"));
 							entity.setStatus(obj.getString("BillingStatus"));
+							entity.setServiceId(obj.getString("ServiceID"));
+							entity.setIdentityID(obj.getString("IdentityID"));
+							entity.setBillNum(obj.getString("BillNo"));
 
 							statusDetails.add(entity);
 

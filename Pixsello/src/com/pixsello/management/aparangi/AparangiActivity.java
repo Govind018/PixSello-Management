@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.pixsello.management.AssessmentActivity;
 import com.pixsello.management.R;
 
 public class AparangiActivity extends Activity {
@@ -36,6 +35,12 @@ public class AparangiActivity extends Activity {
 	public void showAssessment(View v){
 		
 		startActivity(new Intent(getApplicationContext(), AssessmentActivity.class));
+		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_in);
+	}
+	
+	public void showEmpSearch(View v){
+		
+		startActivity(new Intent(getApplicationContext(), EmployeeSearchActivity.class));
 		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_in);
 	}
 }

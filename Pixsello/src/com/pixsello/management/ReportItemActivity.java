@@ -1,5 +1,6 @@
 package com.pixsello.management;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -12,9 +13,11 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -29,7 +32,7 @@ public class ReportItemActivity extends ActionBarActivity {
 	EditText editReportDate;
 	EditText editReportTime, editReportDescription, editReportLocation,
 			editStaffName, editStayFromDate, editStayToDate;
-	
+
 	ImageView image;
 
 	private String reportDate;
@@ -51,6 +54,8 @@ public class ReportItemActivity extends ActionBarActivity {
 	private boolean stayDate;
 
 	ProgressDialog dialog;
+	
+	boolean photoTaken;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +98,7 @@ public class ReportItemActivity extends ActionBarActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-
+		
 		editReportDate.setText(Uttilities.getDate());
 		editReportTime.setText(Uttilities.getTime());
 	}
@@ -130,6 +135,12 @@ public class ReportItemActivity extends ActionBarActivity {
 		stayFromDate = editStayFromDate.getText().toString();
 		stayToDate = editStayToDate.getText().toString();
 
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+		bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
+		byte [] byte_arr = stream.toByteArray();
+		String image_str = Base64.encodeToString(byte_arr, 0);
+		
 		if (stayFromDate.isEmpty() || stayToDate.isEmpty()
 				|| reportDescription.isEmpty() || reportLocation.isEmpty()
 				|| staffName.isEmpty()) {
@@ -138,11 +149,18 @@ public class ReportItemActivity extends ActionBarActivity {
 					"Please Fill all fields");
 
 		} else {
+			
+			if(!photoTaken){
+				
+				Uttilities.showToast(getApplicationContext(), "Please Take Photo.");
+				return;
+			}
 
 			dialog.show();
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(8);
-			nameValuePair.add(new BasicNameValuePair("PropertyID", "property1"));
+			nameValuePair
+					.add(new BasicNameValuePair("PropertyID", "property1"));
 			nameValuePair.add(new BasicNameValuePair("Date", reportDate));
 			nameValuePair.add(new BasicNameValuePair("Time", reportTime));
 			nameValuePair.add(new BasicNameValuePair("Discriptionofitem",
@@ -155,6 +173,8 @@ public class ReportItemActivity extends ActionBarActivity {
 					stayFromDate));
 			nameValuePair.add(new BasicNameValuePair("Gueststaydateto",
 					stayToDate));
+			nameValuePair.add(new BasicNameValuePair("Photo",image_str));
+			
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -164,28 +184,32 @@ public class ReportItemActivity extends ActionBarActivity {
 					dialog.cancel();
 					Uttilities.showToast(getApplicationContext(), data);
 
-					resetTextFields();
+					finish();
+					
+//					resetTextFields();
 				}
 			}, nameValuePair);
 
 			post.execute(Uttilities.REPORT_ITEM_URL);
-		}
+		}                                                                
+		
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
-		if(resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE){
-			
+
+		if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE) {
+
+			photoTaken = true;
 			Bitmap map = (Bitmap) data.getExtras().get("data");
 			image.setImageBitmap(map);
-			
+
 		}
 	}
 
 	private void resetTextFields() {
-
+                       
 		editReportDescription.setText("");
 		editReportLocation.setText("");
 		editStaffName.setText("");
@@ -213,27 +237,30 @@ public class ReportItemActivity extends ActionBarActivity {
 			month = monthOfYear;
 			day = dayOfMonth;
 
+//			Calendar newDate = Calendar.getInstance();
+//			newDate.set(year, monthOfYear, dayOfMonth);
+//			SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy",
+//					Locale.US);
+
 			if (stayDate) {
 
-				editStayFromDate.setText(new StringBuilder().append(month + 1)
-						.append("-").append(day).append("-").append(year)
-						.append(" "));
+//				editStayFromDate.setText(dateFormatter.format(new Date()
+//						.getTime()));
+
+				 editStayFromDate.setText(new StringBuilder().append(day)
+				 .append("-").append(month + 1).append("-").append(year)
+				 .append(" "));
 
 			} else {
 
-				editStayToDate.setText(new StringBuilder().append(month + 1)
-						.append("-").append(day).append("-").append(year)
-						.append(" "));
+//				editStayToDate.setText(dateFormatter.format(new Date()
+//						.getTime()));
+
+				 editStayToDate.setText(new StringBuilder().append(day)
+				 .append("-").append(month + 1).append("-").append(year)
+				 .append(" "));
+
 			}
-
-			// set selected date into textview
-			// tvDisplayDate.setText(new StringBuilder().append(month + 1)
-			// .append("-").append(day).append("-").append(year)
-			// .append(" "));
-			//
-			// // set selected date into datepicker also
-			// dpResult.init(year, month, day, null);
-
 		}
 	};
 }

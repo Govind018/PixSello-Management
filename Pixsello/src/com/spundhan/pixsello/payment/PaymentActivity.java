@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,12 +35,15 @@ public class PaymentActivity extends Activity {
 	String othrDetail;
 	String billDate;
 	String dueDate;
+	String identityID;
 
 	RadioButton radioCash, radioCheque, radioOther;
 
 	boolean cashStatus;
 	boolean chequeStatus;
 	boolean otherStatus;
+	
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +60,21 @@ public class PaymentActivity extends Activity {
 		radioCheque = (RadioButton) findViewById(R.id.radio_cheque);
 		radioOther = (RadioButton) findViewById(R.id.radio_other);
 		
+		dialog = new ProgressDialog(PaymentActivity.this);
+		dialog.setMessage("Please Wait..");
+		
 		Intent intent = getIntent();
 		
 		billNumber = intent.getStringExtra("BillNo");
 		billDate = intent.getStringExtra("BillDate");
 		identityName= intent.getStringExtra("IdentityName");
+		identityID = intent.getStringExtra("IdentityID");
 		serviceName = intent.getStringExtra("ServiceName");
-		identity = intent.getStringExtra("Identity");
 		serviceId = intent.getStringExtra("ServiceID");
 		amount = intent.getStringExtra("Amount");
 		dueDate = intent.getStringExtra("Billduedate");
 
-		editSeviceName.setText(serviceName);
+		editSeviceName.setText(serviceName);                              
 		editIdentity.setText(identityName);
 		editBillNum.setText(billNumber);
 		editAmount.setText(amount);
@@ -160,12 +167,16 @@ public class PaymentActivity extends Activity {
 			nameValuePair
 					.add(new BasicNameValuePair("otherdetail", othrDetail));
 
+			dialog.show();
+			
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 				@Override
 				public void onDataArrived(String data) {
 
+					dialog.cancel();
 					Uttilities.showToast(getApplicationContext(), data);
+					finish();
 
 				}
 			}, nameValuePair);

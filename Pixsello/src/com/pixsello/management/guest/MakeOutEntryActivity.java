@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -41,7 +42,7 @@ public class MakeOutEntryActivity extends Activity {
 
 	static String ID;
 
-	EditText editTime,editRoom;
+	EditText editTime, editRoom;
 
 	static LinearLayout layoutTime;
 
@@ -72,10 +73,11 @@ public class MakeOutEntryActivity extends Activity {
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(4);
 			nameValuePair.add(new BasicNameValuePair("ID", ID));
-			nameValuePair.add(new BasicNameValuePair("Roomno", room));
+			// nameValuePair.add(new BasicNameValuePair("Roomno", room));
 			nameValuePair.add(new BasicNameValuePair("OutTime", time));
-			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
-			
+			nameValuePair.add(new BasicNameValuePair("PropertyID",
+					Uttilities.PROPERTY_ID));
+
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 				@Override
@@ -95,7 +97,6 @@ public class MakeOutEntryActivity extends Activity {
 			}, nameValuePair);
 
 			post.execute(Uttilities.UPDATE_OUT_TIME_URL);
-
 		}
 	}
 
@@ -117,8 +118,37 @@ public class MakeOutEntryActivity extends Activity {
 			hour = selectedHour;
 			minute = selectedMinute;
 
+			updateTime(hour, minute);
+
 		}
 	};
+
+	private void updateTime(int hours, int mins) {
+
+		String timeSet = "";
+		if (hours > 12) {
+			hours -= 12;
+			timeSet = "PM";
+		} else if (hours == 0) {
+			hours += 12;
+			timeSet = "AM";
+		} else if (hours == 12)
+			timeSet = "PM";
+		else
+			timeSet = "AM";
+
+		String minutes = "";
+		if (mins < 10)
+			minutes = "0" + mins;
+		else
+			minutes = String.valueOf(mins);
+
+		// Append in a StringBuilder
+		String aTime = new StringBuilder().append(hours).append(':')
+				.append(minutes).append(" ").append(timeSet).toString();
+
+		editTime.setText(aTime);
+	}
 
 	@Override
 	protected void onStart() {
@@ -128,9 +158,15 @@ public class MakeOutEntryActivity extends Activity {
 	}
 
 	private void getDataFromServer() {
-		
+
+		final ProgressDialog dialog = new ProgressDialog(
+				MakeOutEntryActivity.this);
+		dialog.setMessage("Please Wait..");
+		dialog.show();
+
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
@@ -145,6 +181,7 @@ public class MakeOutEntryActivity extends Activity {
 
 					if (obj.has("error_message")) {
 
+						dialog.cancel();
 						Uttilities.showToast(getApplicationContext(),
 								obj.getString("error_message"));
 
@@ -153,7 +190,7 @@ public class MakeOutEntryActivity extends Activity {
 
 						visitorsData.clear();
 						for (int i = 0; i < jsonArray.length(); i++) {
-							
+
 							guest = new Entity();
 							JSONObject jsonObj = jsonArray.getJSONObject(i);
 							guest.setItemID(jsonObj.getString("ID"));
@@ -165,6 +202,7 @@ public class MakeOutEntryActivity extends Activity {
 							guest.setPhoto(jsonObj.getString("Photo"));
 							guest.setInTime(jsonObj.getString("InTime"));
 							guest.setOutTime(jsonObj.getString("OutTime"));
+							guest.setVisitorName(jsonObj.getString("Visitor"));
 
 							// byte[] bytearray =
 							// Base64.decode(jsonObj.getString("Photo"), 0);
@@ -172,6 +210,7 @@ public class MakeOutEntryActivity extends Activity {
 							visitorsData.add(guest);
 						}
 
+						dialog.cancel();
 						adapter = new OutEntryListAdapter(
 								getApplicationContext(),
 								R.layout.out_entry_list_item, visitorsData);
@@ -180,9 +219,10 @@ public class MakeOutEntryActivity extends Activity {
 					// System.out.println(jsonArray);
 				} catch (JSONException e) {
 					e.printStackTrace();
+
 				}
 			}
-		},nameValuePair);
+		}, nameValuePair);
 
 		getData.execute(Uttilities.GUEST_VISITOR_LIST_URL);
 	}
@@ -190,11 +230,11 @@ public class MakeOutEntryActivity extends Activity {
 	public void goBack(View v) {
 		finish();
 	}
-	
-	public void test(View v){
-		
+
+	public void showTimePick(View v) {
+
 		showDialog(TIME_DIALOG_ID);
-		
+
 	}
 
 	public void updateOutTime(String id) {

@@ -10,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -48,10 +49,9 @@ public class PaymentStatusActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_payment_status);
+		setContentView(R.layout.activity_payment_status_new);
 
 		spinnerServices = (Spinner) findViewById(R.id.list_services);
-		spinnerIdentity = (Spinner) findViewById(R.id.list_identity);
 
 		servicesList = new ArrayList<String>();
 		identityList = new ArrayList<String>();
@@ -62,7 +62,7 @@ public class PaymentStatusActivity extends Activity {
 		statusDetails = new ArrayList<Entity>();
 
 	}
-	
+
 	public void goBack(View v) {
 		finish();
 	}
@@ -71,12 +71,16 @@ public class PaymentStatusActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 
-		getServicesAndIdentity();
+		getServices();
 	}
 
 	public void doSubmit(View v) {
 		String sertviceId = spinnerServices.getSelectedItem().toString();
 		String identity = spinnerIdentity.getSelectedItem().toString();
+
+		final ProgressDialog dialog = new ProgressDialog(PaymentStatusActivity.this);
+		dialog.setMessage("Please Wait..");
+		dialog.show();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
 		nameValuePair.add(new BasicNameValuePair("Nameofservice", sertviceId));
@@ -112,6 +116,8 @@ public class PaymentStatusActivity extends Activity {
 
 						}
 
+						dialog.cancel();
+
 						adapter = new PaymentStatusListAdapter(
 								getApplicationContext(),
 								R.layout.payment_status_list_item,
@@ -128,9 +134,13 @@ public class PaymentStatusActivity extends Activity {
 
 	}
 
-	private void getServicesAndIdentity() {
+	private void getServices() {
 
-		GetDataFromServer get = new GetDataFromServer(new IWebRequest() {
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+
+		WebRequestPost get = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
@@ -153,10 +163,8 @@ public class PaymentStatusActivity extends Activity {
 							JSONObject obj = jsonArray.getJSONObject(i);
 							item.setServiceId(obj.getString("ServiceID"));
 							item.setServiceName(obj.getString("Nameofservice"));
-							item.setIdentity(obj.getString("Identity"));
 
 							servicesList.add(obj.getString("Nameofservice"));
-							identityList.add(obj.getString("Identity"));
 							listOfServices.add(item);
 						}
 
@@ -164,21 +172,16 @@ public class PaymentStatusActivity extends Activity {
 								getApplicationContext(), R.layout.spinner_item,
 								servicesList);
 
-						identityAdapter = new ArrayAdapter<String>(
-								getApplicationContext(), R.layout.spinner_item,
-								identityList);
-
 						spinnerServices.setAdapter(serviceAdapter);
-						spinnerIdentity.setAdapter(identityAdapter);
 
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 			}
-		});
+		}, nameValuePair);
 
-		get.execute(Uttilities.PAYMENT_GET_SERVICES_IDENTITY);
+		get.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getAllservice");
 
 	}
 

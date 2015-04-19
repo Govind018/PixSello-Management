@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -60,6 +62,8 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 			holder.textPhoto = (ImageView) convertView.findViewById(R.id.guest_photo);
 //			holder.textInTime = (TextView) convertView.findViewById(R.id.guest_in_time);
 			holder.textOutTime = (TextView) convertView.findViewById(R.id.guest_out_time);
+			holder.textVisitorName = (TextView) convertView.findViewById(R.id.guest_company_visitor);
+			holder.image = (ImageView) convertView.findViewById(R.id.guest_photo);
 			
 		}else{
 			holder = (ViewHolder) convertView.getTag();
@@ -72,10 +76,16 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 		holder.textGuestName.setText(guestDetail.getGuestName());
 		holder.textCompany.setText(guestDetail.getCompanyName());
 		holder.textGender.setText(guestDetail.getGender());
+		holder.textVisitorName.setText(guestDetail.getVisitorName());
 //		holder.textPhoto.setText(guestDetail.getPhoto());
 //		holder.textInTime.setText(guestDetail.getInTime());
+
+		byte[] imageAsBytes = Base64.decode(guestDetail.getPhoto().getBytes(), Base64.DEFAULT);
+	    holder.image.setImageBitmap(
+	            BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length)
+	    );
 		
-		if(guestDetail.getOutTime().isEmpty()){
+		if(guestDetail.getOutTime().equalsIgnoreCase("0")){
 			holder.textOutTime.setText("UPDATE");
 		}else{
 			holder.textOutTime.setText(guestDetail.getOutTime());
@@ -87,7 +97,7 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 			public void onClick(View v) {  
 	
 				Entity en = details.get(position);    
-				if(en.getOutTime().isEmpty()){
+				if(en.getOutTime().equalsIgnoreCase("0")){
 
 					MakeOutEntryActivity ac = new MakeOutEntryActivity();
 					ac.updateOutTime(en.getItemID());
@@ -109,6 +119,8 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 		ImageView textPhoto;
 		TextView textInTime;
 		TextView textOutTime;
+		TextView textVisitorName;
+		ImageView image;
 	}
 	
 	public void showDailog(){

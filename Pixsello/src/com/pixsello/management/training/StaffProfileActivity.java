@@ -21,7 +21,6 @@ import android.widget.Spinner;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.StaffListAdapter;
-import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
@@ -97,8 +96,8 @@ public class StaffProfileActivity extends Activity {
 		String searchValue = editSearch.getText().toString();
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 				1);
-		nameValuePairSearch.add(new BasicNameValuePair("Trainer", searchValue));
 		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		nameValuePairSearch.add(new BasicNameValuePair("searchkey", searchValue));
 		
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 			
@@ -144,7 +143,7 @@ public class StaffProfileActivity extends Activity {
 			}
 		}, nameValuePairSearch);
 		
-		post.execute(Uttilities.STAFF_SEARCH_TRAINEE);
+		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/staff_search");
 	}
 
 	private void getDataFromServer() {

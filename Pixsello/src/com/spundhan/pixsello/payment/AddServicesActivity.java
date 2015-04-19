@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -61,6 +62,8 @@ public class AddServicesActivity extends Activity {
 	
 	ArrayList<String> existingServices;
 
+	ProgressDialog dialog ;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,6 +84,9 @@ public class AddServicesActivity extends Activity {
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
+		
+		dialog = new ProgressDialog(AddServicesActivity.this);
+		dialog.setMessage("Please Wait..");
 	}
 	
 	
@@ -94,6 +100,8 @@ public class AddServicesActivity extends Activity {
 	
 	private void getAllservices() {
 
+		dialog.show();
+		
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 		
@@ -117,6 +125,8 @@ public class AddServicesActivity extends Activity {
 					e.printStackTrace();
 				}
 				
+				dialog.cancel();
+				
 				servicesAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, existingServices);
 				spinnerServices.setAdapter(servicesAdapter);
 				
@@ -132,7 +142,7 @@ public class AddServicesActivity extends Activity {
 		final Dialog d = new Dialog(AddServicesActivity.this);
 		d.setContentView(R.layout.new_service_dialog);
 		d.setTitle("Add New Service.");
-		
+
 		final EditText editServiceName = (EditText) d.findViewById(R.id.edit_service_name);
 		Button btn = (Button) d.findViewById(R.id.btn_add_service);
 		
@@ -142,9 +152,13 @@ public class AddServicesActivity extends Activity {
 			public void onClick(View v) {
 
 				String name = editServiceName.getText().toString();
-				postNewService(name);
-				d.cancel();
-				
+				if(!name.isEmpty()){
+					postNewService(name);
+					d.cancel();
+				}else{
+
+					Uttilities.showToast(getApplicationContext(), "Type something to add service.");
+				}
 			}
 		});
 		d.show();
@@ -163,10 +177,12 @@ public class AddServicesActivity extends Activity {
 			public void onDataArrived(String data) {
 				
 				Uttilities.showToast(getApplicationContext(), data);
-				listOfServices.add(nameOfService);
-				ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, listOfServices);
-				spinnerServices.setAdapter(adapter);
+				existingServices.add(nameOfService);
 				
+				servicesAdapter.notifyDataSetChanged();
+//				ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, listOfServices);
+//				spinnerServices.setAdapter(adapter);
+//				
 			}
 		}, nameValuePair);
 		
@@ -180,7 +196,9 @@ public class AddServicesActivity extends Activity {
 		identity = editIdentity.getText().toString();
 		dueDate = editDueDate.getText().toString();
 		regularPay = (regular) ? "1":"0";
-		recurring = (recuring) ? "1":"0"; 
+		recurring = (recuring) ? "1":"0";
+		
+		dialog.show();
 
 		if(!service.isEmpty() || !identity.isEmpty() || !dueDate.isEmpty()){
 
@@ -197,12 +215,13 @@ public class AddServicesActivity extends Activity {
 
 				@Override
 				public void onDataArrived(String data) {
-
+					dialog.cancel();
 					Uttilities.showToast(getApplicationContext(), data);
-					resetFields();
 
+					finish();
 				}
 			}, nameValuePair);
+			
 
 			post.execute(Uttilities.PAYMENT_ADD_SERVICES_URL);
 

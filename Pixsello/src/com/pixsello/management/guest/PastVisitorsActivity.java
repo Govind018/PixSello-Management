@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -203,12 +204,19 @@ public class PastVisitorsActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 
-//		getDataFromServer();
+		getDataFromServer();
 	}
 
 	private void getDataFromServer() {
 
-		GetDataFromServer getData = new GetDataFromServer(new IWebRequest() {
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		
+		final ProgressDialog dialog = new ProgressDialog(PastVisitorsActivity.this);
+		dialog.setMessage("Please Wait..");
+		dialog.show();
+		
+		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
@@ -246,6 +254,7 @@ public class PastVisitorsActivity extends Activity {
 							visitorsData.add(guest);
 						}
 
+						dialog.cancel();
 						adapter = new PastVisitorsListAdapter(
 								getApplicationContext(),
 								R.layout.visitors_list_item, visitorsData);
@@ -259,9 +268,9 @@ public class PastVisitorsActivity extends Activity {
 					e.printStackTrace();
 				}
 			}
-		});
+		},nameValuePair);
 
-		getData.execute(Uttilities.GUEST_VISITOR_LIST_URL);
+		getData.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/GetAllpastVisitor");
 	}
 
 	public void goBack(View v) {
