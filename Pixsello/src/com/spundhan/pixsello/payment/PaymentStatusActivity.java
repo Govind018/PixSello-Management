@@ -19,7 +19,6 @@ import android.widget.Spinner;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.PaymentStatusListAdapter;
-import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.guest.Entity;
@@ -184,5 +183,4 @@ public class PaymentStatusActivity extends Activity {
 		get.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getAllservice");
 
 	}
-
 }

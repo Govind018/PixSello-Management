@@ -14,13 +14,10 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -85,7 +82,7 @@ public class FindItemActivity extends Activity {
 	private void getAllItems() {
 		
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-		nameValuePair.add(new BasicNameValuePair("PropertyID","property1"));
+		nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.getPROPERTY_ID()));
 		
 		final ProgressDialog dialog = new ProgressDialog(FindItemActivity.this);
 		dialog.setMessage("Please Wait..");
@@ -150,15 +147,10 @@ public class FindItemActivity extends Activity {
 
 	public void doSubmitItem(View v) {
 
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-			nameValuePair.add(new BasicNameValuePair("PropertyID","property1"));
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.getPROPERTY_ID()));
 			nameValuePair.add(new BasicNameValuePair("searchkey", item
 					.getText().toString()));
-			
-//			nameValuePair.add(new BasicNameValuePair("Locationwherefound",
-//					location.getText().toString()));
-//			nameValuePair.add(new BasicNameValuePair("Gueststaydatefrom",
-//					approxDate.getText().toString()));
 
 			dialog.show();
 			
@@ -166,52 +158,9 @@ public class FindItemActivity extends Activity {
 
 				@Override
 				public void onDataArrived(String data) {   
+					
+					populateDate(data);
 
-					try {
-						
-						Entity item;
-						JSONObject obj = new JSONObject(data);
-						
-						if (obj.has("error_message")) {
-							dialog.cancel();
-							Uttilities.showToast(getApplicationContext(), obj.getString("error_message"));
-							      
-						}else{
-							
-							JSONArray jsonArray = obj.getJSONArray("result");
-
-							foundItems.clear();
-							for (int i = 0; i < jsonArray.length(); i++) {
-								item = new Entity();
-								JSONObject jsonObj = jsonArray.getJSONObject(i);
-								item.setItemID(jsonObj.getString("ID"));
-								item.setDate(jsonObj.getString("Date"));
-								item.setTime(jsonObj.getString("Time"));
-								item.setDescription(jsonObj
-										.getString("Discriptionofitem"));
-								item.setLocation(jsonObj
-										.getString("Locationwherefound"));
-								item.setStaffName(jsonObj
-										.getString("Staffwhofound"));
-								item.setStayDateFrom(jsonObj
-										.getString("Gueststaydatefrom"));
-								item.setStayDateTo(jsonObj
-										.getString("Gueststaydateto"));
-								
-								foundItems.add(item);
-							}
-							layoutHeader.setVisibility(View.VISIBLE);
-
-							dialog.cancel();
-							adapter = new FoundItemsListAdapter(
-									getApplicationContext(),
-									R.layout.found_list_item, foundItems);
-							list.setAdapter(adapter);
-							
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
 				}
 			}, nameValuePair);
 

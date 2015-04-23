@@ -19,12 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.pixsello.management.R;
+import com.pixsello.management.action.UpdateActionDialog.OnCompleteListener;
 import com.pixsello.management.adapters.ActiveItemsListAdapter;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
 
-public class ActiveItemsListActivity extends Activity {
+public class ActiveItemsListActivity extends Activity implements OnCompleteListener {
 
 	ArrayList<ActionItem> itemsData;
 
@@ -39,6 +40,8 @@ public class ActiveItemsListActivity extends Activity {
 	static EditText editActionTaken;
 
 	static RelativeLayout updateLayout;
+
+	RelativeLayout layoutError;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,16 @@ public class ActiveItemsListActivity extends Activity {
 		lbl = (TextView) findViewById(R.id.lbl_title);
 
 		dailog = new ProgressDialog(ActiveItemsListActivity.this);
-		dailog.setMessage("Please Wait..");;
+		dailog.setMessage("Please Wait..");
+		;
+
+		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
+		layoutError.setVisibility(View.GONE);
+
+		adapter = new ActiveItemsListAdapter(getApplicationContext(),
+				getFragmentManager(), R.layout.active_list_item, itemsData);
+		list.setAdapter(adapter);
+
 	}
 
 	@Override
@@ -72,11 +84,25 @@ public class ActiveItemsListActivity extends Activity {
 		finish();
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		// Uttilities.showToast(getApplicationContext(), "resume");
+
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		// Uttilities.showToast(getApplicationContext(), "pa");
+	}
+
 	private void getActiveItemsList() {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-		nameValuePair.add(new BasicNameValuePair("PropertyID",
-				Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", "property1"));
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
@@ -90,8 +116,9 @@ public class ActiveItemsListActivity extends Activity {
 					JSONObject obj = new JSONObject(data);
 					if (obj.has("error_message")) {
 						dailog.cancel();
-						Uttilities.showToast(getApplicationContext(),
-								obj.getString("error_message"));
+						list.setVisibility(View.GONE);
+						layoutError.setVisibility(View.VISIBLE);
+						adapter.notifyDataSetChanged();
 					} else {
 
 						JSONArray jsonArray = obj.getJSONArray("result");
@@ -109,16 +136,12 @@ public class ActiveItemsListActivity extends Activity {
 									.getString("Responsibility"));
 							item.setActionTaken(jsonObj
 									.getString("Actiontaken"));
-                                      
+
 							itemsData.add(item);
 						}
 
-						adapter = new ActiveItemsListAdapter(
-								getApplicationContext(),
-								R.layout.active_list_item, itemsData);
-						list.setAdapter(adapter);
-
 						dailog.cancel();
+						adapter.notifyDataSetChanged();
 
 						System.out.println(jsonArray);
 
@@ -149,7 +172,8 @@ public class ActiveItemsListActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("ID", ID));
 			nameValuePair.add(new BasicNameValuePair("Actiontaken",
 					editActionTaken.getText().toString()));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+					.getPROPERTY_ID()));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -161,12 +185,11 @@ public class ActiveItemsListActivity extends Activity {
 						Uttilities.showToast(getApplicationContext(),
 								json.getString("result"));
 						updateLayout.setVisibility(View.GONE);
+						editActionTaken.setText("");
 						getActiveItemsList();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 				}
 			}, nameValuePair);
 
@@ -175,26 +198,39 @@ public class ActiveItemsListActivity extends Activity {
 
 		}
 	}
-	
-	public void closeItem(View v){
+
+	public void closeItem(View v) {
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
 		nameValuePair.add(new BasicNameValuePair("ID", ID));
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
-		
-		
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+				.getPROPERTY_ID()));
+
 		dailog.show();
-		WebRequestPost post  = new WebRequestPost(new IWebRequest() {
-			
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
 			@Override
 			public void onDataArrived(String data) {
-				
-				dailog.cancel();
-				Uttilities.showToast(getApplicationContext(), data);
-				
+
+				try {
+					dailog.cancel();
+					JSONObject json = new JSONObject(data);
+					Uttilities.showToast(getApplicationContext(),
+							json.getString("result"));
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		}, nameValuePair);
-		
+
 		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/closeActionItem");
+
+	}
+
+	@Override
+	public void onComplete(String result) {
+		
+		getActiveItemsList();
 		
 	}
 }

@@ -138,7 +138,7 @@ public class ClosedItemsActivity extends Activity {
 			List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 					3);
 			nameValuePairSearch.add(new BasicNameValuePair("propertyID",
-					Uttilities.PROPERTY_ID));
+					Uttilities.getPROPERTY_ID()));
 			nameValuePairSearch.add(new BasicNameValuePair("searchkey",
 					fromDate));
 
@@ -209,7 +209,7 @@ public class ClosedItemsActivity extends Activity {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
 		nameValuePair.add(new BasicNameValuePair("PropertyID",
-				Uttilities.PROPERTY_ID));
+				Uttilities.getPROPERTY_ID()));
 		
 		final ProgressDialog dialog = new  ProgressDialog(ClosedItemsActivity.this);
 		dialog.setMessage("Please Wait.");

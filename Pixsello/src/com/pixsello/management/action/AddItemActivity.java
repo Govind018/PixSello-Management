@@ -1,5 +1,6 @@
 package com.pixsello.management.action;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +9,15 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.pixsello.management.R;
 import com.pixsello.management.connectivity.IWebRequest;
@@ -29,6 +34,12 @@ public class AddItemActivity extends Activity {
 	String location;
 	String staffName;
 	String respo;
+	
+	int REQUEST_IMAGE_CAPTURE = 101;
+	
+	ImageView image;
+	
+	boolean photoTaken;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,16 @@ public class AddItemActivity extends Activity {
 		editLocation = (EditText) findViewById(R.id.edit_location);
 		editStaff = (EditText) findViewById(R.id.edit_staff_name);
 		editRespo = (EditText) findViewById(R.id.edit_responsibility);
+		image = (ImageView) findViewById(R.id.image);
+		
+	}
+	
+	public void capturePhoto(View v) {
+
+		Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+			startActivityForResult(cameraIntent, REQUEST_IMAGE_CAPTURE);
+		}
 	}
 
 	@Override
@@ -49,6 +70,19 @@ public class AddItemActivity extends Activity {
 
 		editDate.setText(Uttilities.getDate());
 		editTime.setText(Uttilities.getTime());
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE) {
+			
+			photoTaken = true;
+			Bitmap map = (Bitmap) data.getExtras().get("data");
+			image.setImageBitmap(map);
+
+		}
 	}
 
 	public void doSubmitItem(View v) {
@@ -59,6 +93,12 @@ public class AddItemActivity extends Activity {
 		location = editLocation.getText().toString();
 		staffName = editStaff.getText().toString();
 		respo = editRespo.getText().toString();
+		
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+		bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
+		byte [] byte_arr = stream.toByteArray();
+		String image_str = Base64.encodeToString(byte_arr, 0);
 
 		if (desc.isEmpty() || location.isEmpty() || staffName.isEmpty()
 				|| respo.isEmpty()) {
@@ -67,6 +107,11 @@ public class AddItemActivity extends Activity {
 					"Please fill all the fields.");
 
 		} else {
+			
+			if(!photoTaken){
+				Uttilities.showToast(getApplicationContext(), "Please Take Photo");
+				return;
+			}
 
 			final ProgressDialog dialog = new ProgressDialog(AddItemActivity.this);
 			dialog.setMessage("Please Wait..");
@@ -79,7 +124,8 @@ public class AddItemActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("Where", location));
 			nameValuePair.add(new BasicNameValuePair("Reported", staffName));
 			nameValuePair.add(new BasicNameValuePair("Responsibility", respo));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
+			nameValuePair.add(new BasicNameValuePair("Photo", image_str));
 
 			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
 
@@ -88,9 +134,7 @@ public class AddItemActivity extends Activity {
 					
 					Uttilities.showToast(getApplicationContext(), data);
 					dialog.cancel();
-					
 					finish();
-//					resetData();
 
 				}
 			}, nameValuePair);
@@ -99,37 +143,7 @@ public class AddItemActivity extends Activity {
 		}
 	}
 
-
-	private void resetData() {
-
-		editDesc.setText("");
-		editLocation.setText("");
-		editStaff.setText("");
-		editRespo.setText("");
-
-		
-	}
-	
 	public void goBack(View v) {
 		finish();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_item, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }

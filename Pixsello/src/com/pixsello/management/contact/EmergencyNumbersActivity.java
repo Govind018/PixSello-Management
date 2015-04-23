@@ -76,19 +76,6 @@ public class EmergencyNumbersActivity extends Activity {
 
 		nameValuePair = new ArrayList<NameValuePair>(1);
 
-		// for (int i = 0; i < 10; i++) {
-		//
-		// contact = new ContactDetails();
-		// contact.setServiceDescription("Doctor dasasda");
-		// contact.setContactPerson("Mahantes dasdasdad h");
-		// contact.setContactNumber("123456789");
-		// details.add(contact);
-		// }
-
-		// adapter = new ContactsListAdapter(getApplicationContext(),
-		// R.layout.contact_list_item, details);
-		// list.setAdapter(adapter);
-
 		Intent in = getIntent();
 		type = in.getStringExtra("type");
 		if (type.equalsIgnoreCase("emr")) {
@@ -96,12 +83,12 @@ public class EmergencyNumbersActivity extends Activity {
 					R.string.lbl_emergency_number));
 			quickInfo.setVisibility(View.INVISIBLE);
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
 		} else {
 			quickInfo.setVisibility(View.VISIBLE);
 			title.setText(getResources().getString(R.string.lbl_vendor_number));
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
 		}
 	}
 
@@ -135,7 +122,7 @@ public class EmergencyNumbersActivity extends Activity {
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 				1);
 		nameValuePairSearch.add(new BasicNameValuePair("searchkey", searchValue));
-		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
 
 		dialog.show();
 		getDataFromServer(Uttilities.CONTACT_SEARCH_URL, nameValuePairSearch);

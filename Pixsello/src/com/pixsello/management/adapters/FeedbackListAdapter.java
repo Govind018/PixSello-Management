@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.pixsello.management.R;
 import com.pixsello.management.guest.Entity;
 
-public class EmployeeSearchListAdapter extends ArrayAdapter<Entity> {
+public class FeedbackListAdapter extends ArrayAdapter<Entity> {
 
 	ArrayList<Entity> details;
 
@@ -24,7 +24,7 @@ public class EmployeeSearchListAdapter extends ArrayAdapter<Entity> {
 
 	Entity entity;
 
-	public EmployeeSearchListAdapter(Context context, int resource,
+	public FeedbackListAdapter(Context context, int resource,
 			ArrayList<Entity> data) {
 		super(context, resource, data);
 		thisContext = context;
@@ -49,38 +49,42 @@ public class EmployeeSearchListAdapter extends ArrayAdapter<Entity> {
 			convertView = infalter.inflate(inflatableRes, null);
 			convertView.setTag(holder);
 
-			holder.textEmpName = (TextView) convertView
-					.findViewById(R.id.emp_name);
-			holder.textEmpDesignation = (TextView) convertView
-					.findViewById(R.id.emp_designation);
-			holder.textEmpDepartment = (TextView) convertView
-					.findViewById(R.id.emp_department);
-			holder.textStatus = (TextView) convertView
-					.findViewById(R.id.emp_status);
-			holder.textHighlights = (TextView) convertView
-					.findViewById(R.id.emp_highlights);
+			holder.textGuestName = (TextView) convertView
+					.findViewById(R.id.text_guest_name);
+			holder.textCompany = (TextView) convertView
+					.findViewById(R.id.text_company);
+			holder.textFeedback = (TextView) convertView
+					.findViewById(R.id.text_feedback);
+			holder.textAmbience = (TextView) convertView
+					.findViewById(R.id.text_ambience);
+			holder.textServices = (TextView) convertView
+					.findViewById(R.id.text_services);
+			holder.textFood = (TextView) convertView
+					.findViewById(R.id.text_food);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-  
+
 		entity = details.get(position);
 
-		holder.textEmpName.setText(entity.getEmpName());
-		holder.textEmpDesignation.setText(entity.getEmpDesignation());
-		holder.textEmpDepartment.setText(entity.getEmpDepartment());
-//		holder.textStatus.setText(entity.getEmpStatus());
-		holder.textHighlights.setText(entity.getEmpHighLights());
+		holder.textGuestName.setText(entity.getGuestName());
+		holder.textCompany.setText(entity.getCompanyName());
+		holder.textFeedback.setText(entity.getFeedback());
+		holder.textAmbience.setText(entity.getAmbience());
+		holder.textServices.setText(entity.getServices());
+		holder.textFood.setText(entity.getFood());
 
 		return convertView;
 	}
 
 	public class ViewHolder {
 
-		TextView textEmpName;
-		TextView textEmpDesignation;
-		TextView textEmpDepartment;
-		TextView textStatus;
-		TextView textHighlights;
+		TextView textGuestName;
+		TextView textCompany;
+		TextView textFeedback;
+		TextView textAmbience;
+		TextView textServices;
+		TextView textFood;
 	}
 }

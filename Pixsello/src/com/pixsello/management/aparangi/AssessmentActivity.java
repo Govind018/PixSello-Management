@@ -1,6 +1,7 @@
 package com.pixsello.management.aparangi;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -10,6 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -51,7 +55,13 @@ public class AssessmentActivity extends Activity {
 
 	ArrayAdapter<String> adapter;
 
+	static final int DATE_DIALOG_ID = 999;
+
 	Button btnSubmit;
+
+	private int year;
+	private int month;
+	private int day;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +89,18 @@ public class AssessmentActivity extends Activity {
 		spinnerHonesty.setOnItemSelectedListener(listener);
 		editTotal = (EditText) findViewById(R.id.edit_total);
 		editRemarks = (EditText) findViewById(R.id.edit_remarks);
-		editDateOfAssessment = (EditText) findViewById(R.id.edit_done_by);
+		editDateOfAssessment = (EditText) findViewById(R.id.edit_date);
 		editAssesmentDoneBy = (EditText) findViewById(R.id.edit_done_by);
 		spinnerMonths = (Spinner) findViewById(R.id.spinner_months);
 		employees = new ArrayList<String>();
 		totalItems = new ArrayList<Integer>();
 
 		btnSubmit = (Button) findViewById(R.id.btn_submit);
+
+		final Calendar c = Calendar.getInstance();
+		year = c.get(Calendar.YEAR);
+		month = c.get(Calendar.MONTH);
+		day = c.get(Calendar.DAY_OF_MONTH);
 
 		// btnSubmit.setText("SUBMIT");
 	}
@@ -95,7 +110,7 @@ public class AssessmentActivity extends Activity {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view,
 				int position, long id) {
-			
+
 			calculateTotal();
 
 		}
@@ -105,6 +120,11 @@ public class AssessmentActivity extends Activity {
 
 		}
 	};
+
+	public void selectDate(View v) {
+
+		showDialog(DATE_DIALOG_ID);
+	}
 
 	private void calculateTotal() {
 
@@ -135,7 +155,7 @@ public class AssessmentActivity extends Activity {
 			sum = sum + item;
 		}
 
-		editTotal.setText(""+sum);
+		editTotal.setText("" + sum);
 	}
 
 	@Override
@@ -224,6 +244,8 @@ public class AssessmentActivity extends Activity {
 				editAssesmentDoneBy.getText().toString()));
 		nameValuePair.add(new BasicNameValuePair("Dateofassesment",
 				editDateOfAssessment.getText().toString()));
+		nameValuePair.add(new BasicNameValuePair("Totalmarks", editTotal
+				.getText().toString()));
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -238,4 +260,31 @@ public class AssessmentActivity extends Activity {
 
 		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addAssesmentdetails");
 	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+			// set date picker as current date
+			return new DatePickerDialog(this, datePickerListener, year, month,
+					day);
+		}
+		return null;
+	}
+
+	private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+
+		@Override
+		public void onDateSet(DatePicker view, int year11, int monthOfYear,
+				int dayOfMonth) {
+			year = year11;
+			month = monthOfYear;
+			day = dayOfMonth;
+
+			editDateOfAssessment.setText(new StringBuilder().append(day)
+					.append("-").append(month + 1).append("-").append(year)
+					.append(" "));
+		}
+	};
+
 }

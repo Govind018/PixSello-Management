@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 
 import com.pixsello.management.R;
@@ -46,6 +47,8 @@ public class MakeOutEntryActivity extends Activity {
 
 	static LinearLayout layoutTime;
 
+	RelativeLayout layoutError;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,16 +61,22 @@ public class MakeOutEntryActivity extends Activity {
 		layoutTime = (LinearLayout) findViewById(R.id.layout_out_entry);
 		visitorsData = new ArrayList<Entity>();
 
+		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
+		layoutError.setVisibility(View.GONE);
+
 		final Calendar c = Calendar.getInstance();
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
+
+		adapter = new OutEntryListAdapter(getApplicationContext(),
+				R.layout.out_entry_list_item, visitorsData);
+		guestList.setAdapter(adapter);
 
 	}
 
 	public void updateTime(View v) {
 
 		String time = editTime.getText().toString();
-		String room = editRoom.getText().toString();
 
 		if (!time.isEmpty()) {
 
@@ -76,7 +85,7 @@ public class MakeOutEntryActivity extends Activity {
 			// nameValuePair.add(new BasicNameValuePair("Roomno", room));
 			nameValuePair.add(new BasicNameValuePair("OutTime", time));
 			nameValuePair.add(new BasicNameValuePair("PropertyID",
-					Uttilities.PROPERTY_ID));
+					Uttilities.getPROPERTY_ID()));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -84,13 +93,13 @@ public class MakeOutEntryActivity extends Activity {
 				public void onDataArrived(String data) {
 
 					try {
+						editTime.setText("");
 						JSONObject json = new JSONObject(data);
 						Uttilities.showToast(getApplicationContext(),
 								json.getString("result"));
 						layoutTime.setVisibility(View.GONE);
 						getDataFromServer();
 					} catch (JSONException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -166,29 +175,31 @@ public class MakeOutEntryActivity extends Activity {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
 		nameValuePair.add(new BasicNameValuePair("PropertyID",
-				Uttilities.PROPERTY_ID));
+				Uttilities.getPROPERTY_ID()));
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
-
+				visitorsData.clear();
 				try {
 
 					Entity guest;
-
 					JSONObject obj = new JSONObject(data);
 
 					if (obj.has("error_message")) {
 
 						dialog.cancel();
-						Uttilities.showToast(getApplicationContext(),
-								obj.getString("error_message"));
+
+						guestList.setVisibility(View.GONE);
+						layoutError.setVisibility(View.VISIBLE);
+						// Uttilities.showToast(getApplicationContext(),
+						// obj.getString("error_message"));
+						adapter.notifyDataSetChanged();
 
 					} else {
 						JSONArray jsonArray = obj.getJSONArray("result");
 
-						visitorsData.clear();
 						for (int i = 0; i < jsonArray.length(); i++) {
 
 							guest = new Entity();
@@ -211,12 +222,8 @@ public class MakeOutEntryActivity extends Activity {
 						}
 
 						dialog.cancel();
-						adapter = new OutEntryListAdapter(
-								getApplicationContext(),
-								R.layout.out_entry_list_item, visitorsData);
-						guestList.setAdapter(adapter);
+						adapter.notifyDataSetChanged();
 					}
-					// System.out.println(jsonArray);
 				} catch (JSONException e) {
 					e.printStackTrace();
 

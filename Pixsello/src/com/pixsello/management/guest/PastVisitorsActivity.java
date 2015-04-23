@@ -19,11 +19,9 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.PastVisitorsListAdapter;
-import com.pixsello.management.connectivity.GetDataFromServer;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
@@ -35,21 +33,18 @@ public class PastVisitorsActivity extends Activity {
 	PastVisitorsListAdapter adapter;
 
 	ArrayList<Entity> visitorsData;
-	
-	RelativeLayout layoutSerach;
-	
+
 	EditText editDateFrom,editDateTo;
-	
+
 	static final int DATE_DIALOG_ID = 999;
-	
+
 	private int year;
 	private int month;
 	private int day;
 
 	private boolean stayDate;
-	
-	EditText editFromDate;
-	EditText editToDate;
+
+	EditText editSearch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +52,17 @@ public class PastVisitorsActivity extends Activity {
 		setContentView(R.layout.activity_past_visitors);
 
 		guestList = (ListView) findViewById(R.id.guest_list);
-		layoutSerach = (RelativeLayout) findViewById(R.id.layout_search);
-		editFromDate = (EditText) findViewById(R.id.edit_date);
-		editToDate = (EditText) findViewById(R.id.editText1);
-		
+		editSearch = (EditText) findViewById(R.id.edit_search);
+
 		visitorsData = new ArrayList<Entity>();
-		
+
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
 
 	}
-	
+
 	public void setStayFromDate(View v) {
 
 		stayDate = true;
@@ -82,7 +75,7 @@ public class PastVisitorsActivity extends Activity {
 		// Toast.LENGTH_SHORT).show();
 		showDialog(DATE_DIALOG_ID);
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
@@ -93,7 +86,7 @@ public class PastVisitorsActivity extends Activity {
 		}
 		return null;
 	}
-	
+
 	private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 
 		@Override
@@ -105,50 +98,39 @@ public class PastVisitorsActivity extends Activity {
 
 			if (stayDate) {
 
-				editFromDate.setText(new StringBuilder().append(day)
+				editSearch.setText(new StringBuilder().append(day)
 						.append("-").append(month + 1).append("-").append(year)
 						.append(" "));
 
 			} else {
 
-				editToDate.setText(new StringBuilder().append(day)
-						.append("-").append(month + 1).append("-").append(year)
-						.append(" "));
+				//				editToDate.setText(new StringBuilder().append(day)
+				//						.append("-").append(month + 1).append("-").append(year)
+				//						.append(" "));
 			}
 		}
 	};
 
-	
-	public void showSearchOptions(View v){
-		
-		layoutSerach.setVisibility(View.VISIBLE);
-	}
-	
-	public void showAllData(View v){
-		
-		layoutSerach.setVisibility(View.GONE);
-		getDataFromServer();
-	}
-	
-	public void testMethod(View v){
-		
-		String fromDate = editFromDate.getText().toString();
-		String toDate =  editToDate.getText().toString();
-		
-		if(!fromDate.isEmpty() && !toDate.isEmpty())
+
+	public void doSearch(View v){
+
+		String searchValue = editSearch.getText().toString();
+
+		if(!searchValue.isEmpty())
 		{
 			List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 					1);
-			nameValuePairSearch.add(new BasicNameValuePair("propertyID",Uttilities.PROPERTY_ID));
-			nameValuePairSearch.add(new BasicNameValuePair("date_from",fromDate));
-			nameValuePairSearch.add(new BasicNameValuePair("date_to",toDate));
-			
+			nameValuePairSearch.add(new BasicNameValuePair("searchkey",searchValue));
+			nameValuePairSearch.add(new BasicNameValuePair("propertyID",Uttilities.getPROPERTY_ID()));
+
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
-				
+
 				@Override
 				public void onDataArrived(String data) {
 					try {
 
+						visitorsData.clear();
+						
 						Entity guest;
 
 						JSONObject obj = new JSONObject(data);
@@ -174,9 +156,6 @@ public class PastVisitorsActivity extends Activity {
 								guest.setInTime(jsonObj.getString("InTime"));
 								guest.setOutTime(jsonObj.getString("OutTime"));
 
-								// byte[] bytearray =
-								// Base64.decode(jsonObj.getString("Photo"), 0);
-
 								visitorsData.add(guest);
 							}
 
@@ -194,9 +173,9 @@ public class PastVisitorsActivity extends Activity {
 					}
 				}
 			}, nameValuePairSearch);
-			post.execute(Uttilities.PAST_VISITORS_SEARCH);
+			post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/pastVisitorSearch");
 		}else{
-			
+
 		}
 	}
 
@@ -211,18 +190,18 @@ public class PastVisitorsActivity extends Activity {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
-		
+
 		final ProgressDialog dialog = new ProgressDialog(PastVisitorsActivity.this);
 		dialog.setMessage("Please Wait..");
 		dialog.show();
-		
+
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
 
 				try {
-
+					visitorsData.clear();
 					Entity guest;
 
 					JSONObject obj = new JSONObject(data);

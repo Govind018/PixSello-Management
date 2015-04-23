@@ -7,6 +7,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,11 +23,11 @@ import com.pixsello.management.util.Uttilities;
 public class TrainingUpdatesActivity extends Activity {
 
 	EditText editTrainingDate, editTrainigTime, editTrainee, editTrainer,
-			editOther,editAssement;
+			editOther, editAssement;
 
 	Spinner editTrainingType;
-	
-	Spinner editHrs,editMins;
+
+	Spinner editHrs, editMins;
 
 	private String trainingDate;
 	private String trainingTime;
@@ -39,6 +40,8 @@ public class TrainingUpdatesActivity extends Activity {
 	private String assessment;
 
 	String[] types;
+
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +58,8 @@ public class TrainingUpdatesActivity extends Activity {
 		editOther = (EditText) findViewById(R.id.edit_other);
 		editHrs = (Spinner) findViewById(R.id.edit_hrs);
 		editMins = (Spinner) findViewById(R.id.edit_mins);
-		editAssement = (EditText) findViewById(R.id.stay_from_date); 
-		
+		editAssement = (EditText) findViewById(R.id.stay_from_date);
+
 		editTrainingType
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -80,6 +83,9 @@ public class TrainingUpdatesActivity extends Activity {
 
 					}
 				});
+
+		dialog = new ProgressDialog(TrainingUpdatesActivity.this);
+		dialog.setMessage("Please Wait..");
 	}
 
 	@Override
@@ -102,8 +108,25 @@ public class TrainingUpdatesActivity extends Activity {
 		trainingMins = editMins.getSelectedItem().toString();
 		assessment = editAssement.getText().toString();
 
+		dialog.show();
+
+		if (traineeName.isEmpty() || trainerName.isEmpty()
+				|| assessment.isEmpty()) {
+
+			Uttilities.showToast(getApplicationContext(), "Enter all fields.");
+			return;
+		}
+
+		if (!(Integer.parseInt(assessment) > 0 && Integer.parseInt(assessment) <= 10)) {
+
+			Uttilities.showToast(getApplicationContext(),
+					"Assessment should be out of 10");
+			return;
+		}
+
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
-		nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+				.getPROPERTY_ID()));
 		nameValuePair.add(new BasicNameValuePair("Date", trainingDate));
 		nameValuePair.add(new BasicNameValuePair("Time", trainingTime));
 		nameValuePair.add(new BasicNameValuePair("Trainee", traineeName));
@@ -123,13 +146,12 @@ public class TrainingUpdatesActivity extends Activity {
 			public void onDataArrived(String data) {
 
 				Uttilities.showToast(getApplicationContext(), data);
-				
+				dialog.cancel();
 				finish();
 
 			}
 		}, nameValuePair);
 		post.execute(Uttilities.TRAINING_UPDATE_URL);
-
 	}
 
 	public void goBack(View v) {

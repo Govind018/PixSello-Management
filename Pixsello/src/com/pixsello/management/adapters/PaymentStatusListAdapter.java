@@ -91,8 +91,6 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 				
 				Entity en = details.get(position);
 				
-				Uttilities.showToast(thisContext, en.getServiceName());
-
 				Intent intent = new Intent(thisContext, PaymentActivity.class);
 				intent.putExtra("ServiceID",en.getServiceId());
 				intent.putExtra("IdentityID",en.getServiceId());

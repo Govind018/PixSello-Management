@@ -72,6 +72,56 @@ public class Entity {
 	
 	private String identityID;
 	
+	private String feedback;
+	
+	private String ambience;
+	
+	private String services;
+	
+	private String food;
+	
+	private String feedbackID;
+	
+	public String getFeedbackID() {
+		return feedbackID;
+	}
+
+	public void setFeedbackID(String feedbackID) {
+		this.feedbackID = feedbackID;
+	}
+
+	public String getAmbience() {
+		return ambience;
+	}
+
+	public void setAmbience(String ambience) {
+		this.ambience = ambience;
+	}
+
+	public String getServices() {
+		return services;
+	}
+
+	public void setServices(String services) {
+		this.services = services;
+	}
+
+	public String getFood() {
+		return food;
+	}
+
+	public void setFood(String food) {
+		this.food = food;
+	}
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
 	public String getIdentityID() {
 		return identityID;
 	}

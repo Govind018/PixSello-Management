@@ -14,6 +14,7 @@ import android.widget.PopupMenu.OnMenuItemClickListener;
 
 import com.pixsello.management.action.ActionRequiredActivity;
 import com.pixsello.management.aparangi.AparangiActivity;
+import com.pixsello.management.feedback.FeedbackDetailsActivity;
 import com.pixsello.management.training.TrainingActivity;
 
 public class HomeScreenActivity extends ActionBarActivity {
@@ -118,5 +119,13 @@ public class HomeScreenActivity extends ActionBarActivity {
 		startActivity(new Intent(getApplicationContext(),
 				AparangiActivity.class));
 		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
+	}
+	
+	public void showFeedbackDetails(View v){
+		
+		startActivity(new Intent(getApplicationContext(),
+				FeedbackDetailsActivity.class));
+		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
+		
 	}
 }

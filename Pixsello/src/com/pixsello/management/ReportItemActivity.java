@@ -1,8 +1,11 @@
 package com.pixsello.management;
 
 import java.io.ByteArrayOutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -155,12 +158,16 @@ public class ReportItemActivity extends ActionBarActivity {
 				Uttilities.showToast(getApplicationContext(), "Please Take Photo.");
 				return;
 			}
+			
+			if(!checkDate(stayFromDate,stayToDate)){
+				return;
+			}
 
 			dialog.show();
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(8);
 			nameValuePair
-					.add(new BasicNameValuePair("PropertyID", "property1"));
+					.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
 			nameValuePair.add(new BasicNameValuePair("Date", reportDate));
 			nameValuePair.add(new BasicNameValuePair("Time", reportTime));
 			nameValuePair.add(new BasicNameValuePair("Discriptionofitem",
@@ -193,6 +200,31 @@ public class ReportItemActivity extends ActionBarActivity {
 			post.execute(Uttilities.REPORT_ITEM_URL);
 		}                                                                
 		
+	}
+
+	private boolean checkDate(String dateFrom,String dateTo) {
+
+		SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy");
+		try {
+			Date fromDate = format.parse(dateFrom);
+			Date toDate = format.parse(dateTo);
+			
+			// fromdate is greater then to date
+			if(fromDate.compareTo(toDate) > 0){
+
+				Uttilities.showToast(getApplicationContext(), "Invalid date selection.");
+				return false;
+				
+			}else if(toDate.compareTo(fromDate) < 0){
+				
+				Uttilities.showToast(getApplicationContext(), "Invalid date selection.");
+				return false;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 
 	@Override

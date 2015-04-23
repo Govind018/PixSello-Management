@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
@@ -65,6 +66,16 @@ public class Uttilities {
 	
 	public static String PROPERTY_ID = "property1";
 	
+//	public static String PROPERTY_ID;
+	
+	public static String getPROPERTY_ID() {
+		return PROPERTY_ID;
+	}
+
+	public static void setPROPERTY_ID(String pROPERTY_ID) {
+		PROPERTY_ID = pROPERTY_ID;
+	}
+
 	public static void showToast(Context context, String message) {
 
 		Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -142,6 +153,22 @@ public class Uttilities {
 		
 		AlertDialog dialog = alertDialog.create();
 		dialog.create();
+	}
+	
+	public static Bitmap resizeImage(int width, int height, Bitmap map) {
+
+		Bitmap resizedImage;
+
+		if (width == 480) {
+			width = width - 160;
+		} else if (width == 720) {
+			width = width - 220;
+		}
+
+		resizedImage = Bitmap.createScaledBitmap(map, width, (height - 320),
+				true);
+
+		return resizedImage;
 	}
 	
 }

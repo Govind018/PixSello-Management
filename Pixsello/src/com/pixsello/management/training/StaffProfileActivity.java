@@ -37,8 +37,6 @@ public class StaffProfileActivity extends Activity {
 
 	ArrayList<StaffDetails> staffDetails;
 	
-	RelativeLayout searchLayout;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,7 +46,6 @@ public class StaffProfileActivity extends Activity {
 		staffDetails = new ArrayList<StaffDetails>();
 		editSearch = (EditText) findViewById(R.id.edit_search);
 		searchSpinner = (Spinner) findViewById(R.id.search_spinner);
-		searchLayout = (RelativeLayout) findViewById(R.id.layout_search);
 		
 		adapter = new StaffListAdapter(getApplicationContext(),
 				R.layout.staff_list_item, staffDetails);
@@ -62,41 +59,17 @@ public class StaffProfileActivity extends Activity {
 		getDataFromServer();
 	}
 	
-	public void showSearchOptions(View v){
-		
-		searchLayout.setVisibility(View.VISIBLE);
-		
-	}
-	
-	public void showAllData(View v) {
-		searchLayout.setVisibility(View.GONE);
-		getDataFromServer();
-	}
-
-	
 	public void doSearch(View v) {
 		
-		String searchKey = "";
-		switch (searchSpinner.getSelectedItemPosition()) {
-		case 0:
-			searchKey = "Trainer";
-			break;
-
-		case 1:
-			searchKey = "Trainee";
-			break;
-
-		case 2:
-			searchKey = "Type";
-			break;
-		default:
-			break;
-		}
-
 		String searchValue = editSearch.getText().toString();
+		
+		if(searchValue.isEmpty()){
+			return;
+		}
+		
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 				1);
-		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
 		nameValuePairSearch.add(new BasicNameValuePair("searchkey", searchValue));
 		
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
@@ -148,8 +121,8 @@ public class StaffProfileActivity extends Activity {
 
 	private void getDataFromServer() {
 		
-		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
@@ -200,24 +173,5 @@ public class StaffProfileActivity extends Activity {
 
 	public void goBack(View v) {
 		finish();
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.staff_profile, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }

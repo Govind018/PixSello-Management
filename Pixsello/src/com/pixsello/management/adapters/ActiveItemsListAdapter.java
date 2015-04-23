@@ -3,7 +3,9 @@ package com.pixsello.management.adapters;
 import java.util.ArrayList;
 
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import com.pixsello.management.R;
 import com.pixsello.management.action.ActionItem;
 import com.pixsello.management.action.ActiveItemsListActivity;
+import com.pixsello.management.action.UpdateActionDialog;
+import com.pixsello.management.aparangi.EmployeeDetailEditDialog;
 
 public class ActiveItemsListAdapter extends ArrayAdapter<ActionItem> {
 
@@ -28,14 +32,17 @@ public class ActiveItemsListAdapter extends ArrayAdapter<ActionItem> {
 	int inflatableRes = 0;
 
 	LayoutInflater inflater;
+	
+	FragmentManager thisManger;
 
-	public ActiveItemsListAdapter(Context context, int resource,
+	public ActiveItemsListAdapter(Context context, FragmentManager fragmentManager, int resource,
 			ArrayList<ActionItem> objects) {
 		super(context, resource, objects);
 
 		thisContext = context;
 		inflatableRes = resource;
 		items = objects;
+		thisManger = fragmentManager;
 		inflater = (LayoutInflater) thisContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -96,8 +103,23 @@ public class ActiveItemsListAdapter extends ArrayAdapter<ActionItem> {
 				ActionItem item1 = items.get(position);
 //				ActiveItemsListActivity.showDailog(item1.getItemID());
 				
-				ActiveItemsListActivity a = new ActiveItemsListActivity();
-				a.showDailog(item1.getItemID());
+//				ActiveItemsListActivity a = new ActiveItemsListActivity();
+//				a.showDailog(item1.getItemID());
+				
+				
+				Bundle bundle = new Bundle();
+				bundle.putString("ID", item1.getItemID());
+				bundle.putString("date", item1.getDate());
+				bundle.putString("time", item1.getTime());
+				bundle.putString("description", item1.getDispersion());
+				bundle.putString("location", item1.getLocation());
+				bundle.putString("reported", item1.getReported());
+				bundle.putString("respo", item1.getResponsibility());
+				bundle.putString("action_taken", item1.getActionTaken());
+
+				UpdateActionDialog dialog = new UpdateActionDialog();
+				dialog.setArguments(bundle);
+				dialog.show(thisManger, "");
 			}
 		});
 

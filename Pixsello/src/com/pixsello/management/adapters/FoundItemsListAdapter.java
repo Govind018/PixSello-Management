@@ -2,17 +2,19 @@ package com.pixsello.management.adapters;
 
 import java.util.ArrayList;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pixsello.management.ImagePreviewActivity;
 import com.pixsello.management.R;
 import com.pixsello.management.guest.Entity;
 
@@ -69,7 +71,8 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.found_item_from);
 			holder.textToDate = (TextView) convertView
 					.findViewById(R.id.found_item_to);
-			holder.image = (ImageView) convertView.findViewById(R.id.found_item_photo);
+			holder.image = (ImageView) convertView
+					.findViewById(R.id.found_item_photo);
 
 		} else {
 
@@ -86,13 +89,31 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		holder.textStaff.setText(item.getStaffName());
 		holder.textFromDate.setText(item.getStayDateFrom());
 		holder.textToDate.setText(item.getStayDateTo());
-		
-		
-		byte[] imageAsBytes = Base64.decode(item.getPhoto().getBytes(), Base64.DEFAULT);
-	    holder.image.setImageBitmap(
-	            BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length)
-	    );
 
+		if (item.getPhoto() != null) {
+			byte[] imageAsBytes = Base64.decode(item.getPhoto().getBytes(),
+					Base64.DEFAULT);
+			holder.image.setImageBitmap(BitmapFactory.decodeByteArray(
+					imageAsBytes, 0, imageAsBytes.length));
+		}
+		
+		holder.image.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				Entity itemPhoto = items.get(position);
+				
+				byte[] imageAsBytes = Base64.decode(itemPhoto.getPhoto().getBytes(),
+						Base64.DEFAULT);
+				
+				Intent intent = new  Intent(thisContext,ImagePreviewActivity.class);
+				intent.putExtra("image", imageAsBytes);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				thisContext.startActivity(intent);
+				
+			}
+		});
 
 		return convertView;
 	}

@@ -80,13 +80,6 @@ public class UpdateNewBIllActivity extends Activity {
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
 
-		
-	}
-	
-	public void doSubmit(View v){
-		
-		finish();
-		
 	}
 
 	public void pickBillDate(View v) {
@@ -108,7 +101,8 @@ public class UpdateNewBIllActivity extends Activity {
 
 	private void getServicesAndIdentity() {
 
-		final ProgressDialog dialog = new ProgressDialog(UpdateNewBIllActivity.this);
+		final ProgressDialog dialog = new ProgressDialog(
+				UpdateNewBIllActivity.this);
 		dialog.setMessage("Please Wait..");
 		dialog.show();
 
@@ -169,6 +163,55 @@ public class UpdateNewBIllActivity extends Activity {
 
 	}
 
+	public void doSubmit(View v) {
+
+		billNumber = editBillNumber.getText().toString();
+		billDate = editBillDate.getText().toString();
+		billDueDate = editDueDate.getText().toString();
+		billAmount = editAmount.getText().toString();
+		int serviceId = spinnerServices.getSelectedItemPosition() + 1;
+		int identityID = spinnerIdentity.getSelectedItemPosition() + 1;
+
+		if (!billNumber.isEmpty() || !billDate.isEmpty()
+				|| !billDueDate.isEmpty() || !billAmount.isEmpty()) {
+
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
+			nameValuePair.add(new BasicNameValuePair("IdentityID", String
+					.valueOf(identityID)));
+			nameValuePair.add(new BasicNameValuePair("PropertyID",
+					Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("ServiceID", String
+					.valueOf(serviceId)));
+			nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
+			nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
+			nameValuePair
+					.add(new BasicNameValuePair("Billduedate", billDueDate));
+			nameValuePair.add(new BasicNameValuePair("Amount", billAmount));
+
+			WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+				@Override
+				public void onDataArrived(String data) {
+
+					try {
+						JSONObject json = new JSONObject(data);
+						Uttilities.showToast(getApplicationContext(),
+								json.getString("result"));
+						finish();
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}, nameValuePair);
+
+			post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/saveBill");
+
+		} else {
+			Uttilities.showToast(getApplicationContext(),
+					"Please fill all fields.");
+		}
+	}
+
 	public void showPayment(View v) {
 
 		billNumber = editBillNumber.getText().toString();
@@ -178,50 +221,40 @@ public class UpdateNewBIllActivity extends Activity {
 		int serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		int identityID = spinnerIdentity.getSelectedItemPosition() + 1;
 
-		// if(!billNumber.isEmpty() || !billDate.isEmpty() ||
-		// !billDueDate.isEmpty() || !billAmount.isEmpty()){
+		if (!billNumber.isEmpty() || !billDate.isEmpty()
+				|| !billDueDate.isEmpty() || !billAmount.isEmpty()) {
 
-		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
-		nameValuePair.add(new BasicNameValuePair("PropertyID",
-				Uttilities.PROPERTY_ID));
-		nameValuePair.add(new BasicNameValuePair("ServiceID", String
-				.valueOf(serviceId)));
-		nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
-		nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
-		nameValuePair.add(new BasicNameValuePair("Billduedate", billDueDate));
-		nameValuePair.add(new BasicNameValuePair("Amount", billAmount));
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
+			nameValuePair.add(new BasicNameValuePair("PropertyID",
+					Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("ServiceID", String
+					.valueOf(serviceId)));
+			nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
+			nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
+			nameValuePair
+					.add(new BasicNameValuePair("Billduedate", billDueDate));
+			nameValuePair.add(new BasicNameValuePair("Amount", billAmount));
 
-//		WebRequestPost post = new WebRequestPost(new IWebRequest() {
-//
-//			@Override
-//			public void onDataArrived(String data) {
-//
-//			}
-//		}, nameValuePair);
-//
-//		post.execute(Uttilities.PAYMENT_UPDATE_NEW_BILL_URL);
-		
-		Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
-		intent.putExtra("ServiceID",String
-				.valueOf(serviceId));
-		intent.putExtra("Identity",String
-				.valueOf(identityID));
-		intent.putExtra("ServiceName", spinnerServices.getSelectedItem().toString());
-		intent.putExtra("IdentityName", spinnerIdentity.getSelectedItem().toString());
-		intent.putExtra("BillNo", billNumber);
-		intent.putExtra("BillDate", billDate);
-		intent.putExtra("Billduedate", billDueDate);
-		intent.putExtra("Amount", billAmount);
+			Intent intent = new Intent(getApplicationContext(),
+					PaymentActivity.class);
+			intent.putExtra("ServiceID", String.valueOf(serviceId));
+			intent.putExtra("Identity", String.valueOf(identityID));
+			intent.putExtra("ServiceName", spinnerServices.getSelectedItem()
+					.toString());
+			intent.putExtra("IdentityName", spinnerIdentity.getSelectedItem()
+					.toString());
+			intent.putExtra("BillNo", billNumber);
+			intent.putExtra("BillDate", billDate);
+			intent.putExtra("Billduedate", billDueDate);
+			intent.putExtra("Amount", billAmount);
 
-		startActivity(intent);
-		
-		
-		
-		// }else{
+			startActivity(intent);
 
-		// Uttilities.showToast(getApplicationContext(),
-		// "Please Fill all fields.");
-		// }
+		} else {
+
+			Uttilities.showToast(getApplicationContext(),
+					"Please Fill all fields.");
+		}
 	}
 
 	public void goBack(View v) {
@@ -261,16 +294,6 @@ public class UpdateNewBIllActivity extends Activity {
 								.append(month + 1).append("-").append(year)
 								.append(" "));
 			}
-
-			// set selected date into textview
-			// tvDisplayDate.setText(new StringBuilder().append(month + 1)
-			// .append("-").append(day).append("-").append(year)
-			// .append(" "));
-			//
-			// // set selected date into datepicker also
-			// dpResult.init(year, month, day, null);
-
 		}
 	};
-
 }

@@ -144,9 +144,9 @@ public class EmployeeSearchActivity extends Activity {
 					for (int i = 0; i < jsonArray.length(); i++) {
 						en = new Entity();
 						JSONObject jsonObj = jsonArray.getJSONObject(i);
-						en.setEmpName(jsonObj.getString("Employername"));
+						en.setEmpName(jsonObj.getString("Nameofstaff"));
 						en.setEmpDesignation(jsonObj.getString("Designation"));
-						en.setEmpStatus(jsonObj.getString("Employmentstatus"));
+//						en.setEmpStatus(jsonObj.getString("Employmentstatus"));
 						en.setEmpHighLights(jsonObj.getString("Highlights"));
 						en.setEmpDepartment(jsonObj.getString("Department"));
 

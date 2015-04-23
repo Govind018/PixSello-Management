@@ -75,6 +75,8 @@ public class EmployeeDetailsActivity extends Activity {
 	
 	ImageView image;
 	
+	boolean photoTaken;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -139,7 +141,6 @@ public class EmployeeDetailsActivity extends Activity {
 		childNum = editChildrenNum.getText().toString();
 		addSarpanch = editAddSarpanch.getText().toString();
 		identificationMarks = editIdentification.getText().toString();
-//		dateOfPhoto = editDateOfPhoto.getText().toString();
 		employer = editEmployer.getText().toString();
 		previousEmp = editPreviousEmp.getText().toString();
 		employedOn = editEmployedOn.getText().toString();
@@ -161,15 +162,12 @@ public class EmployeeDetailsActivity extends Activity {
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(10);
 		nameValuePair.add(new BasicNameValuePair("PropertyID",
 				Uttilities.PROPERTY_ID));
-//		nameValuePair.add(new BasicNameValuePair("searchkey",
-//				"Ravi"));
 		nameValuePair.add(new BasicNameValuePair("Nameofstaff", nameOfStaff));
 		nameValuePair.add(new BasicNameValuePair("Aliasname", alias));
 		nameValuePair.add(new BasicNameValuePair("Dateofbirth", DOB));
 		nameValuePair.add(new BasicNameValuePair("Mobileno", mobile));
 		nameValuePair.add(new BasicNameValuePair("Emailid", email));
 		nameValuePair.add(new BasicNameValuePair("Language", language));
-//		nameValuePair.add(new BasicNameValuePair("Permanentadress", address));
 		nameValuePair.add(new BasicNameValuePair("Fathername", fatherName));
 		nameValuePair.add(new BasicNameValuePair("Mothername", motherName));
 		nameValuePair.add(new BasicNameValuePair("Marritalstatus", married));
@@ -179,7 +177,6 @@ public class EmployeeDetailsActivity extends Activity {
 		nameValuePair.add(new BasicNameValuePair("Identification",
 				identificationMarks));
 		nameValuePair.add(new BasicNameValuePair("Photo", image_str));
-//		nameValuePair.add(new BasicNameValuePair("Dateofphoto", dateOfPhoto));
 		nameValuePair.add(new BasicNameValuePair("Statusofemp", "test"));
 		nameValuePair.add(new BasicNameValuePair("Employername", employer));
 		nameValuePair.add(new BasicNameValuePair("Previousemployer", previousEmp));
@@ -192,7 +189,19 @@ public class EmployeeDetailsActivity extends Activity {
 		nameValuePair.add(new BasicNameValuePair("Department", department));
 		nameValuePair.add(new BasicNameValuePair("Employmentstatus", reffered));
 		nameValuePair.add(new BasicNameValuePair("Designation", designation));
-
+		
+		if(nameOfStaff.isEmpty() || alias.isEmpty() || DOB.isEmpty() || 
+			  	mobile.isEmpty() || email.isEmpty() || language.isEmpty()){
+			
+			Uttilities.showToast(getApplicationContext(), "Please fill all fields.");
+			return;
+		}
+		
+		if(!photoTaken){
+			
+			Uttilities.showToast(getApplicationContext(), "Please Take Photo.");
+			return;
+		}
 		
 		
 		final ProgressDialog dialog = new ProgressDialog(
@@ -226,6 +235,7 @@ public class EmployeeDetailsActivity extends Activity {
 
 		if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE_CAPTURE) {
 
+			photoTaken = true;
 			Bitmap map = (Bitmap) data.getExtras().get("data");
 			image.setImageBitmap(map);
 

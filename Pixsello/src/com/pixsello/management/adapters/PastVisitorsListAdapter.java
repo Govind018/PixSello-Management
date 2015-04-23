@@ -3,13 +3,18 @@ package com.pixsello.management.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.pixsello.management.ImagePreviewActivity;
 import com.pixsello.management.R;
 import com.pixsello.management.guest.Entity;
 
@@ -40,7 +45,7 @@ public class PastVisitorsListAdapter extends ArrayAdapter<Entity> {
 	}
 	
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		
 		ViewHolder holder = null;
 		
@@ -69,9 +74,33 @@ public class PastVisitorsListAdapter extends ArrayAdapter<Entity> {
 		holder.textGuestName.setText(guestDetail.getGuestName());
 		holder.textCompany.setText(guestDetail.getCompanyName());
 		holder.textGender.setText(guestDetail.getGender());
-//		holder.textPhoto.setText(guestDetail.getPhoto());
 		holder.textInTime.setText(guestDetail.getInTime());
 		holder.textOutTime.setText(guestDetail.getOutTime());
+		
+		if (guestDetail.getPhoto() != null) {
+			byte[] imageAsBytes = Base64.decode(guestDetail.getPhoto().getBytes(),
+					Base64.DEFAULT);
+			holder.textPhoto.setImageBitmap(BitmapFactory.decodeByteArray(
+					imageAsBytes, 0, imageAsBytes.length));
+		}
+		
+		holder.textPhoto.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Entity itemPhoto = details.get(position);
+
+				byte[] imageAsBytes = Base64.decode(itemPhoto.getPhoto().getBytes(),
+						Base64.DEFAULT);
+
+				Intent intent = new  Intent(thisContext,ImagePreviewActivity.class);
+				intent.putExtra("image", imageAsBytes);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				thisContext.startActivity(intent);
+
+			}
+		});
 		
 		return convertView;
 	}
