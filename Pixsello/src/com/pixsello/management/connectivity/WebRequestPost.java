@@ -8,16 +8,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreProtocolPNames;
+import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.pixsello.management.util.Uttilities;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -45,10 +47,11 @@ public class WebRequestPost extends AsyncTask<String, Integer, String> {
 //		dialog.show();
 		
 		String result = "";
-
+		HttpParams httpParams = new BasicHttpParams();
+		httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 		// Creating HTTP client
-		HttpClient httpClient = new DefaultHttpClient();
-
+		HttpClient httpClient = new DefaultHttpClient(httpParams);
+		
 		// Creating HTTP Post
 		HttpPost httpPost = new HttpPost(params[0]);
 

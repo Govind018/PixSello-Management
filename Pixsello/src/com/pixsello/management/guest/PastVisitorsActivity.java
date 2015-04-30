@@ -202,7 +202,7 @@ public class PastVisitorsActivity extends Activity {
 
 				try {
 					visitorsData.clear();
-					Entity guest;
+					Entity guest;  
 
 					JSONObject obj = new JSONObject(data);
 

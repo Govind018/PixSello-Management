@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import com.pixsello.management.R;
 import com.pixsello.management.guest.Entity;
 import com.pixsello.management.guest.MakeOutEntryActivity;
 
-public class OutEntryListAdapter extends ArrayAdapter<Entity> {
+public class MakeOutEntryListAdapter extends ArrayAdapter<Entity> {
 
 	ArrayList<Entity> details;
 
@@ -32,7 +33,7 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 
 	Entity guestDetail;
 
-	public OutEntryListAdapter(Context context, int resource,
+	public MakeOutEntryListAdapter(Context context, int resource,
 			ArrayList<Entity> data) {
 		super(context, resource, data);
 		thisContext = context;
@@ -69,11 +70,9 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 						.findViewById(R.id.guest_company);
 				holder.textGender = (TextView) convertView
 						.findViewById(R.id.guest_gender);
-				holder.textPhoto = (ImageView) convertView
-						.findViewById(R.id.guest_photo);
-				// holder.textInTime = (TextView)
-				// convertView.findViewById(R.id.guest_in_time);
-				holder.textOutTime = (TextView) convertView
+//				holder.textInTime = (TextView) convertView
+//						.findViewById(R.id.guest_in_time);
+				holder.textOutTime = (Button) convertView
 						.findViewById(R.id.guest_out_time);
 				holder.textVisitorName = (TextView) convertView
 						.findViewById(R.id.guest_company_visitor);
@@ -92,19 +91,18 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 			holder.textCompany.setText(guestDetail.getCompanyName());
 			holder.textGender.setText(guestDetail.getGender());
 			holder.textVisitorName.setText(guestDetail.getVisitorName());
-			// holder.textPhoto.setText(guestDetail.getPhoto());
-			// holder.textInTime.setText(guestDetail.getInTime());
+//			holder.textInTime.setText(guestDetail.getInTime());
 
 			byte[] imageAsBytes = Base64.decode(guestDetail.getPhoto()
 					.getBytes(), Base64.DEFAULT);
 			holder.image.setImageBitmap(BitmapFactory.decodeByteArray(
 					imageAsBytes, 0, imageAsBytes.length));
 
-			if (guestDetail.getOutTime().equalsIgnoreCase("0")) {
-				holder.textOutTime.setText("UPDATE");
-			} else {
-				holder.textOutTime.setText(guestDetail.getOutTime());
-			}
+//			if (guestDetail.getOutTime().equalsIgnoreCase("0")) {
+//				holder.textOutTime.setText("UPDATE");
+//			} else {
+//				holder.textOutTime.setText(guestDetail.getOutTime());
+//			}
 
 			holder.textOutTime.setOnClickListener(new OnClickListener() {
 
@@ -156,7 +154,7 @@ public class OutEntryListAdapter extends ArrayAdapter<Entity> {
 		TextView textGender;
 		ImageView textPhoto;
 		TextView textInTime;
-		TextView textOutTime;
+		Button textOutTime;
 		TextView textVisitorName;
 		ImageView image;
 	}

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -28,6 +29,7 @@ import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
 
 public class EmergencyNumbersActivity extends Activity {
+	
 	String type;
 
 	TextView title;
@@ -48,7 +50,7 @@ public class EmergencyNumbersActivity extends Activity {
 
 	ProgressDialog dialog;
 	
-	RelativeLayout searchLayout;
+	LinearLayout searchLayout;
 	
 	Button search;
 	
@@ -63,7 +65,7 @@ public class EmergencyNumbersActivity extends Activity {
 		list = (ListView) findViewById(R.id.contact_list);
 		editSearch = (EditText) findViewById(R.id.edit_search);
 		searchSpinner = (Spinner) findViewById(R.id.search_spinner);
-		searchLayout = (RelativeLayout) findViewById(R.id.layout_search);
+		searchLayout = (LinearLayout) findViewById(R.id.layout_search);
 		search = (Button) findViewById(R.id.button_search);
 		quickInfo = (TextView) findViewById(R.id.text_quickinfo);
 		
@@ -100,23 +102,6 @@ public class EmergencyNumbersActivity extends Activity {
 	}
 
 	public void doSearch(View v) {
-
-		String searchKey = "";
-		switch (searchSpinner.getSelectedItemPosition()) {
-		case 0:
-			searchKey = "ServiceDescription";
-			break;
-
-		case 1:
-			searchKey = "Contactperson";
-			break;
-
-		case 2:
-			searchKey = "ContactNumber";
-			break;
-		default:
-			break;
-		}
 
 		String searchValue = editSearch.getText().toString();
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
@@ -174,7 +159,7 @@ public class EmergencyNumbersActivity extends Activity {
 							contact.setContactNumber(jsonObj
 									.getString("ContactNumber"));
 							contact.setQuickInfo(jsonObj.getString("quickinfo"));
-							details.add(contact);
+							details.add(contact);          
 						}
 
 						adapter = new ContactsListAdapter(getApplicationContext(),

@@ -23,7 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TimePicker;
 
 import com.pixsello.management.R;
-import com.pixsello.management.adapters.OutEntryListAdapter;
+import com.pixsello.management.adapters.MakeOutEntryListAdapter;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
@@ -32,7 +32,7 @@ public class MakeOutEntryActivity extends Activity {
 
 	ListView guestList;
 
-	OutEntryListAdapter adapter;
+	MakeOutEntryListAdapter adapter;
 
 	ArrayList<Entity> visitorsData;
 
@@ -68,11 +68,11 @@ public class MakeOutEntryActivity extends Activity {
 		hour = c.get(Calendar.HOUR_OF_DAY);
 		minute = c.get(Calendar.MINUTE);
 
-		adapter = new OutEntryListAdapter(getApplicationContext(),
+		adapter = new MakeOutEntryListAdapter(getApplicationContext(),
 				R.layout.out_entry_list_item, visitorsData);
 		guestList.setAdapter(adapter);
 
-	}
+	}         
 
 	public void updateTime(View v) {
 
@@ -199,6 +199,10 @@ public class MakeOutEntryActivity extends Activity {
 
 					} else {
 						JSONArray jsonArray = obj.getJSONArray("result");
+						
+						System.out.println( "JSON>>>>>>>>>>>>>>>>>>>>>>>>"+ data);
+						
+						guestList.setVisibility(View.VISIBLE);
 
 						for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -208,15 +212,12 @@ public class MakeOutEntryActivity extends Activity {
 							guest.setDate(jsonObj.getString("Date"));
 							guest.setTime(jsonObj.getString("Time"));
 							guest.setGuestName(jsonObj.getString("GuestName"));
+							guest.setVisitorName(jsonObj.getString("Visitor"));
 							guest.setCompanyName(jsonObj.getString("Company"));
 							guest.setGender(jsonObj.getString("Gender"));
 							guest.setPhoto(jsonObj.getString("Photo"));
 							guest.setInTime(jsonObj.getString("InTime"));
 							guest.setOutTime(jsonObj.getString("OutTime"));
-							guest.setVisitorName(jsonObj.getString("Visitor"));
-
-							// byte[] bytearray =
-							// Base64.decode(jsonObj.getString("Photo"), 0);
 
 							visitorsData.add(guest);
 						}

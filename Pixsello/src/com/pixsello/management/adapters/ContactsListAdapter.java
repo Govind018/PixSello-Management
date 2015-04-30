@@ -74,7 +74,7 @@ public class ContactsListAdapter extends ArrayAdapter<ContactDetails> {
 			holder.textQuickInfo.setText(contact.getQuickInfo());
 		}
 
-		return convertView;
+		return convertView;                
 	}
 
 	public class ViewHolder {

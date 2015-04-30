@@ -11,12 +11,9 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.pixsello.management.R;
@@ -101,6 +98,8 @@ public class StaffProfileActivity extends Activity {
 							staff.setDate(jsonObj.getString("Date"));
 							staff.setType(jsonObj.getString("Type"));
 							staff.setOther(jsonObj.getString("Other"));
+							staff.setTraineeHrs(jsonObj.getString("Timeoftraineehrs"));
+							staff.setTraineeMins(jsonObj.getString("Timeoftraineemin"));
 
 							staffDetails.add(staff);
 						}
@@ -154,6 +153,8 @@ public class StaffProfileActivity extends Activity {
 							staff.setDate(jsonObj.getString("Date"));
 							staff.setType(jsonObj.getString("Type"));
 							staff.setOther(jsonObj.getString("Other"));
+							staff.setTraineeHrs(jsonObj.getString("Timeoftraineehrs"));
+							staff.setTraineeMins(jsonObj.getString("Timeoftraineemin"));
 
 							staffDetails.add(staff);
 						}

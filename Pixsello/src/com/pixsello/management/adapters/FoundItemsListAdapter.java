@@ -59,7 +59,7 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 
 			holder.textDate = (TextView) convertView
 					.findViewById(R.id.found_item_date);
-			holder.textTime = (TextView) convertView
+			holder.textTime = (TextView) convertView                     
 					.findViewById(R.id.found_item_time);
 			holder.textDescription = (TextView) convertView
 					.findViewById(R.id.found_item_description);

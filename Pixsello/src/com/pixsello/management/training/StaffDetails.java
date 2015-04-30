@@ -7,6 +7,21 @@ public class StaffDetails {
 	private String date;
 	private String time;
 	private String type;
+	private String traineeHrs;
+	private String traineeMins;
+	
+	public String getTraineeHrs() {
+		return traineeHrs;
+	}
+	public void setTraineeHrs(String traineeHrs) {
+		this.traineeHrs = traineeHrs;
+	}
+	public String getTraineeMins() {
+		return traineeMins;
+	}
+	public void setTraineeMins(String traineeMins) {
+		this.traineeMins = traineeMins;
+	}
 	public String getTime() {
 		return time;
 	}

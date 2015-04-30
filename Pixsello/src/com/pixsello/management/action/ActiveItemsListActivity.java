@@ -42,7 +42,7 @@ public class ActiveItemsListActivity extends Activity implements OnCompleteListe
 	static RelativeLayout updateLayout;
 
 	RelativeLayout layoutError;
-
+               
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
