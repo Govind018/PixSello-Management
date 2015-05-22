@@ -16,6 +16,14 @@ public class ActionItem {
 	private String reported;
 	private String responsibility;
 	private String actionTaken;
+	
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	private String photo;
 	public String getDate() {
 		return date;
 	}

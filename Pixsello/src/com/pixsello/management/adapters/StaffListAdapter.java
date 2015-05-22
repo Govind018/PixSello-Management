@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pixsello.management.R;
@@ -63,19 +64,30 @@ public class StaffListAdapter extends ArrayAdapter<StaffDetails> {
 					.findViewById(R.id.item_training_hrs_text);
 			holder.textMins = (TextView) convertView
 					.findViewById(R.id.item_training_mins_text);
+			holder.rowLayout = (LinearLayout) convertView.findViewById(R.id.staff_row);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
 		staff = details.get(position);
+		
+//		if( position%2 == 0){
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+//		}else{
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+//		}
 
 		holder.textTrainer.setText(staff.getTrainerName());
 		holder.textTrainee.setText(staff.getTraineeName());
-		holder.textDateAndTime
-				.setText(staff.getDate() + "  " + staff.getTime());
+		holder.textDateAndTime.setText(staff.getDate() + "  " + staff.getTime());
 		holder.textOther.setText(staff.getOther());
-		holder.textType.setText(staff.getType());
+		
+		if(staff.getType().equalsIgnoreCase("Other")){
+			holder.textType.setText(staff.getOther());
+		}else{
+			holder.textType.setText(staff.getType());
+		}
 		holder.textHrs.setText(staff.getTraineeHrs());
 		holder.textMins.setText(staff.getTraineeMins());
 
@@ -91,5 +103,6 @@ public class StaffListAdapter extends ArrayAdapter<StaffDetails> {
 		TextView textType;
 		TextView textHrs;
 		TextView textMins;
+		LinearLayout rowLayout;
 	}
 }

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pixsello.management.ImagePreviewActivity;
@@ -78,6 +79,7 @@ public class MakeOutEntryListAdapter extends ArrayAdapter<Entity> {
 						.findViewById(R.id.guest_company_visitor);
 				holder.image = (ImageView) convertView
 						.findViewById(R.id.guest_photo);
+				holder.rowLayout = (LinearLayout) convertView.findViewById(R.id.out_entry_row);
 
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -85,6 +87,12 @@ public class MakeOutEntryListAdapter extends ArrayAdapter<Entity> {
 
 			guestDetail = details.get(position);
 
+//			if( position%2 == 0){
+//				holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+//			}else{
+//				holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+//			}
+			
 			holder.textDate.setText(guestDetail.getDate());
 			holder.textTime.setText(guestDetail.getTime());
 			holder.textGuestName.setText(guestDetail.getGuestName());
@@ -157,6 +165,7 @@ public class MakeOutEntryListAdapter extends ArrayAdapter<Entity> {
 		Button textOutTime;
 		TextView textVisitorName;
 		ImageView image;
+		LinearLayout rowLayout;
 	}
 
 	public void showDailog() {

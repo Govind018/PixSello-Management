@@ -68,7 +68,7 @@ public class PaymentActivity extends Activity {
 		billNumber = intent.getStringExtra("BillNo");
 		billDate = intent.getStringExtra("BillDate");
 		identityName= intent.getStringExtra("IdentityName");
-		identityID = intent.getStringExtra("IdentityID");
+		identityID = intent.getStringExtra("Identity");
 		serviceName = intent.getStringExtra("ServiceName");
 		serviceId = intent.getStringExtra("ServiceID");
 		amount = intent.getStringExtra("Amount");
@@ -155,7 +155,7 @@ public class PaymentActivity extends Activity {
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(4);
 			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 			nameValuePair.add(new BasicNameValuePair("ServiceID", serviceId));
-			nameValuePair.add(new BasicNameValuePair("IdentityID", identity));
+			nameValuePair.add(new BasicNameValuePair("IdentityID", identityID));
 			nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
 			nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
 			nameValuePair.add(new BasicNameValuePair("Billduedate", dueDate));

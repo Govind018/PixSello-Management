@@ -20,12 +20,14 @@ import android.widget.ListView;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.EmployeeSearchListAdapter;
+import com.pixsello.management.aparangi.EmployeeDetailEditDialog.OnCompleteListener;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.guest.Entity;
 import com.pixsello.management.util.Uttilities;
 
-public class EmployeeSearchActivity extends Activity {
+public class EmployeeSearchActivity extends Activity implements
+		OnCompleteListener {
 
 	ListView listStaff;
 
@@ -139,26 +141,35 @@ public class EmployeeSearchActivity extends Activity {
 					Entity en;
 					listOfEmps.clear();
 					JSONObject obj = new JSONObject(data);
-					JSONArray jsonArray = obj.getJSONArray("result");
 
-					for (int i = 0; i < jsonArray.length(); i++) {
-						en = new Entity();
-						JSONObject jsonObj = jsonArray.getJSONObject(i);
-						en.setEmpName(jsonObj.getString("Nameofstaff"));
-						en.setEmpDesignation(jsonObj.getString("Designation"));
-//						en.setEmpStatus(jsonObj.getString("Employmentstatus"));
-						en.setEmpHighLights(jsonObj.getString("Highlights"));
-						en.setEmpDepartment(jsonObj.getString("Department"));
+					if (obj.has("error_message")) {
+						dialog.cancel();
+						Uttilities.showToast(getApplicationContext(),
+								"No Records to display");
+					} else {
 
-						listOfEmps.add(en);
+						JSONArray jsonArray = obj.getJSONArray("result");
+
+						for (int i = 0; i < jsonArray.length(); i++) {
+							en = new Entity();
+							JSONObject jsonObj = jsonArray.getJSONObject(i);
+							en.setEmpName(jsonObj.getString("Nameofstaff"));
+							en.setEmpDesignation(jsonObj
+									.getString("Designation"));
+							// en.setEmpStatus(jsonObj.getString("Employmentstatus"));
+							en.setEmpId(jsonObj.getString("empID"));
+							en.setEmpHighLights(jsonObj.getString("Highlights"));
+							en.setEmpDepartment(jsonObj.getString("Department"));
+
+							listOfEmps.add(en);
+						}
+
+						dialog.cancel();
+						adapter = new EmployeeSearchListAdapter(
+								getApplicationContext(),
+								R.layout.emp_search_list_item, listOfEmps);
+						listStaff.setAdapter(adapter);
 					}
-
-					dialog.cancel();
-					adapter = new EmployeeSearchListAdapter(
-							getApplicationContext(),
-							R.layout.emp_search_list_item, listOfEmps);
-					listStaff.setAdapter(adapter);
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -194,5 +205,11 @@ public class EmployeeSearchActivity extends Activity {
 	public void goBack(View v) {
 
 		finish();
+	}
+
+	@Override
+	public void onComplete(String result) {
+
+		getEmployeeDetails();
 	}
 }

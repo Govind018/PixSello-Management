@@ -120,6 +120,7 @@ public class UpdateNewBIllActivity extends Activity {
 					JSONObject jsonObj = new JSONObject(data);
 
 					if (jsonObj.has("error_message")) {
+						dialog.cancel();
 						Uttilities.showToast(getApplicationContext(),
 								jsonObj.getString("error_message"));
 
@@ -134,6 +135,7 @@ public class UpdateNewBIllActivity extends Activity {
 							item.setServiceId(obj.getString("ServiceID"));
 							item.setServiceName(obj.getString("Nameofservice"));
 							item.setIdentity(obj.getString("Identity"));
+							item.setIdentityID(obj.getString("IdentityID"));
 
 							servicesList.add(obj.getString("Nameofservice"));
 							identityList.add(obj.getString("Identity"));

@@ -66,6 +66,10 @@ public class Uttilities {
 	
 	public static String PROPERTY_ID = "property1";
 	
+	public static String PAYMENT_NEWPAYMENT_SEARCH = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getNewPaymentSearch";
+	
+	public static String PAYMENT_NEWPAYMENT = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/newPayment";
+	
 //	public static String PROPERTY_ID;
 	
 	public static String getPROPERTY_ID() {

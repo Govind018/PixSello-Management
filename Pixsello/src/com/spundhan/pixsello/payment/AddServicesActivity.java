@@ -47,12 +47,13 @@ public class AddServicesActivity extends Activity {
 	boolean recuring;
 	
 	Spinner spinnerServices;
+	Spinner spinnerRecurringTypes;
 
 	String service;
 	String identity;
 	String dueDate;
 	String regularPay;
-	String recurring;
+	int recurring;
 	
 	int serviceId;
 	
@@ -74,6 +75,7 @@ public class AddServicesActivity extends Activity {
 		editDueDate = (EditText) findViewById(R.id.due_date);
 		radioRegular = (RadioButton) findViewById(R.id.radio_type_payment_regular);
 		radioRecurring = (RadioButton) findViewById(R.id.radio_type_payment_recurring);
+		spinnerRecurringTypes = (Spinner) findViewById(R.id.spinner_recurring_type);
 		radioRegular.setOnCheckedChangeListener(Regularlistener);
 		radioRecurring.setOnCheckedChangeListener(Recurringlistener);
 
@@ -191,16 +193,30 @@ public class AddServicesActivity extends Activity {
 
 	public void doSubmitItem(View v){
 
-		service = spinnerServices.getSelectedItem().toString();
+		service = spinnerServices.getSelectedItem().toString() != null ? spinnerServices.getSelectedItem().toString() : "";
 		serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		identity = editIdentity.getText().toString();
 		dueDate = editDueDate.getText().toString();
-		regularPay = (regular) ? "1":"0";
-		recurring = (recuring) ? "1":"0";
+		regularPay = (regular) ? "1":"2";
 		
-		dialog.show();
+		if(service.isEmpty()){
+			Uttilities.showToast(getApplicationContext(), "Add Services.");
+		}
+		
+		if(regular){
+			recurring = 0;
+		}else{
+			recurring =  spinnerRecurringTypes.getSelectedItemPosition() + 1;
+		}
+		
+		if(!regular && !recuring){
+			Uttilities.showToast(getApplicationContext(), "Select Type of payment.");
+			return;
+		}
 
-		if(!service.isEmpty() || !identity.isEmpty() || !dueDate.isEmpty()){
+		
+		if(!service.isEmpty() && !identity.isEmpty() && !dueDate.isEmpty()){
+			dialog.show();
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
 			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
@@ -208,7 +224,7 @@ public class AddServicesActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("Nameofservice",service));
 			nameValuePair.add(new BasicNameValuePair("Identity",identity));
 			nameValuePair.add(new BasicNameValuePair("PaymentType",regularPay));
-			nameValuePair.add(new BasicNameValuePair("Recurringpaymentbase",recurring));
+			nameValuePair.add(new BasicNameValuePair("Recurringpaymentbase",String.valueOf(recurring)));
 			nameValuePair.add(new BasicNameValuePair("Serviceduedate",dueDate	));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {

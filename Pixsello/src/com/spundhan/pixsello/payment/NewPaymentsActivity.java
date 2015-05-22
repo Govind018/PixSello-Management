@@ -14,11 +14,12 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.pixsello.management.R;
-import com.pixsello.management.adapters.PaymentStatusListAdapter;
+import com.pixsello.management.adapters.NewPaymentListAdapter;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.guest.Entity;
@@ -39,30 +40,40 @@ public class NewPaymentsActivity extends Activity {
 
 	ArrayAdapter<String> identityAdapter;
 
-	PaymentStatusListAdapter adapter;
+	NewPaymentListAdapter adapter;
 
 	ArrayList<Entity> statusDetails;
 
 	ListView list;
 
+	EditText editSearch;
+	
+	ProgressDialog dialog;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payment_status);
 
-		spinnerServices = (Spinner) findViewById(R.id.list_services);
-		spinnerIdentity = (Spinner) findViewById(R.id.list_identity);
+		initLayout();
+	}
 
-		servicesList = new ArrayList<String>();
-		identityList = new ArrayList<String>();
+	private void initLayout() {
+
 		listOfServices = new ArrayList<Entity>();
-
 		list = (ListView) findViewById(R.id.list_status);
-
 		statusDetails = new ArrayList<Entity>();
+		editSearch = (EditText) findViewById(R.id.edit_search);
+		adapter = new NewPaymentListAdapter(
+				getApplicationContext(),
+				R.layout.new_payment_list_item,
+				statusDetails);
+		list.setAdapter(adapter);
+		dialog = new ProgressDialog(NewPaymentsActivity.this);
+		dialog.setMessage("Please Wait..");
 
 	}
-	
+
 	public void goBack(View v) {
 		finish();
 	}
@@ -71,17 +82,21 @@ public class NewPaymentsActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 
-		getServicesAndIdentity();
-		
 		getAllData();
 	}
 
 	private void getAllData() {
+
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 		
-		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
-//		nameValuePair.add(new BasicNameValuePair("Nameofservice", sertviceId));
-//		nameValuePair.add(new BasicNameValuePair("Identity", identity));
+		populateData(nameValuePair,Uttilities.PAYMENT_NEWPAYMENT);
+
+	}
+
+	public void populateData(List<NameValuePair> nameValuePair, String url){
+		
+		dialog.show();
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -95,8 +110,11 @@ public class NewPaymentsActivity extends Activity {
 				try {
 					jsonObj = new JSONObject(data);
 					if (jsonObj.has("error_message")) {
+						dialog.cancel();
 						Uttilities.showToast(getApplicationContext(),
 								jsonObj.getString("error_message"));
+						statusDetails.clear();
+						adapter.notifyDataSetChanged();
 					} else {
 						JSONArray jsonArray = jsonObj.getJSONArray("result");
 						for (int i = 0; i < jsonArray.length(); i++) {
@@ -106,21 +124,22 @@ public class NewPaymentsActivity extends Activity {
 							entity.setIdentity(obj.getString("Identity"));
 							entity.setType(getPaymentType(Integer.parseInt(obj.getString("Paymentmode"))));
 							entity.setAmount(obj.getString("Amount"));
-							entity.setDueDate(obj.getString("BillDate"));
-							entity.setStatus(obj.getString("BillingStatus"));
-							entity.setServiceId(obj.getString("ServiceID"));
-							entity.setIdentityID(obj.getString("IdentityID"));
-							entity.setBillNum(obj.getString("BillNo"));
+							String billDate = obj.has("BillDate") ? obj.getString("BillDate") : ""; 
+							entity.setDueDate(billDate);
+							String billStatus = obj.has("BillingStatus") ? obj.getString("BillingStatus") : "";
+							entity.setStatus(billStatus);
+							String serviceID = obj.has("ServiceID") ? obj.getString("ServiceID") : "";
+							entity.setServiceId(serviceID);
+							String identityID = obj.has("IdentityID") ? obj.getString("IdentityID") : "";
+							entity.setIdentityID(identityID);
+							String billNumber = obj.has("BillNo") ? obj.getString("BillNo") : "";
+							entity.setBillNum(billNumber);
+							entity.setType(getPaymentType(Integer.parseInt(obj.getString("PaymentType"))));
 
 							statusDetails.add(entity);
-
 						}
-
-						adapter = new PaymentStatusListAdapter(
-								getApplicationContext(),
-								R.layout.payment_status_list_item,
-								statusDetails);
-						list.setAdapter(adapter);
+						dialog.cancel();
+						adapter.notifyDataSetChanged();
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -128,69 +147,21 @@ public class NewPaymentsActivity extends Activity {
 			}
 		}, nameValuePair);
 
-		post.execute(Uttilities.PAYMENT_STATUS);
+		post.execute(url);
 	}
 
-	public void doSubmit(View v) {
-		String sertviceId = spinnerServices.getSelectedItem().toString();
-		String identity = spinnerIdentity.getSelectedItem().toString();
+	public void doSearch(View v) {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
-//		nameValuePair.add(new BasicNameValuePair("Nameofservice", sertviceId));
-//		nameValuePair.add(new BasicNameValuePair("Identity", identity));
-
-		WebRequestPost post = new WebRequestPost(new IWebRequest() {
-
-			@Override
-			public void onDataArrived(String data) {
-
-				Entity entity;
-				JSONObject jsonObj;
-
-				statusDetails.clear();
-				try {
-					jsonObj = new JSONObject(data);
-					if (jsonObj.has("error_message")) {
-						Uttilities.showToast(getApplicationContext(),
-								jsonObj.getString("error_message"));
-					} else {
-						JSONArray jsonArray = jsonObj.getJSONArray("result");
-						for (int i = 0; i < jsonArray.length(); i++) {
-							entity = new Entity();
-							JSONObject obj = jsonArray.getJSONObject(i);
-							entity.setServiceName(obj.getString("Nameofservice"));
-							entity.setIdentity(obj.getString("Identity"));
-							entity.setType(getPaymentType(Integer.parseInt(obj.getString("Paymentmode"))));
-							entity.setAmount(obj.getString("Amount"));
-							entity.setDueDate(obj.getString("BillDate"));
-							entity.setStatus(obj.getString("BillingStatus"));
-							entity.setServiceId(obj.getString("ServiceID"));
-							entity.setIdentityID(obj.getString("IdentityID"));
-							entity.setBillNum(obj.getString("BillNo"));
-
-							statusDetails.add(entity);
-
-						}
-
-						adapter = new PaymentStatusListAdapter(
-								getApplicationContext(),
-								R.layout.payment_status_list_item,
-								statusDetails);
-						list.setAdapter(adapter);
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		}, nameValuePair);
-
-		post.execute(Uttilities.PAYMENT_STATUS);
+		nameValuePair.add(new BasicNameValuePair("searchkey", editSearch.getText().toString()));
+		
+		populateData(nameValuePair, Uttilities.PAYMENT_NEWPAYMENT_SEARCH);
 
 	}
-	
+
 	public String getPaymentType(int number){
-		
+
 		switch (number) {
 		case 1:
 			return "Cash";
@@ -201,12 +172,12 @@ public class NewPaymentsActivity extends Activity {
 		default:
 			break;
 		}
-		
+
 		return "";
 	}
 
 	private void getServicesAndIdentity() {
-		
+
 		final ProgressDialog dialog = new ProgressDialog(NewPaymentsActivity.this);
 		dialog.setMessage("Please Wait..");
 		dialog.show();
@@ -244,19 +215,11 @@ public class NewPaymentsActivity extends Activity {
 							identityList.add(obj.getString("Identity"));
 							listOfServices.add(item);
 						}
-						
+
 						dialog.cancel();
 
-						serviceAdapter = new ArrayAdapter<String>(
-								getApplicationContext(), R.layout.spinner_item,
-								servicesList);
-
-						identityAdapter = new ArrayAdapter<String>(
-								getApplicationContext(), R.layout.spinner_item,
-								identityList);
-
-						spinnerServices.setAdapter(serviceAdapter);
-						spinnerIdentity.setAdapter(identityAdapter);
+						serviceAdapter.notifyDataSetChanged();
+						identityAdapter.notifyDataSetChanged();
 
 					}
 				} catch (JSONException e) {
@@ -266,7 +229,5 @@ public class NewPaymentsActivity extends Activity {
 		},nameValuePair);
 
 		get.execute(Uttilities.PAYMENT_GET_SERVICES_IDENTITY);
-
 	}
-
 }

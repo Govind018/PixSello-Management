@@ -1,6 +1,7 @@
 package com.pixsello.management.training;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,10 @@ public class TrainingVideosActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_training_videos);
+		
+		Intent in = new Intent(getApplicationContext(), VideoPlayerActivity.class);
+		startActivity(in);
+		
 	}
 	
 	public void goBack(View v){

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ContactsListAdapter extends ArrayAdapter<ContactDetails> {
@@ -57,11 +58,18 @@ public class ContactsListAdapter extends ArrayAdapter<ContactDetails> {
 					.findViewById(R.id.item_contact_number);
 			holder.textQuickInfo = (TextView) convertView
 					.findViewById(R.id.item_contact_quickinfo);
-		} else {
+			holder.rowLayout = (LinearLayout) convertView.findViewById(R.id.contact_row_layout);
+		} else {	
 			holder = (ViewHolder) convertView.getTag();
 		}
 
 		contact = details.get(position);
+
+//		if( position%2 == 0){
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+//		}else{
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+//		}
 
 		holder.textServiceDesc.setText(contact.getServiceDescription());
 		holder.textContactPerson.setText(contact.getContactPerson());
@@ -83,5 +91,6 @@ public class ContactsListAdapter extends ArrayAdapter<ContactDetails> {
 		TextView textContactPerson;
 		TextView textContactNumber;
 		TextView textQuickInfo;
+		LinearLayout rowLayout;
 	}
 }

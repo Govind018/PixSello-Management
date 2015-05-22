@@ -38,31 +38,31 @@ public class FindItemActivity extends Activity {
 	FoundItemsListAdapter adapter;
 
 	ArrayList<Entity> foundItems;
-	
+
 	LinearLayout layoutHeader;
-	
+
 	ProgressDialog dialog;
 
 	static final int DATE_DIALOG_ID = 999;
-	
+
 	private int year;
 	private int month;
 	private int day;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_item);
 
 		list = (ListView) findViewById(R.id.list_found_items);
-		
+
 		dialog = new ProgressDialog(FindItemActivity.this);
 		dialog.setMessage("Please Wait..");
-		
+
 		layoutHeader = (LinearLayout) findViewById(R.id.layout_header);
 
 		foundItems = new ArrayList<Entity>();
-		
+
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
@@ -70,42 +70,43 @@ public class FindItemActivity extends Activity {
 
 		initLayout();
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
-		
+
 		getAllItems();
-		
+
 	}
-	
+
 	private void getAllItems() {
-		
+
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
-		nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.getPROPERTY_ID()));
-		
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+				.getPROPERTY_ID()));
+
 		final ProgressDialog dialog = new ProgressDialog(FindItemActivity.this);
 		dialog.setMessage("Please Wait..");
 		dialog.show();
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
-			
+
 			@Override
 			public void onDataArrived(String data) {
-				
+
 				populateDate(data);
 				dialog.cancel();
-				
+
 			}
 		}, nameValuePair);
-		
+
 		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getReportanitem");
 	}
 
-	public void showDate(View v){
-		
+	public void showDate(View v) {
+
 		showDialog(DATE_DIALOG_ID);
 	}
-	
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
@@ -116,7 +117,7 @@ public class FindItemActivity extends Activity {
 		}
 		return null;
 	}
-	
+
 	private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 
 		@Override
@@ -126,12 +127,10 @@ public class FindItemActivity extends Activity {
 			month = monthOfYear;
 			day = dayOfMonth;
 
-			approxDate.setText(new StringBuilder().append(day)
-						.append("-").append(month + 1).append("-").append(year)
-						.append(" "));
+			approxDate.setText(new StringBuilder().append(day).append("-")
+					.append(month + 1).append("-").append(year).append(" "));
 		}
 	};
-
 
 	public void goBack(View v) {
 		finish();
@@ -147,39 +146,46 @@ public class FindItemActivity extends Activity {
 
 	public void doSubmitItem(View v) {
 
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.getPROPERTY_ID()));
-			nameValuePair.add(new BasicNameValuePair("searchkey", item
-					.getText().toString()));
+		if (item.getText().toString().isEmpty()) {
+			Uttilities.showToast(getApplicationContext(), "Please enter the item name.");
+			return;
+		}
 
-			dialog.show();
-			
-			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+				.getPROPERTY_ID()));
+		nameValuePair.add(new BasicNameValuePair("searchkey", item.getText()
+				.toString()));
 
-				@Override
-				public void onDataArrived(String data) {   
-					
-					populateDate(data);
+		dialog.show();
 
-				}
-			}, nameValuePair);
+		WebRequestPost postData = new WebRequestPost(new IWebRequest() {
 
-			postData.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/Findanitem");
+			@Override
+			public void onDataArrived(String data) {
+
+				populateDate(data);
+
+			}
+		}, nameValuePair);
+
+		postData.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/Findanitem");
 	}
-	
-	public void populateDate(String data){
-		
+
+	public void populateDate(String data) {
+
 		try {
-			
+
 			Entity item;
 			JSONObject obj = new JSONObject(data);
-			
+
 			if (obj.has("error_message")) {
 				dialog.cancel();
-				Uttilities.showToast(getApplicationContext(), obj.getString("error_message"));
-				      
-			}else{
-				
+				Uttilities.showToast(getApplicationContext(),
+						obj.getString("error_message"));
+
+			} else {
+
 				JSONArray jsonArray = obj.getJSONArray("result");
 
 				foundItems.clear();
@@ -189,16 +195,11 @@ public class FindItemActivity extends Activity {
 					item.setItemID(jsonObj.getString("ID"));
 					item.setDate(jsonObj.getString("Date"));
 					item.setTime(jsonObj.getString("Time"));
-					item.setDescription(jsonObj
-							.getString("Discriptionofitem"));
-					item.setLocation(jsonObj
-							.getString("Locationwherefound"));
-					item.setStaffName(jsonObj
-							.getString("Staffwhofound"));
-					item.setStayDateFrom(jsonObj
-							.getString("Gueststaydatefrom"));
-					item.setStayDateTo(jsonObj
-							.getString("Gueststaydateto"));
+					item.setDescription(jsonObj.getString("Discriptionofitem"));
+					item.setLocation(jsonObj.getString("Locationwherefound"));
+					item.setStaffName(jsonObj.getString("Staffwhofound"));
+					item.setStayDateFrom(jsonObj.getString("Gueststaydatefrom"));
+					item.setStayDateTo(jsonObj.getString("Gueststaydateto"));
 					item.setPhoto(jsonObj.getString("Photo"));
 
 					foundItems.add(item);
@@ -206,11 +207,10 @@ public class FindItemActivity extends Activity {
 				layoutHeader.setVisibility(View.VISIBLE);
 
 				dialog.cancel();
-				adapter = new FoundItemsListAdapter(
-						getApplicationContext(),
+				adapter = new FoundItemsListAdapter(getApplicationContext(),
 						R.layout.found_list_item, foundItems);
 				list.setAdapter(adapter);
-				
+
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

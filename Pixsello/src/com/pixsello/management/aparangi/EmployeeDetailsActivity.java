@@ -42,6 +42,7 @@ public class EmployeeDetailsActivity extends Activity {
 	EditText editInterViewedBy;
 	EditText editReffered;
 	EditText editDesignation;
+	EditText editEmploymentStatus;
 
 	String employer;
 	String previousEmp;
@@ -70,6 +71,7 @@ public class EmployeeDetailsActivity extends Activity {
 	String identificationMarks;
 	String dateOfPhoto;
 	String designation;
+	String empStatus;
 
 	int REQUEST_IMAGE_CAPTURE = 101;
 	
@@ -121,6 +123,7 @@ public class EmployeeDetailsActivity extends Activity {
 		editInterViewedBy= (EditText) findViewById(R.id.edit_interviewedby);
 		editReffered= (EditText) findViewById(R.id.edit_reffered);
 		editDesignation = (EditText) findViewById(R.id.edit_designation);
+		editEmploymentStatus = (EditText) findViewById(R.id.edit_employment_satus);
 		image = (ImageView) findViewById(R.id.image);
 
 	}
@@ -152,6 +155,7 @@ public class EmployeeDetailsActivity extends Activity {
 		interviewedBy = editInterViewedBy.getText().toString();
 		reffered = editReffered.getText().toString();
 		designation = editDesignation.getText().toString();
+		empStatus = editEmploymentStatus.getText().toString();
 		
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
@@ -187,7 +191,7 @@ public class EmployeeDetailsActivity extends Activity {
 		nameValuePair.add(new BasicNameValuePair("Introducedby", reffered));
 		nameValuePair.add(new BasicNameValuePair("Interviewedby", interviewedBy));
 		nameValuePair.add(new BasicNameValuePair("Department", department));
-		nameValuePair.add(new BasicNameValuePair("Employmentstatus", reffered));
+		nameValuePair.add(new BasicNameValuePair("Employmentstatus", empStatus));
 		nameValuePair.add(new BasicNameValuePair("Designation", designation));
 		
 		if(nameOfStaff.isEmpty() || alias.isEmpty() || DOB.isEmpty() || 

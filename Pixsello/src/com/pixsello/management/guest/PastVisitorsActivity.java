@@ -45,7 +45,7 @@ public class PastVisitorsActivity extends Activity {
 	private boolean stayDate;
 
 	EditText editSearch;
-
+	ProgressDialog dialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,6 +60,9 @@ public class PastVisitorsActivity extends Activity {
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
+		
+	    dialog = new ProgressDialog(PastVisitorsActivity.this);
+		dialog.setMessage("Please Wait..");
 
 	}
 
@@ -118,10 +121,11 @@ public class PastVisitorsActivity extends Activity {
 
 		if(!searchValue.isEmpty())
 		{
+			dialog.show();
 			List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 					1);
 			nameValuePairSearch.add(new BasicNameValuePair("searchkey",searchValue));
-			nameValuePairSearch.add(new BasicNameValuePair("propertyID",Uttilities.getPROPERTY_ID()));
+			nameValuePairSearch.add(new BasicNameValuePair("PropertyID",Uttilities.getPROPERTY_ID()));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -136,7 +140,7 @@ public class PastVisitorsActivity extends Activity {
 						JSONObject obj = new JSONObject(data);
 
 						if (obj.has("error_message")) {
-
+							dialog.cancel();
 							Uttilities.showToast(getApplicationContext(),
 									obj.getString("error_message"));
 
@@ -158,7 +162,7 @@ public class PastVisitorsActivity extends Activity {
 
 								visitorsData.add(guest);
 							}
-
+							dialog.cancel();
 							adapter = new PastVisitorsListAdapter(
 									getApplicationContext(),
 									R.layout.visitors_list_item, visitorsData);
@@ -191,8 +195,6 @@ public class PastVisitorsActivity extends Activity {
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
 
-		final ProgressDialog dialog = new ProgressDialog(PastVisitorsActivity.this);
-		dialog.setMessage("Please Wait..");
 		dialog.show();
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {

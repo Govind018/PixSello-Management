@@ -62,8 +62,8 @@ public class ActiveItemsListActivity extends Activity implements OnCompleteListe
 		dailog.setMessage("Please Wait..");
 		;
 
-		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
-		layoutError.setVisibility(View.GONE);
+//		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
+//		layoutError.setVisibility(View.GONE);
 
 		adapter = new ActiveItemsListAdapter(getApplicationContext(),
 				getFragmentManager(), R.layout.active_list_item, itemsData);
@@ -116,9 +116,10 @@ public class ActiveItemsListActivity extends Activity implements OnCompleteListe
 					JSONObject obj = new JSONObject(data);
 					if (obj.has("error_message")) {
 						dailog.cancel();
-						list.setVisibility(View.GONE);
-						layoutError.setVisibility(View.VISIBLE);
-						adapter.notifyDataSetChanged();
+						Uttilities.showToast(getApplicationContext(), "No Records to display.");
+//						list.setVisibility(View.GONE);
+//						layoutError.setVisibility(View.VISIBLE);
+//						adapter.notifyDataSetChanged();
 					} else {
 
 						JSONArray jsonArray = obj.getJSONArray("result");
@@ -136,6 +137,7 @@ public class ActiveItemsListActivity extends Activity implements OnCompleteListe
 									.getString("Responsibility"));
 							item.setActionTaken(jsonObj
 									.getString("Actiontaken"));
+							item.setPhoto(jsonObj.getString("Photo"));
 
 							itemsData.add(item);
 						}

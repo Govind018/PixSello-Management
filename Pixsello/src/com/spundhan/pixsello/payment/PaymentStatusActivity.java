@@ -14,8 +14,8 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.PaymentStatusListAdapter;
@@ -30,9 +30,6 @@ public class PaymentStatusActivity extends Activity {
 
 	ArrayList<String> identityList;
 
-	Spinner spinnerServices;
-	Spinner spinnerIdentity;
-
 	ArrayList<Entity> listOfServices;
 
 	ArrayAdapter<String> serviceAdapter;
@@ -43,6 +40,8 @@ public class PaymentStatusActivity extends Activity {
 
 	ArrayList<Entity> statusDetails;
 
+	EditText searchKey;
+
 	ListView list;
 
 	@Override
@@ -50,13 +49,12 @@ public class PaymentStatusActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payment_status_new);
 
-		spinnerServices = (Spinner) findViewById(R.id.list_services);
-
 		servicesList = new ArrayList<String>();
 		identityList = new ArrayList<String>();
 		listOfServices = new ArrayList<Entity>();
 
-		list = (ListView) findViewById(R.id.list_status);
+		list = (ListView) findViewById(R.id.list_search_items);
+		searchKey = (EditText) findViewById(R.id.edit_search);
 
 		statusDetails = new ArrayList<Entity>();
 
@@ -70,20 +68,39 @@ public class PaymentStatusActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 
-		getServices();
+		getData();
 	}
 
 	public void doSubmit(View v) {
-		String sertviceId = spinnerServices.getSelectedItem().toString();
-		String identity = spinnerIdentity.getSelectedItem().toString();
 
-		final ProgressDialog dialog = new ProgressDialog(PaymentStatusActivity.this);
-		dialog.setMessage("Please Wait..");
-		dialog.show();
+		String url = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getNewPaymentSearch";
+
+		String searchKeyVal = searchKey.getText().toString();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-		nameValuePair.add(new BasicNameValuePair("Nameofservice", sertviceId));
-		nameValuePair.add(new BasicNameValuePair("Identity", identity));
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("searchkey", searchKeyVal));
+
+		populateData(url, nameValuePair);
+
+	}
+
+	private void getData() {
+
+		String url = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/newPayment";
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+		populateData(url, nameValuePair);
+	}
+
+	private void populateData(String url, List<NameValuePair> nameValuePair) {
+
+		final ProgressDialog dialog = new ProgressDialog(
+				PaymentStatusActivity.this);
+		dialog.setMessage("Please Wait..");
+		dialog.show();
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -104,15 +121,16 @@ public class PaymentStatusActivity extends Activity {
 						for (int i = 0; i < jsonArray.length(); i++) {
 							entity = new Entity();
 							JSONObject obj = jsonArray.getJSONObject(i);
-							entity.setServiceName(obj.getString(""));
-							entity.setIdentity(obj.getString(""));
-							entity.setType(obj.getString(""));
-							entity.setAmount(obj.getString(""));
-							entity.setDueDate(obj.getString(""));
-							entity.setStatus(obj.getString(""));
+							entity.setServiceName(obj
+									.getString("Nameofservice"));
+							entity.setIdentity(obj.getString("Identity"));
+							entity.setAmount(obj.getString("Amount"));
+							entity.setDueDate(obj.getString("Billduedate"));
+							entity.setStatus(obj.getString("BillingStatus"));
+							entity.setBillNum(obj.getString("BillNo"));
+							entity.setBillDate(obj.getString("BillDate"));
 
 							statusDetails.add(entity);
-
 						}
 
 						dialog.cancel();
@@ -129,58 +147,6 @@ public class PaymentStatusActivity extends Activity {
 			}
 		}, nameValuePair);
 
-		post.execute(Uttilities.PAYMENT_STATUS);
-
-	}
-
-	private void getServices() {
-
-		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-		nameValuePair.add(new BasicNameValuePair("PropertyID",
-				Uttilities.PROPERTY_ID));
-
-		WebRequestPost get = new WebRequestPost(new IWebRequest() {
-
-			@Override
-			public void onDataArrived(String data) {
-
-				Entity item;
-				try {
-					JSONObject jsonObj = new JSONObject(data);
-
-					if (jsonObj.has("error_message")) {
-						Uttilities.showToast(getApplicationContext(),
-								jsonObj.getString("error_message"));
-
-					} else {
-
-						JSONArray jsonArray = jsonObj.getJSONArray("result");
-
-						for (int i = 0; i < jsonArray.length(); i++) {
-							item = new Entity();
-
-							JSONObject obj = jsonArray.getJSONObject(i);
-							item.setServiceId(obj.getString("ServiceID"));
-							item.setServiceName(obj.getString("Nameofservice"));
-
-							servicesList.add(obj.getString("Nameofservice"));
-							listOfServices.add(item);
-						}
-
-						serviceAdapter = new ArrayAdapter<String>(
-								getApplicationContext(), R.layout.spinner_item,
-								servicesList);
-
-						spinnerServices.setAdapter(serviceAdapter);
-
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-			}
-		}, nameValuePair);
-
-		get.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getAllservice");
-
+		post.execute(url);
 	}
 }

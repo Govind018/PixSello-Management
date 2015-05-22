@@ -37,7 +37,6 @@ public class ClosedItemsActivity extends Activity {
 
 	ArrayList<Entity> items;
 
-	RelativeLayout layout;
 
 	Button btnSearch;
 
@@ -52,6 +51,10 @@ public class ClosedItemsActivity extends Activity {
 	private boolean stayDate;
 
 	static final int DATE_DIALOG_ID = 999;
+	
+	RelativeLayout layoutError;
+	
+	ProgressDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +63,20 @@ public class ClosedItemsActivity extends Activity {
 
 		listOfClosedItems = (ListView) findViewById(R.id.closed_items_list);
 		btnSearch = (Button) findViewById(R.id.btn_search);
-		layout = (RelativeLayout) findViewById(R.id.layout_search);
 
 		dateFrom = (EditText) findViewById(R.id.edit_date);
 		items = new ArrayList<Entity>();
+		
+//		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
+//		layoutError.setVisibility(View.GONE);
 
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
+		
+		dialog = new  ProgressDialog(ClosedItemsActivity.this);
+		dialog.setMessage("Please Wait.");
 
 	}
 
@@ -115,20 +123,6 @@ public class ClosedItemsActivity extends Activity {
 		}
 	};
 
-	public void showSearchOptions(View v) {
-
-		layout.setVisibility(View.VISIBLE);
-		btnSearch.setVisibility(View.INVISIBLE);
-
-	}
-
-	public void showAllData(View v) {
-
-		layout.setVisibility(View.GONE);
-		btnSearch.setVisibility(View.VISIBLE);
-
-	}
-
 	public void searchData(View v) {
 
 		String fromDate = dateFrom.getText().toString();
@@ -137,10 +131,11 @@ public class ClosedItemsActivity extends Activity {
 
 			List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 					3);
-			nameValuePairSearch.add(new BasicNameValuePair("propertyID",
+			nameValuePairSearch.add(new BasicNameValuePair("PropertyID",
 					Uttilities.getPROPERTY_ID()));
 			nameValuePairSearch.add(new BasicNameValuePair("searchkey",
 					fromDate));
+			dialog.show();
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -152,6 +147,7 @@ public class ClosedItemsActivity extends Activity {
 						JSONObject obj = new JSONObject(data);
 
 						if (obj.has("error_message")) {
+							dialog.cancel();
 							Uttilities.showToast(getApplicationContext(),
 									obj.getString("error_message"));
 						} else {
@@ -177,6 +173,7 @@ public class ClosedItemsActivity extends Activity {
 								items.add(item);
 							}
 
+							dialog.cancel();
 							adapter = new ClosedItemsListAdapter(
 									getApplicationContext(),
 									R.layout.closed_list_item, items);
@@ -211,8 +208,6 @@ public class ClosedItemsActivity extends Activity {
 		nameValuePair.add(new BasicNameValuePair("PropertyID",
 				Uttilities.getPROPERTY_ID()));
 		
-		final ProgressDialog dialog = new  ProgressDialog(ClosedItemsActivity.this);
-		dialog.setMessage("Please Wait.");
 		dialog.show();
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
@@ -227,8 +222,9 @@ public class ClosedItemsActivity extends Activity {
 
 					if (obj.has("error_message")) {
 						dialog.cancel();
-						Uttilities.showToast(getApplicationContext(),
-								obj.getString("error_message"));
+						Uttilities.showToast(getApplicationContext(), "No Records to display");
+//						listOfClosedItems.setVisibility(View.GONE);
+//						layoutError.setVisibility(View.VISIBLE);
 					} else {
 
 						JSONArray jsonArray = obj.getJSONArray("result");

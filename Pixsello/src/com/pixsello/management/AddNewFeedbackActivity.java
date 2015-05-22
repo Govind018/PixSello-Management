@@ -134,4 +134,9 @@ public class AddNewFeedbackActivity extends Activity {
 		super.onStart();
 		editDate.setText(Uttilities.getDate());
 	}
+	
+	public void goBack(View v){
+		
+		finish();
+	}
 }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pixsello.management.R;
@@ -66,7 +67,8 @@ public class ClosedItemsListAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.closed_item_respo);
 			holder.textActionTaken = (TextView) convertView
 					.findViewById(R.id.closed_item_action_taken);
-
+			holder.rowLayout = (LinearLayout) convertView.findViewById(R.id.closed_items_row);
+                
 		} else {
 
 			holder = (ViewHolder) convertView.getTag();
@@ -75,6 +77,12 @@ public class ClosedItemsListAdapter extends ArrayAdapter<Entity> {
 
 		item = items.get(position);
 
+//		if( position%2 == 0){
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+//		}else{
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+//		}
+		
 		holder.textDate.setText(item.getDate());
 		holder.textTime.setText(item.getTime());
 		holder.textDescription.setText(item.getDescription());
@@ -95,6 +103,7 @@ public class ClosedItemsListAdapter extends ArrayAdapter<Entity> {
 		TextView textReported;
 		TextView textRespo;
 		TextView textActionTaken;
+		LinearLayout rowLayout;
 
 	}
 	

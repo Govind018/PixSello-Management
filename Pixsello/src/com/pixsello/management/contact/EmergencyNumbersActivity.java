@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -108,8 +107,18 @@ public class EmergencyNumbersActivity extends Activity {
 				1);
 		nameValuePairSearch.add(new BasicNameValuePair("searchkey", searchValue));
 		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
+		if (type.equalsIgnoreCase("emr")) {
+			nameValuePairSearch.add(new BasicNameValuePair("Typeofperson", "1"));
+		}else{
+			nameValuePairSearch.add(new BasicNameValuePair("Typeofperson", "2"));
+		}
 
+		if(searchValue.isEmpty()){
+			Uttilities.showToast(getApplicationContext(), "Enter search key");
+			return;
+		}
 		dialog.show();
+		
 		getDataFromServer(Uttilities.CONTACT_SEARCH_URL, nameValuePairSearch);
 
 	}

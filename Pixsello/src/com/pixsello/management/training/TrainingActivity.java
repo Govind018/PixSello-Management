@@ -24,38 +24,21 @@ public class TrainingActivity extends Activity {
 	public void doUpdate(View v) {
 
 		startActivity(new Intent(getApplicationContext(), TrainingUpdatesActivity.class));
-
+		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
 	}
 
 	public void showProfile(View v) {
 
 		startActivity(new Intent(getApplicationContext(),
 				StaffProfileActivity.class));
+		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
 	}
 
 	public void showVideos(View v) {
 
 		startActivity(new Intent(getApplicationContext(),
 				TrainingVideosActivity.class));
+		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.training, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }

@@ -61,8 +61,8 @@ public class MakeOutEntryActivity extends Activity {
 		layoutTime = (LinearLayout) findViewById(R.id.layout_out_entry);
 		visitorsData = new ArrayList<Entity>();
 
-		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
-		layoutError.setVisibility(View.GONE);
+		// layoutError = (RelativeLayout) findViewById(R.id.layout_error);
+		// layoutError.setVisibility(View.GONE);
 
 		final Calendar c = Calendar.getInstance();
 		hour = c.get(Calendar.HOUR_OF_DAY);
@@ -72,7 +72,7 @@ public class MakeOutEntryActivity extends Activity {
 				R.layout.out_entry_list_item, visitorsData);
 		guestList.setAdapter(adapter);
 
-	}         
+	}
 
 	public void updateTime(View v) {
 
@@ -84,8 +84,8 @@ public class MakeOutEntryActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("ID", ID));
 			// nameValuePair.add(new BasicNameValuePair("Roomno", room));
 			nameValuePair.add(new BasicNameValuePair("OutTime", time));
-			nameValuePair.add(new BasicNameValuePair("PropertyID",
-					Uttilities.getPROPERTY_ID()));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+					.getPROPERTY_ID()));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -174,8 +174,8 @@ public class MakeOutEntryActivity extends Activity {
 		dialog.show();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-		nameValuePair.add(new BasicNameValuePair("PropertyID",
-				Uttilities.getPROPERTY_ID()));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+				.getPROPERTY_ID()));
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
@@ -191,17 +191,18 @@ public class MakeOutEntryActivity extends Activity {
 
 						dialog.cancel();
 
-						guestList.setVisibility(View.GONE);
-						layoutError.setVisibility(View.VISIBLE);
-						// Uttilities.showToast(getApplicationContext(),
-						// obj.getString("error_message"));
-						adapter.notifyDataSetChanged();
+						// guestList.setVisibility(View.GONE);
+						// layoutError.setVisibility(View.VISIBLE);
+						Uttilities.showToast(getApplicationContext(),
+								obj.getString("error_message"));
+						 adapter.notifyDataSetChanged();
 
 					} else {
 						JSONArray jsonArray = obj.getJSONArray("result");
-						
-						System.out.println( "JSON>>>>>>>>>>>>>>>>>>>>>>>>"+ data);
-						
+
+						System.out.println("JSON>>>>>>>>>>>>>>>>>>>>>>>>"
+								+ data);
+
 						guestList.setVisibility(View.VISIBLE);
 
 						for (int i = 0; i < jsonArray.length(); i++) {

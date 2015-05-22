@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pixsello.management.ImagePreviewActivity;
@@ -73,6 +74,7 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.found_item_to);
 			holder.image = (ImageView) convertView
 					.findViewById(R.id.found_item_photo);
+			holder.rowLayout = (LinearLayout) convertView.findViewById(R.id.row_layout);
 
 		} else {
 
@@ -89,6 +91,12 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		holder.textStaff.setText(item.getStaffName());
 		holder.textFromDate.setText(item.getStayDateFrom());
 		holder.textToDate.setText(item.getStayDateTo());
+		
+//		if( position%2 == 0){
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+//		}else{
+//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+//		}
 
 		if (item.getPhoto() != null) {
 			byte[] imageAsBytes = Base64.decode(item.getPhoto().getBytes(),
@@ -128,6 +136,7 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		TextView textFromDate;
 		TextView textToDate;
 		ImageView image;
+		LinearLayout rowLayout;
 
 	}
 }

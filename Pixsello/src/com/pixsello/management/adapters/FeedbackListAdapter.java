@@ -6,7 +6,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pixsello.management.R;
@@ -55,27 +58,48 @@ public class FeedbackListAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.text_company);
 			holder.textFeedback = (TextView) convertView
 					.findViewById(R.id.text_feedback);
-			holder.textAmbience = (TextView) convertView
-					.findViewById(R.id.text_ambience);
-			holder.textServices = (TextView) convertView
-					.findViewById(R.id.text_services);
-			holder.textFood = (TextView) convertView
-					.findViewById(R.id.text_food);
+			holder.ratingAmbience = (LinearLayout) convertView
+					.findViewById(R.id.rating_ambience);
+			holder.ratingServices = (LinearLayout) convertView
+					.findViewById(R.id.rating_services);
+			holder.ratingFood = (LinearLayout) convertView
+					.findViewById(R.id.rating_food);
+			holder.rowLayout = (LinearLayout) convertView.findViewById(R.id.feedback_row);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
 		entity = details.get(position);
+		
+		if( position%2 == 0){
+			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+		}else{
+			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+		}
 
 		holder.textGuestName.setText(entity.getGuestName());
 		holder.textCompany.setText(entity.getCompanyName());
 		holder.textFeedback.setText(entity.getFeedback());
-		holder.textAmbience.setText(entity.getAmbience());
-		holder.textServices.setText(entity.getServices());
-		holder.textFood.setText(entity.getFood());
+
+		showRatingStars(holder.ratingAmbience,
+				Integer.parseInt(entity.getAmbience()));
+		showRatingStars(holder.ratingServices,
+				Integer.parseInt(entity.getServices()));
+		showRatingStars(holder.ratingFood, Integer.parseInt(entity.getFood()));
 
 		return convertView;
+	}
+
+	private void showRatingStars(LinearLayout ratingLayout, int number) {
+
+		for (int i = 0; i < number; i++) {
+
+			ImageView im = new ImageView(thisContext);
+			im.setImageResource(R.drawable.star);
+			im.setLayoutParams(new LayoutParams(30, 30));
+			ratingLayout.addView(im);
+		}
 	}
 
 	public class ViewHolder {
@@ -86,5 +110,9 @@ public class FeedbackListAdapter extends ArrayAdapter<Entity> {
 		TextView textAmbience;
 		TextView textServices;
 		TextView textFood;
+		LinearLayout ratingAmbience;
+		LinearLayout ratingServices;
+		LinearLayout ratingFood;
+		LinearLayout rowLayout;
 	}
 }

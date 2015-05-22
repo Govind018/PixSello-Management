@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,6 +51,18 @@ public class EmployeeDetailEditDialog extends DialogFragment {
 	Button btnReport;
 	Button btnEdit;
 	Button btnExit;
+	private OnCompleteListener mListener;
+
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		try {
+			this.mListener = (OnCompleteListener) activity;
+		} catch (final ClassCastException e) {
+			throw new ClassCastException(activity.toString()
+					+ " must implement OnCompleteListener");
+		}
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,14 +79,14 @@ public class EmployeeDetailEditDialog extends DialogFragment {
 				.findViewById(R.id.text_designation);
 		editDepartment = (TextView) convertView
 				.findViewById(R.id.text_department);
-//		editStatus = (TextView) convertView.findViewById(R.id.text_status);
+		// editStatus = (TextView) convertView.findViewById(R.id.text_status);
 		editRemarks = (EditText) convertView.findViewById(R.id.edit_remarks);
 		editHighlights = (EditText) convertView
 				.findViewById(R.id.edit_highlights);
 		textName.setText(getArguments().getString("name"));
 		editDesignation.setText(getArguments().getString("designation"));
 		editDepartment.setText(getArguments().getString("department"));
-//		editStatus.setText(getArguments().getString("status"));
+		// editStatus.setText(getArguments().getString("status"));
 		btnReport = (Button) convertView.findViewById(R.id.edit_button);
 		btnEdit = (Button) convertView.findViewById(R.id.btn_edit);
 		btnExit = (Button) convertView.findViewById(R.id.report_exit_action);
@@ -141,9 +154,17 @@ public class EmployeeDetailEditDialog extends DialogFragment {
 
 			@Override
 			public void onDataArrived(String data) {
-				
-				Uttilities.showToast(getActivity(), data);
 
+				JSONObject json;
+				try {
+					json = new JSONObject(data);
+					Uttilities.showToast(getActivity(),
+							json.getString("result"));
+					getDialog().cancel();
+					mListener.onComplete("done");
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		}, nameValuePair);
 
@@ -177,6 +198,8 @@ public class EmployeeDetailEditDialog extends DialogFragment {
 					JSONObject json = new JSONObject(data);
 					Uttilities.showToast(getActivity(),
 							json.getString("result"));
+					getDialog().cancel();
+					mListener.onComplete("done");
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -185,5 +208,9 @@ public class EmployeeDetailEditDialog extends DialogFragment {
 
 		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/Reportjobexit");
 
+	}
+
+	public interface OnCompleteListener {
+		public void onComplete(String result);
 	}
 }

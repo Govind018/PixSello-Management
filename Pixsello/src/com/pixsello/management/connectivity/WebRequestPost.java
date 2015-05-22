@@ -28,51 +28,49 @@ import android.util.Log;
 public class WebRequestPost extends AsyncTask<String, Integer, String> {
 	private IWebRequest webReq;
 	List<NameValuePair> nameValuePair;
-	
+
 	ProgressDialog dialog;
 
-	public WebRequestPost(IWebRequest web,
-			List<NameValuePair> nameValuePair) {
+	public WebRequestPost(IWebRequest web, List<NameValuePair> nameValuePair) {
 
 		webReq = web;
 		this.nameValuePair = nameValuePair;
-		
-//		dialog = new ProgressDialog(context);
-//		dialog.setMessage("Please Wait..!");
+
+		// dialog = new ProgressDialog(context);
+		// dialog.setMessage("Please Wait..!");
 	}
 
 	@Override
 	protected String doInBackground(String... params) {
 
-//		dialog.show();
-		
+		// dialog.show();
+
 		String result = "";
 		HttpParams httpParams = new BasicHttpParams();
-		httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+		httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION,
+				HttpVersion.HTTP_1_1);
 		// Creating HTTP client
 		HttpClient httpClient = new DefaultHttpClient(httpParams);
-		
+
 		// Creating HTTP Post
 		HttpPost httpPost = new HttpPost(params[0]);
-
 		// Url Encoding the POST parameters
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair));
-			
 
-			// Making HTTP Request                                                         
-			HttpResponse response = httpClient.execute(httpPost);
-
+			// Making HTTP Request
+ 			HttpResponse response = httpClient.execute(httpPost);
+ 			
 			String json_obj = convertStreamToString(response.getEntity()
 					.getContent());
-			
-			try {     
+                       
+			try {
 				JSONObject json = new JSONObject(json_obj);
-				result = json.has("status") ? json.getString("status") : json_obj ;
+				result = json.has("status") ? json.getString("status"): json_obj;
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-                   
+
 			// writing response to log
 			Log.d("Http Response:", response.toString());
 
@@ -119,11 +117,11 @@ public class WebRequestPost extends AsyncTask<String, Integer, String> {
 		// }
 		return result;
 	}
-	
+
 	@Override
 	protected void onPostExecute(String result) {
 		super.onPostExecute(result);
-//		dialog.cancel();
+		// dialog.cancel();
 		webReq.onDataArrived(result);
 	}
 

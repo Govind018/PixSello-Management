@@ -7,9 +7,11 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
@@ -95,6 +97,18 @@ public class TrainingUpdatesActivity extends Activity {
 		editTrainingDate.setText(Uttilities.getDate());
 		editTrainigTime.setText(Uttilities.getTime());
 	}
+	
+	public void showDialog(View v){
+		
+		Dialog d = new Dialog(TrainingUpdatesActivity.this);
+		d.setTitle("How long?");
+		d.setContentView(R.layout.dialog_training_update);
+		
+		Window win = d.getWindow();
+		win.setLayout(250, 180);
+		d.show();
+		
+	}
 
 	public void doSubmit(View v) {
 
@@ -107,8 +121,6 @@ public class TrainingUpdatesActivity extends Activity {
 		trainingHrs = editHrs.getSelectedItem().toString();
 		trainingMins = editMins.getSelectedItem().toString();
 		assessment = editAssement.getText().toString();
-
-		dialog.show();
 
 		if (traineeName.isEmpty() || trainerName.isEmpty()
 				|| assessment.isEmpty()) {
@@ -123,6 +135,8 @@ public class TrainingUpdatesActivity extends Activity {
 					"Assessment should be out of 10");
 			return;
 		}
+		
+		dialog.show();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities

@@ -3,17 +3,21 @@ package com.pixsello.management.adapters;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pixsello.management.R;
 import com.pixsello.management.guest.Entity;
+import com.spundhan.pixsello.payment.PaymentActivity;
 
-public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
+public class NewPaymentListAdapter extends ArrayAdapter<Entity> {
 
 	ArrayList<Entity> details;
 
@@ -25,7 +29,7 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 
 	Entity guestDetail;
 
-	public PaymentStatusListAdapter(Context context, int resource,
+	public NewPaymentListAdapter(Context context, int resource,
 			ArrayList<Entity> data) {
 		super(context, resource, data);
 		thisContext = context;
@@ -53,21 +57,20 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 				convertView.setTag(holder);
 
 				holder.textService = (TextView) convertView
-						.findViewById(R.id.text_serivce_name);
+						.findViewById(R.id.text_service_name);
 				holder.textIdentity = (TextView) convertView
 						.findViewById(R.id.text_identity);
-				holder.textBillDate = (TextView) convertView
-						.findViewById(R.id.text_bill_date);
+				holder.textPaymentType = (TextView) convertView
+						.findViewById(R.id.text_payment_type);
 				holder.textAmount = (TextView) convertView
 						.findViewById(R.id.text_amount);
 				holder.textDueDate = (TextView) convertView
 						.findViewById(R.id.text_due_date);
 				holder.textStatus = (TextView) convertView
 						.findViewById(R.id.text_status);
+				holder.btnPay = (Button) convertView.findViewById(R.id.btn_pay);
 				holder.rowLayout = (LinearLayout) convertView
 						.findViewById(R.id.payment_row);
-				holder.textBillNumber = (TextView) convertView
-						.findViewById(R.id.text_bill_number);
 
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -83,18 +86,43 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 //						.getColor(R.color.items_row2));
 //			}
 
-			holder.textBillNumber.setText(guestDetail.getBillNum());
 			holder.textService.setText(guestDetail.getServiceName());
 			holder.textIdentity.setText(guestDetail.getIdentity());
-			holder.textBillDate.setText(guestDetail.getBillDate());
 			holder.textAmount.setText(guestDetail.getAmount());
 			holder.textDueDate.setText(guestDetail.getDueDate());
+			holder.textPaymentType.setText(guestDetail.getType());
+			holder.textStatus.setText(guestDetail.getStatus());
 
 			if (guestDetail.getStatus().equalsIgnoreCase("0")) {
 				holder.textStatus.setText("OPEN");
+				holder.btnPay.setVisibility(View.VISIBLE);
 			} else {
 				holder.textStatus.setText("PAID");
+				holder.btnPay.setVisibility(View.INVISIBLE);
 			}
+
+			holder.btnPay.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+
+					Entity en = details.get(position);
+					Intent intent = new Intent(thisContext,
+							PaymentActivity.class);
+					intent.putExtra("ServiceID", en.getServiceId());
+					intent.putExtra("Identity", en.getIdentityID());
+					intent.putExtra("ServiceName", en.getServiceName());
+					intent.putExtra("IdentityName", en.getIdentity());
+					intent.putExtra("BillNo", en.getBillNum());
+					intent.putExtra("BillDate", en.getBillDate());
+					intent.putExtra("Billduedate", en.getDueDate());
+					intent.putExtra("Amount", en.getAmount());
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+					thisContext.startActivity(intent);
+
+				}
+			});
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,8 +137,8 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 		TextView textAmount;
 		TextView textDueDate;
 		TextView textStatus;
-		TextView textBillDate;
-		TextView textBillNumber;
+		TextView textPaymentType;
+		Button btnPay;
 		LinearLayout rowLayout;
 	}
 }
