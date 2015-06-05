@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:id="@+id/out_entry_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/list_item_background"
         android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:paddingLeft="20dp" >
 
         <TextView
             android:id="@+id/guest_date"
-            android:layout_width="160dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:text="DATE"
+            android:text="29-12-2015"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/guest_time"
-            android:layout_width="130dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="TIME"
+            android:text="12:53 PM"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/guest_name"
-            android:layout_width="210dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
             android:text="GUEST NAME"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -35,15 +36,24 @@
             android:id="@+id/guest_company"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="COMPANY"
+            android:text="Spundhan Softwares"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+        
+        <TextView
+            android:id="@+id/guest_company_visitor"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:text="VISITOR"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/guest_gender"
-            android:layout_width="170dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="GENDER"
+            android:layout_marginLeft="20dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -52,6 +62,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:paddingTop="5dp"
+            android:layout_marginLeft="30dp"
             android:paddingBottom="5dp"
             android:src="@drawable/profile"
             android:textColor="@android:color/black"
@@ -67,12 +78,13 @@
             android:textColor="@android:color/black"
             android:textSize="25sp" />
         
-        <TextView
+        <Button
             android:id="@+id/guest_out_time"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
-            android:text="fdfd"
+            android:layout_marginLeft="40dp"
+            android:text="UPDATE"
+            android:background="@drawable/submit_selector"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
         

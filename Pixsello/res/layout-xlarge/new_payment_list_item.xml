@@ -5,64 +5,66 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/text_bill_number"
+            android:id="@+id/text_service_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Bill number"
+            android:text="Service name"
             android:layout_marginLeft="30dp"
             android:textColor="@android:color/black"
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/text_bill_date"
-            android:layout_width="200dp"
-            android:layout_height="45dp"
-            android:text="Date"
-            android:textSize="30sp"
-            android:textColor="@android:color/black"/>
-
-        <TextView
-            android:id="@+id/text_serivce_name"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:text="Service"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
-
-        <TextView
             android:id="@+id/text_identity"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="45dp"
             android:text="Identity"
             android:textSize="30sp"
             android:textColor="@android:color/black" />
 
         <TextView
+            android:id="@+id/text_payment_type"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="Cash"
+           android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <TextView
             android:id="@+id/text_amount"
-            android:layout_width="190dp"
+            android:layout_width="180dp"
             android:layout_height="45dp"
-            android:text="AMount"
+            android:text="5000"
             android:textSize="30sp"
             android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/text_due_date"
-            android:layout_width="180dp"
+            android:layout_width="210dp"
             android:layout_height="45dp"
-            android:text="Due Date"
+            android:text="12-4-2015"
             android:textSize="30sp"
             android:textColor="@android:color/black" />
-        
+
         <TextView
             android:id="@+id/text_status"
             android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:text="Status"
+            android:textSize="30sp"
+            android:textColor="@android:color/black" />
+        
+        <Button
+            android:id="@+id/btn_pay"
+            android:layout_width="120dp"
             android:layout_height="50dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:visibility="gone"
+            android:text="PAY"
+            android:background="@drawable/submit_selector"
             android:textSize="30sp"
-            android:textColor="@android:color/black" />
+             />
     </LinearLayout>

@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	android:id="@+id/visitors_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/list_item_background"
+        android:background="@android:color/transparent"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
         <TextView
             android:id="@+id/guest_date"
-            android:layout_width="170dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:text="DATE"
+            android:text="29-12-2015"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/guest_time"
-            android:layout_width="170dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="TIME"
+            android:text="12.40 AM"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
             android:id="@+id/guest_name"
-            android:layout_width="210dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="GUEST NAME"
             android:textColor="@android:color/black"
@@ -32,7 +33,7 @@
 
         <TextView
             android:id="@+id/guest_company"
-            android:layout_width="180dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:text="COMPANY"
             android:textColor="@android:color/black"
@@ -40,7 +41,7 @@
 
         <TextView
             android:id="@+id/guest_gender"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="GENDER"
             android:textColor="@android:color/black"
@@ -52,14 +53,15 @@
             android:layout_height="60dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
+            android:layout_marginLeft="30dp"
             android:src="@drawable/profile"
             android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/guest_in_time"
-            android:layout_width="110dp"
+            android:layout_width="135dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="50dp"
             android:text="IN TIME"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
