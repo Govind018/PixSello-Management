@@ -20,6 +20,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.pixsello.management.adapters.FoundItemsListAdapter;
 import com.pixsello.management.connectivity.IWebRequest;
@@ -49,12 +50,15 @@ public class FindItemActivity extends Activity {
 	private int month;
 	private int day;
 
+	RelativeLayout layoutError;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_find_item);
 
 		list = (ListView) findViewById(R.id.list_found_items);
+		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
 
 		dialog = new ProgressDialog(FindItemActivity.this);
 		dialog.setMessage("Please Wait..");
@@ -83,7 +87,7 @@ public class FindItemActivity extends Activity {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
-				.getPROPERTY_ID()));
+				.getUserLoginId(getApplicationContext())));
 
 		final ProgressDialog dialog = new ProgressDialog(FindItemActivity.this);
 		dialog.setMessage("Please Wait..");
@@ -99,7 +103,7 @@ public class FindItemActivity extends Activity {
 			}
 		}, nameValuePair);
 
-		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getReportanitem");
+		post.execute(Uttilities.LOST_FOUND_GET_ALL_ITEM_URL);
 	}
 
 	public void showDate(View v) {
@@ -147,15 +151,14 @@ public class FindItemActivity extends Activity {
 	public void doSubmitItem(View v) {
 
 		if (item.getText().toString().isEmpty()) {
-			Uttilities.showToast(getApplicationContext(), "Please enter the item name.");
+			Uttilities.showToast(getApplicationContext(),
+					"Please enter the item name.");
 			return;
 		}
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
-				.getPROPERTY_ID()));
-		nameValuePair.add(new BasicNameValuePair("searchkey", item.getText()
-				.toString()));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
+		nameValuePair.add(new BasicNameValuePair("searchkey", item.getText().toString()));
 
 		dialog.show();
 
@@ -169,7 +172,7 @@ public class FindItemActivity extends Activity {
 			}
 		}, nameValuePair);
 
-		postData.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/Findanitem");
+		postData.execute(Uttilities.LOST_FOUND_FIND_ITEM_URL);
 	}
 
 	public void populateDate(String data) {
@@ -181,12 +184,13 @@ public class FindItemActivity extends Activity {
 
 			if (obj.has("error_message")) {
 				dialog.cancel();
-				Uttilities.showToast(getApplicationContext(),
-						obj.getString("error_message"));
+				list.setVisibility(View.GONE);
+				layoutError.setVisibility(View.VISIBLE);
 
 			} else {
 
 				JSONArray jsonArray = obj.getJSONArray("result");
+				list.setVisibility(View.VISIBLE);
 
 				foundItems.clear();
 				for (int i = 0; i < jsonArray.length(); i++) {

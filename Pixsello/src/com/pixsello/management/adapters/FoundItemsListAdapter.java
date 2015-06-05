@@ -92,11 +92,11 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		holder.textFromDate.setText(item.getStayDateFrom());
 		holder.textToDate.setText(item.getStayDateTo());
 		
-//		if( position%2 == 0){
-//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
-//		}else{
-//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
-//		}
+		if( position%2 == 0){
+			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+		}else{
+			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+		}
 
 		if (item.getPhoto() != null) {
 			byte[] imageAsBytes = Base64.decode(item.getPhoto().getBytes(),
@@ -112,14 +112,17 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 
 				Entity itemPhoto = items.get(position);
 				
-				byte[] imageAsBytes = Base64.decode(itemPhoto.getPhoto().getBytes(),
-						Base64.DEFAULT);
-				
-				Intent intent = new  Intent(thisContext,ImagePreviewActivity.class);
-				intent.putExtra("image", imageAsBytes);
-				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				thisContext.startActivity(intent);
-				
+				if(itemPhoto != null){
+
+					byte[] imageAsBytes = Base64.decode(itemPhoto.getPhoto().getBytes(),
+							Base64.DEFAULT);
+					
+					Intent intent = new  Intent(thisContext,ImagePreviewActivity.class);
+					intent.putExtra("image", imageAsBytes);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					thisContext.startActivity(intent);
+					
+				}
 			}
 		});
 

@@ -72,13 +72,6 @@ public class AddContactNumberActivity extends Activity {
 
 	public void doAddNumber(View v) {
 		
-//		if(!Uttilities.isNetworkAvailable(getApplicationContext())){
-//			
-//			Uttilities.showToast(getApplicationContext(), "Internet Not connected");
-//			
-//			return;
-//		}
-
 		serviceDesc = editServiceDesc.getText().toString();
 		contactNumber = editContactNum.getText().toString();
 		contactPerson = editContactPerson.getText().toString();
@@ -105,8 +98,7 @@ public class AddContactNumberActivity extends Activity {
 				nameValuePair.add(new BasicNameValuePair("quickinfo",quickInfo));
 			}
 			
-			nameValuePair.add(new BasicNameValuePair("PropertyID",
-					Uttilities.getPROPERTY_ID()));
+			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.getUserLoginId(getApplicationContext())));
 			
 			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
 

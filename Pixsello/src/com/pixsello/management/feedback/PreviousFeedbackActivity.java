@@ -65,7 +65,7 @@ public class PreviousFeedbackActivity extends Activity {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
-				.getPROPERTY_ID()));
+				.getUserLoginId(getApplicationContext())));
 
 		dialog.show();
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
@@ -99,6 +99,6 @@ public class PreviousFeedbackActivity extends Activity {
 			}
 		}, nameValuePair);
 
-		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getGuestfeedback");
+		post.execute(Uttilities.FEEDBACK_PREVIOUS_LIST);
 	}
 }

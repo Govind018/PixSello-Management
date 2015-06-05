@@ -27,7 +27,7 @@ public class AddNewFeedbackActivity extends Activity {
 
 	String guestName;
 	String guestCompany;
-	String date;
+	String date;      
 	String feedback;
 
 	ProgressDialog dialog;
@@ -57,7 +57,6 @@ public class AddNewFeedbackActivity extends Activity {
 		ratingServices = (RatingBar) findViewById(R.id.rating_services);
 		ratingFood = (RatingBar) findViewById(R.id.rating_food);
 		
-		
 		ratingAmbience.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 			
 			@Override
@@ -79,7 +78,6 @@ public class AddNewFeedbackActivity extends Activity {
 				
 			}
 		});
-
 		
 		ratingFood.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 			
@@ -104,7 +102,7 @@ public class AddNewFeedbackActivity extends Activity {
 		feedback = editFeedback.getText().toString();
 		
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 		nameValuePair.add(new BasicNameValuePair("GuestName", guestName));
 		nameValuePair.add(new BasicNameValuePair("CompanyName", guestCompany));
 		nameValuePair.add(new BasicNameValuePair("Dateoffeedback", date));
@@ -126,7 +124,7 @@ public class AddNewFeedbackActivity extends Activity {
 			}
 		}, nameValuePair);
 		
-		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addGuestFeedback");
+		post.execute(Uttilities.FEEDBACK_ADD_NEW);
 	}
 	
 	@Override

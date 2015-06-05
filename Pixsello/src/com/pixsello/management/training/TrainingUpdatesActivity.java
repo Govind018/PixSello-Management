@@ -139,20 +139,16 @@ public class TrainingUpdatesActivity extends Activity {
 		dialog.show();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
-				.getPROPERTY_ID()));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 		nameValuePair.add(new BasicNameValuePair("Date", trainingDate));
 		nameValuePair.add(new BasicNameValuePair("Time", trainingTime));
 		nameValuePair.add(new BasicNameValuePair("Trainee", traineeName));
 		nameValuePair.add(new BasicNameValuePair("Trainer", trainerName));
 		nameValuePair.add(new BasicNameValuePair("Type", trainingType));
 		nameValuePair.add(new BasicNameValuePair("Other", other));
-		nameValuePair.add(new BasicNameValuePair("Timeoftraineehrs",
-				trainingHrs));
-		nameValuePair.add(new BasicNameValuePair("Timeoftraineemin",
-				trainingMins));
-		nameValuePair.add(new BasicNameValuePair("Traineeassessment",
-				assessment));
+		nameValuePair.add(new BasicNameValuePair("Timeoftraineehrs",trainingHrs));
+		nameValuePair.add(new BasicNameValuePair("Timeoftraineemin",trainingMins));
+		nameValuePair.add(new BasicNameValuePair("Traineeassessment",assessment));
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 

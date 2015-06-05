@@ -16,8 +16,8 @@ public class TrainingVideosActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_training_videos);
 		
-		Intent in = new Intent(getApplicationContext(), VideoPlayerActivity.class);
-		startActivity(in);
+//		Intent in = new Intent(getApplicationContext(), VideoPlayerActivity.class);
+//		startActivity(in);
 		
 	}
 	

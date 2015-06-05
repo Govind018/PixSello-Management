@@ -61,8 +61,7 @@ public class MakeOutEntryActivity extends Activity {
 		layoutTime = (LinearLayout) findViewById(R.id.layout_out_entry);
 		visitorsData = new ArrayList<Entity>();
 
-		// layoutError = (RelativeLayout) findViewById(R.id.layout_error);
-		// layoutError.setVisibility(View.GONE);
+		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
 
 		final Calendar c = Calendar.getInstance();
 		hour = c.get(Calendar.HOUR_OF_DAY);
@@ -80,12 +79,10 @@ public class MakeOutEntryActivity extends Activity {
 
 		if (!time.isEmpty()) {
 
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(4);
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(3);
 			nameValuePair.add(new BasicNameValuePair("ID", ID));
-			// nameValuePair.add(new BasicNameValuePair("Roomno", room));
 			nameValuePair.add(new BasicNameValuePair("OutTime", time));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
-					.getPROPERTY_ID()));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -105,7 +102,7 @@ public class MakeOutEntryActivity extends Activity {
 				}
 			}, nameValuePair);
 
-			post.execute(Uttilities.UPDATE_OUT_TIME_URL);
+			post.execute(Uttilities.GUEST_UPDATE_OUT_TIME_URL);
 		}
 	}
 
@@ -174,8 +171,7 @@ public class MakeOutEntryActivity extends Activity {
 		dialog.show();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
-				.getPROPERTY_ID()));
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 
 		WebRequestPost getData = new WebRequestPost(new IWebRequest() {
 
@@ -191,11 +187,9 @@ public class MakeOutEntryActivity extends Activity {
 
 						dialog.cancel();
 
-						// guestList.setVisibility(View.GONE);
-						// layoutError.setVisibility(View.VISIBLE);
-						Uttilities.showToast(getApplicationContext(),
-								obj.getString("error_message"));
-						 adapter.notifyDataSetChanged();
+						guestList.setVisibility(View.GONE);
+						layoutError.setVisibility(View.VISIBLE);
+						adapter.notifyDataSetChanged();
 
 					} else {
 						JSONArray jsonArray = obj.getJSONArray("result");
@@ -233,7 +227,7 @@ public class MakeOutEntryActivity extends Activity {
 			}
 		}, nameValuePair);
 
-		getData.execute(Uttilities.GUEST_VISITOR_LIST_URL);
+		getData.execute(Uttilities.GUEST_MAKE_OUT_ENTRY);
 	}
 
 	public void goBack(View v) {

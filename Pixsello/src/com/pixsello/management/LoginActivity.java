@@ -11,10 +11,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Base64;
@@ -105,20 +102,18 @@ public class LoginActivity extends Activity {
 
 							String id = jsonn.getString("PropertyID");
 							
-							Uttilities.setPROPERTY_ID(id);
-
+//							Uttilities.setPROPERTY_ID(id);
+							
+							Uttilities.storeSession(true, id,getApplicationContext());
+							
 							finish();
-							SharedPreferences pref = getSharedPreferences(
-									"login_data", Context.MODE_PRIVATE);
-							Editor editor = pref.edit();
-							editor.putBoolean("login", true);
-							editor.commit();
 							startActivity(new Intent(getApplicationContext(),
 									HomeScreenActivity.class));
 
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
+						Uttilities.showToast(getApplicationContext(), "Connection Error..!");
 					}
 				}
 			}, nameValuePair);

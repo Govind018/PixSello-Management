@@ -75,13 +75,13 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 
 			guestDetail = details.get(position);
 
-//			if (position % 2 == 0) {
-//				holder.rowLayout.setBackgroundColor(thisContext.getResources()
-//						.getColor(R.color.items_row1));
-//			} else {
-//				holder.rowLayout.setBackgroundColor(thisContext.getResources()
-//						.getColor(R.color.items_row2));
-//			}
+			if (position % 2 == 0) {
+				holder.rowLayout.setBackgroundColor(thisContext.getResources()
+						.getColor(R.color.items_row1));
+			} else {
+				holder.rowLayout.setBackgroundColor(thisContext.getResources()
+						.getColor(R.color.items_row2));
+			}
 
 			holder.textBillNumber.setText(guestDetail.getBillNum());
 			holder.textService.setText(guestDetail.getServiceName());

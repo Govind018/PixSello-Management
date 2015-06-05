@@ -180,8 +180,9 @@ public class EmployeeDetailsActivity extends Activity {
 		nameValuePair.add(new BasicNameValuePair("Grampanchayataddress", addSarpanch));
 		nameValuePair.add(new BasicNameValuePair("Identification",
 				identificationMarks));
+		nameValuePair.add(new BasicNameValuePair("Parmanentaddress", address));
 		nameValuePair.add(new BasicNameValuePair("Photo", image_str));
-		nameValuePair.add(new BasicNameValuePair("Statusofemp", "test"));
+//		nameValuePair.add(new BasicNameValuePair("Statusofemp", "test"));
 		nameValuePair.add(new BasicNameValuePair("Employername", employer));
 		nameValuePair.add(new BasicNameValuePair("Previousemployer", previousEmp));
 		nameValuePair.add(new BasicNameValuePair("Employedon", employedOn));

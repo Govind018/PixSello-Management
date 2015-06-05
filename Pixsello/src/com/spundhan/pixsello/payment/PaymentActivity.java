@@ -36,6 +36,8 @@ public class PaymentActivity extends Activity {
 	String billDate;
 	String dueDate;
 	String identityID;
+	String url;
+	String type;
 
 	RadioButton radioCash, radioCheque, radioOther;
 
@@ -73,6 +75,8 @@ public class PaymentActivity extends Activity {
 		serviceId = intent.getStringExtra("ServiceID");
 		amount = intent.getStringExtra("Amount");
 		dueDate = intent.getStringExtra("Billduedate");
+		url = intent.getStringExtra("url");
+		type = intent.getStringExtra("type");
 
 		editSeviceName.setText(serviceName);                              
 		editIdentity.setText(identityName);
@@ -151,22 +155,32 @@ public class PaymentActivity extends Activity {
 
 		if (!serviceName.isEmpty() || !identity.isEmpty()
 				|| !billNumber.isEmpty() || !amount.isEmpty()) {
-
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(4);
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
-			nameValuePair.add(new BasicNameValuePair("ServiceID", serviceId));
-			nameValuePair.add(new BasicNameValuePair("IdentityID", identityID));
-			nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
-			nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
-			nameValuePair.add(new BasicNameValuePair("Billduedate", dueDate));
-			nameValuePair.add(new BasicNameValuePair("Amount", amount));
-			nameValuePair
-					.add(new BasicNameValuePair("Paymentmode",paymentMode));
-			nameValuePair.add(new BasicNameValuePair("chequedetail",
-					chequeNumber));
-			nameValuePair
-					.add(new BasicNameValuePair("otherdetail", othrDetail));
+			
+			if(type.equalsIgnoreCase("new")){
 
+				nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+				nameValuePair.add(new BasicNameValuePair("ServiceID", serviceId));
+				nameValuePair.add(new BasicNameValuePair("IdentityID", identityID));
+				nameValuePair.add(new BasicNameValuePair("BillNo", billNumber));
+				nameValuePair.add(new BasicNameValuePair("BillDate", billDate));
+				nameValuePair.add(new BasicNameValuePair("Billduedate", dueDate));
+				nameValuePair.add(new BasicNameValuePair("Amount", amount));
+				nameValuePair
+						.add(new BasicNameValuePair("Paymentmode",paymentMode));
+				nameValuePair.add(new BasicNameValuePair("chequedetail",
+						chequeNumber));
+				nameValuePair
+						.add(new BasicNameValuePair("otherdetail", othrDetail));
+			
+			}else{
+				
+				nameValuePair.add(new BasicNameValuePair("ServiceID", serviceId));
+				nameValuePair.add(new BasicNameValuePair("Paymentmode",paymentMode));
+				nameValuePair.add(new BasicNameValuePair("chequedetail",chequeNumber));
+				nameValuePair.add(new BasicNameValuePair("otherdetail", othrDetail));
+			}
+	
 			dialog.show();
 			
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
@@ -181,7 +195,7 @@ public class PaymentActivity extends Activity {
 				}
 			}, nameValuePair);
 
-			post.execute(Uttilities.PAYMENT_BILL_PAYMENT_URL);
+			post.execute(url);
 
 		} else {
 

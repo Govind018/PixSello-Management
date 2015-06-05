@@ -86,15 +86,12 @@ public class ReportItemActivity extends ActionBarActivity {
 	}
 
 	public void setStayFromDate(View v) {
-
 		stayDate = true;
 		showDialog(DATE_DIALOG_ID);
 	}
 
 	public void setStayToDate(View v) {
 		stayDate = false;
-		// Toast.makeText(getApplicationContext(), "" + Uttilities.getDate(),
-		// Toast.LENGTH_SHORT).show();
 		showDialog(DATE_DIALOG_ID);
 	}
 
@@ -124,12 +121,6 @@ public class ReportItemActivity extends ActionBarActivity {
 
 	public void doSubmitItem(View v) {
 
-		// if(Uttilities.isNetworkAvailable(getApplicationContext())){
-		// Uttilities.showToast(getApplicationContext(), "ava");
-		// }else{
-		// Uttilities.showToast(getApplicationContext(), "not");
-		// }
-		// showDialog(DATE_DIALOG_ID);
 		reportDate = editReportDate.getText().toString();
 		reportTime = editReportTime.getText().toString();
 		reportDescription = editReportDescription.getText().toString();
@@ -167,7 +158,7 @@ public class ReportItemActivity extends ActionBarActivity {
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(8);
 			nameValuePair
-					.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
+					.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 			nameValuePair.add(new BasicNameValuePair("Date", reportDate));
 			nameValuePair.add(new BasicNameValuePair("Time", reportTime));
 			nameValuePair.add(new BasicNameValuePair("Discriptionofitem",
@@ -197,7 +188,7 @@ public class ReportItemActivity extends ActionBarActivity {
 				}
 			}, nameValuePair);
 
-			post.execute(Uttilities.REPORT_ITEM_URL);
+			post.execute(Uttilities.LOST_FOUND_REPORT_ITEM_URL);
 		}                                                                
 		
 	}
@@ -240,15 +231,6 @@ public class ReportItemActivity extends ActionBarActivity {
 		}
 	}
 
-	private void resetTextFields() {
-                       
-		editReportDescription.setText("");
-		editReportLocation.setText("");
-		editStaffName.setText("");
-		editStayFromDate.setText("");
-		editStayToDate.setText("");
-	}
-
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
@@ -269,15 +251,8 @@ public class ReportItemActivity extends ActionBarActivity {
 			month = monthOfYear;
 			day = dayOfMonth;
 
-//			Calendar newDate = Calendar.getInstance();
-//			newDate.set(year, monthOfYear, dayOfMonth);
-//			SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy",
-//					Locale.US);
 
 			if (stayDate) {
-
-//				editStayFromDate.setText(dateFormatter.format(new Date()
-//						.getTime()));
 
 				 editStayFromDate.setText(new StringBuilder().append(day)
 				 .append("-").append(month + 1).append("-").append(year)
@@ -285,13 +260,9 @@ public class ReportItemActivity extends ActionBarActivity {
 
 			} else {
 
-//				editStayToDate.setText(dateFormatter.format(new Date()
-//						.getTime()));
-
 				 editStayToDate.setText(new StringBuilder().append(day)
 				 .append("-").append(month + 1).append("-").append(year)
 				 .append(" "));
-
 			}
 		}
 	};

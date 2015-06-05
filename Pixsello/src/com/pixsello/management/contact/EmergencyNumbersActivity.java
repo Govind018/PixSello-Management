@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -54,6 +55,8 @@ public class EmergencyNumbersActivity extends Activity {
 	Button search;
 	
 	TextView quickInfo;
+	
+	RelativeLayout layoutError;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,7 @@ public class EmergencyNumbersActivity extends Activity {
 		searchLayout = (LinearLayout) findViewById(R.id.layout_search);
 		search = (Button) findViewById(R.id.button_search);
 		quickInfo = (TextView) findViewById(R.id.text_quickinfo);
+		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
 		
 		dialog = new ProgressDialog(EmergencyNumbersActivity.this);
 		dialog.setMessage("Please Wait..!");
@@ -84,12 +88,12 @@ public class EmergencyNumbersActivity extends Activity {
 					R.string.lbl_emergency_number));
 			quickInfo.setVisibility(View.INVISIBLE);
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 		} else {
 			quickInfo.setVisibility(View.VISIBLE);
 			title.setText(getResources().getString(R.string.lbl_vendor_number));
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 		}
 	}
 
@@ -106,7 +110,7 @@ public class EmergencyNumbersActivity extends Activity {
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 				1);
 		nameValuePairSearch.add(new BasicNameValuePair("searchkey", searchValue));
-		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.getPROPERTY_ID()));
+		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 		if (type.equalsIgnoreCase("emr")) {
 			nameValuePairSearch.add(new BasicNameValuePair("Typeofperson", "1"));
 		}else{
@@ -152,10 +156,13 @@ public class EmergencyNumbersActivity extends Activity {
 					
 					if(obj.has("error_message")){
 						
-						Uttilities.showToast(getApplicationContext(), obj.getString("error_message"));
+//						Uttilities.showToast(getApplicationContext(), obj.getString("error_message"));
 						dialog.cancel();
+						list.setVisibility(View.GONE);
+						layoutError.setVisibility(View.VISIBLE);
 					}else{
 						JSONArray jsonArray = obj.getJSONArray("result");
+						list.setVisibility(View.VISIBLE);
 						details.clear();
 						for (int i = 0; i < jsonArray.length(); i++) {
 							contact = new ContactDetails();
@@ -183,34 +190,6 @@ public class EmergencyNumbersActivity extends Activity {
 		}, parameter);
 
 		post.execute(url);
-
-		// GetDataFromServer getData = new GetDataFromServer(new IWebRequest() {
-		//
-		// @Override
-		// public void onDataArrived(String data) {
-		//
-		// try {
-		//
-		// ContactDetails contact;
-		//
-		// JSONObject obj = new JSONObject(data);
-		// JSONArray jsonArray = obj.getJSONArray("result");
-		//
-		// for (int i = 0; i < jsonArray.length(); i++) {
-		// contact = new ContactDetails();
-		// JSONObject jsonObj = jsonArray.getJSONObject(i);
-		//
-		// }
-		//
-		// System.out.println(jsonArray);
-		// } catch (JSONException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// }
-		// });
-		//
-		// getData.execute(Uttilities.ACTION_ACTIVE_ITEMS_URL);
 	}
 
 	public void addEmergencyNumber(View v) {
@@ -222,9 +201,7 @@ public class EmergencyNumbersActivity extends Activity {
 		} else {
 			emIntent.putExtra("type", "vendor");
 		}
-
 		startActivity(emIntent);
-
 	}
 
 	public void goBack(View v) {

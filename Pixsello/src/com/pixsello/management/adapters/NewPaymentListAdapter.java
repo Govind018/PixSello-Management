@@ -78,13 +78,13 @@ public class NewPaymentListAdapter extends ArrayAdapter<Entity> {
 
 			guestDetail = details.get(position);
 
-//			if (position % 2 == 0) {
-//				holder.rowLayout.setBackgroundColor(thisContext.getResources()
-//						.getColor(R.color.items_row1));
-//			} else {
-//				holder.rowLayout.setBackgroundColor(thisContext.getResources()
-//						.getColor(R.color.items_row2));
-//			}
+			 if (position % 2 == 0) {
+			 holder.rowLayout.setBackgroundColor(thisContext.getResources()
+			 .getColor(R.color.items_row1));
+			 } else {
+			 holder.rowLayout.setBackgroundColor(thisContext.getResources()
+			 .getColor(R.color.items_row2));
+			 }
 
 			holder.textService.setText(guestDetail.getServiceName());
 			holder.textIdentity.setText(guestDetail.getIdentity());
@@ -117,6 +117,9 @@ public class NewPaymentListAdapter extends ArrayAdapter<Entity> {
 					intent.putExtra("BillDate", en.getBillDate());
 					intent.putExtra("Billduedate", en.getDueDate());
 					intent.putExtra("Amount", en.getAmount());
+					intent.putExtra("type", "old");
+					intent.putExtra("url",
+							"http://pixsello.in/qualitymaintenanceapp/index.php/webapp/BillPay");
 					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
 					thisContext.startActivity(intent);

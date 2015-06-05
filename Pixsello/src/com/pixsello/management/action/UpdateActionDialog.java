@@ -18,13 +18,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.pixsello.management.R;
+import com.pixsello.management.adapters.ActionTakenListAdapter;
 import com.pixsello.management.connectivity.IWebRequest;
 import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.guest.Entity;
@@ -48,11 +51,20 @@ public class UpdateActionDialog extends DialogFragment {
 	private OnCompleteListener mListener;
 	Button btnClose;
 	
-	ArrayList<String> listOfActions;
-	Spinner spinnerActionTaken;
 	Context context;
 	
+	String date;
+	String time;
+	
 	ArrayAdapter<String> serviceAdapter;
+	
+	ActionTakenListAdapter previousActionTaken;
+	
+	ListView listActionTaken;
+	
+	ImageView closeDialog;
+	
+	ArrayList<Entity> listOfActionTaken;
 	
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -70,18 +82,21 @@ public class UpdateActionDialog extends DialogFragment {
 			Bundle savedInstanceState) {
 
 		getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 		
-		View convertView = inflater.inflate(R.layout.update_action_dialog,
+		View convertView = inflater.inflate(R.layout.update_action_dialog_new,
 				container, false);
 
 		textDate = (TextView) convertView.findViewById(R.id.text_date);
 		textTime = (TextView) convertView.findViewById(R.id.text_time);
 		textDescription = (TextView) convertView
 				.findViewById(R.id.text_description);
-		textLocation = (TextView) convertView.findViewById(R.id.text_where);
+		textLocation = (TextView) convertView.findViewById(R.id.text_location);
 		textReported = (TextView) convertView.findViewById(R.id.text_reported);
-		textRespo = (TextView) convertView.findViewById(R.id.text_respo);
-		spinnerActionTaken = (Spinner) convertView.findViewById(R.id.spinner_action_taken);
+		textRespo = (TextView) convertView.findViewById(R.id.text_responsibility);
+		closeDialog = (ImageView) convertView.findViewById(R.id.image_close);
+		
+		listActionTaken = (ListView) convertView.findViewById(R.id.list_action_taken);
 
 		btnDone = (Button) convertView.findViewById(R.id.btn_done);
 		btnClose = (Button) convertView.findViewById(R.id.btn_close);
@@ -90,16 +105,31 @@ public class UpdateActionDialog extends DialogFragment {
 				.findViewById(R.id.edit_new_update);
 
 		itemId = getArguments().getString("ID");
-		textDate.setText(getArguments().getString("date"));
-		textTime.setText(getArguments().getString("time"));
+		date = getArguments().getString("date");
+		textDate.setText(date);
+		time = getArguments().getString("time");
+		textTime.setText(time);
 		textDescription.setText(getArguments().getString("description"));
 		textLocation.setText(getArguments().getString("location"));
 		textReported.setText(getArguments().getString("reported"));
 		textRespo.setText(getArguments().getString("respo"));
 //		textActionTaken.setText(getArguments().getString("action_taken"));
 		
-		listOfActions = new ArrayList<String>();
+		listOfActionTaken = new ArrayList<Entity>();
+		
+		previousActionTaken = new ActionTakenListAdapter(getActivity(), R.layout.action_taken_item, listOfActionTaken);
+		listActionTaken.setAdapter(previousActionTaken);
 
+		closeDialog.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+
+				getDialog().cancel();
+				
+			}
+		});
+		
 		btnDone.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -150,15 +180,14 @@ public class UpdateActionDialog extends DialogFragment {
 						
 						JSONArray jsonArray = json.getJSONArray("result");
 						for (int i = 0; i < jsonArray.length(); i++) {
-							
 							JSONObject jsonObj = jsonArray.getJSONObject(i);
-							listOfActions.add(jsonObj.getString("New_update"));
+							Entity en = new Entity();
+							en.setTime(jsonObj.getString("Time"));
+							en.setDate(jsonObj.getString("Date"));
+							en.setActionTaken(jsonObj.getString("New_update"));
+							listOfActionTaken.add(en);
 						}
-						
-						serviceAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, listOfActions);
-						spinnerActionTaken.setAdapter(serviceAdapter);
-						
-						
+						previousActionTaken.notifyDataSetChanged();
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -180,6 +209,8 @@ public class UpdateActionDialog extends DialogFragment {
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
 				.getPROPERTY_ID()));
 		nameValuePair.add(new BasicNameValuePair("New_update", updateTxt));
+		nameValuePair.add(new BasicNameValuePair("Date", Uttilities.getDate()));
+		nameValuePair.add(new BasicNameValuePair("Time", Uttilities.getTime()));
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -225,14 +256,6 @@ public class UpdateActionDialog extends DialogFragment {
 		}, nameValuePair);
 
 		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/closeActionItem");
-	}
-
-	private void refreshList() {
-
-//		ActiveItemsListActivity items = new ActiveItemsListActivity();
-//		items.getActiveItemsList(getActivity());
-
-		
 	}
 	
 	public interface OnCompleteListener {

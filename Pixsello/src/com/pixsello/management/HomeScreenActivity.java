@@ -27,7 +27,13 @@ public class HomeScreenActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_sample);
 
 		image = (ImageView) findViewById(R.id.button_logout);
+		
+	}
 
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
 		SharedPreferences pref = getSharedPreferences("login_data",
 				Context.MODE_PRIVATE);
 
@@ -38,7 +44,7 @@ public class HomeScreenActivity extends ActionBarActivity {
 
 		}
 	}
-
+	
 	public void showLogOut(View v) {
 
 		PopupMenu menu = new PopupMenu(getApplicationContext(), image);
@@ -50,7 +56,7 @@ public class HomeScreenActivity extends ActionBarActivity {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 
-				SharedPreferences pref = getSharedPreferences("login_date",
+				SharedPreferences pref = getSharedPreferences("login_data",
 						Context.MODE_PRIVATE);
 				Editor edit = pref.edit();
 				edit.putBoolean("login", false);

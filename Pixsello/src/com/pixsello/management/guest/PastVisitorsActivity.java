@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.PastVisitorsListAdapter;
@@ -34,7 +35,7 @@ public class PastVisitorsActivity extends Activity {
 
 	ArrayList<Entity> visitorsData;
 
-	EditText editDateFrom,editDateTo;
+	EditText editDateFrom, editDateTo;
 
 	static final int DATE_DIALOG_ID = 999;
 
@@ -46,6 +47,8 @@ public class PastVisitorsActivity extends Activity {
 
 	EditText editSearch;
 	ProgressDialog dialog;
+	RelativeLayout layoutError;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,14 +57,16 @@ public class PastVisitorsActivity extends Activity {
 		guestList = (ListView) findViewById(R.id.guest_list);
 		editSearch = (EditText) findViewById(R.id.edit_search);
 
+		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
+
 		visitorsData = new ArrayList<Entity>();
 
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
-		
-	    dialog = new ProgressDialog(PastVisitorsActivity.this);
+
+		dialog = new ProgressDialog(PastVisitorsActivity.this);
 		dialog.setMessage("Please Wait..");
 
 	}
@@ -101,84 +106,92 @@ public class PastVisitorsActivity extends Activity {
 
 			if (stayDate) {
 
-				editSearch.setText(new StringBuilder().append(day)
-						.append("-").append(month + 1).append("-").append(year)
-						.append(" "));
+				editSearch
+						.setText(new StringBuilder().append(day).append("-")
+								.append(month + 1).append("-").append(year)
+								.append(" "));
 
 			} else {
 
-				//				editToDate.setText(new StringBuilder().append(day)
-				//						.append("-").append(month + 1).append("-").append(year)
-				//						.append(" "));
+				// editToDate.setText(new StringBuilder().append(day)
+				// .append("-").append(month + 1).append("-").append(year)
+				// .append(" "));
 			}
 		}
 	};
 
-
-	public void doSearch(View v){
+	public void doSearch(View v) {
 
 		String searchValue = editSearch.getText().toString();
 
-		if(!searchValue.isEmpty())
-		{
+		if (!searchValue.isEmpty()) {
 			dialog.show();
 			List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 					1);
-			nameValuePairSearch.add(new BasicNameValuePair("searchkey",searchValue));
-			nameValuePairSearch.add(new BasicNameValuePair("PropertyID",Uttilities.getPROPERTY_ID()));
+			nameValuePairSearch.add(new BasicNameValuePair("searchkey",
+					searchValue));
+			nameValuePairSearch.add(new BasicNameValuePair("PropertyID",
+					Uttilities.getPROPERTY_ID()));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 				@Override
 				public void onDataArrived(String data) {
-					try {
 
-						visitorsData.clear();
-						
-						Entity guest;
-
-						JSONObject obj = new JSONObject(data);
-
-						if (obj.has("error_message")) {
-							dialog.cancel();
-							Uttilities.showToast(getApplicationContext(),
-									obj.getString("error_message"));
-
-						} else {
-
-							JSONArray jsonArray = obj.getJSONArray("result");
-
-							for (int i = 0; i < jsonArray.length(); i++) {
-								guest = new Entity();
-								JSONObject jsonObj = jsonArray.getJSONObject(i);
-								guest.setDate(jsonObj.getString("Date"));
-								guest.setTime(jsonObj.getString("Time"));
-								guest.setGuestName(jsonObj.getString("GuestName"));
-								guest.setCompanyName(jsonObj.getString("Company"));
-								guest.setGender(jsonObj.getString("Gender"));
-								guest.setPhoto(jsonObj.getString("Photo"));
-								guest.setInTime(jsonObj.getString("InTime"));
-								guest.setOutTime(jsonObj.getString("OutTime"));
-
-								visitorsData.add(guest);
-							}
-							dialog.cancel();
-							adapter = new PastVisitorsListAdapter(
-									getApplicationContext(),
-									R.layout.visitors_list_item, visitorsData);
-							guestList.setAdapter(adapter);
-
-							System.out.println(jsonArray);
-
-						}
-
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
+					populateData(data);
+					// try {
+					//
+					// visitorsData.clear();
+					//
+					// Entity guest;
+					//
+					// JSONObject obj = new JSONObject(data);
+					//
+					// if (obj.has("error_message")) {
+					// dialog.cancel();
+					// guestList.setVisibility(View.GONE);
+					// layoutError.setVisibility(View.VISIBLE);
+					// // Uttilities.showToast(getApplicationContext(),
+					// // obj.getString("error_message"));
+					//
+					// } else {
+					//
+					// JSONArray jsonArray = obj.getJSONArray("result");
+					// guestList.setVisibility(View.VISIBLE);
+					//
+					// for (int i = 0; i < jsonArray.length(); i++) {
+					// guest = new Entity();
+					// JSONObject jsonObj = jsonArray.getJSONObject(i);
+					// guest.setDate(jsonObj.getString("Date"));
+					// guest.setTime(jsonObj.getString("Time"));
+					// guest.setGuestName(jsonObj.getString("GuestName"));
+					// guest.setCompanyName(jsonObj.getString("Company"));
+					// guest.setGender(jsonObj.getString("Gender"));
+					// guest.setPhoto(jsonObj.getString("Photo"));
+					// guest.setInTime(jsonObj.getString("InTime"));
+					// guest.setOutTime(jsonObj.getString("OutTime"));
+					//
+					// visitorsData.add(guest);
+					// }
+					// dialog.cancel();
+					// adapter = new PastVisitorsListAdapter(
+					// getApplicationContext(),
+					// R.layout.visitors_list_item, visitorsData);
+					// guestList.setAdapter(adapter);
+					//
+					// System.out.println(jsonArray);
+					//
+					// }
+					//
+					// } catch (JSONException e) {
+					// e.printStackTrace();
+					// }
 				}
 			}, nameValuePairSearch);
-			post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/pastVisitorSearch");
-		}else{
+			post.execute(Uttilities.GUEST_PAST_VISITORS_SEARCH);
+		} else {
+			
+			Uttilities.showToast(getApplicationContext(), "Enter search key.");
 
 		}
 	}
@@ -193,7 +206,8 @@ public class PastVisitorsActivity extends Activity {
 	private void getDataFromServer() {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
 
 		dialog.show();
 
@@ -202,59 +216,111 @@ public class PastVisitorsActivity extends Activity {
 			@Override
 			public void onDataArrived(String data) {
 
-				try {
-					visitorsData.clear();
-					Entity guest;  
+				populateData(data);
 
-					JSONObject obj = new JSONObject(data);
-
-					if (obj.has("error_message")) {
-
-						Uttilities.showToast(getApplicationContext(),
-								obj.getString("error_message"));
-
-					} else {
-
-						JSONArray jsonArray = obj.getJSONArray("result");
-
-						for (int i = 0; i < jsonArray.length(); i++) {
-							guest = new Entity();
-							JSONObject jsonObj = jsonArray.getJSONObject(i);
-							guest.setDate(jsonObj.getString("Date"));
-							guest.setTime(jsonObj.getString("Time"));
-							guest.setGuestName(jsonObj.getString("GuestName"));
-							guest.setCompanyName(jsonObj.getString("Company"));
-							guest.setGender(jsonObj.getString("Gender"));
-							guest.setPhoto(jsonObj.getString("Photo"));
-							guest.setInTime(jsonObj.getString("InTime"));
-							guest.setOutTime(jsonObj.getString("OutTime"));
-
-							// byte[] bytearray =
-							// Base64.decode(jsonObj.getString("Photo"), 0);
-
-							visitorsData.add(guest);
-						}
-
-						dialog.cancel();
-						adapter = new PastVisitorsListAdapter(
-								getApplicationContext(),
-								R.layout.visitors_list_item, visitorsData);
-						guestList.setAdapter(adapter);
-
-						System.out.println(jsonArray);
-
-					}
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				// try {
+				// visitorsData.clear();
+				// Entity guest;
+				//
+				// JSONObject obj = new JSONObject(data);
+				//
+				// if (obj.has("error_message")) {
+				//
+				// Uttilities.showToast(getApplicationContext(),
+				// obj.getString("error_message"));
+				//
+				// } else {
+				//
+				// JSONArray jsonArray = obj.getJSONArray("result");
+				//
+				// for (int i = 0; i < jsonArray.length(); i++) {
+				// guest = new Entity();
+				// JSONObject jsonObj = jsonArray.getJSONObject(i);
+				// guest.setDate(jsonObj.getString("Date"));
+				// guest.setTime(jsonObj.getString("Time"));
+				// guest.setGuestName(jsonObj.getString("GuestName"));
+				// guest.setCompanyName(jsonObj.getString("Company"));
+				// guest.setGender(jsonObj.getString("Gender"));
+				// guest.setPhoto(jsonObj.getString("Photo"));
+				// guest.setInTime(jsonObj.getString("InTime"));
+				// guest.setOutTime(jsonObj.getString("OutTime"));
+				//
+				// // byte[] bytearray =
+				// // Base64.decode(jsonObj.getString("Photo"), 0);
+				//
+				// visitorsData.add(guest);
+				// }
+				//
+				// dialog.cancel();
+				// adapter = new PastVisitorsListAdapter(
+				// getApplicationContext(),
+				// R.layout.visitors_list_item, visitorsData);
+				// guestList.setAdapter(adapter);
+				//
+				// System.out.println(jsonArray);
+				//
+				// }
+				//
+				// } catch (JSONException e) {
+				// e.printStackTrace();
+				// }
 			}
-		},nameValuePair);
+		}, nameValuePair);
 
-		getData.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/GetAllpastVisitor");
+		getData.execute(Uttilities.GUEST_PAST_VISITORS_LIST);
 	}
 
 	public void goBack(View v) {
 		finish();
+	}
+
+	public void populateData(String data) {
+
+		try {
+			visitorsData.clear();
+			Entity guest;
+
+			JSONObject obj = new JSONObject(data);
+
+			if (obj.has("error_message")) {
+
+//				Uttilities.showToast(getApplicationContext(),
+//						obj.getString("error_message"));
+				guestList.setVisibility(View.GONE);
+				layoutError.setVisibility(View.VISIBLE);
+				adapter.notifyDataSetChanged();
+
+			} else {
+
+				JSONArray jsonArray = obj.getJSONArray("result");
+				guestList.setVisibility(View.VISIBLE);
+
+				for (int i = 0; i < jsonArray.length(); i++) {
+					guest = new Entity();
+					JSONObject jsonObj = jsonArray.getJSONObject(i);
+					guest.setDate(jsonObj.getString("Date"));
+					guest.setTime(jsonObj.getString("Time"));
+					guest.setGuestName(jsonObj.getString("GuestName"));
+					guest.setCompanyName(jsonObj.getString("Company"));
+					guest.setGender(jsonObj.getString("Gender"));
+					guest.setPhoto(jsonObj.getString("Photo"));
+					guest.setInTime(jsonObj.getString("InTime"));
+					guest.setOutTime(jsonObj.getString("OutTime"));
+
+					// byte[] bytearray =
+					// Base64.decode(jsonObj.getString("Photo"), 0);
+
+					visitorsData.add(guest);
+				}
+
+				dialog.cancel();
+				adapter = new PastVisitorsListAdapter(getApplicationContext(),
+						R.layout.visitors_list_item, visitorsData);
+				guestList.setAdapter(adapter);
+
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

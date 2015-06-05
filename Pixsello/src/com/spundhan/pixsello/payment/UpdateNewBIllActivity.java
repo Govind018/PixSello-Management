@@ -126,6 +126,8 @@ public class UpdateNewBIllActivity extends Activity {
 
 					} else {
 
+						servicesList.clear();
+						identityList.clear();
 						JSONArray jsonArray = jsonObj.getJSONArray("result");
 
 						for (int i = 0; i < jsonArray.length(); i++) {
@@ -249,6 +251,8 @@ public class UpdateNewBIllActivity extends Activity {
 			intent.putExtra("BillDate", billDate);
 			intent.putExtra("Billduedate", billDueDate);
 			intent.putExtra("Amount", billAmount);
+			intent.putExtra("type","new");
+			intent.putExtra("url",Uttilities.PAYMENT_BILL_PAYMENT_URL);
 
 			startActivity(intent);
 

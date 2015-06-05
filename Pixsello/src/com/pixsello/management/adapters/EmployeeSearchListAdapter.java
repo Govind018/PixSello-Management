@@ -59,6 +59,7 @@ public class EmployeeSearchListAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.emp_status);
 			holder.textHighlights = (TextView) convertView
 					.findViewById(R.id.emp_highlights);
+			holder.textMarks = (TextView) convertView.findViewById(R.id.emp_marks);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -71,6 +72,7 @@ public class EmployeeSearchListAdapter extends ArrayAdapter<Entity> {
 		holder.textEmpDepartment.setText(entity.getEmpDepartment());
 //		holder.textStatus.setText(entity.getEmpStatus());
 		holder.textHighlights.setText(entity.getEmpHighLights());
+		holder.textMarks.setText(entity.getEmpMarks());
 
 		return convertView;
 	}
@@ -82,5 +84,6 @@ public class EmployeeSearchListAdapter extends ArrayAdapter<Entity> {
 		TextView textEmpDepartment;
 		TextView textStatus;
 		TextView textHighlights;
+		TextView textMarks;
 	}
 }

@@ -116,13 +116,14 @@ public class ActiveItemsListActivity extends Activity implements OnCompleteListe
 					JSONObject obj = new JSONObject(data);
 					if (obj.has("error_message")) {
 						dailog.cancel();
-						Uttilities.showToast(getApplicationContext(), "No Records to display.");
-//						list.setVisibility(View.GONE);
-//						layoutError.setVisibility(View.VISIBLE);
-//						adapter.notifyDataSetChanged();
+//						Uttilities.showToast(getApplicationContext(), "No Records to display.");
+						list.setVisibility(View.GONE);
+						layoutError.setVisibility(View.VISIBLE);
+						adapter.notifyDataSetChanged();
 					} else {
 
 						JSONArray jsonArray = obj.getJSONArray("result");
+						list.setVisibility(View.VISIBLE);
 						itemsData.clear();
 						for (int i = 0; i < jsonArray.length(); i++) {
 							item = new ActionItem();
@@ -151,6 +152,8 @@ public class ActiveItemsListActivity extends Activity implements OnCompleteListe
 
 				} catch (JSONException e) {
 					e.printStackTrace();
+					dailog.cancel();
+					Uttilities.showToast(getApplicationContext(), data);
 				}
 			}
 		}, nameValuePair);

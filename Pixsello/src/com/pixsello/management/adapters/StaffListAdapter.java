@@ -72,11 +72,11 @@ public class StaffListAdapter extends ArrayAdapter<StaffDetails> {
 
 		staff = details.get(position);
 		
-//		if( position%2 == 0){
-//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
-//		}else{
-//			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
-//		}
+		if( position%2 == 0){
+			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row1));
+		}else{
+			holder.rowLayout.setBackgroundColor(thisContext.getResources().getColor(R.color.items_row2));
+		}
 
 		holder.textTrainer.setText(staff.getTrainerName());
 		holder.textTrainee.setText(staff.getTraineeName());

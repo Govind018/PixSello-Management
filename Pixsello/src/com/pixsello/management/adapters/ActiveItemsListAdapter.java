@@ -94,13 +94,13 @@ public class ActiveItemsListAdapter extends ArrayAdapter<ActionItem> {
 
 		item = items.get(position);
 
-//		if (position % 2 == 0) {
-//			holder.rowLayout.setBackgroundColor(thisContext.getResources()
-//					.getColor(R.color.items_row1));
-//		} else {
-//			holder.rowLayout.setBackgroundColor(thisContext.getResources()
-//					.getColor(R.color.items_row2));
-//		}
+		if (position % 2 == 0) {
+			holder.rowLayout.setBackgroundColor(thisContext.getResources()
+					.getColor(R.color.items_row1));
+		} else {
+			holder.rowLayout.setBackgroundColor(thisContext.getResources()
+					.getColor(R.color.items_row2));
+		}
 
 		holder.textDate.setText(item.getDate());
 		holder.textTime.setText(item.getTime());

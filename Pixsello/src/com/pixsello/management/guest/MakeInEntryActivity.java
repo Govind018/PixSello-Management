@@ -153,8 +153,7 @@ public class MakeInEntryActivity extends Activity {
 			dialog.show();
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(9);
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
-					.getPROPERTY_ID()));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
 			nameValuePair.add(new BasicNameValuePair("Date", date));
 			nameValuePair.add(new BasicNameValuePair("Time", time));
 			nameValuePair.add(new BasicNameValuePair("GuestName", guestName));

@@ -82,6 +82,16 @@ public class Entity {
 	
 	private String feedbackID;
 	
+	private String empMarks;
+	
+	public String getEmpMarks() {
+		return empMarks;
+	}
+
+	public void setEmpMarks(String empMarks) {
+		this.empMarks = empMarks;
+	}
+
 	public String getFeedbackID() {
 		return feedbackID;
 	}

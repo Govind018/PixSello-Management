@@ -16,7 +16,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.pixsello.management.R;
 import com.pixsello.management.adapters.EmployeeSearchListAdapter;
@@ -37,6 +39,17 @@ public class EmployeeSearchActivity extends Activity implements
 
 	EditText editSearch;
 
+	ImageView arrowFront, arrowBack;
+
+	TextView month;
+
+	String[] months = { "January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December" };
+
+	ProgressDialog dialog;
+
+	int counter = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,6 +60,12 @@ public class EmployeeSearchActivity extends Activity implements
 		listOfEmps = new ArrayList<Entity>();
 
 		editSearch = (EditText) findViewById(R.id.edit_search_key);
+
+		arrowFront = (ImageView) findViewById(R.id.arrow_front);
+		arrowBack = (ImageView) findViewById(R.id.arrow_back);
+		month = (TextView) findViewById(R.id.item_training_performance);
+
+		dialog = new ProgressDialog(EmployeeSearchActivity.this);
 
 		// Entity en;
 		//
@@ -61,13 +80,51 @@ public class EmployeeSearchActivity extends Activity implements
 		// listOfEmps.add(en);
 		// }
 
+		month.setText(months[counter]);
+	}
+
+	public void showNext(View v) {
+
+		if (counter < months.length - 1) {
+			counter++;
+			month.setText(months[counter]);
+			getDataMonthWise(months[counter]);
+		}
+	}
+
+	public void showPrevious(View v) {
+		if (counter != 0) {
+			counter--;
+			month.setText(months[counter]);
+			getDataMonthWise(months[counter]);
+		}
+	}
+
+	public void getDataMonthWise(String month) {
+
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+		nameValuePair.add(new BasicNameValuePair("empID", "1"));
+		nameValuePair.add(new BasicNameValuePair("Monthof", month));
+
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+			@Override
+			public void onDataArrived(String data) {
+
+				populateData(data);
+
+			}
+		}, nameValuePair);
+
+		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getPerformance");
+
 	}
 
 	public void doSearch(View v) {
 
 		String search = editSearch.getText().toString();
-		final ProgressDialog dialog = new ProgressDialog(
-				EmployeeSearchActivity.this);
 		dialog.setMessage("Please Wait..");
 		dialog.show();
 
@@ -81,33 +138,8 @@ public class EmployeeSearchActivity extends Activity implements
 			@Override
 			public void onDataArrived(String data) {
 
-				try {
-					Entity en;
-					listOfEmps.clear();
-					JSONObject obj = new JSONObject(data);
-					JSONArray jsonArray = obj.getJSONArray("result");
+				populateData(data);
 
-					for (int i = 0; i < jsonArray.length(); i++) {
-						en = new Entity();
-						JSONObject jsonObj = jsonArray.getJSONObject(i);
-						en.setEmpName(jsonObj.getString("Employername"));
-						en.setEmpDesignation(jsonObj.getString("Designation"));
-						en.setEmpStatus(jsonObj.getString("Employmentstatus"));
-						en.setEmpHighLights(jsonObj.getString("Highlights"));
-						en.setEmpDepartment(jsonObj.getString("Department"));
-
-						listOfEmps.add(en);
-					}
-
-					dialog.cancel();
-					adapter = new EmployeeSearchListAdapter(
-							getApplicationContext(),
-							R.layout.emp_search_list_item, listOfEmps);
-					listStaff.setAdapter(adapter);
-
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
 			}
 		}, nameValuePair);
 
@@ -123,61 +155,27 @@ public class EmployeeSearchActivity extends Activity implements
 
 	private void getEmployeeDetails() {
 
-		final ProgressDialog dialog = new ProgressDialog(
-				EmployeeSearchActivity.this);
 		dialog.setMessage("Please Wait..");
 		dialog.show();
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
 		nameValuePair.add(new BasicNameValuePair("PropertyID",
 				Uttilities.PROPERTY_ID));
+		// nameValuePair.add(new BasicNameValuePair("empID","1"));
+		// nameValuePair.add(new BasicNameValuePair("Monthof","February"));
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 			@Override
 			public void onDataArrived(String data) {
 
-				try {
-					Entity en;
-					listOfEmps.clear();
-					JSONObject obj = new JSONObject(data);
-
-					if (obj.has("error_message")) {
-						dialog.cancel();
-						Uttilities.showToast(getApplicationContext(),
-								"No Records to display");
-					} else {
-
-						JSONArray jsonArray = obj.getJSONArray("result");
-
-						for (int i = 0; i < jsonArray.length(); i++) {
-							en = new Entity();
-							JSONObject jsonObj = jsonArray.getJSONObject(i);
-							en.setEmpName(jsonObj.getString("Nameofstaff"));
-							en.setEmpDesignation(jsonObj
-									.getString("Designation"));
-							// en.setEmpStatus(jsonObj.getString("Employmentstatus"));
-							en.setEmpId(jsonObj.getString("empID"));
-							en.setEmpHighLights(jsonObj.getString("Highlights"));
-							en.setEmpDepartment(jsonObj.getString("Department"));
-
-							listOfEmps.add(en);
-						}
-
-						dialog.cancel();
-						adapter = new EmployeeSearchListAdapter(
-								getApplicationContext(),
-								R.layout.emp_search_list_item, listOfEmps);
-						listStaff.setAdapter(adapter);
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				populateData(data);
 
 			}
 		}, nameValuePair);
 
-		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getEmployeeDetails");
+		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getemployeeAssessmentnew");
+
 	}
 
 	OnItemClickListener listener = new OnItemClickListener() {
@@ -211,5 +209,45 @@ public class EmployeeSearchActivity extends Activity implements
 	public void onComplete(String result) {
 
 		getEmployeeDetails();
+	}
+
+	public void populateData(final String data) {
+
+		try {
+			Entity en;
+			listOfEmps.clear();
+			JSONObject obj = new JSONObject(data);
+
+			if (obj.has("error_message")) {
+				dialog.cancel();
+				Uttilities.showToast(getApplicationContext(),
+						"No Records to display");
+			} else {
+
+				JSONArray jsonArray = obj.getJSONArray("result");
+
+				for (int i = 0; i < jsonArray.length(); i++) {
+					en = new Entity();
+					JSONObject jsonObj = jsonArray.getJSONObject(i);
+					en.setEmpName(jsonObj.getString("Nameofstaff"));
+					en.setEmpDesignation(jsonObj.getString("Designation"));
+					// en.setEmpStatus(jsonObj.getString("Employmentstatus"));
+					en.setEmpId(jsonObj.getString("empID"));
+					en.setEmpHighLights(jsonObj.getString("Highlights"));
+					en.setEmpDepartment(jsonObj.getString("Department"));
+					en.setEmpMarks(jsonObj.getString("Totalmarks"));
+
+					listOfEmps.add(en);
+				}
+
+				dialog.cancel();
+				adapter = new EmployeeSearchListAdapter(
+						getApplicationContext(), R.layout.emp_search_list_item,
+						listOfEmps);
+				listStaff.setAdapter(adapter);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 	}
 }

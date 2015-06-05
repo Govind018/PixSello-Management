@@ -45,7 +45,7 @@ public class AddServicesActivity extends Activity {
 	boolean regular;
 
 	boolean recuring;
-	
+
 	Spinner spinnerServices;
 	Spinner spinnerRecurringTypes;
 
@@ -54,17 +54,17 @@ public class AddServicesActivity extends Activity {
 	String dueDate;
 	String regularPay;
 	int recurring;
-	
+
 	int serviceId;
-	
+
 	ArrayList<String> listOfServices;
-	
+
 	ArrayAdapter<String> servicesAdapter;
-	
+
 	ArrayList<String> existingServices;
 
-	ProgressDialog dialog ;
-	
+	ProgressDialog dialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,151 +81,160 @@ public class AddServicesActivity extends Activity {
 
 		listOfServices = new ArrayList<String>();
 		existingServices = new ArrayList<String>();
-		
+
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
 		month = c.get(Calendar.MONTH);
 		day = c.get(Calendar.DAY_OF_MONTH);
-		
+
 		dialog = new ProgressDialog(AddServicesActivity.this);
 		dialog.setMessage("Please Wait..");
 	}
-	
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
-		
+
 		getAllservices();
 	}
-	
-	
+
 	private void getAllservices() {
 
 		dialog.show();
-		
+
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(1);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
-		
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
-			
+
 			@Override
 			public void onDataArrived(String data) {
-				
+
 				try {
 					existingServices.clear();
 					JSONObject obj = new JSONObject(data);
 					JSONArray jsonArray = obj.getJSONArray("result");
-					
-					for(int i = 0; i < jsonArray.length(); i++){
-						
+
+					for (int i = 0; i < jsonArray.length(); i++) {
+
 						JSONObject jsonObj = jsonArray.getJSONObject(i);
 						existingServices.add(jsonObj.getString("Nameofservice"));
 					}
-					
+
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-				
+
 				dialog.cancel();
-				
-				servicesAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, existingServices);
+
+				servicesAdapter = new ArrayAdapter<String>(
+						getApplicationContext(), R.layout.spinner_item,
+						existingServices);
 				spinnerServices.setAdapter(servicesAdapter);
-				
+
 			}
 		}, nameValuePair);
-		
+
 		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getAllservice");
 	}
 
+	public void addNewService(View v) {
 
-	public void addNewService(View v){
-		
 		final Dialog d = new Dialog(AddServicesActivity.this);
 		d.setContentView(R.layout.new_service_dialog);
 		d.setTitle("Add New Service.");
 
-		final EditText editServiceName = (EditText) d.findViewById(R.id.edit_service_name);
+		final EditText editServiceName = (EditText) d
+				.findViewById(R.id.edit_service_name);
 		Button btn = (Button) d.findViewById(R.id.btn_add_service);
-		
+
 		btn.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 
 				String name = editServiceName.getText().toString();
-				if(!name.isEmpty()){
+				if (!name.isEmpty()) {
 					postNewService(name);
 					d.cancel();
-				}else{
+				} else {
 
-					Uttilities.showToast(getApplicationContext(), "Type something to add service.");
+					Uttilities.showToast(getApplicationContext(),
+							"Type something to add service.");
 				}
 			}
 		});
 		d.show();
 	}
-	
-	
-	public void postNewService(final String nameOfService){
+
+	public void postNewService(final String nameOfService) {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.PROPERTY_ID));
-		nameValuePair.add(new BasicNameValuePair("Nameofservice", nameOfService));
-		
+		nameValuePair.add(new BasicNameValuePair("PropertyID",
+				Uttilities.PROPERTY_ID));
+		nameValuePair
+				.add(new BasicNameValuePair("Nameofservice", nameOfService));
+
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
-			
+
 			@Override
 			public void onDataArrived(String data) {
 				
-				Uttilities.showToast(getApplicationContext(), data);
-				existingServices.add(nameOfService);
-				
-				servicesAdapter.notifyDataSetChanged();
-//				ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.spinner_item, listOfServices);
-//				spinnerServices.setAdapter(adapter);
-//				
+				if(data.startsWith("S")){
+					Uttilities.showToast(getApplicationContext(),data);
+				}else{
+					Uttilities.showToast(getApplicationContext(),data);
+					existingServices.add(nameOfService);
+					servicesAdapter.notifyDataSetChanged();
+				}
 			}
 		}, nameValuePair);
-		
+
 		post.execute(Uttilities.PAYMENT_ADD_NEW_SERVICES_URL);
 	}
 
-	public void doSubmitItem(View v){
+	public void doSubmitItem(View v) {
 
-		service = spinnerServices.getSelectedItem().toString() != null ? spinnerServices.getSelectedItem().toString() : "";
+		service = spinnerServices.getSelectedItem().toString() != null ? spinnerServices
+				.getSelectedItem().toString() : "";
 		serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		identity = editIdentity.getText().toString();
 		dueDate = editDueDate.getText().toString();
-		regularPay = (regular) ? "1":"2";
-		
-		if(service.isEmpty()){
+		regularPay = (regular) ? "1" : "2";
+
+		if (service.isEmpty()) {
 			Uttilities.showToast(getApplicationContext(), "Add Services.");
 		}
-		
-		if(regular){
+
+		if (regular) {
 			recurring = 0;
-		}else{
-			recurring =  spinnerRecurringTypes.getSelectedItemPosition() + 1;
+		} else {
+			recurring = spinnerRecurringTypes.getSelectedItemPosition() + 1;
 		}
-		
-		if(!regular && !recuring){
-			Uttilities.showToast(getApplicationContext(), "Select Type of payment.");
+
+		if (!regular && !recuring) {
+			Uttilities.showToast(getApplicationContext(),
+					"Select Type of payment.");
 			return;
 		}
 
-		
-		if(!service.isEmpty() && !identity.isEmpty() && !dueDate.isEmpty()){
+		if (!service.isEmpty() && !identity.isEmpty() && !dueDate.isEmpty()) {
 			dialog.show();
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
-			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.PROPERTY_ID));
-			nameValuePair.add(new BasicNameValuePair("ServiceID",String.valueOf(serviceId)));
-			nameValuePair.add(new BasicNameValuePair("Nameofservice",service));
-			nameValuePair.add(new BasicNameValuePair("Identity",identity));
-			nameValuePair.add(new BasicNameValuePair("PaymentType",regularPay));
-			nameValuePair.add(new BasicNameValuePair("Recurringpaymentbase",String.valueOf(recurring)));
-			nameValuePair.add(new BasicNameValuePair("Serviceduedate",dueDate	));
+			nameValuePair.add(new BasicNameValuePair("PropertyID",
+					Uttilities.PROPERTY_ID));
+			nameValuePair.add(new BasicNameValuePair("ServiceID", String
+					.valueOf(serviceId)));
+			nameValuePair.add(new BasicNameValuePair("Nameofservice", service));
+			nameValuePair.add(new BasicNameValuePair("Identity", identity));
+			nameValuePair
+					.add(new BasicNameValuePair("PaymentType", regularPay));
+			nameValuePair.add(new BasicNameValuePair("Recurringpaymentbase",
+					String.valueOf(recurring)));
+			nameValuePair
+					.add(new BasicNameValuePair("Serviceduedate", dueDate));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -237,13 +246,13 @@ public class AddServicesActivity extends Activity {
 					finish();
 				}
 			}, nameValuePair);
-			
 
 			post.execute(Uttilities.PAYMENT_ADD_SERVICES_URL);
 
-		}else{
+		} else {
 
-			Uttilities.showToast(getApplicationContext(), "Please fill all fields.");
+			Uttilities.showToast(getApplicationContext(),
+					"Please fill all fields.");
 		}
 	}
 

@@ -35,9 +35,7 @@ public class WebRequestPost extends AsyncTask<String, Integer, String> {
 
 		webReq = web;
 		this.nameValuePair = nameValuePair;
-
-		// dialog = new ProgressDialog(context);
-		// dialog.setMessage("Please Wait..!");
+		
 	}
 
 	@Override
@@ -69,10 +67,12 @@ public class WebRequestPost extends AsyncTask<String, Integer, String> {
 				result = json.has("status") ? json.getString("status"): json_obj;
 			} catch (JSONException e) {
 				e.printStackTrace();
+				result = "Invalid Data!";
 			}
 
 			// writing response to log
-			Log.d("Http Response:", response.toString());
+			Log.d("Http Response:", response.toString());                  
+			
 
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
