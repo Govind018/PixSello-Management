@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/active_items_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/list_item_background"
     android:orientation="horizontal"
+    android:background="@android:color/transparent"
     android:paddingLeft="25dp" >
 
     <TextView
         android:id="@+id/active_item_date"
-        android:layout_width="130dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="12-4-2015"
         android:textColor="@android:color/black"
@@ -16,65 +17,70 @@
 
     <TextView
         android:id="@+id/active_item_time"
-        android:layout_width="140dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="15.23"
+        android:text="15.23 PM"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/active_item_dispersion"
-        android:layout_width="100dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="SOAP"
-        android:layout_weight="0.10"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/active_item_where"
-        android:layout_width="100dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.15"
-        android:layout_marginLeft="30dp"
         android:text="BATHROOM"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/active_item_reported"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.20"
         android:text="RAGHU"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/active_item_respo"
-        android:layout_width="130dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.20"
         android:text="OWNER"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/active_item_action_taken"
-        android:layout_width="70dp"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.20"
-        android:text="INGPDSD DADADAD da d"
+        android:layout_marginLeft="30dp"
+        android:text="Informed cleaning"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
-    
-    <Button 
+
+    <ImageView
+        android:id="@+id/guest_photo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:paddingTop="5dp"
+        android:src="@drawable/profile" />
+
+    <Button
         android:id="@+id/btn_update"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/submit_selector"
-        android:text="UPDATE"
-        
-        />
+        android:text="UPDATE" />
 
 </LinearLayout>

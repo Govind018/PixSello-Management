@@ -1,65 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/row_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FAF0E6" 
     android:orientation="horizontal"
-    android:paddingLeft="30dp" >
+    android:paddingLeft="30dp"
+    android:paddingTop="15dp" >
 
     <TextView
         android:id="@+id/found_item_date"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="DATE"
+        android:text="29-11-2015"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/found_item_time"
-        android:layout_width="140dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:text="TIME"
+        android:text="12.20 PM"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
 
     <TextView
         android:id="@+id/found_item_description"
-        android:layout_width="190dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:text="DESCRIPTION"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
-    
+        android:textSize="25sp" />
+
     <TextView
         android:id="@+id/found_item_location"
         android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:text="LOCATION"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
-    
+        android:textSize="25sp" />
+
     <TextView
         android:id="@+id/found_item_staff"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="Staff"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
-    
-     <TextView
+        android:textSize="25sp" />
+
+    <TextView
         android:id="@+id/found_item_from"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="From"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
-     
-      <TextView
+        android:textSize="25sp" />
+
+    <TextView
         android:id="@+id/found_item_to"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="To"
         android:textColor="@android:color/black"
-        android:textSize="20sp" />
+        android:textSize="25sp" />
+
+    <ImageView
+        android:id="@+id/found_item_photo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:paddingBottom="10dp"
+        android:src="@drawable/profile" />
 
 </LinearLayout>

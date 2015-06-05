@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contact_row_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/list_item_background"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@android:color/transparent"
     android:orientation="horizontal"
     android:paddingLeft="30dp" >
 
     <TextView
         android:id="@+id/item_service"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.50"
+        android:layout_marginLeft="40dp"
         android:text="@string/lbl_services"
-        android:layout_marginLeft="100dp"
         android:textColor="@android:color/black"
         android:textSize="25sp" />
 
     <TextView
         android:id="@+id/item_contact_person"
-        android:layout_width="180dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.50"
-        android:layout_marginLeft="170dp"
         android:text="@string/lbl_contact_person"
         android:textColor="@android:color/black"
         android:textSize="25sp" />
 
     <TextView
         android:id="@+id/item_contact_number"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.50"
-        android:layout_marginLeft="170dp"
-        android:text="@string/lbl_contact_number"
+        android:text="886133452632"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    
+    <TextView
+        android:id="@+id/item_contact_quickinfo"
+        android:layout_width="300dp"
+        android:layout_marginLeft="100dp"
+        android:layout_height="wrap_content"
+        android:text="QUICK INFO"
         android:textColor="@android:color/black"
         android:textSize="25sp" />
 

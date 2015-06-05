@@ -6,6 +6,7 @@
     tools:context="com.pixsello.management.GuestVisitorActivity" >
 
     <RelativeLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@color/actionbar_background" >
@@ -30,11 +31,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="80dp"
-        android:background="@color/layout_background" >
+        android:layout_below="@id/action_bar"
+        android:background="@drawable/guest_background"
+         >
 
         <LinearLayout
             android:layout_width="match_parent"

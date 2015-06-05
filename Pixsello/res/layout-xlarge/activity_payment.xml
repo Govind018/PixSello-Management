@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/payment_background"
     android:orientation="vertical"
     tools:context="com.spundhan.pixsello.payment.PaymentActivity" >
 
@@ -98,41 +99,45 @@
             <EditText
                 android:id="@+id/edit_service_name"
                 android:layout_width="400dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginRight="40dp"
-                android:background="@android:drawable/editbox_background"
-                android:textColor="@android:color/black"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
+                android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/edit_identity"
                 android:layout_width="400dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
-                android:background="@android:drawable/editbox_background"
-                android:textColor="@android:color/black"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
+                android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/edit_bill_num"
                 android:layout_width="400dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
-                android:background="@android:drawable/editbox_background"
-                android:textColor="@android:color/black"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
+                android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/edit_amount"
                 android:layout_width="400dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
-                android:background="@android:drawable/editbox_background"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
                 android:inputType="number"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
             <RadioButton
@@ -163,11 +168,12 @@
                 <EditText
                     android:id="@+id/edit_cheque_number"
                     android:layout_width="400dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginTop="35dp"
-                    android:background="@android:drawable/editbox_background"
-                    android:textColor="@android:color/black"
+                    android:paddingLeft="10dp"
+                    android:background="@drawable/edittext_background_selector"
+                    android:textColor="@android:color/white"
                     android:textSize="30sp" />
             </LinearLayout>
 
@@ -189,19 +195,20 @@
                 <EditText
                     android:id="@+id/edit_other_detail"
                     android:layout_width="400dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginRight="40dp"
                     android:layout_marginTop="35dp"
+                    android:paddingLeft="10dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@android:drawable/editbox_background"
-                    android:textColor="@android:color/black"
+                    android:background="@drawable/edittext_background_selector"
+                    android:textColor="@android:color/white"
                     android:textSize="30sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     
     <Button 
-        android:layout_width="450dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:background="@drawable/submit_selector"

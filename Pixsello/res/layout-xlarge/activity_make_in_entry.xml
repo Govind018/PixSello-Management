@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/guest_background"
     tools:context="com.pixsello.management.guest.MakeInEntryActivity" >
 
     <RelativeLayout
@@ -29,7 +30,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="50dp"
@@ -47,14 +48,15 @@
             android:layout_width="180dp"
             android:layout_height="45dp"
             android:layout_marginLeft="15dp"
-            android:background="@android:drawable/editbox_background"
+            android:background="@drawable/edittext_background_selector"
             android:drawableEnd="@android:drawable/ic_menu_today"
             android:drawableRight="@android:drawable/ic_menu_today"
+            android:editable="false"
+            android:focusableInTouchMode="true"
+            android:textColor="@android:color/white"
             android:paddingLeft="10dp"
-			android:focusableInTouchMode="true"    
-			android:editable="false"        
             android:paddingRight="5dp"
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -69,12 +71,13 @@
             android:layout_width="180dp"
             android:layout_height="45dp"
             android:layout_marginLeft="15dp"
-            android:background="@android:drawable/editbox_background"
+            android:background="@drawable/edittext_background_selector"
+            android:editable="false"
+            android:textColor="@android:color/white"
+            android:focusableInTouchMode="true"
             android:paddingLeft="10dp"
             android:paddingRight="5dp"
-        	android:focusableInTouchMode="true"    
-			android:editable="false"        
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -111,6 +114,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:text="Room No"
+                android:textColor="@android:color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
                 android:text="@string/lbl_visiting_guest_name"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
@@ -122,15 +133,15 @@
                 android:text="@string/lbl_Gendar"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 android:text="In Time"
                 android:textColor="@android:color/black"
-                android:visibility="invisible"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <LinearLayout
@@ -145,32 +156,47 @@
                 android:layout_width="470dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="5dp"
-                android:background="@android:drawable/editbox_background"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
                 android:inputType="text"
                 android:singleLine="true"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" >
+
                 <requestFocus />
-               </EditText> 
+            </EditText>
 
             <EditText
                 android:id="@+id/edit_company"
                 android:layout_width="470dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="35dp"
-                android:background="@android:drawable/editbox_background"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
                 android:singleLine="true"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_visiting_room"
+                android:layout_width="470dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/edittext_background_selector"
+                android:singleLine="true"
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
             <EditText
                 android:id="@+id/edit_visiting_guest"
                 android:layout_width="470dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="35dp"
-                android:background="@android:drawable/editbox_background"
+                android:paddingLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/edittext_background_selector"
                 android:singleLine="true"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
             <LinearLayout
@@ -194,22 +220,20 @@
                     android:text="Female"
                     android:textSize="30sp" />
             </LinearLayout>
+
             <EditText
                 android:id="@+id/edit_in_time"
                 android:layout_width="470dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
-                android:background="@android:drawable/editbox_background"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:visibility="invisible"
-                android:textSize="25sp" />
-            
-            
+                android:background="@drawable/edittext_background_selector"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"
+                android:paddingLeft="10dp"
+                android:visibility="invisible" />
         </LinearLayout>
-        
-        
-                <RelativeLayout
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -245,31 +269,16 @@
                 android:onClick="capturePhoto"
                 android:text="Take Photo" />
         </RelativeLayout>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     </LinearLayout>
-
+                               
     <Button
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        android:textSize="25sp"
-        android:onClick="doSubmit"
+        android:layout_marginTop="10dp"
         android:background="@drawable/submit_selector"
-        android:text="Submit" />
+        android:onClick="doSubmit"
+        android:text="Submit"
+        android:textSize="25sp" />
 
 </LinearLayout>

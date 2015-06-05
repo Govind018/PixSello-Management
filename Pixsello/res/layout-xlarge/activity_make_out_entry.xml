@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:background="@drawable/guest_background"
     android:orientation="vertical"
     tools:context="com.pixsello.management.guest.MakeOutEntryActivity" >
 
@@ -32,12 +33,12 @@
     <LinearLayout
         android:id="@+id/layout_out_entry"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"
+        android:layout_height="90dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone" >
@@ -55,58 +56,42 @@
                 android:id="@+id/edit_time"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
-                android:background="@android:drawable/editbox_background"
+                android:background="@drawable/edittext_background_selector"
+                android:editable="false"
                 android:hint="TIME"
-                android:inputType="number"
+                android:onClick="showTimePick"
+                android:paddingLeft="10dp"
                 android:textColor="@android:color/black" />
 
             <Button
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/submit_selector"
                 android:onClick="updateTime"
                 android:text="Update" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="visible" >
-
-            <EditText
-                android:id="@+id/edit_room"
-                android:layout_width="300dp"
-                android:layout_height="50dp"
-                android:layout_marginRight="220dp"
-                android:background="@android:drawable/editbox_background"
-                android:hint="Room Number"
-                android:inputType="number"
-                android:visibility="visible"
-                android:textColor="@android:color/black" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/list_header_background"
+        android:layout_height="50dp"
+        android:background="@drawable/list_header_back"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="DATE"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
-            android:layout_width="140dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="TIME"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -114,6 +99,7 @@
         <TextView
             android:layout_width="210dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="GUEST NAME"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -121,20 +107,33 @@
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="COMPANY"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
-            android:layout_width="150dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="VISITOR"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:text="GENDER"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <TextView
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
             android:text="PHOTO"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -142,14 +141,16 @@
         <TextView
             android:layout_width="110dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="IN TIME"
             android:textColor="@android:color/black"
-            android:visibility="gone"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="OUT TIME"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
@@ -158,7 +159,27 @@
     <ListView
         android:id="@+id/active_items_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1px" >
     </ListView>
+
+<!--     <RelativeLayout
+        android:id="@+id/layout_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:visibility="gone"
+        android:background="@color/link_text_material_light" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="NO RECORDS..!"
+            android:textSize="50sp" />
+    </RelativeLayout> -->
+
+	<include layout="@layout/layout_no_records"/>
 
 </LinearLayout>

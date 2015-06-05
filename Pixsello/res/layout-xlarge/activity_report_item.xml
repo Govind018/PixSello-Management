@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/lostfound"
     tools:context="com.pixsello.management.ReportItemActivity" >
 
     <RelativeLayout
@@ -33,7 +34,7 @@
             android:layout_marginRight="10dp"
             android:onClick="doSubmitItem"
             android:text="Submit" /> -->
-    </RelativeLayout>z
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,14 +57,14 @@
             android:layout_width="190dp"
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
-            android:background="@android:drawable/editbox_background"
+            android:background="@drawable/edittext_background_selector"
             android:drawableEnd="@android:drawable/ic_menu_today"
             android:drawableRight="@android:drawable/ic_menu_today"
             android:editable="false"
             android:inputType="number"
             android:paddingLeft="10dp"
             android:paddingRight="5dp"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:text="12-4-2015"
             android:textSize="23sp"
              />
@@ -82,13 +83,13 @@
             android:layout_width="160dp"
             android:layout_height="50dp"
             android:layout_marginLeft="15dp"
-            android:background="@android:drawable/editbox_background"
+            android:background="@drawable/edittext_background_selector"
             android:editable="false"
             android:paddingLeft="15dp"
             android:paddingRight="5dp"
             android:inputType="number"
             android:text="12-4-2015"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="23sp"
              />
     </LinearLayout>
@@ -125,7 +126,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="65dp"
                 android:text="@string/lbl_staff"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
@@ -133,7 +134,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="55dp"
                 android:text="@string/lbl_date_guest_stay"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
@@ -148,12 +149,13 @@
             <EditText
                 android:id="@+id/edit_description"
                 android:layout_width="470dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="5dp"
+                android:paddingLeft="10dp"
                 android:singleLine="true"
-                android:background="@android:drawable/editbox_background"
+                android:background="@drawable/edittext_background_selector"
                 android:inputType="text"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" >
 
                 <requestFocus />
@@ -162,11 +164,12 @@
             <EditText
                 android:id="@+id/edit_location"
                 android:layout_width="470dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="47dp"
                 android:singleLine="true"
-                android:background="@android:drawable/editbox_background"
-                android:textColor="@android:color/black"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
             <LinearLayout
@@ -179,11 +182,12 @@
             <EditText
                 android:id="@+id/edit_staff_name"
                 android:layout_width="470dp"
-                android:layout_height="45dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:singleLine="true"
-                android:background="@android:drawable/editbox_background"
-                android:textColor="@android:color/black"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_background_selector"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
             <LinearLayout
@@ -195,12 +199,14 @@
                 <EditText
                     android:id="@+id/stay_from_date"
                     android:layout_width="220dp"
-                    android:layout_height="45dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:layout_height="50dp"
+                    android:background="@drawable/edittext_background_selector"
                     android:editable="false"
                     android:singleLine="true"
                     android:textSize="23sp"
+                    android:paddingLeft="10dp"
                     android:inputType="date"
+                    android:textColor="@android:color/white"
                     android:drawableRight="@android:drawable/ic_menu_today"
                     android:onClick="setStayFromDate" />
 
@@ -215,11 +221,13 @@
                 <EditText
                     android:id="@+id/stay_to_date"
                     android:layout_width="220dp"
-                    android:layout_height="45dp"
+                    android:layout_height="50dp"
                     android:onClick="setStayToDate"
                     android:singleLine="true"
                     android:textSize="23sp"
-                    android:background="@android:drawable/editbox_background"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/edittext_background_selector"
                     android:drawableRight="@android:drawable/ic_menu_today"
                     android:inputType="date" >
                 </EditText>

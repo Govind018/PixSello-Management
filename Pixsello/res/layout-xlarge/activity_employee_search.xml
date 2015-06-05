@@ -1,0 +1,220 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    tools:context="com.pixsello.management.training.StaffProfileActivity" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/actionbar_background" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:onClick="goBack"
+            android:src="@drawable/arrow" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="SEARCH"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_search"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="10dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/text_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="99dp"
+            android:layout_marginTop="54dp"
+            android:text="Search By:"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/search_spinner"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="54dp"
+            android:layout_toRightOf="@+id/text_search"
+            android:background="@android:drawable/btn_dropdown"
+            android:entries="@array/staff_search_types" />
+
+        <EditText
+            android:id="@+id/edit_search"
+            android:layout_width="430dp"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/text_search"
+            android:layout_below="@+id/search_spinner"
+            android:layout_marginTop="20dp"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/search_spinner"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/edit_search"
+            android:background="@drawable/submit_selector"
+            android:onClick="doSearch"
+            android:text="Search" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="29dp"
+            android:layout_marginTop="30dp"
+            android:onClick="showAllData"
+            android:src="@drawable/arrow_up" />
+    </RelativeLayout>
+    
+    <LinearLayout 
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:orientation="horizontal"
+        >
+        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SEARCH"
+            android:layout_marginLeft="30dp"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            />
+        
+        <EditText 
+            android:id="@+id/edit_search_key"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:background="@android:drawable/editbox_background"
+            />
+        
+        <Button 
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="SEARCH"
+            android:onClick="doSearch"
+            android:background="@drawable/submit_selector"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/list_header_background"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="30dp" >
+
+        <TextView
+            android:id="@+id/item_trainer"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="NAME"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_trainee"
+           android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="DESIGNATION"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_date_time"   
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="DEPARTMENT"     
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_training"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="STATUS"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/item_training_type"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:text="HIGHLIGHTS"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+        
+        <ImageView 
+            android:id="@+id/arrow_back"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:onClick="showPrevious"
+            android:src="@drawable/arrow_left"
+            android:contentDescription="@null"
+            />
+        
+        <TextView
+            android:id="@+id/item_training_performance"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="January"
+            android:textColor="@android:color/black"
+            android:textSize="25sp" />
+        
+        <ImageView 
+            android:id="@+id/arrow_front"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:onClick="showNext"
+            android:src="@drawable/arrow_right"
+            android:contentDescription="@null"
+            
+            />
+    </LinearLayout>
+    
+    <ListView
+        android:id="@+id/list_staff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </ListView>
+
+</LinearLayout>

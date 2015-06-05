@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/payment_background"
-    tools:context="com.spundhan.pixsello.payment.PaymentStatusActivity" >
+    android:orientation="vertical"
+    tools:context="com.spundhan.pixsello.payment.PaymentSearchActivity" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="NEW PAYMENT"
+            android:text="PAYMENT STATUS"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
     </RelativeLayout>
@@ -35,7 +35,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:background="@android:color/transparent"
         android:orientation="horizontal"
         android:paddingTop="5dp" >
 
@@ -53,11 +52,9 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
-            android:textSize="20sp"
             android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:background="@drawable/edittext_background_selector"
-            android:textColor="@android:color/white" />
+            android:background="@android:drawable/editbox_background"
+            android:textColor="@android:color/black" />
 
         <Button
             android:layout_width="200dp"
@@ -65,7 +62,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/submit_selector"
-            android:onClick="doSearch"
+            android:onClick="doSubmit"
             android:text="Search" />
     </LinearLayout>
 
@@ -78,24 +75,24 @@
         <TextView
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="SERVICE"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="30dp"
+            android:text="BILL NO"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="30sp" />
 
         <TextView
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:text="IDENTITY"
+            android:text="BILL DATE"
             android:layout_marginTop="10dp"
-            android:textSize="30sp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
 
         <TextView
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:text="TYPE"
+            android:text="SERVICE"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="30sp" />
@@ -103,30 +100,38 @@
         <TextView
             android:layout_width="180dp"
             android:layout_height="45dp"
-            android:text="AMOUNT"
+            android:text="IDENTITY"
             android:layout_marginTop="10dp"
-            android:textSize="30sp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
 
         <TextView
             android:layout_width="190dp"
             android:layout_height="45dp"
-            android:text="DUE DATE"
-            android:textSize="30sp"
+            android:text="AMOUNT"
             android:layout_marginTop="10dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:text="DUE DATE"
+            android:layout_marginTop="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
 
         <TextView
             android:layout_width="160dp"
             android:layout_height="45dp"
             android:text="STATUS"
-            android:textSize="30sp"
             android:layout_marginTop="10dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <ListView
-        android:id="@+id/list_status"
+        android:id="@+id/list_search_items"
         android:layout_width="match_parent"
         android:dividerHeight="1px"
         android:divider="@android:color/darker_gray"

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:orientation="vertical"
+    android:background="@drawable/training_background"
     tools:context="com.pixsello.management.training.TrainingUpdatesActivity" >
 
     <RelativeLayout
@@ -30,7 +31,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
@@ -48,11 +49,13 @@
             android:layout_width="190dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:background="@android:drawable/editbox_background"
+            android:background="@drawable/edittext_background_selector"
             android:drawableEnd="@android:drawable/ic_menu_today"
             android:drawableRight="@android:drawable/ic_menu_today"
             android:editable="false"
+            android:textColor="@android:color/white"
             android:inputType="number"
+            android:paddingLeft="10dp"
             android:text="12-4-2015"
             android:textSize="23sp" />
 
@@ -69,8 +72,10 @@
             android:layout_width="170dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:background="@android:drawable/editbox_background"
+            android:background="@drawable/edittext_background_selector"
             android:editable="false"
+            android:paddingLeft="10dp"
+            android:textColor="@android:color/white"
             android:inputType="number"
             android:text="12-4-2015"
             android:textSize="20sp" />
@@ -144,10 +149,11 @@
                 android:layout_width="450dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="5dp"
-                android:background="@android:drawable/editbox_background"
+                android:background="@drawable/edittext_background_selector"
                 android:inputType="text"
                 android:singleLine="true"
-                android:textColor="@android:color/black"
+                android:paddingLeft="10dp"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" >
 
                 <requestFocus />
@@ -157,10 +163,11 @@
                 android:id="@+id/edit_trainer"
                 android:layout_width="450dp"
                 android:layout_height="50dp"
+                android:paddingLeft="10dp"
                 android:layout_marginTop="35dp"
-                android:background="@android:drawable/editbox_background"
+                android:background="@drawable/edittext_background_selector"
                 android:singleLine="true"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
             <LinearLayout
@@ -188,10 +195,11 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:inputType="text"
                     android:singleLine="true"
-                    android:text="Other"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/white"
                     android:visibility="invisible" />
             </LinearLayout>
 
@@ -250,9 +258,9 @@
                     android:layout_width="210dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="20dp"
-                    android:background="@android:drawable/editbox_background"
-                    android:editable="false"
-                    android:inputType="date"
+                    android:paddingLeft="10dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
 
                 <TextView
@@ -267,9 +275,8 @@
             </LinearLayout>
 
             <Button
-                android:layout_width="190dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/submit_selector"

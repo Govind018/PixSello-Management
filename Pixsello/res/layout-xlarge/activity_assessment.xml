@@ -22,9 +22,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="EMPLOYEE DETAILS"
+            android:text="ASSESSMENT"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
+        
     </RelativeLayout>
 
     <ScrollView
@@ -51,6 +52,7 @@
                     android:textSize="25sp" />
 
                 <Spinner
+                    android:id="@+id/spinner_employees"
                     android:layout_width="250dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
@@ -65,10 +67,12 @@
                     android:textSize="25sp" />
 
                 <Spinner
+                    android:id="@+id/spinner_months"
                     android:layout_width="250dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/btn_dropdown" />
+                    android:background="@android:drawable/btn_dropdown"
+                    android:entries="@array/months" />
             </LinearLayout>
 
             <TableLayout
@@ -394,6 +398,8 @@
                         android:id="@+id/edit_total"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
+                        android:inputType="number"
+                        android:editable="false"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/editbox_background" />
                 </TableRow>
@@ -415,6 +421,7 @@
                         android:id="@+id/edit_remarks"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
+                        android:inputType="text"
                         android:layout_marginLeft="40dp"
                         android:background="@android:drawable/editbox_background" />
                 </TableRow>
@@ -437,6 +444,7 @@
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
+                        android:inputType="text"
                         android:background="@android:drawable/editbox_background" />
                 </TableRow>
 
@@ -454,26 +462,34 @@
                         android:textSize="25sp" />
 
                     <EditText
+                        android:id="@+id/edit_date"
                         android:layout_width="250dp"
                         android:layout_height="45dp"
                         android:layout_marginLeft="40dp"
+                        android:onClick="selectDate"
+                        android:drawableEnd="@android:drawable/ic_menu_today"
+                        android:drawableRight="@android:drawable/ic_menu_today"
                         android:background="@android:drawable/editbox_background" />
+                    
+				    <Button
+                        android:id="@+id/btn_submit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:paddingLeft="80dp"
+                        android:paddingRight="80dp"
+                        android:background="@drawable/submit_selector"
+                        android:onClick="doSubmitData"
+                        android:gravity="center"
+                        android:text="Submit" /> 
                 </TableRow>
 
                 <TableRow
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center" >
-
-                    <Button
-                        android:layout_width="250dp"
-                        android:layout_height="45dp"
-                        android:layout_marginLeft="40dp"
-                        android:background="@drawable/submit_selector"
-                        android:onClick="doSubmitData"
-                        android:text="Submit" />
+                    android:layout_marginTop="30dp">
+                    
                 </TableRow>
             </TableLayout>
         </RelativeLayout>

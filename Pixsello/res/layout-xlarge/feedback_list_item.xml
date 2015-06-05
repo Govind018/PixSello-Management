@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/feedback_row"
+    android:layout_width="match_parent"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="30dp" >
+
+    <TextView
+        android:id="@+id/text_guest_name"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="GUEST NAME"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/text_company"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:text="COMPANY"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/text_feedback"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="FEEDBACK"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:id="@+id/rating_ambience"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/rating_services"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/rating_food"
+        android:layout_width="150dp"
+        android:layout_marginLeft="35dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    </LinearLayout>
+    
+</LinearLayout>

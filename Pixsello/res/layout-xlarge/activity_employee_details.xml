@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="EMPLOYEE DETAILS"
+            android:text="EMPLOYEE &amp; EMPLOYMENT DETAILS"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
     </RelativeLayout>
@@ -30,9 +30,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-
-        <TableLayout
+        
+        <LinearLayout 
+            
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+        <TableLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent" >
 
             <TableRow
@@ -53,8 +59,8 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -74,9 +80,9 @@
                     android:id="@+id/edit_name_alias"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -97,8 +103,8 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -119,8 +125,9 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:inputType="number"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -140,9 +147,9 @@
                     android:id="@+id/edit_email"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -163,8 +170,8 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -185,10 +192,10 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:singleLine="true"
                     android:background="@android:drawable/editbox_background"
                     android:inputType="textMultiLine"
-                    android:lines="3" />
+                    android:lines="3"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -208,9 +215,9 @@
                     android:id="@+id/edit_father_name"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -230,9 +237,9 @@
                     android:id="@+id/edit_mother_name"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -252,9 +259,9 @@
                     android:id="@+id/edit_married"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -274,9 +281,9 @@
                     android:id="@+id/edit_spouse_name"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -296,9 +303,9 @@
                     android:id="@+id/edit_children"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -319,8 +326,8 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -340,9 +347,9 @@
                     android:id="@+id/edit_ide_marks"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -354,17 +361,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PHOTO"
+                    android:text="DESIGNATION"
                     android:textColor="@android:color/black"
                     android:textSize="25sp" />
 
                 <EditText
-                    android:id="@+id/edit_photo"
+                    android:id="@+id/edit_designation"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
             </TableRow>
 
             <TableRow
@@ -377,6 +384,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="DATE OF PHOTO"
+                    android:visibility="gone"
                     android:textColor="@android:color/black"
                     android:textSize="25sp" />
 
@@ -384,8 +392,31 @@
                     android:id="@+id/edit_date_photo"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:singleLine="true"
+                    android:visibility="gone"
                     android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMPLOYER ( DEFAULT )"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_employer"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:singleLine="true"
                     android:background="@android:drawable/editbox_background" />
             </TableRow>
 
@@ -393,9 +424,229 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:gravity="center"
-                android:paddingBottom="50dp"
                 android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PREVIOUS EMPLOYER,IF ANY"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_previous_empl"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:singleLine="true"
+                    android:background="@android:drawable/editbox_background" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMPLOYED ON"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_employed_on"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:singleLine="true"
+                    android:background="@android:drawable/editbox_background" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DOCUMENTS VERIFIED"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_docs_verified"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:singleLine="true"
+                    android:background="@android:drawable/editbox_background" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DOCUMENTS GIVEN"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_docs_given"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SCAN DOCUMENTS"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_scan_docs"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMPLOYED IN THE CAPACITY OF"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_employed_in"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DEPARTMENT"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_department"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="INTERVIEWED BY( PERSON )"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_interviewedby"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REFFERED / INTRODUCED BY"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_reffered"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+            
+             <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMPLOYMENT STATUS"
+                    android:textColor="@android:color/black"
+                    android:textSize="25sp" />
+
+                <EditText
+                    android:id="@+id/edit_employment_satus"
+                    android:layout_width="450dp"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="40dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:singleLine="true" />
+            </TableRow>
+
+              <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingBottom="50dp" >
 
                 <Button
                     android:layout_width="250dp"
@@ -403,8 +654,46 @@
                     android:background="@drawable/submit_selector"
                     android:onClick="submitData"
                     android:text="Submit" />
-            </TableRow>
+            </TableRow>  
         </TableLayout>
+        
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" >
+
+            <ImageView
+                android:id="@+id/frame"
+                android:layout_width="210dp"
+                android:layout_height="210dp"
+                android:layout_marginTop="30dp"
+                android:contentDescription="@null"
+                android:src="@drawable/frame"
+                android:text="Photo" />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="140dp"
+                android:layout_height="190dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="40dp"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/profile"
+                android:text="Photo" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frame"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/submit_selector"
+                android:onClick="capturePhoto"
+                android:text="Take Photo" />
+        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

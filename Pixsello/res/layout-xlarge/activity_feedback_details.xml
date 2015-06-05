@@ -1,14 +1,12 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    tools:context="com.pixsello.management.action.ActionRequiredActivity" >
+    tools:context="com.pixsello.management.feedback.FeedbackDetailsActivity" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:background="@color/actionbar_background" >
 
         <ImageView
@@ -20,23 +18,20 @@
             android:src="@drawable/arrow" />
 
         <TextView
-            android:id="@+id/lbl_type_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="APARANJI"
+            android:text="FEEDBACK"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/background_new" >
+        android:layout_marginTop="50dp"
+        android:background="@drawable/feedback_banner">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,85 +40,59 @@
             android:gravity="center" >
 
             <RelativeLayout
-                android:layout_width="320dp"
-                android:layout_height="320dp"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:background="@drawable/contact_back"
                 android:clickable="true"
-                android:onClick="showEmpDetails" >
-
+                android:onClick="showNewFeedback" >
+                
                 <ImageView
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/employee_details" />
+                     />
 
                 <TextView
+                    android:id="@+id/lable_guest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="EMPLOYEE DETAILS"
+                    android:text="ADD NEW FEEDBACK"
                     android:textColor="@android:color/white"
-                    android:textSize="30sp" />
+                    android:textSize="27sp" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="320dp"
-                android:layout_height="320dp"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/guest_back"
                 android:clickable="true"
-                android:onClick="showAssessment" >
-
+                android:onClick="showPreviuosFeedback" >
+                
                 <ImageView
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/assessment" />
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="20dp"
-                    android:text="ASSESSMENT"
+                    android:text="SEE PREVIOUS FEEDBACK"
                     android:textColor="@android:color/white"
-                    android:textSize="25sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="320dp"
-                android:layout_height="320dp"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/lost_back"
-                android:clickable="true"
-                android:onClick="showEmpSearch" >
-
-                <ImageView
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:contentDescription="@null"
-                    android:src="@drawable/find_an_item" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="20dp"
-                    android:text="SEARCH"
-                    android:textColor="@android:color/white"
-                    android:textSize="25sp" />
+                    android:textSize="27sp" />
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

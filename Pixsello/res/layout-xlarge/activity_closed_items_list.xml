@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:animateLayoutChanges="true"
+    android:background="@drawable/action_required_background"
+    android:orientation="vertical"
     tools:context="com.pixsello.management.action.ActiveItemsListActivity" >
 
     <RelativeLayout
@@ -27,109 +28,73 @@
             android:text="CLOSED ITEMS"
             android:textColor="@android:color/white"
             android:textSize="35sp" />
-        
+
         <Button
             android:id="@+id/btn_search"
             android:layout_width="170dp"
             android:layout_height="45dp"
             android:layout_alignParentRight="true"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:onClick="showSearchOptions"
             android:background="@drawable/submit_selector"
-            android:text="Search" />
-
+            android:onClick="showSearchOptions"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Search"
+            android:visibility="gone" />
     </RelativeLayout>
-    
-     <RelativeLayout
+
+    <LinearLayout
         android:id="@+id/layout_search"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"
-        android:visibility="gone" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="29dp"
-            android:layout_marginTop="30dp"
-            android:onClick="showAllData"
-            android:visibility="visible"
-            android:src="@drawable/arrow_up" />
+        android:layout_height="80dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/text_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imageView1"
-            android:layout_marginLeft="77dp"
-            android:text="From"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Search By"
+            android:textColor="@android:color/black"
             android:textSize="25sp" />
 
         <EditText
             android:id="@+id/edit_date"
-            android:layout_width="200dp"
+            android:layout_width="350dp"
             android:layout_height="50dp"
-            android:onClick="setStayFromDate"
-            android:layout_alignBaseline="@+id/text_from"
-            android:layout_alignBottom="@+id/text_from"
             android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@+id/text_from"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/ic_menu_today"
-            android:ems="10" >
+            android:layout_marginTop="20dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/edittext_background_selector"
+            android:ems="10"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" >
 
             <requestFocus />
         </EditText>
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/text_from"
-            android:layout_marginLeft="37dp"
-            android:layout_toRightOf="@+id/edit_date"
-            android:text="To"
-            android:textSize="25sp" />
-
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="25dp"
-            android:onClick="setStayToDate"
-            android:layout_toRightOf="@id/textView1"
-            android:background="@android:drawable/editbox_background"
-            android:drawableRight="@android:drawable/ic_menu_today"
-            android:ems="10" />
-
         <Button
             android:id="@+id/button1"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textView1"
-            android:layout_marginLeft="40dp"
-            android:onClick="testMethod"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/submit_selector"
-            android:layout_toRightOf="@+id/editText1"
+            android:onClick="searchData"
             android:text="Search" />
-    </RelativeLayout>
-
-    
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E6E6FA"
+        android:layout_height="50dp"
+        android:background="@drawable/list_header_back"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
@@ -137,6 +102,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="DATE"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -144,6 +110,7 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="TIME"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -151,6 +118,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="DESCRIPTION"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -158,6 +126,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:text="WHERE"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -165,6 +134,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="REPORTED"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -172,6 +142,7 @@
             android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:text="RESPONSIBILITY"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -179,15 +150,23 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="ACTION TAKEN"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
-        
     </LinearLayout>
 
     <ListView
         android:id="@+id/closed_items_list"
         android:layout_width="match_parent"
+        android:dividerHeight="1px"
+        android:divider="@android:color/darker_gray"
         android:layout_height="match_parent" >
     </ListView>
+
+    <!--
+        <include 
+        layout="@layout/layout_no_records"
+        />
+    -->
 
 </LinearLayout>

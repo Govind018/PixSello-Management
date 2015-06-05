@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:animateLayoutChanges="true"
-    android:background="@android:color/white"
+    android:background="@drawable/action_required_background"
+    android:orientation="vertical"
     tools:context="com.pixsello.management.action.ActiveItemsListActivity" >
 
     <RelativeLayout
@@ -34,14 +34,14 @@
         android:id="@+id/update_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:paddingBottom="10dp"
-        android:visibility="gone"
+        android:layout_marginTop="10dp"
         android:background="@android:color/darker_gray"
-        android:paddingLeft="200dp" >
+        android:paddingBottom="10dp"
+        android:paddingLeft="200dp"
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,8 +71,8 @@
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="30dp"
-                android:onClick="updateItem"
                 android:background="@drawable/submit_selector"
+                android:onClick="updateItem"
                 android:text="Submit" />
 
             <Button
@@ -81,81 +81,91 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="30dp"
                 android:background="@drawable/submit_selector"
+                android:onClick="closeItem"
                 android:text="Close Item" />
         </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E6E6FA"
+        android:layout_height="50dp"
+        android:background="@drawable/list_header_back"
         android:orientation="horizontal"
         android:paddingLeft="20dp" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30"
-            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:text="DATE"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="23sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30"
-            android:gravity="center"
+            android:layout_marginTop="10dp"
             android:text="TIME"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="23sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="0.15"
-            android:text="DISPERSION"
+            android:layout_marginTop="10dp"
+            android:text="DESCRIPTION"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="23sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.20"
+            android:layout_marginTop="10dp"
             android:text="WHERE"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="23sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30"
+            android:layout_marginTop="10dp"
             android:text="REPORTED"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="23sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30"
+            android:layout_marginTop="10dp"
             android:text="RESPONSIBILITY"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="23sp" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.30"
+            android:layout_marginTop="10dp"
             android:text="ACTION TAKEN"
             android:textColor="@android:color/black"
-            android:textSize="25sp" />
+            android:textSize="23sp" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="PHOTO"
+            android:textColor="@android:color/black"
+            android:textSize="23sp" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/active_items_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1px" >
     </ListView>
+
+    <include layout="@layout/layout_no_records" />
 
 </LinearLayout>
