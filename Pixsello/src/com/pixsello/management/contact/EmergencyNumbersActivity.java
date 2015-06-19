@@ -202,6 +202,7 @@ public class EmergencyNumbersActivity extends Activity {
 			emIntent.putExtra("type", "vendor");
 		}
 		startActivity(emIntent);
+		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
 	}
 
 	public void goBack(View v) {

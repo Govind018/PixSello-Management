@@ -1,5 +1,6 @@
 package com.pixsello.management.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -8,10 +9,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.content.DialogInterface.OnClickListener;
-import android.content.SharedPreferences.Editor;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -209,5 +210,28 @@ public class Uttilities {
 
 		return pref.getString("login_user", "");
 
+	}
+	
+	public static boolean isDateValid(String dateToValidate){
+		
+		if(dateToValidate == null){
+			return false;
+		}
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+		sdf.setLenient(false);
+		
+		try {
+			 
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(dateToValidate);
+ 
+		} catch (ParseException e) {
+ 
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 }

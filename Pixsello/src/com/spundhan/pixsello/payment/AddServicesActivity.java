@@ -218,6 +218,12 @@ public class AddServicesActivity extends Activity {
 					"Select Type of payment.");
 			return;
 		}
+		
+		if(!Uttilities.isDateValid(dueDate)){
+			Uttilities.showToast(getApplicationContext(),
+					"Invalid Date Format.");
+			return;
+		}
 
 		if (!service.isEmpty() && !identity.isEmpty() && !dueDate.isEmpty()) {
 			dialog.show();

@@ -31,10 +31,10 @@ public class ImagePreviewActivity extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(display);
 		int screenWidth = display.widthPixels;
 		int screenHeight = display.heightPixels;
-		
-			Bitmap m = convert2Bitmap(image);
-			Bitmap resizedImage = Uttilities.resizeImage(screenWidth, screenHeight,
-					m);
+
+		Bitmap m = convert2Bitmap(image);
+		Bitmap resizedImage = Uttilities.resizeImage(screenWidth, screenHeight,
+				m);
 
 		imagePreview.setScaleType(ImageView.ScaleType.FIT_XY);
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -44,12 +44,11 @@ public class ImagePreviewActivity extends Activity {
 
 	}
 
-	public void goBack(View v){
-		
+	public void goBack(View v) {
+
 		finish();
 	}
-	
-	
+
 	public Bitmap convert2Bitmap(byte[] image) {
 
 		return BitmapFactory.decodeByteArray(image, 0, image.length);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -99,10 +100,9 @@ public class FoundItemsListAdapter extends ArrayAdapter<Entity> {
 		}
 
 		if (item.getPhoto() != null) {
-			byte[] imageAsBytes = Base64.decode(item.getPhoto().getBytes(),
-					Base64.DEFAULT);
-			holder.image.setImageBitmap(BitmapFactory.decodeByteArray(
-					imageAsBytes, 0, imageAsBytes.length));
+			byte[] imageAsBytes = Base64.decode(item.getPhoto(),Base64.DEFAULT);
+			Bitmap m = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+			holder.image.setImageBitmap(m);
 		}
 		
 		holder.image.setOnClickListener(new OnClickListener() {

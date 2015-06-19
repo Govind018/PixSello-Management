@@ -175,6 +175,11 @@ public class UpdateNewBIllActivity extends Activity {
 		billAmount = editAmount.getText().toString();
 		int serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		int identityID = spinnerIdentity.getSelectedItemPosition() + 1;
+		
+		if(!Uttilities.isDateValid(billDueDate) || !Uttilities.isDateValid(billDate)){
+			Uttilities.showToast(getApplicationContext(), "Invalid Date Formate.");
+			return;
+		}
 
 		if (!billNumber.isEmpty() || !billDate.isEmpty()
 				|| !billDueDate.isEmpty() || !billAmount.isEmpty()) {
@@ -224,6 +229,11 @@ public class UpdateNewBIllActivity extends Activity {
 		billAmount = editAmount.getText().toString();
 		int serviceId = spinnerServices.getSelectedItemPosition() + 1;
 		int identityID = spinnerIdentity.getSelectedItemPosition() + 1;
+		
+		if(!Uttilities.isDateValid(billDueDate) || !Uttilities.isDateValid(billDate)){
+			Uttilities.showToast(getApplicationContext(), "Invalid Date Formate.");
+			return;
+		}
 
 		if (!billNumber.isEmpty() || !billDate.isEmpty()
 				|| !billDueDate.isEmpty() || !billAmount.isEmpty()) {
