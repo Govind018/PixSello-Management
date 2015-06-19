@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:orientation="vertical"
     android:background="@drawable/training_background"
+    android:orientation="vertical"
     tools:context="com.pixsello.management.training.TrainingUpdatesActivity" >
 
     <RelativeLayout
@@ -29,260 +29,279 @@
             android:textSize="35sp" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DATE"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
-
-        <EditText
-            android:id="@+id/edit_training_date"
-            android:layout_width="190dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/edittext_background_selector"
-            android:drawableEnd="@android:drawable/ic_menu_today"
-            android:drawableRight="@android:drawable/ic_menu_today"
-            android:editable="false"
-            android:textColor="@android:color/white"
-            android:inputType="number"
-            android:paddingLeft="10dp"
-            android:text="12-4-2015"
-            android:textSize="23sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="TIME"
-            android:textColor="@android:color/black"
-            android:textSize="30sp" />
-
-        <EditText
-            android:id="@+id/edit_training_time"
-            android:layout_width="170dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/edittext_background_selector"
-            android:editable="false"
-            android:paddingLeft="10dp"
-            android:textColor="@android:color/white"
-            android:inputType="number"
-            android:text="12-4-2015"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:text="@string/lbl_trainee"
-                android:textColor="@android:color/black"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="@string/lbl_trainer"
-                android:textColor="@android:color/black"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:text="@string/lbl_type"
-                android:textColor="@android:color/black"
-                android:textSize="30sp"
-                android:visibility="visible" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
-                android:text="@string/lbl_time_training"
-                android:textColor="@android:color/black"
-                android:textSize="30sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:text="@string/lbl_trainee_assessment"
-                android:textColor="@android:color/black"
-                android:textSize="30sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:paddingLeft="5dp"
-            android:paddingBottom="10dp"
-            android:orientation="vertical" >
-
-            <EditText
-                android:id="@+id/edit_trainee_name"
-                android:layout_width="450dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edittext_background_selector"
-                android:inputType="text"
-                android:singleLine="true"
-                android:paddingLeft="10dp"
-                android:textColor="@android:color/white"
-                android:textSize="25sp" >
-
-                <requestFocus />
-            </EditText>
-
-            <EditText
-                android:id="@+id/edit_trainer"
-                android:layout_width="450dp"
-                android:layout_height="50dp"
-                android:paddingLeft="10dp"
-                android:layout_marginTop="35dp"
-                android:background="@drawable/edittext_background_selector"
-                android:singleLine="true"
-                android:textColor="@android:color/white"
-                android:textSize="25sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal" >
 
-                <!-- android:id="@+id/spinner_type" -->
-
-                <Spinner
-                    android:id="@+id/spinner_type"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:entries="@array/training_types"
-                    android:text="@string/lbl_room_num"
+                    android:text="DATE"
                     android:textColor="@android:color/black"
-                    android:textSize="25sp" />
+                    android:textSize="30sp" />
 
                 <EditText
-                    android:id="@+id/edit_other"
-                    android:layout_width="150dp"
+                    android:id="@+id/edit_training_date"
+                    android:layout_width="190dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
                     android:background="@drawable/edittext_background_selector"
-                    android:inputType="text"
-                    android:singleLine="true"
+                    android:drawableEnd="@android:drawable/ic_menu_today"
+                    android:drawableRight="@android:drawable/ic_menu_today"
+                    android:editable="false"
+                    android:focusableInTouchMode="true"
+                    android:inputType="number"
                     android:paddingLeft="10dp"
+                    android:text="12-4-2015"
                     android:textColor="@android:color/white"
-                    android:visibility="invisible" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal" >
-
-                <Spinner
-                    android:id="@+id/edit_hrs"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:entries="@array/training_hours"
-                    android:textColor="@android:color/black"
-                    android:textSize="25sp" />
+                    android:textSize="23sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Hrs"
-                    android:textColor="@android:color/black"
-                    android:textSize="25sp" />
-
-                <Spinner
-                    android:id="@+id/edit_mins"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@android:drawable/btn_dropdown"
-                    android:entries="@array/training_mins"
+                    android:text="TIME"
                     android:textColor="@android:color/black"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Mins"
-                    android:textColor="@android:color/black"
-                    android:textSize="25sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal" >
+                    android:textSize="30sp" />
 
                 <EditText
-                    android:id="@+id/stay_from_date"
-                    android:layout_width="210dp"
+                    android:id="@+id/edit_training_time"
+                    android:layout_width="170dp"
                     android:layout_height="50dp"
-                    android:layout_marginTop="20dp"
-                    android:paddingLeft="10dp"
-                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/edittext_background_selector"
-                    android:singleLine="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="15dp"
-                    android:text="1-10"
-                    android:textColor="@android:color/black"
+                    android:editable="false"
+                    android:focusableInTouchMode="true"
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:text="12-4-2015"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
             </LinearLayout>
 
-            <Button
-                android:layout_width="250dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/submit_selector"
-                android:onClick="doSubmit"
-                android:text="Submit" />
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/lbl_trainee"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:text="@string/lbl_trainer"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:text="@string/lbl_type"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:text="@string/lbl_time_training"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="45dp"
+                        android:text="@string/lbl_trainee_assessment"
+                        android:textColor="@android:color/black"
+                        android:textSize="30sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="5dp" >
+
+                    <EditText
+                        android:id="@+id/edit_trainee_name"
+                        android:layout_width="450dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/edittext_background_selector"
+                        android:digits="@string/valid_input"
+                        android:inputType="text"
+                        android:maxLength="30"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" >
+
+                        <requestFocus />
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/edit_trainer"
+                        android:layout_width="450dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="35dp"
+                        android:background="@drawable/edittext_background_selector"
+                        android:digits="@string/valid_input"
+                        android:maxLength="30"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal" >
+
+                        <!-- android:id="@+id/spinner_type" -->
+
+                        <Spinner
+                            android:id="@+id/spinner_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:entries="@array/training_types"
+                            android:text="@string/lbl_room_num"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp" />
+
+                        <EditText
+                            android:id="@+id/edit_other"
+                            android:layout_width="150dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/edittext_background_selector"
+                            android:inputType="text"
+                            android:maxLength="30"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@android:color/white"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal" >
+
+                        <Spinner
+                            android:id="@+id/edit_hrs"
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:entries="@array/training_hours"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="Hrs"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp" />
+
+                        <Spinner
+                            android:id="@+id/edit_mins"
+                            android:layout_width="100dp"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@android:drawable/btn_dropdown"
+                            android:entries="@array/training_mins"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="Mins"
+                            android:textColor="@android:color/black"
+                            android:textSize="25sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:id="@+id/stay_from_date"
+                            android:layout_width="210dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/edittext_background_selector"
+                            android:digits="@string/valid_input"
+                            android:paddingLeft="10dp"
+                            android:singleLine="true"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="15dp"
+                            android:text="1-10"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/submit_selector"
+                        android:onClick="doSubmit"
+                        android:text="Submit" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

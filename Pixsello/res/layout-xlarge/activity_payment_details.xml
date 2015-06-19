@@ -103,16 +103,13 @@
                 android:clickable="true"
                 android:onClick="doNewPayment" >
 
-                <!--
-                     <ImageView
+                <ImageView
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:src="@drawable/payment"
-                -->
-/>
+                    android:src="@drawable/report_an_item" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -175,8 +172,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@null"
-                    android:visibility="invisible"
-                    android:src="@drawable/report_an_item" />
+                    android:src="@drawable/payment_status"
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -195,8 +192,8 @@
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/payment_back"
                 android:clickable="true"
-                android:visibility="gone"
-                android:onClick="doSearch" >
+                android:onClick="doSearch"
+                android:visibility="gone" >
 
                 <ImageView
                     android:layout_width="250dp"

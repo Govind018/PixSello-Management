@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="GUEST NAME"
+                android:text="Guest Name"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
-                android:text="COMPANY"
+                android:text="Company"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
-                android:text="DATE"
+                android:text="Date"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="AMBIENCE"
+                android:text="Ambience"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="FOOD"
+                android:text="Food"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="SERVICES"
+                android:text="Services"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
 
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
-                android:text="FEEDBACK"
+                android:text="Feedback"
                 android:textColor="@android:color/black"
                 android:textSize="30sp" />
         </LinearLayout>
@@ -121,6 +121,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/edittext_background_selector"
                 android:inputType="text"
+                android:digits="@string/valid_input"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@android:color/white"

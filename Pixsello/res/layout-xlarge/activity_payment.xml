@@ -102,6 +102,8 @@
                 android:layout_height="50dp"
                 android:layout_marginRight="40dp"
                 android:paddingLeft="10dp"
+                android:editable="false"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/edittext_background_selector"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
@@ -113,6 +115,8 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
                 android:paddingLeft="10dp"
+                android:editable="false"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/edittext_background_selector"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
@@ -124,6 +128,8 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
                 android:paddingLeft="10dp"
+                android:editable="false"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/edittext_background_selector"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
@@ -135,8 +141,10 @@
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="30dp"
                 android:paddingLeft="10dp"
+                android:editable="false"
+                android:focusableInTouchMode="true"
                 android:background="@drawable/edittext_background_selector"
-                android:inputType="number"
+                android:inputType="none"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
