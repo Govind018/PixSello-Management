@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.belgaum.events.LoginActivity" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="@string/lbl_search_criteria"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/spinner_type"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:background="@android:drawable/btn_dropdown"
+        android:dropDownWidth="230dp"
+        android:entries="@array/search_categories"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/edit_search"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edittext_background_selector"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:hint="@string/edit_email"
+        android:inputType="textEmailAddress"
+        android:maxLength="30" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_selector"
+        android:text="@string/btn_search"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="23sp" />
+
+</LinearLayout>

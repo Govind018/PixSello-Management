@@ -1,0 +1,23 @@
+<resources>
+
+    <!--
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <!-- API 21 theme customizations can go here. -->
+
+        <item name="colorPrimary">#ea5d4b</item>
+        <item name="colorPrimaryDark">#da4d3b</item>
+        <item name="colorAccent">#FF80AB</item>
+        <item name="android:dropDownListViewStyle">@style/mySpinnerStyle</item>
+    </style>
+    
+    <style name="mySpinnerStyle" parent="android:Widget.ListView.DropDown">
+        <item name="android:divider">#ffffff</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+</resources>

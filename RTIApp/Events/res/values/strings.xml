@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Events@BGM</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <!-- Login Screen -->
+    <string name="edit_email">Email</string>
+    <string name="edit_password">Password</string>
+    <string name="text_forgot_password">Forgot Password?</string>
+    <string name="btn_login">Log In</string>
+    
+    <!-- Signup Screen -->
+    <string name="edit_name">Name</string>
+    <string name="edit_mobile">Mobile</string>
+    <string name="edit_table">Table Number</string>
+    <string name="edit_dob">DOB</string>
+    <string name="edit_anniversary">Anniversary</string>
+    <string name="edit_business">Business</string>
+    <string name="edit_address">Address</string>
+    
+    <string name="btn_search">Search</string>
+    <string name="btn_post">Post Event</string>
+    <string name="btn_logout">Log Out</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="btn_upload">Upload Image</string>
+    <string name="text_note">Don\'t have an account yet?</string>
+    <string name="forgot_password_note">Please enter the email address for \n your account.</string>
+    <string name="lbl_email">Enter Email</string>
+    <string name="lbl_search_criteria">Select Search Criteria</string>
+    <string name="lbl_event_name">Event Name</string>
+    <string name="lbl_event_date">Date</string>
+    <string name="lbl_event_time">Event Time</string>
+
+    <color name="btn_normal">#FF6666</color>
+    <color name="btn_pressed">#89FF6666</color>
+    <color name="light_white">#96FFFFFF</color>
+    <color name="tab_released">#E1E1E1</color>
+    <color name="tab_pressed">#ADADAD</color>
+    <color name="tab_strip">#FF6666</color>
+
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="title_section1">Search</string>
+    <string name="title_section2">Aim &amp;Objectives</string>
+    <string name="title_section3">Area 10 Board</string>
+    <string name="title_section4">National Board</string>
+    <string name="title_section5">Events</string>
+    <string name="title_section6">Admin</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+
+    <string-array name="search_categories">
+        <item> Name </item>
+        <item> Email </item>
+        <item> Mobile Number </item>
+        <item> Table Number </item>
+        <item> Business </item>
+        <item> Address </item>
+    </string-array>
+
+    <string name="title_activity_event_detail">EventDetailActivity</string>
+
+    <string-array name="tr_types">
+        <item> Tr </item>
+        <item> Tr </item>
+        <item> Tr </item>
+        <item> Tr </item>
+        <item> Tr </item>
+    </string-array>
+    <string-array name="table_number">
+        <item> 1 </item>
+        <item> 2 </item>
+        <item> 3 </item>
+        <item> 4 </item>
+        <item> 5 </item>
+    </string-array>
+
+    <string name="title_activity_search_list">SearchListActivity</string>
+    <string name="title_activity_search_detail">SearchDetailActivity</string>
+
+</resources>

@@ -1,0 +1,203 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.belgaum.events.SignUpActivity" >
+
+    <!--
+         <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+    </LinearLayout>
+    -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" >
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:dropDownWidth="270dp"
+                android:entries="@array/tr_types"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_name"
+                android:inputType="text"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:dropDownWidth="270dp"
+                android:entries="@array/table_number"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_email"
+                android:inputType="textEmailAddress"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_password"
+                android:inputType="textPassword"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_mobile"
+                android:inputType="number"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_dob"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_dob"
+                android:inputType="number"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_anniversary"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_anniversary"
+                android:inputType="number"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_business"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_business"
+                android:inputType="text"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/edit_address"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/edittext_background_selector"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:hint="@string/edit_address"
+                android:inputType="text"
+                android:maxLength="30"
+                android:textColor="@android:color/white"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btn_image_pick"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@android:drawable/btn_default"
+                android:text="@string/btn_upload"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="23sp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/btn_selector"
+                android:onClick="doSignUp"
+                android:text="@string/btn_signup"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="23sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
