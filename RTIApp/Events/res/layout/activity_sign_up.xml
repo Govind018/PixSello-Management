@@ -176,6 +176,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/btn_upload"
                 android:textAllCaps="false"
+                android:onClick="doUploadImage"
                 android:background="@android:drawable/btn_default"
                 android:textColor="@android:color/black"
                 android:textSize="23sp" />
