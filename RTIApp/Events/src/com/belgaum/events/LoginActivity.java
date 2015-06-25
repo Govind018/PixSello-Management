@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.belgaum.events.util.Util;
 import com.belgaum.networks.IWebRequest;
 import com.belgaum.networks.WebRequestPost;
-import com.belgaum.networks.WebRequestPostLogin;
 
 public class LoginActivity extends Activity {
 
@@ -88,49 +87,61 @@ public class LoginActivity extends Activity {
 		userEmail = editEmail.getText().toString();
 		userPassword = editPassword.getText().toString();
 
-		if (TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPassword)) {
-			Util.showToast(getApplicationContext(), "Enter all Fields..");
-		} else {
-
-			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-			nameValuePair.add(new BasicNameValuePair("email", userEmail));
-			nameValuePair.add(new BasicNameValuePair("passowrd", userPassword));
-
-			String url = Util.LOGIN_URL + userEmail + "/" + userPassword;
-
-			WebRequestPostLogin postData = new WebRequestPostLogin(
-					new IWebRequest() {
-
-						@Override
-						public void onDataArrived(String data) {
-
-							try {
-								JSONObject json = new JSONObject(data);
-
-								String loginStatus = json.getString("error");
-								if (loginStatus.equalsIgnoreCase("true")) {
-									Util.showToast(getApplicationContext(),
-											"Email and password doesn't match");
-								} else {
-
-									Util.storeUserSession(
-											getApplicationContext(), true);
-									finish();
-									startActivity(new Intent(
-											getApplicationContext(),
-											DashBoardActivity.class));
-									overridePendingTransition(
-											R.anim.left_to_right,
-											R.anim.abc_fade_out);
-								}
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
-						}
-					}, nameValuePair, LoginActivity.this);
-
-			postData.execute(url);
+		if(TextUtils.isEmpty(userEmail)){
+			editEmail.setError("Enter Email id");
+			return;
 		}
+
+		if(TextUtils.isEmpty(userPassword)){
+			editPassword.setError("Enter Password");
+			return;
+		}
+
+		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
+		nameValuePair.add(new BasicNameValuePair("email", userEmail));
+		nameValuePair.add(new BasicNameValuePair("passowrd", userPassword));
+
+		String url = Util.LOGIN_URL + userEmail + "/" + userPassword;
+
+		startActivity(new Intent(
+				getApplicationContext(),
+				DashBoardActivity.class));
+		overridePendingTransition(
+				R.anim.left_to_right,
+				R.anim.abc_fade_out);
+
+		//			WebRequestPostLogin postData = new WebRequestPostLogin(
+		//					new IWebRequest() {
+		//
+		//						@Override
+		//						public void onDataArrived(String data) {
+		//
+		//							try {
+		//								JSONObject json = new JSONObject(data);
+		//
+		//								String loginStatus = json.getString("error");
+		//								if (loginStatus.equalsIgnoreCase("true")) {
+		//									Util.showToast(getApplicationContext(),
+		//											"Email and password doesn't match");
+		//								} else {
+		//
+		//									Util.storeUserSession(
+		//											getApplicationContext(), true);
+		//									finish();
+		//									startActivity(new Intent(
+		//											getApplicationContext(),
+		//											DashBoardActivity.class));
+		//									overridePendingTransition(
+		//											R.anim.left_to_right,
+		//											R.anim.abc_fade_out);
+		//								}
+		//							} catch (JSONException e) {
+		//								e.printStackTrace();
+		//							}
+		//						}
+		//					}, nameValuePair, LoginActivity.this);
+		//
+		//			postData.execute(url);
 	}
 
 	public void openDialog(View v) {
