@@ -147,6 +147,13 @@ public class MakeInEntryActivity extends Activity {
 				return;
 			}
 
+			if(!Uttilities.validate(guestName) || !Uttilities.validate(companyName) || !Uttilities.validate(visitingGuest)){
+				Uttilities.showToast(getApplicationContext(),
+						"Please select gender.");
+				return;
+			}
+			
+			
 			final ProgressDialog dialog = new ProgressDialog(
 					MakeInEntryActivity.this);
 			dialog.setMessage("Please Wait..");

@@ -28,31 +28,31 @@ public class AddContactNumberActivity extends Activity {
 	EditText editQuickInfo;
 
 	TextView textQuickInfo;
-	
+
 	String serviceDesc;
 	String contactPerson;
 	String contactNumber;
 	String quickInfo;
 
 	List<NameValuePair> nameValuePair;
-	
+
 	boolean emergency;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_contact_number);
 
 		nameValuePair = new ArrayList<NameValuePair>(4);
-		
+
 		typeOfContact = (TextView) findViewById(R.id.lbl_type_contact);
-		
+
 		editServiceDesc = (EditText) findViewById(R.id.edit_services_description);
 		editContactPerson = (EditText) findViewById(R.id.edit_contact_person);
 		editContactNum = (EditText) findViewById(R.id.edit_contact_number);
 		editQuickInfo = (EditText) findViewById(R.id.edit_contact_quickinfo);
 		textQuickInfo = (TextView) findViewById(R.id.text_quick_info);
-		
+
 		Intent in = getIntent();
 
 		String type = in.getStringExtra("type");
@@ -71,7 +71,7 @@ public class AddContactNumberActivity extends Activity {
 	}
 
 	public void doAddNumber(View v) {
-		
+
 		serviceDesc = editServiceDesc.getText().toString();
 		contactNumber = editContactNum.getText().toString();
 		contactPerson = editContactPerson.getText().toString();
@@ -82,38 +82,47 @@ public class AddContactNumberActivity extends Activity {
 
 			Uttilities.showToast(getApplicationContext(),
 					"Please fill all the fields.");
-		} else {
-
-			nameValuePair.add(new BasicNameValuePair("ServiceDescription", serviceDesc));
-			nameValuePair.add(new BasicNameValuePair("Contactperson",
-					contactPerson));
-			nameValuePair.add(new BasicNameValuePair("ContactNumber",
-					contactNumber));
-			
-			if(emergency){
-				nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
-				//emergency number
-			}else{
-				nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));	// vendor number
-				nameValuePair.add(new BasicNameValuePair("quickinfo",quickInfo));
-			}
-			
-			nameValuePair.add(new BasicNameValuePair("PropertyID",Uttilities.getUserLoginId(getApplicationContext())));
-			
-			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
-
-				@Override
-				public void onDataArrived(String data) {
-					
-					finish();
-					
-					Uttilities.showToast(getApplicationContext(), data);
-
-				}
-			}, nameValuePair);
-
-			postData.execute(Uttilities.CONTACT_ADD_URL);
+			return;
 		}
+
+		if (!Uttilities.validate(serviceDesc)
+				|| !Uttilities.validate(contactPerson)) {
+			Uttilities.showToast(getApplicationContext(), "Invalid Input");
+			return;
+		}
+
+		nameValuePair.add(new BasicNameValuePair("ServiceDescription",
+				serviceDesc));
+		nameValuePair
+				.add(new BasicNameValuePair("Contactperson", contactPerson));
+		nameValuePair
+				.add(new BasicNameValuePair("ContactNumber", contactNumber));
+
+		if (emergency) {
+			nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
+			// emergency number
+		} else {
+			nameValuePair.add(new BasicNameValuePair("Typeofperson", "2")); // vendor
+																			// number
+			nameValuePair.add(new BasicNameValuePair("quickinfo", quickInfo));
+		}
+
+		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+				.getUserLoginId(getApplicationContext())));
+
+		WebRequestPost postData = new WebRequestPost(new IWebRequest() {
+
+			@Override
+			public void onDataArrived(String data) {
+
+				finish();
+
+				Uttilities.showToast(getApplicationContext(), data);
+
+			}
+		}, nameValuePair);
+
+		postData.execute(Uttilities.CONTACT_ADD_URL);
 	}
 
 	public void goBack(View v) {

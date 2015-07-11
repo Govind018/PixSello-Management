@@ -29,7 +29,7 @@ import com.pixsello.management.connectivity.WebRequestPost;
 import com.pixsello.management.util.Uttilities;
 
 public class EmergencyNumbersActivity extends Activity {
-	
+
 	String type;
 
 	TextView title;
@@ -49,13 +49,13 @@ public class EmergencyNumbersActivity extends Activity {
 	Spinner searchSpinner;
 
 	ProgressDialog dialog;
-	
+
 	LinearLayout searchLayout;
-	
+
 	Button search;
-	
+
 	TextView quickInfo;
-	
+
 	RelativeLayout layoutError;
 
 	@Override
@@ -71,7 +71,7 @@ public class EmergencyNumbersActivity extends Activity {
 		search = (Button) findViewById(R.id.button_search);
 		quickInfo = (TextView) findViewById(R.id.text_quickinfo);
 		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
-		
+
 		dialog = new ProgressDialog(EmergencyNumbersActivity.this);
 		dialog.setMessage("Please Wait..!");
 
@@ -88,12 +88,14 @@ public class EmergencyNumbersActivity extends Activity {
 					R.string.lbl_emergency_number));
 			quickInfo.setVisibility(View.INVISIBLE);
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "1"));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+					.getUserLoginId(getApplicationContext())));
 		} else {
 			quickInfo.setVisibility(View.VISIBLE);
 			title.setText(getResources().getString(R.string.lbl_vendor_number));
 			nameValuePair.add(new BasicNameValuePair("Typeofperson", "2"));
-			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+					.getUserLoginId(getApplicationContext())));
 		}
 	}
 
@@ -109,20 +111,29 @@ public class EmergencyNumbersActivity extends Activity {
 		String searchValue = editSearch.getText().toString();
 		List<NameValuePair> nameValuePairSearch = new ArrayList<NameValuePair>(
 				1);
-		nameValuePairSearch.add(new BasicNameValuePair("searchkey", searchValue));
-		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
+		nameValuePairSearch
+				.add(new BasicNameValuePair("searchkey", searchValue));
+		nameValuePairSearch.add(new BasicNameValuePair("PropertyID", Uttilities
+				.getUserLoginId(getApplicationContext())));
 		if (type.equalsIgnoreCase("emr")) {
-			nameValuePairSearch.add(new BasicNameValuePair("Typeofperson", "1"));
-		}else{
-			nameValuePairSearch.add(new BasicNameValuePair("Typeofperson", "2"));
+			nameValuePairSearch
+					.add(new BasicNameValuePair("Typeofperson", "1"));
+		} else {
+			nameValuePairSearch
+					.add(new BasicNameValuePair("Typeofperson", "2"));
 		}
 
-		if(searchValue.isEmpty()){
+		if (searchValue.isEmpty()) {
 			Uttilities.showToast(getApplicationContext(), "Enter search key");
 			return;
 		}
+
+		if (!Uttilities.validate(searchValue)) {
+			Uttilities.showToast(getApplicationContext(), "Invalid Input.");
+			return;
+		}
 		dialog.show();
-		
+
 		getDataFromServer(Uttilities.CONTACT_SEARCH_URL, nameValuePairSearch);
 
 	}
@@ -133,12 +144,12 @@ public class EmergencyNumbersActivity extends Activity {
 		dialog.show();
 		getDataFromServer(Uttilities.CONTACT_GET_URL, nameValuePair);
 	}
-	
-	public void showSearchOptions(View v){
-		
+
+	public void showSearchOptions(View v) {
+
 		searchLayout.setVisibility(View.VISIBLE);
 		search.setVisibility(View.INVISIBLE);
-		
+
 	}
 
 	private void getDataFromServer(String url, List<NameValuePair> parameter) {
@@ -153,21 +164,23 @@ public class EmergencyNumbersActivity extends Activity {
 				JSONObject obj;
 				try {
 					obj = new JSONObject(data);
-					
-					if(obj.has("error_message")){
-						
-//						Uttilities.showToast(getApplicationContext(), obj.getString("error_message"));
+
+					if (obj.has("error_message")) {
+
+						// Uttilities.showToast(getApplicationContext(),
+						// obj.getString("error_message"));
 						dialog.cancel();
 						list.setVisibility(View.GONE);
 						layoutError.setVisibility(View.VISIBLE);
-					}else{
+					} else {
 						JSONArray jsonArray = obj.getJSONArray("result");
 						list.setVisibility(View.VISIBLE);
 						details.clear();
 						for (int i = 0; i < jsonArray.length(); i++) {
 							contact = new ContactDetails();
 							JSONObject jsonObj = jsonArray.getJSONObject(i);
-							contact.setTypeOfPerson(jsonObj.getString("Typeofperson"));
+							contact.setTypeOfPerson(jsonObj
+									.getString("Typeofperson"));
 							contact.setServiceDescription(jsonObj
 									.getString("ServiceDescription"));
 							contact.setContactPerson(jsonObj
@@ -175,10 +188,11 @@ public class EmergencyNumbersActivity extends Activity {
 							contact.setContactNumber(jsonObj
 									.getString("ContactNumber"));
 							contact.setQuickInfo(jsonObj.getString("quickinfo"));
-							details.add(contact);          
+							details.add(contact);
 						}
 
-						adapter = new ContactsListAdapter(getApplicationContext(),
+						adapter = new ContactsListAdapter(
+								getApplicationContext(),
 								R.layout.contact_list_item, details);
 						list.setAdapter(adapter);
 						dialog.cancel();

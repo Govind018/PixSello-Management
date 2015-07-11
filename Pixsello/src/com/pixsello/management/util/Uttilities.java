@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,7 +23,6 @@ import android.widget.Toast;
 
 public class Uttilities {
 
-
 	public static String LOST_FOUND_REPORT_ITEM_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/Reportanitem";
 
 	public static String LOST_FOUND_GET_ALL_ITEM_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getReportanitem";
@@ -31,19 +32,19 @@ public class Uttilities {
 	public static String REPORT_FIND_ITEM_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/Findanitem";
 
 	public static String CONTACT_ADD_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addContactDetail";
-	
+
 	public static String CONTACT_GET_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getContactDetail";
-	
+
 	public static String CONTACT_SEARCH_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/searchContact";
-	
+
 	public static String GUEST_MAKE_IN_ENTRY = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addGuestVisitor";
 
 	public static String GUEST_MAKE_OUT_ENTRY = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/GetGuestVisitor";
 
 	public static String GUEST_UPDATE_OUT_TIME_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/updateOuttime";
-	
+
 	public static String GUEST_PAST_VISITORS_LIST = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/GetAllpastVisitor";
-	
+
 	public static String GUEST_PAST_VISITORS_SEARCH = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/pastVisitorSearch";
 
 	public static String ACTION_REQUIRED_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addActionRequired";
@@ -51,20 +52,21 @@ public class Uttilities {
 	public static String ACTION_ACTIVE_ITEMS_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getActiveActionList";
 
 	public static String ACTION_ITEM_UPDATE_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/updateActionTaken";
-	
+
 	public static String CLOSED_ITEMS_LIST_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getCloseActionList";
 
 	public static String TRAINING_UPDATE_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/TrainingUpdate";
 
 	public static String TRAINING_STAFF_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getStaffList";
-	
+
 	public static String TRAINING_STAFF_SEARCH = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/staff_search";
-	
+
 	public static String FEEDBACK_ADD_NEW = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addGuestFeedback";
-	
+
 	public static String FEEDBACK_PREVIOUS_LIST = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getGuestfeedback";
 
-//	public static String PAST_VISITORS_SEARCH = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getPastVisitors";
+	// public static String PAST_VISITORS_SEARCH =
+	// "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getPastVisitors";
 
 	public static String PAYMENT_ADD_NEW_SERVICES_URL = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/addService";
 
@@ -211,27 +213,45 @@ public class Uttilities {
 		return pref.getString("login_user", "");
 
 	}
-	
-	public static boolean isDateValid(String dateToValidate){
-		
-		if(dateToValidate == null){
+
+	public static boolean isDateValid(String dateToValidate) {
+
+		if (dateToValidate == null) {
 			return false;
 		}
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
 		sdf.setLenient(false);
-		
+
 		try {
-			 
-			//if not valid, it will throw ParseException
+
+			// if not valid, it will throw ParseException
 			Date date = sdf.parse(dateToValidate);
- 
+
 		} catch (ParseException e) {
- 
+
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return true;
+	}
+ 
+	public static boolean validate(String input) {
+
+		Pattern pattern = Pattern.compile("[^a-zA-Z 0-9]");
+		Matcher m = pattern.matcher(input);
+
+		if (!m.find()) {
+			Pattern pattern1 = Pattern.compile("[a-zA-Z]");
+			Matcher m1 = pattern1.matcher(input);
+			if (m1.find()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else { 
+			return false;
+		}
 	}
 }

@@ -57,7 +57,7 @@ public class ReportItemActivity extends ActionBarActivity {
 	private boolean stayDate;
 
 	ProgressDialog dialog;
-	
+
 	boolean photoTaken;
 
 	@Override
@@ -98,7 +98,7 @@ public class ReportItemActivity extends ActionBarActivity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		
+
 		editReportDate.setText(Uttilities.getDate());
 		editReportTime.setText(Uttilities.getTime());
 	}
@@ -130,11 +130,11 @@ public class ReportItemActivity extends ActionBarActivity {
 		stayToDate = editStayToDate.getText().toString();
 
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+		Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
 		bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream);
-		byte [] byte_arr = stream.toByteArray();
+		byte[] byte_arr = stream.toByteArray();
 		String image_str = Base64.encodeToString(byte_arr, 0);
-		
+
 		if (stayFromDate.isEmpty() || stayToDate.isEmpty()
 				|| reportDescription.isEmpty() || reportLocation.isEmpty()
 				|| staffName.isEmpty()) {
@@ -143,22 +143,31 @@ public class ReportItemActivity extends ActionBarActivity {
 					"Please Fill all fields");
 
 		} else {
+
+			 if(!photoTaken){
 			
-			if(!photoTaken){
-				
-				Uttilities.showToast(getApplicationContext(), "Please Take Photo.");
-				return;
-			}
+			 Uttilities.showToast(getApplicationContext(),
+			 "Please Take Photo.");
+			 return;
+			 }
 			
-			if(!checkDate(stayFromDate,stayToDate)){
+			 if(!checkDate(stayFromDate,stayToDate)){
+			 return;
+			 }
+
+			if (!Uttilities.validate(reportDescription)
+					|| !Uttilities.validate(reportLocation)
+					|| !Uttilities.validate(staffName)) {
+				Uttilities.showToast(getApplicationContext(),
+						"Special Characters not allowed.");
 				return;
 			}
 
 			dialog.show();
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(8);
-			nameValuePair
-					.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities
+					.getUserLoginId(getApplicationContext())));
 			nameValuePair.add(new BasicNameValuePair("Date", reportDate));
 			nameValuePair.add(new BasicNameValuePair("Time", reportTime));
 			nameValuePair.add(new BasicNameValuePair("Discriptionofitem",
@@ -171,8 +180,7 @@ public class ReportItemActivity extends ActionBarActivity {
 					stayFromDate));
 			nameValuePair.add(new BasicNameValuePair("Gueststaydateto",
 					stayToDate));
-			nameValuePair.add(new BasicNameValuePair("Photo",image_str));
-			
+			nameValuePair.add(new BasicNameValuePair("Photo", image_str));
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -183,38 +191,39 @@ public class ReportItemActivity extends ActionBarActivity {
 					Uttilities.showToast(getApplicationContext(), data);
 
 					finish();
-					
-//					resetTextFields();
+
+					// resetTextFields();
 				}
 			}, nameValuePair);
 
-			post.execute(Uttilities.LOST_FOUND_REPORT_ITEM_URL);
-		}                                                                
-		
+			 post.execute(Uttilities.LOST_FOUND_REPORT_ITEM_URL);
+		}
 	}
 
-	private boolean checkDate(String dateFrom,String dateTo) {
+	private boolean checkDate(String dateFrom, String dateTo) {
 
 		SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy");
 		try {
 			Date fromDate = format.parse(dateFrom);
 			Date toDate = format.parse(dateTo);
-			
-			// fromdate is greater then to date
-			if(fromDate.compareTo(toDate) > 0){
 
-				Uttilities.showToast(getApplicationContext(), "Invalid date selection.");
+			// fromdate is greater then to date
+			if (fromDate.compareTo(toDate) > 0) {
+
+				Uttilities.showToast(getApplicationContext(),
+						"Invalid date selection.");
 				return false;
-				
-			}else if(toDate.compareTo(fromDate) < 0){
-				
-				Uttilities.showToast(getApplicationContext(), "Invalid date selection.");
+
+			} else if (toDate.compareTo(fromDate) < 0) {
+
+				Uttilities.showToast(getApplicationContext(),
+						"Invalid date selection.");
 				return false;
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return true;
 	}
 
@@ -251,18 +260,17 @@ public class ReportItemActivity extends ActionBarActivity {
 			month = monthOfYear;
 			day = dayOfMonth;
 
-
 			if (stayDate) {
 
-				 editStayFromDate.setText(new StringBuilder().append(day)
-				 .append("-").append(month + 1).append("-").append(year)
-				 .append(" "));
+				editStayFromDate.setText(new StringBuilder().append(day)
+						.append("-").append(month + 1).append("-").append(year)
+						.append(" "));
 
 			} else {
 
-				 editStayToDate.setText(new StringBuilder().append(day)
-				 .append("-").append(month + 1).append("-").append(year)
-				 .append(" "));
+				editStayToDate.setText(new StringBuilder().append(day)
+						.append("-").append(month + 1).append("-").append(year)
+						.append(" "));
 			}
 		}
 	};

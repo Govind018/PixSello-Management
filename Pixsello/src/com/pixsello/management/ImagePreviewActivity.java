@@ -33,6 +33,10 @@ public class ImagePreviewActivity extends Activity {
 		int screenHeight = display.heightPixels;
 
 		Bitmap m = convert2Bitmap(image);
+		if(m == null){
+			this.finish();
+			return;
+		}
 		Bitmap resizedImage = Uttilities.resizeImage(screenWidth, screenHeight,
 				m);
 

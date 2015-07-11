@@ -155,6 +155,11 @@ public class FindItemActivity extends Activity {
 					"Please enter the item name.");
 			return;
 		}
+		
+		if(!Uttilities.validate(item.getText().toString())){
+			Uttilities.showToast(getApplicationContext(), "Special Characters not allowed.");
+			return;
+		}
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(2);
 		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));

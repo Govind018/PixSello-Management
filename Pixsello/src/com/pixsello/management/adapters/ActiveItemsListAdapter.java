@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
@@ -18,9 +19,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.pixsello.management.ImagePreviewActivity;
 import com.pixsello.management.R;
 import com.pixsello.management.action.ActionItem;
 import com.pixsello.management.action.UpdateActionDialog;
+import com.pixsello.management.guest.Entity;
 
 public class ActiveItemsListAdapter extends ArrayAdapter<ActionItem> {
 
@@ -139,6 +142,28 @@ public class ActiveItemsListAdapter extends ArrayAdapter<ActionItem> {
 				UpdateActionDialog dialog = new UpdateActionDialog();
 				dialog.setArguments(bundle);
 				dialog.show(thisManger, "");
+			}
+		});
+
+		holder.image.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				ActionItem itemPhoto = items.get(position);
+
+				if (itemPhoto != null) {
+
+					byte[] imageAsBytes = Base64.decode(itemPhoto.getPhoto()
+							.getBytes(), Base64.DEFAULT);
+
+					Intent intent = new Intent(thisContext,
+							ImagePreviewActivity.class);
+					intent.putExtra("image", imageAsBytes);
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					thisContext.startActivity(intent);
+
+				}
 			}
 		});
 

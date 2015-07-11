@@ -62,8 +62,8 @@ public class ActiveItemsListActivity extends Activity implements OnCompleteListe
 		dailog.setMessage("Please Wait..");
 		;
 
-//		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
-//		layoutError.setVisibility(View.GONE);
+		layoutError = (RelativeLayout) findViewById(R.id.layout_error);
+		layoutError.setVisibility(View.GONE);
 
 		adapter = new ActiveItemsListAdapter(getApplicationContext(),
 				getFragmentManager(), R.layout.active_list_item, itemsData);

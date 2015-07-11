@@ -132,6 +132,11 @@ public class PastVisitorsActivity extends Activity {
 					searchValue));
 			nameValuePairSearch.add(new BasicNameValuePair("PropertyID",
 					Uttilities.getPROPERTY_ID()));
+			
+			if(Uttilities.validate(searchValue)){
+				Uttilities.showToast(getApplicationContext(), "Invalid Input.");
+				return;
+			}
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -139,53 +144,6 @@ public class PastVisitorsActivity extends Activity {
 				public void onDataArrived(String data) {
 
 					populateData(data);
-					// try {
-					//
-					// visitorsData.clear();
-					//
-					// Entity guest;
-					//
-					// JSONObject obj = new JSONObject(data);
-					//
-					// if (obj.has("error_message")) {
-					// dialog.cancel();
-					// guestList.setVisibility(View.GONE);
-					// layoutError.setVisibility(View.VISIBLE);
-					// // Uttilities.showToast(getApplicationContext(),
-					// // obj.getString("error_message"));
-					//
-					// } else {
-					//
-					// JSONArray jsonArray = obj.getJSONArray("result");
-					// guestList.setVisibility(View.VISIBLE);
-					//
-					// for (int i = 0; i < jsonArray.length(); i++) {
-					// guest = new Entity();
-					// JSONObject jsonObj = jsonArray.getJSONObject(i);
-					// guest.setDate(jsonObj.getString("Date"));
-					// guest.setTime(jsonObj.getString("Time"));
-					// guest.setGuestName(jsonObj.getString("GuestName"));
-					// guest.setCompanyName(jsonObj.getString("Company"));
-					// guest.setGender(jsonObj.getString("Gender"));
-					// guest.setPhoto(jsonObj.getString("Photo"));
-					// guest.setInTime(jsonObj.getString("InTime"));
-					// guest.setOutTime(jsonObj.getString("OutTime"));
-					//
-					// visitorsData.add(guest);
-					// }
-					// dialog.cancel();
-					// adapter = new PastVisitorsListAdapter(
-					// getApplicationContext(),
-					// R.layout.visitors_list_item, visitorsData);
-					// guestList.setAdapter(adapter);
-					//
-					// System.out.println(jsonArray);
-					//
-					// }
-					//
-					// } catch (JSONException e) {
-					// e.printStackTrace();
-					// }
 				}
 			}, nameValuePairSearch);
 			post.execute(Uttilities.GUEST_PAST_VISITORS_SEARCH);
