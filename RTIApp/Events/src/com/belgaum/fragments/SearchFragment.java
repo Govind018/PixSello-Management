@@ -1,6 +1,13 @@
 package com.belgaum.fragments;
 
-import android.content.Intent;
+import java.util.ArrayList;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,10 +16,15 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.belgaum.events.R;
-import com.belgaum.events.SearchListActivity;
+import com.belgaum.events.adapter.SearchListAdapter;
+import com.belgaum.events.util.Entity;
+import com.belgaum.events.util.Util;
+import com.belgaum.networks.IWebRequest;
+import com.belgaum.networks.WebRequestPost;
 
 public class SearchFragment extends Fragment {
 
@@ -31,6 +43,10 @@ public class SearchFragment extends Fragment {
 	EditText editSearchKey;
 
 	Button btnSearch;
+
+	private String searchByKey;
+
+	ListView listUsers;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +73,7 @@ public class SearchFragment extends Fragment {
 		btnStripBusiness = convertView.findViewById(R.id.bottom_strip_business);
 		btnStripTable = convertView.findViewById(R.id.bottom_strip_table);
 		btnStripName = convertView.findViewById(R.id.bottom_strip_name);
+		listUsers = (ListView) convertView.findViewById(R.id.list_search);
 
 		initUI();
 
@@ -68,8 +85,65 @@ public class SearchFragment extends Fragment {
 		@Override
 		public void onClick(View v) {
 
-			startActivity(new Intent(getActivity(), SearchListActivity.class));
+//			Util.showToast(getActivity(), searchByKey);
 
+			String searchBy = editSearchKey.getText().toString();
+
+			if (searchBy.isEmpty()) {
+				Util.showToast(getActivity(), "Please Enter key to search.");
+				return;
+			}
+
+			ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
+			nameValuePair.add(new BasicNameValuePair("searchby", searchByKey));
+			nameValuePair.add(new BasicNameValuePair("keyword", searchBy));
+
+			WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+				@Override
+				public void onDataArrived(String data) {
+
+					System.out.println(data);
+
+					try {
+						ArrayList<Entity> listOfUsers = new ArrayList<Entity>();
+						JSONObject jsonObj = new JSONObject(data);
+						JSONArray jsonArray = jsonObj.getJSONArray("details");
+						System.out.println(jsonArray);
+
+						if (jsonArray.length() == 0) {
+							Util.showToast(getActivity(), "No Records Found.");
+							listOfUsers.clear();
+							return;
+						}
+
+						for (int i = 0; i < jsonArray.length(); i++) {
+							Entity entity = new Entity();
+							JSONObject json = jsonArray.getJSONObject(i);
+							entity.setName(json.getString("name"));
+							entity.setId(json.getString("id"));
+							entity.setEmail(json.getString("email"));
+							entity.setMobile(json.getString("mobile"));
+							entity.setBusiness(json.getString("business"));
+							entity.setImage(json.getString("image"));
+							listOfUsers.add(entity);
+						}
+
+						SearchListAdapter adapter = new SearchListAdapter(
+								getActivity(), R.layout.search_item_row,
+								listOfUsers);
+						listUsers.setAdapter(adapter);
+
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}, nameValuePair, getActivity(), "Finding people.");
+
+			post.execute(Util.SEARCH_URL);
+
+			// startActivity(new Intent(getActivity(),
+			// SearchListActivity.class));
 		}
 	};
 
@@ -103,6 +177,8 @@ public class SearchFragment extends Fragment {
 					R.color.tab_pressed));
 			btnStripName.setBackgroundColor(getResources().getColor(
 					R.color.tab_pressed));
+
+			searchByKey = "table_number";
 		}
 	};
 
@@ -126,7 +202,7 @@ public class SearchFragment extends Fragment {
 					R.color.tab_pressed));
 			btnStripName.setBackgroundColor(getResources().getColor(
 					R.color.tab_strip));
-
+			searchByKey = "name";
 		}
 	};
 
@@ -148,5 +224,6 @@ public class SearchFragment extends Fragment {
 		btnStripName.setBackgroundColor(getResources().getColor(
 				R.color.tab_pressed));
 
+		searchByKey = "business";
 	}
 }

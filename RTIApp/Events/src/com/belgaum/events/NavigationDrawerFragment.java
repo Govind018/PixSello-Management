@@ -142,7 +142,7 @@ public class NavigationDrawerFragment extends Fragment {
 		@Override
 		public void onClick(View v) {
 
-			Util.storeUserSession(getActivity(), false);
+			Util.storeUserSession(getActivity(), false,false);
 			getActivity().finish();
 			startActivity(new Intent(getActivity().getApplicationContext(),
 					LoginActivity.class));

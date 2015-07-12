@@ -62,6 +62,8 @@ public class WebRequestPost extends AsyncTask<String, Integer, String>{
 			String json_obj = convertStreamToString(response.getEntity()
 					.getContent());
                        
+			System.out.println(json_obj + "JSON");
+			
 			try {
 				JSONObject json = new JSONObject(json_obj);
 				result = json.toString();

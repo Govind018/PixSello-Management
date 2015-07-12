@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.belgaum.events.adapter.EventDetailAdapter;
 
+//Not using
 public class EventDetailActivity extends ActionBarActivity {
 
 	ListView list;

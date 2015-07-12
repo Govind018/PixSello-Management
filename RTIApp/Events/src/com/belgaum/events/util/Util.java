@@ -6,17 +6,24 @@ import java.util.regex.Pattern;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.preference.PreferenceManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.Toast;
 
 public class Util {
 
-	public static String LOGIN_URL = "http://www.dhairyasheel.com/pk/api/index.php/login/";
+	public static String LOGIN_URL = "http://www.dhairyasheel.com/pk/api/index.php/applogin";
 
-	public static String SIGNUP_URL = "http://www.dhairyasheel.com/pk/api/index.php/signup";
+	public static String SIGNUP_URL = "http://www.dhairyasheel.com/pk/api/index.php/appregister";
 
 	public static String FORGOT_PASSWORD_URL = "http://www.dhairyasheel.com/pk/api/index.php/forgotpassword";
 
+	public static String SIGNUP_PREFIX_URL = "http://www.dhairyasheel.com/pk/api/index.php/prefixtablenumber";
+	
+	public static String SEARCH_URL = "http://www.dhairyasheel.com/pk/api/index.php/search";
+	
+	public static String EVETNS_URL = "http://www.dhairyasheel.com/pk/api/index.php/getallevents";
+	
 	public static void showToast(Context context, String text) {
 
 		Toast.makeText(context, text, Toast.LENGTH_LONG).show();
@@ -34,12 +41,14 @@ public class Util {
 		return false;
 	}
 
-	public static void storeUserSession(Context context,boolean status) {
+	public static void storeUserSession(Context context, boolean loginStatus,
+			boolean signUpStatus) {
 
 		SharedPreferences pref = context.getSharedPreferences("login_status",
 				Context.MODE_PRIVATE);
 		Editor editor = pref.edit();
-		editor.putBoolean("login", status);
+		editor.putBoolean("login", loginStatus);
+		editor.putBoolean("register", signUpStatus);
 		editor.commit();
 
 	}
@@ -50,5 +59,35 @@ public class Util {
 				Context.MODE_PRIVATE);
 		return pref.getBoolean("login", false);
 
+	}
+
+	public static boolean isUserRegistered(Context context) {
+
+		SharedPreferences pref = context.getSharedPreferences("login_status",
+				Context.MODE_PRIVATE);
+		return pref.getBoolean("register", false);
+
+	}
+
+	public static boolean isNetWorkConnected(Context context) {
+
+		ConnectivityManager manager = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo nInfo = manager.getActiveNetworkInfo();
+
+		if (nInfo != null && nInfo.isConnected()) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isValidEmail(String email) {
+		String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+		Matcher matcher = pattern.matcher(email);
+		return matcher.matches();
 	}
 }

@@ -1,5 +1,6 @@
 package com.belgaum.events;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.util.Locale;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,21 +27,28 @@ import android.os.ParcelFileDescriptor;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.belgaum.events.adapter.SpinnerCustomAdapter;
+import com.belgaum.events.util.Entity;
 import com.belgaum.events.util.Util;
 import com.belgaum.networks.IWebRequest;
 import com.belgaum.networks.WebRequestPost;
 
 public class SignUpActivity extends ActionBarActivity implements
-		OnClickListener {
+		OnClickListener, IWebRequest {
 
 	EditText editName;
 
@@ -55,15 +64,16 @@ public class SignUpActivity extends ActionBarActivity implements
 
 	EditText editAddress;
 
-	EditText editDOB;
+	Button editDOB;
 
-	EditText editAnnivarsary;
+	Button editAnnivarsary;
 
 	String name;
 	String email;
 	String password;
 	String mobile;
 	String tableNumber;
+	String prefixName;
 	String business;
 	String address;
 
@@ -76,6 +86,24 @@ public class SignUpActivity extends ActionBarActivity implements
 	boolean dob;
 
 	int IMAGE_PICKER_SELECT = 100;
+
+	Spinner spinnerPrefixItems;
+
+	Spinner spinnerTableNames;
+
+	private String prefixSelected;
+
+	private String tableSelected;
+
+	String prefixIndex;
+
+	String tableIndex;
+
+	ArrayList<Entity> tables;
+
+	ArrayList<Entity> prefix;
+
+	String image_str;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,21 +133,92 @@ public class SignUpActivity extends ActionBarActivity implements
 		getSupportActionBar().setCustomView(v, params);
 
 		initLayout();
+
+		initValues();
+
+		if (Util.isUserRegistered((getApplicationContext()))) {
+			finish();
+			startActivity(new Intent(getApplicationContext(),
+					DashBoardActivity.class));
+			overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
+		}
+	}
+
+	private void initValues() {
+
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+			@Override
+			public void onDataArrived(String data) {
+				try {
+
+					tables = new ArrayList<Entity>();
+					prefix = new ArrayList<Entity>();
+					JSONObject jsonObjDetails = new JSONObject(data);
+					JSONObject objDetails = jsonObjDetails.getJSONObject("details");
+					JSONArray arrayTable = objDetails.getJSONArray("table");
+
+					for (int i = 0; i < arrayTable.length(); i++) {
+
+						Entity entity = new Entity();
+						JSONObject obj = arrayTable.getJSONObject(i);
+						entity.setTableId(obj.getString("id"));
+						entity.setTableName(obj.getString("name"));
+						tables.add(entity);
+					}
+
+					JSONArray arrayPrefix = objDetails.getJSONArray("prefix");
+
+					for (int i = 0; i < arrayPrefix.length(); i++) {
+
+						Entity entity = new Entity();
+						JSONObject obj = arrayPrefix.getJSONObject(i);
+						entity.setPrefixId(obj.getString("id"));
+						entity.setPrefixName(obj.getString("prefix"));
+						prefix.add(entity);
+					}
+
+					SpinnerCustomAdapter adapterPrefix = new SpinnerCustomAdapter(
+							getApplicationContext(), R.layout.spinner_item_row,
+							prefix, "Prefix");
+					adapterPrefix
+							.setDropDownViewResource(android.R.layout.simple_spinner_item);
+					spinnerPrefixItems.setAdapter(adapterPrefix);
+
+					SpinnerCustomAdapter adapterTable = new SpinnerCustomAdapter(
+							getApplicationContext(), R.layout.spinner_item_row,
+							tables, "Table");
+					adapterTable
+							.setDropDownViewResource(android.R.layout.simple_spinner_item);
+					spinnerTableNames.setAdapter(adapterTable);
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, nameValuePairs, SignUpActivity.this, "");
+
+		post.execute(Util.SIGNUP_PREFIX_URL);
 	}
 
 	private void initLayout() {
 
 		editName = (EditText) findViewById(R.id.edit_name);
 		editEmail = (EditText) findViewById(R.id.edit_email);
-		editPassword = (EditText) findViewById(R.id.edit_password);
 		editMobile = (EditText) findViewById(R.id.edit_mobile);
-		// editTableNumber = (EditText) findViewById(R.id.edit_table);
 		editBusiness = (EditText) findViewById(R.id.edit_business);
 		editAddress = (EditText) findViewById(R.id.edit_address);
-		editDOB = (EditText) findViewById(R.id.edit_dob);
+		editDOB = (Button) findViewById(R.id.edit_dob);
 		editDOB.setOnClickListener(this);
-		editAnnivarsary = (EditText) findViewById(R.id.edit_anniversary);
+		editAnnivarsary = (Button) findViewById(R.id.edit_anniversary);
 		editAnnivarsary.setOnClickListener(this);
+
+		spinnerPrefixItems = (Spinner) findViewById(R.id.spinner_prefix);
+		spinnerPrefixItems.setOnItemSelectedListener(prefixSelectedListener);
+		spinnerTableNames = (Spinner) findViewById(R.id.spinner_table_name);
+		spinnerTableNames.setOnItemSelectedListener(tableSelectedListener);
 	}
 
 	public void doUploadImage(View v) {
@@ -134,41 +233,44 @@ public class SignUpActivity extends ActionBarActivity implements
 
 		name = editName.getText().toString();
 		email = editEmail.getText().toString();
-		password = editPassword.getText().toString();
 		mobile = editMobile.getText().toString();
-		tableNumber = editTableNumber.getText().toString();
 		business = editBusiness.getText().toString();
 		address = editAddress.getText().toString();
-
-		List<NameValuePair> dataToSend = new ArrayList<NameValuePair>();
-		dataToSend.add(new BasicNameValuePair("name", name));
-		dataToSend.add(new BasicNameValuePair("email", email));
-		dataToSend.add(new BasicNameValuePair("password", password));
-		dataToSend.add(new BasicNameValuePair("mobile", mobile));
-		dataToSend.add(new BasicNameValuePair("table_number", tableNumber));
-		dataToSend.add(new BasicNameValuePair("business", business));
-		dataToSend.add(new BasicNameValuePair("address", address));
-
-		// if (Util.valid(name)) {
-		// Util.showToast(getApplicationContext(), "ds");
-		//
-		// }else{
-		// Util.showToast(getApplicationContext(), "wrwr");
-		// }
+		String dob = editDOB.getText().toString();
+		String anv = editAnnivarsary.getText().toString();
 
 		if (TextUtils.isEmpty(name) || TextUtils.isEmpty(email)
-				|| TextUtils.isEmpty(password) || TextUtils.isEmpty(mobile)
-				|| TextUtils.isEmpty(tableNumber)
-				|| TextUtils.isEmpty(business) || TextUtils.isEmpty(address)) {
-
+				|| TextUtils.isEmpty(mobile) || TextUtils.isEmpty(business)
+				|| TextUtils.isEmpty(address)) {
 			Util.showToast(getApplicationContext(), "Please Fill all Fields.");
 		} else {
 
 			if (mobile.length() < 10) {
 				Util.showToast(getApplicationContext(),
-						"Invalid mobile number.");
+						"Invalid Mobile Number.");
 				return;
 			}
+
+			if (!Util.isValidEmail(email)) {
+				editEmail.setFocusable(true);
+				Util.showToast(getApplicationContext(),
+						"Invalid Email address.");
+				return;
+			}
+
+			List<NameValuePair> dataToSend = new ArrayList<NameValuePair>();
+			dataToSend.add(new BasicNameValuePair("prefix", prefixIndex));
+			dataToSend.add(new BasicNameValuePair("name", name));
+			dataToSend.add(new BasicNameValuePair("table_number", tableIndex));
+			dataToSend.add(new BasicNameValuePair("email", email));
+			dataToSend.add(new BasicNameValuePair("mobile", mobile));
+			dataToSend.add(new BasicNameValuePair("business", business));
+			dataToSend.add(new BasicNameValuePair("address", address));
+			dataToSend.add(new BasicNameValuePair("dob", dob));
+			dataToSend.add(new BasicNameValuePair("anniversary", anv));
+			dataToSend.add(new BasicNameValuePair("chairman", "0"));
+			dataToSend.add(new BasicNameValuePair("password", "nopassword"));
+			dataToSend.add(new BasicNameValuePair("image", image_str));
 
 			WebRequestPost postData = new WebRequestPost(new IWebRequest() {
 
@@ -185,6 +287,10 @@ public class SignUpActivity extends ActionBarActivity implements
 									json.getString("message"));
 						} else {
 							finish();
+							Util.storeUserSession(SignUpActivity.this, true,
+									true);
+							startActivity(new Intent(getApplicationContext(),
+									DashBoardActivity.class));
 							Util.showToast(getApplicationContext(),
 									json.getString("message"));
 						}
@@ -239,6 +345,10 @@ public class SignUpActivity extends ActionBarActivity implements
 		if (resultCode == RESULT_OK && requestCode == IMAGE_PICKER_SELECT) {
 
 			Bitmap map = getDataFromGallery(data);
+			ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+			map.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+			byte[] image = bStream.toByteArray();
+			image_str = Base64.encodeToString(image, 0);
 
 			Util.showToast(getApplicationContext(), "Image Selected.");
 		}
@@ -249,15 +359,11 @@ public class SignUpActivity extends ActionBarActivity implements
 
 		switch (v.getId()) {
 		case R.id.edit_dob:
-			// Toast.makeText(getApplicationContext(), "fsd",
-			// Toast.LENGTH_LONG).show();
 			dob = true;
 			datePickerDialog.show();
 			break;
 
 		case R.id.edit_anniversary:
-			// Toast.makeText(getApplicationContext(), "fsdsda",
-			// Toast.LENGTH_LONG).show();
 			datePickerDialog.show();
 			break;
 
@@ -319,4 +425,43 @@ public class SignUpActivity extends ActionBarActivity implements
 		return map;
 
 	}
+
+	@Override
+	public void onDataArrived(String data) {
+
+	}
+
+	OnItemSelectedListener tableSelectedListener = new OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view,
+				int position, long id) {
+
+			Entity entity = tables.get(position);
+			tableIndex = entity.getTableId();
+
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+
+		}
+	};
+
+	OnItemSelectedListener prefixSelectedListener = new OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view,
+				int position, long id) {
+
+			Entity entity = prefix.get(position);
+			prefixIndex = entity.getPrefixId();
+
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) {
+
+		}
+	};
 }
