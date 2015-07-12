@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:contentDescription="@null"
-        android:src="@drawable/icon" />
+        android:src="@drawable/app_logo" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,6 +36,7 @@
         android:layout_marginTop="40dp"
         android:singleLine="true"
         android:hint="@string/edit_email"
+        android:textColor="@android:color/white"
         android:background="@drawable/edittext_background_selector"
         android:inputType="textEmailAddress"
         android:maxLength="30" />
@@ -47,6 +48,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
         android:singleLine="true"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:background="@drawable/edittext_background_selector"
         android:hint="@string/edit_password"
@@ -63,25 +65,15 @@
         android:textColor="@android:color/white"
         android:textSize="23sp"
         android:textAllCaps="false"
-        android:onClick="doLogin"
+        android:onClick="directLogin"
         android:text="@string/btn_login" />
-
-    <TextView
-        android:id="@+id/text_forgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/light_white"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:onClick="openDialog"
-        android:text="@string/text_forgot_password" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
         android:gravity="center|bottom"
+        android:visibility="invisible"
         android:orientation="horizontal" >
 
         <TextView

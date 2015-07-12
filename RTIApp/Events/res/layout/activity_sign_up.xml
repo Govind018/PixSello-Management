@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
+    android:paddingBottom="5dp"
     tools:context="com.belgaum.events.SignUpActivity" >
 
     <!--
@@ -32,14 +33,13 @@
             android:paddingRight="15dp" >
 
             <Spinner
-                android:id="@+id/spinner1"
+                android:id="@+id/spinner_prefix"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:dropDownWidth="270dp"
-                android:entries="@array/tr_types"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 
@@ -58,14 +58,13 @@
                 android:textColor="@android:color/white" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/spinner_table_name"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:dropDownWidth="270dp"
-                android:entries="@array/table_number"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 
@@ -83,7 +82,8 @@
                 android:maxLength="30"
                 android:textColor="@android:color/white" />
 
-            <EditText
+            <!--
+                 <EditText
                 android:id="@+id/edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -96,6 +96,7 @@
                 android:inputType="textPassword"
                 android:maxLength="30"
                 android:textColor="@android:color/white" />
+            -->
 
             <EditText
                 android:id="@+id/edit_mobile"
@@ -108,38 +109,9 @@
                 android:gravity="center"
                 android:hint="@string/edit_mobile"
                 android:inputType="number"
-                android:maxLength="30"
+                android:maxLength="10"
                 android:textColor="@android:color/white" />
 
-            <EditText
-                android:id="@+id/edit_dob"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/edittext_background_selector"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:hint="@string/edit_dob"
-                android:inputType="number"
-                android:maxLength="30"
-                android:textColor="@android:color/white" />
-            
-            
-            <EditText
-                android:id="@+id/edit_anniversary"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/edittext_background_selector"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:hint="@string/edit_anniversary"
-                android:inputType="number"
-                android:maxLength="30"
-                android:textColor="@android:color/white" />
-            
             <EditText
                 android:id="@+id/edit_business"
                 android:layout_width="match_parent"
@@ -169,15 +141,41 @@
                 android:textColor="@android:color/white" />
 
             <Button
+                android:id="@+id/edit_dob"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_background_selector"
+                android:gravity="center"
+                android:hint="@string/edit_dob"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="normal" />
+
+            <Button
+                android:id="@+id/edit_anniversary"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_background_selector"
+                android:gravity="center"
+                android:hint="@string/edit_anniversary"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="normal" />
+
+            <Button
                 android:id="@+id/btn_image_pick"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
+                android:background="@android:drawable/btn_default"
+                android:onClick="doUploadImage"
                 android:text="@string/btn_upload"
                 android:textAllCaps="false"
-                android:onClick="doUploadImage"
-                android:background="@android:drawable/btn_default"
                 android:textColor="@android:color/black"
                 android:textSize="23sp" />
 
@@ -185,7 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/btn_selector"
                 android:onClick="doSignUp"
                 android:text="@string/btn_signup"

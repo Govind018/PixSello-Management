@@ -33,13 +33,13 @@
             android:paddingRight="15dp" >
 
             <Spinner
+                 android:id="@+id/spinner_prefix"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:dropDownWidth="270dp"
-                android:entries="@array/tr_types"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 
@@ -59,13 +59,13 @@
                 android:textSize="25sp" />
 
             <Spinner
+                android:id="@+id/spinner_table_name"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:background="@android:drawable/btn_dropdown"
                 android:dropDownWidth="270dp"
-                android:entries="@array/table_number"
                 android:gravity="center"
                 android:spinnerMode="dropdown" />
 
@@ -84,7 +84,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
-            <EditText
+<!--             <EditText
                 android:id="@+id/edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
@@ -98,7 +98,7 @@
                 android:maxLength="30"
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
-
+ -->
             <EditText
                 android:id="@+id/edit_mobile"
                 android:layout_width="match_parent"
@@ -110,40 +110,10 @@
                 android:gravity="center"
                 android:hint="@string/edit_mobile"
                 android:inputType="number"
-                android:maxLength="30"
+                android:maxLength="10"
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
-
-            <EditText
-                android:id="@+id/edit_dob"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_background_selector"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:hint="@string/edit_dob"
-                android:inputType="number"
-                android:maxLength="30"
-                android:textColor="@android:color/white"
-                android:textSize="25sp" />
-
-            <EditText
-                android:id="@+id/edit_anniversary"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/edittext_background_selector"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:hint="@string/edit_anniversary"
-                android:inputType="number"
-                android:maxLength="30"
-                android:textColor="@android:color/white"
-                android:textSize="25sp" />
-
+            
             <EditText
                 android:id="@+id/edit_business"
                 android:layout_width="match_parent"
@@ -173,6 +143,30 @@
                 android:maxLength="30"
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
+            
+           <Button
+                android:id="@+id/edit_dob"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_background_selector"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:hint="@string/edit_dob"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/edit_anniversary"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_background_selector"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:hint="@string/edit_anniversary"
+                android:textColor="@android:color/white" />
 
             <Button
                 android:id="@+id/btn_image_pick"
