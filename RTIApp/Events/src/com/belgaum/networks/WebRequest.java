@@ -1,10 +1,8 @@
 package com.belgaum.networks;
 
-import java.util.Map;
-
 import org.json.JSONObject;
 
-import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
@@ -14,8 +12,7 @@ import com.belgaum.events.AppController;
 
 public class WebRequest {
 
-	public static void addNewRequestQueue(final Context context, String url,
-			final Map<String, String> values) {
+	public static void addNewRequestQueue(final Fragment context, String url) {
 
 		JsonObjectRequest request = new JsonObjectRequest(Method.POST, url,
 				null, new Response.Listener<JSONObject>() {

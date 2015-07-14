@@ -22,11 +22,11 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 	int inflatableRes = 0;
 
 	ArrayList<Entity> items;
-	
+
 	String typeOfScreen;
 
 	public CustomAdapter(Context context, int resource,
-			ArrayList<Entity> objects,String type) {
+			ArrayList<Entity> objects, String type) {
 		super(context, resource, objects);
 		thisContext = context;
 		inflatableRes = resource;
@@ -56,21 +56,29 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 		}
 
 		Entity entity = items.get(position);
-		
+
 		holder.image = (ImageView) convertView.findViewById(R.id.image);
-		if(typeOfScreen.equalsIgnoreCase("Events")){
-			holder.textName = (TextView) convertView.findViewById(R.id.text_item_name);
+		if (typeOfScreen.equalsIgnoreCase("Events")) {
+			holder.textName = (TextView) convertView
+					.findViewById(R.id.text_item_name);
 			holder.textName.setText(entity.getName());
-		}else if(typeOfScreen.equalsIgnoreCase("Area")){
-			holder.textPosition = (TextView) convertView.findViewById(R.id.text_item_position);
-			holder.textName = (TextView) convertView.findViewById(R.id.text_item_name);
-//			holder.textName.setText(items.get(position));
+		} else if (typeOfScreen.equalsIgnoreCase("Area")) {
+			holder.textPosition = (TextView) convertView    
+					.findViewById(R.id.text_item_position);
+			holder.textName = (TextView) convertView
+					.findViewById(R.id.text_item_name);
+			// holder.textName.setText(items.get(position));
+		} else {
+			holder.textPosition = (TextView) convertView
+					.findViewById(R.id.text_item_position);
+			holder.textName = (TextView) convertView
+					.findViewById(R.id.text_item_name);
+			holder.textName.setText(entity.getPost() + " " + entity.getName());
 		}
-		
 		return convertView;
 	}
-  
-	 private class ViewHolder {
+
+	private class ViewHolder {
 
 		TextView textName;
 		TextView textPosition;

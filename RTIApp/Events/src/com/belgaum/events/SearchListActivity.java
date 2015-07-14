@@ -15,6 +15,6 @@ public class SearchListActivity extends ActionBarActivity {
 	
 	public void showDetails(View v){
 		
-		startActivity(new Intent(getApplicationContext(), SearchDetailActivity.class));
+		startActivity(new Intent(getApplicationContext(), DetailsActivity.class));
 	}
 }

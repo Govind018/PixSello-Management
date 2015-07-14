@@ -59,10 +59,18 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 		init();
 
 		if (Util.isUserLoggedIn(getApplicationContext())) {
-			finish();
-			startActivity(new Intent(getApplicationContext(),
-					DashBoardActivity.class));
-			overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
+			
+			if(Util.isUserRegistered(getApplicationContext())){
+				finish();
+				startActivity(new Intent(getApplicationContext(),
+						DashBoardActivity.class));
+				overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
+			}else{
+				finish();
+				startActivity(new Intent(getApplicationContext(),
+						SignUpActivity.class));
+				overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
+			}
 		}
 	}
 
@@ -111,7 +119,7 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 		}
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-		nameValuePair.add(new BasicNameValuePair("email", userEmail));
+		nameValuePair.add(new BasicNameValuePair("user", userEmail));
 		nameValuePair.add(new BasicNameValuePair("passowrd", userPassword));
 
 		Map<String, String> values = new HashMap<String, String>();

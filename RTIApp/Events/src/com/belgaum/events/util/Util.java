@@ -14,7 +14,7 @@ public class Util {
 
 	public static String LOGIN_URL = "http://www.dhairyasheel.com/pk/api/index.php/applogin";
 
-	public static String SIGNUP_URL = "http://www.dhairyasheel.com/pk/api/index.php/appregister";
+	public static String SIGNUP_URL = "http://www.dhairyasheel.com/pk/api/index.php/appregister2";
 
 	public static String FORGOT_PASSWORD_URL = "http://www.dhairyasheel.com/pk/api/index.php/forgotpassword";
 
@@ -23,6 +23,10 @@ public class Util {
 	public static String SEARCH_URL = "http://www.dhairyasheel.com/pk/api/index.php/search";
 	
 	public static String EVETNS_URL = "http://www.dhairyasheel.com/pk/api/index.php/getallevents";
+	
+	public static String NATIONAL_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/nationalboard";
+	
+	public static String AREA_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/areaboard";
 	
 	public static void showToast(Context context, String text) {
 

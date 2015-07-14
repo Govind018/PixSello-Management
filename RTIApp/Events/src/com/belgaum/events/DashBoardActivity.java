@@ -1,5 +1,7 @@
 package com.belgaum.events;
 
+import org.json.JSONObject;
+
 import com.belgaum.fragments.AdminFragment;
 import com.belgaum.fragments.AimObjectivesFragment;
 import com.belgaum.fragments.AreaBoardFragment;
@@ -7,6 +9,7 @@ import com.belgaum.fragments.EventsFragment;
 import com.belgaum.fragments.NationalBoardFragment;
 import com.belgaum.fragments.PostNewEventFragment;
 import com.belgaum.fragments.SearchFragment;
+import com.belgaum.networks.NetWorkLayer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class DashBoardActivity extends ActionBarActivity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks {
+		NavigationDrawerFragment.NavigationDrawerCallbacks{
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the

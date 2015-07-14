@@ -31,6 +31,16 @@ public class Entity {
 	private String anr;
 	
 	private String image;
+	
+	private String post;
+
+	public String getPost() {
+		return post;
+	}
+
+	public void setPost(String post) {
+		this.post = post;
+	}
 
 	public String getImage() {
 		return image;

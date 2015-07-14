@@ -8,17 +8,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import com.belgaum.events.DetailsActivity;
 import com.belgaum.events.R;
 import com.belgaum.events.adapter.SearchListAdapter;
 import com.belgaum.events.util.Entity;
@@ -48,6 +52,8 @@ public class SearchFragment extends Fragment {
 
 	ListView listUsers;
 
+	ArrayList<Entity> listOfUsers;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -74,18 +80,35 @@ public class SearchFragment extends Fragment {
 		btnStripTable = convertView.findViewById(R.id.bottom_strip_table);
 		btnStripName = convertView.findViewById(R.id.bottom_strip_name);
 		listUsers = (ListView) convertView.findViewById(R.id.list_search);
+		listUsers.setOnItemClickListener(listListener);
 
 		initUI();
 
 		return convertView;
 	}
 
+	OnItemClickListener listListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+
+			Entity entity = listOfUsers.get(position);
+			Intent intent = new Intent(getActivity(), DetailsActivity.class);
+			intent.putExtra("name", entity.getName());
+			intent.putExtra("email", entity.getEmail());
+			intent.putExtra("phone", entity.getMobile());
+			startActivity(intent);
+
+		}
+	};
+
 	OnClickListener mListener = new OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
 
-//			Util.showToast(getActivity(), searchByKey);
+			// Util.showToast(getActivity(), searchByKey);
 
 			String searchBy = editSearchKey.getText().toString();
 
@@ -106,7 +129,7 @@ public class SearchFragment extends Fragment {
 					System.out.println(data);
 
 					try {
-						ArrayList<Entity> listOfUsers = new ArrayList<Entity>();
+						listOfUsers = new ArrayList<Entity>();
 						JSONObject jsonObj = new JSONObject(data);
 						JSONArray jsonArray = jsonObj.getJSONArray("details");
 						System.out.println(jsonArray);

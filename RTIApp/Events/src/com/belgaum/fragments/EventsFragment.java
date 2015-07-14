@@ -13,14 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.belgaum.events.R;
 import com.belgaum.events.adapter.CustomAdapter;
-import com.belgaum.events.adapter.SearchListAdapter;
 import com.belgaum.events.util.Entity;
 import com.belgaum.events.util.Util;
 import com.belgaum.networks.IWebRequest;
 import com.belgaum.networks.NetWorkLayer;
+import com.belgaum.networks.WebRequest;
 import com.belgaum.networks.WebRequestPost;
 
 public class EventsFragment extends Fragment implements NetWorkLayer{
@@ -33,18 +34,26 @@ public class EventsFragment extends Fragment implements NetWorkLayer{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		ArrayList<String> items = new ArrayList<String>();
-		for(int i = 0; i <= 15; i++){
-			items.add("Govind C Mastamardi");
-		}
+//		ArrayList<String> items = new ArrayList<String>();
+//		for(int i = 0; i <= 15; i++){
+//			items.add("Govind C Mastamardi");
+//		}
 		View convertView = inflater.inflate(R.layout.fragment_events, container, false);
 
 		list = (ListView) convertView.findViewById(R.id.list_events);
 		list.setAdapter(adapter);
 		
-		getEvents();
+//		getEvents();
+		
+		getAllEvents();
 
 		return convertView;
+	}
+
+	private void getAllEvents() {
+
+			WebRequest.addNewRequestQueue(EventsFragment.this, Util.EVETNS_URL);
+		
 	}
 
 	private void getEvents() {
@@ -105,6 +114,8 @@ public class EventsFragment extends Fragment implements NetWorkLayer{
 	
 	@Override
 	public void parseResponse(JSONObject json) {
+		
+		Toast.makeText(getActivity(), "" + json, Toast.LENGTH_LONG).show();
 		
 	}
 
