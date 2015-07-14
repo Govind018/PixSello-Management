@@ -33,6 +33,7 @@
             android:background="@drawable/btn_selector"
             android:text="@string/btn_logout"
             android:textAllCaps="false"
+            android:visibility="invisible"
             android:textColor="@android:color/white"
             android:textSize="23sp" />
     </LinearLayout>

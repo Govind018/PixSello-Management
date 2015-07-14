@@ -80,5 +80,6 @@
 
     <string name="title_activity_search_list">SearchListActivity</string>
     <string name="title_activity_search_detail">SearchDetailActivity</string>
+    <color name="listItemBackground">#ff80ab</color>
 
 </resources>

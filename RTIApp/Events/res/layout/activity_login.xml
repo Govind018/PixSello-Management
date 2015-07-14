@@ -22,8 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:visibility="invisible"
+        android:layout_marginTop="7dp"
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
         android:text="@string/app_name" />
 
     <EditText
@@ -33,7 +34,7 @@
         android:layout_gravity="center"
         android:background="@drawable/edittext_background_selector"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:hint="@string/edit_email"
         android:textColor="@android:color/white"
         android:inputType="textEmailAddress"

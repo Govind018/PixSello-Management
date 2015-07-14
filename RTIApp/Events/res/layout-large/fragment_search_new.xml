@@ -105,6 +105,9 @@
             android:background="@drawable/edittext_background_selector"
             android:focusableInTouchMode="true"
             android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:inputType="text"
             android:maxLength="30" />
     </RelativeLayout>
 
@@ -115,6 +118,8 @@
         android:layout_gravity="center"
         android:background="@drawable/btn_selector"
         android:text="@string/btn_search"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="23sp" />

@@ -12,6 +12,7 @@
         <item name="colorPrimary">#ea5d4b</item>
         <item name="colorPrimaryDark">#da4d3b</item>
         <item name="colorAccent">#FF80AB</item>
+        <item  name="android:activatedBackgroundIndicator">@drawable/list_item_background</item>
         <item name="android:dropDownListViewStyle">@style/mySpinnerStyle</item>
     </style>
     
