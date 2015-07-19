@@ -98,7 +98,20 @@ public class SearchFragment extends Fragment {
 			intent.putExtra("name", entity.getName());
 			intent.putExtra("email", entity.getEmail());
 			intent.putExtra("phone", entity.getMobile());
+			intent.putExtra("post", entity.getPost());
+			intent.putExtra("table", entity.getTableNumber());
+			intent.putExtra("image", entity.getImageUrl());
 			startActivity(intent);
+
+		}
+	};
+
+	OnClickListener l = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+
+			startActivity(new Intent(getActivity(), DetailsActivity.class));
 
 		}
 	};
@@ -114,6 +127,11 @@ public class SearchFragment extends Fragment {
 
 			if (searchBy.isEmpty()) {
 				Util.showToast(getActivity(), "Please Enter key to search.");
+				return;
+			}
+
+			if (!Util.isNetWorkConnected(getActivity())) {
+				Util.showToast(getActivity(), Util.NETWORK_ERROR_MSG);
 				return;
 			}
 
@@ -144,11 +162,15 @@ public class SearchFragment extends Fragment {
 							Entity entity = new Entity();
 							JSONObject json = jsonArray.getJSONObject(i);
 							entity.setName(json.getString("name"));
+							entity.setTableNumber(json
+									.getString("table_number"));
+							entity.setPost(json.getString("prefix"));
 							entity.setId(json.getString("id"));
 							entity.setEmail(json.getString("email"));
 							entity.setMobile(json.getString("mobile"));
 							entity.setBusiness(json.getString("business"));
-							entity.setImage(json.getString("image"));
+							entity.setImageUrl(Util.IMAGE_URL
+									+ json.getString("imageUrl"));
 							listOfUsers.add(entity);
 						}
 

@@ -36,6 +36,7 @@ public class WebRequestPost extends AsyncTask<String, Integer, String>{
 		webRequest = clientWebRequest;
 		dataTosend = nameValuePairs;
 		dialog = new ProgressDialog(context);
+		dialog.setCanceledOnTouchOutside(false);
 		dialog.setMessage(message);
 		dialog.show();
 	}

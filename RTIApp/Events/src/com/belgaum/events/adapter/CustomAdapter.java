@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.belgaum.events.AppController;
 import com.belgaum.events.R;
 import com.belgaum.events.util.Entity;
 
@@ -24,6 +27,8 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 	ArrayList<Entity> items;
 
 	String typeOfScreen;
+	
+	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 	public CustomAdapter(Context context, int resource,
 			ArrayList<Entity> objects, String type) {
@@ -57,7 +62,15 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 
 		Entity entity = items.get(position);
 
-		holder.image = (ImageView) convertView.findViewById(R.id.image);
+//		holder.image = (ImageView) convertView.findViewById(R.id.image);
+		
+//		if (imageLoader == null)
+			imageLoader = AppController.getInstance().getImageLoader();
+			NetworkImageView thumbNail = (NetworkImageView) convertView
+					.findViewById(R.id.image);
+			
+			thumbNail.setImageUrl(entity.getImageUrl(), imageLoader);
+		
 		if (typeOfScreen.equalsIgnoreCase("Events")) {
 			holder.textName = (TextView) convertView
 					.findViewById(R.id.text_item_name);
@@ -67,14 +80,17 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.text_item_position);
 			holder.textName = (TextView) convertView
 					.findViewById(R.id.text_item_name);
-			// holder.textName.setText(items.get(position));
+			holder.textName.setText(entity.getName());
+			holder.textPosition.setText(entity.getPost());
 		} else {
 			holder.textPosition = (TextView) convertView
 					.findViewById(R.id.text_item_position);
 			holder.textName = (TextView) convertView
 					.findViewById(R.id.text_item_name);
-			holder.textName.setText(entity.getPost() + " " + entity.getName());
+			holder.textName.setText(entity.getName());
+			holder.textPosition.setText(entity.getPost());
 		}
+		
 		return convertView;
 	}
 

@@ -3,9 +3,6 @@ package com.belgaum.events.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.belgaum.events.AppController;
 import com.belgaum.events.R;
 import com.belgaum.events.util.Entity;
 
@@ -25,6 +25,8 @@ public class SearchListAdapter extends ArrayAdapter<Entity> {
 	int inflatableRes = 0;
 
 	ArrayList<Entity> items;
+
+	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 	public SearchListAdapter(Context context, int resource,
 			ArrayList<Entity> objects) {
@@ -56,15 +58,27 @@ public class SearchListAdapter extends ArrayAdapter<Entity> {
 		}
 
 		Entity entity = items.get(position);
-		
+
 		holder.image = (ImageView) convertView.findViewById(R.id.image);
+
+		imageLoader = AppController.getInstance().getImageLoader();
+		NetworkImageView thumbNail = (NetworkImageView) convertView
+				.findViewById(R.id.image);
+
+		thumbNail.setImageUrl(entity.getImageUrl(), imageLoader);
+
 		holder.textName = (TextView) convertView
 				.findViewById(R.id.text_user_name);
+		holder.textPost = (TextView) convertView
+				.findViewById(R.id.text_user_post);
 		holder.textName.setText(entity.getName());
-		
-//		byte[] imageAsBytes = Base64.decode(entity.getImage(),Base64.DEFAULT);
-//		Bitmap m = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-//		holder.image.setImageBitmap(m);
+		holder.textPost.setText(entity.getPost());
+
+		// byte[] imageAsBytes =
+		// Base64.decode(entity.getImage(),Base64.DEFAULT);
+		// Bitmap m = BitmapFactory.decodeByteArray(imageAsBytes, 0,
+		// imageAsBytes.length);
+		// holder.image.setImageBitmap(m);
 
 		return convertView;
 	}
@@ -72,6 +86,7 @@ public class SearchListAdapter extends ArrayAdapter<Entity> {
 	private class ViewHolder {
 
 		TextView textName;
+		TextView textPost;
 		ImageView image;
 	}
 }

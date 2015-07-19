@@ -42,11 +42,11 @@ public class Entity {
 		this.post = post;
 	}
 
-	public String getImage() {
+	public String getImageUrl() {
 		return image;
 	}
 
-	public void setImage(String image) {
+	public void setImageUrl(String image) {
 		this.image = image;
 	}
 

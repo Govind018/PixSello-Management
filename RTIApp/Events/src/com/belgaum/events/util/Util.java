@@ -16,18 +16,22 @@ public class Util {
 
 	public static String SIGNUP_URL = "http://www.dhairyasheel.com/pk/api/index.php/appregister2";
 
+	public static String SIGNUP_PREFIX_URL = "http://www.dhairyasheel.com/pk/api/index.php/prefixtablenumber";
+
 	public static String FORGOT_PASSWORD_URL = "http://www.dhairyasheel.com/pk/api/index.php/forgotpassword";
 
-	public static String SIGNUP_PREFIX_URL = "http://www.dhairyasheel.com/pk/api/index.php/prefixtablenumber";
+	public static String SEARCH_URL = "http://www.dhairyasheel.com/pk/api/index.php/search2";
+
+	public static String EVETNS_URL = "http://www.dhairyasheel.com/pk/api/index.php/getallevents2";
+
+	public static String NATIONAL_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/nationalboard2";
+
+	public static String AREA_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/areaboard2";
+
+	public static final String NETWORK_ERROR_MSG = "No Network Connection.";
 	
-	public static String SEARCH_URL = "http://www.dhairyasheel.com/pk/api/index.php/search";
-	
-	public static String EVETNS_URL = "http://www.dhairyasheel.com/pk/api/index.php/getallevents";
-	
-	public static String NATIONAL_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/nationalboard";
-	
-	public static String AREA_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/areaboard";
-	
+	public static final String IMAGE_URL = "http://www.dhairyasheel.com/pk/";
+
 	public static void showToast(Context context, String text) {
 
 		Toast.makeText(context, text, Toast.LENGTH_LONG).show();
