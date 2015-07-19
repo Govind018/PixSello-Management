@@ -15,10 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="Govind C Mastamardi"
         android:textColor="@android:color/black"
-        android:textSize="25sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/text_area"
@@ -27,20 +27,35 @@
         android:layout_gravity="center"
         android:text="Tilkwadi Belgaum"
         android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <ImageView
+        android:textSize="20sp" />
+    
+    <TextView
+        android:id="@+id/text_blank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:text="Tilkwadi Belgaum"
         android:layout_marginTop="20dp"
-        android:contentDescription="@null"
-        android:src="@drawable/user" />
+        android:visibility="invisible"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/user" >
+    </com.android.volley.toolbox.NetworkImageView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="120dp"
         android:gravity="bottom"
         android:orientation="vertical" >
 
@@ -51,12 +66,12 @@
             android:layout_gravity="bottom"
             android:text="National President"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="25sp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="10dp"
+			android:layout_marginTop="15dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
@@ -68,25 +83,29 @@
                 android:id="@+id/text_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:text="8861334526"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="25sp" />
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_weight="0.25"
+                android:paddingTop="5dp"
+                android:layout_marginTop="10dp"
+                android:onClick="doMessage"
+                android:contentDescription="@null"
+                android:src="@drawable/message" />
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="0.25"
                 android:paddingTop="5dp"
-                android:contentDescription="@null"
-                android:src="@drawable/message" />
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_weight="0.25"
-                android:paddingTop="5dp"
+                android:onClick="doCall"
+                android:layout_marginTop="10dp"
                 android:contentDescription="@null"
                 android:src="@drawable/call" />
         </LinearLayout>
@@ -94,29 +113,32 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/text_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:text="xyz@gmail.com"
                 android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                android:textSize="25sp" />
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
                 android:layout_weight="0.25"
                 android:paddingTop="5dp"
+                android:layout_marginTop="10dp"
+                android:onClick="doSendEmail"
                 android:contentDescription="@null"
                 android:src="@drawable/email" />
         </LinearLayout>

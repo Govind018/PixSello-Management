@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingBottom="5dp"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
     android:paddingTop="5dp"
     tools:context="com.belgaum.events.LoginActivity" >
 
@@ -14,9 +14,7 @@
         android:layout_width="match_parent"
         android:divider="@null"
         android:scrollbars="none"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="5dp"
         android:layout_height="match_parent" >
     </ListView>
 
