@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="com.belgaum.events.AppController"
@@ -30,24 +31,29 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_sign_up"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".DashBoardActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_dash_board"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".EventDetailActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_event_detail" >
         </activity>
         <activity
             android:name=".SearchListActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_search_list" >
         </activity>
         <activity
-            android:name=".SearchDetailActivity"
+            android:name=".DetailsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_search_detail" >
         </activity>
     </application>
