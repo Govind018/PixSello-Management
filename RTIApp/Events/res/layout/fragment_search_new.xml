@@ -100,11 +100,14 @@
 
         <EditText
             android:id="@+id/edit_search_key"
-            android:layout_width="270dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/edittext_background_selector"
             android:focusableInTouchMode="true"
             android:gravity="center"
+            android:inputType="text"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:maxLength="30" />
