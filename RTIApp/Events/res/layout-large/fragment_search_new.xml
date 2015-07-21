@@ -100,8 +100,10 @@
 
         <EditText
             android:id="@+id/edit_search_key"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/edittext_background_selector"
             android:focusableInTouchMode="true"
             android:gravity="center"
