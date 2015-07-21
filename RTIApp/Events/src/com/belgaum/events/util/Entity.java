@@ -33,6 +33,16 @@ public class Entity {
 	private String image;
 	
 	private String post;
+	
+	private String eventDescription;
+
+	public String getEventDescription() {
+		return eventDescription;
+	}
+
+	public void setEventDescription(String eventDescription) {
+		this.eventDescription = eventDescription;
+	}
 
 	public String getPost() {
 		return post;

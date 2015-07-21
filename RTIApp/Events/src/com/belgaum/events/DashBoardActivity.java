@@ -2,6 +2,7 @@ package com.belgaum.events;
 
 import org.json.JSONObject;
 
+import com.belgaum.events.util.Util;
 import com.belgaum.fragments.AdminFragment;
 import com.belgaum.fragments.AimObjectivesFragment;
 import com.belgaum.fragments.AreaBoardFragment;
@@ -13,6 +14,7 @@ import com.belgaum.networks.NetWorkLayer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -26,7 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class DashBoardActivity extends ActionBarActivity implements
-		NavigationDrawerFragment.NavigationDrawerCallbacks{
+		NavigationDrawerFragment.NavigationDrawerCallbacks {
 
 	/**
 	 * Fragment managing the behaviors, interactions and presentation of the
@@ -128,9 +130,14 @@ public class DashBoardActivity extends ActionBarActivity implements
 			break;
 
 		case 5:
-			fragment = new AdminFragment();
-			mTitle = getString(R.string.title_section6);
-			restoreActionBar();
+			// fragment = new AdminFragment();
+			// mTitle = getString(R.string.title_section6);
+			// restoreActionBar();
+
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse(Util.ADMIN_URL));
+			startActivity(intent);
+
 			break;
 
 		default:

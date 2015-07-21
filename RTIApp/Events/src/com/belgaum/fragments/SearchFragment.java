@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -122,6 +123,12 @@ public class SearchFragment extends Fragment {
 		public void onClick(View v) {
 
 			// Util.showToast(getActivity(), searchByKey);
+			
+//			InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+//			manager.hideSoftInputFromInputMethod(v.getWindowToken(), 0);
+			
+			getActivity().getWindow().setSoftInputMode(
+		            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 			String searchBy = editSearchKey.getText().toString();
 

@@ -27,6 +27,8 @@ public class Util {
 	public static String NATIONAL_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/nationalboard2";
 
 	public static String AREA_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/areaboard2";
+	
+	public static String ADMIN_URL = "http://www.dhairyasheel.com/pk";
 
 	public static final String NETWORK_ERROR_MSG = "No Network Connection.";
 	

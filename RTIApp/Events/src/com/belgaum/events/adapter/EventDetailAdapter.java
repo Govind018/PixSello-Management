@@ -20,9 +20,6 @@ public class EventDetailAdapter extends ArrayAdapter<String> {
 
 	int inflatableRes = 0;
 
-	String[] headers = { "Name", "Email", "Mobile No", "Table Number",
-			"Business", "Address" };
-
 	ArrayList<String> details;
 
 	public EventDetailAdapter(Context context, int resource,
@@ -51,25 +48,24 @@ public class EventDetailAdapter extends ArrayAdapter<String> {
 			convertView = inflater.inflate(inflatableRes, null);
 			convertView.setTag(holder);
 
-			holder.textHeader = (TextView) convertView
+			holder.textSenderName = (TextView) convertView
 					.findViewById(R.id.text_header);
-			holder.textContent = (TextView) convertView
+			holder.textSendMessage = (TextView) convertView
 					.findViewById(R.id.text_content);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-
-		holder.textHeader.setText(headers[position]);
-		holder.textContent.setText(details.get(position));
+		
+		
 
 		return convertView;
 	}
 
 	private class ViewHolder {
 
-		TextView textHeader;
-		TextView textContent;
+		TextView textSenderName;
+		TextView textSendMessage;
 
 	}
 }

@@ -59,17 +59,19 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 		init();
 
 		if (Util.isUserLoggedIn(getApplicationContext())) {
-			
-			if(Util.isUserRegistered(getApplicationContext())){
+
+			if (Util.isUserRegistered(getApplicationContext())) {
 				finish();
 				startActivity(new Intent(getApplicationContext(),
 						DashBoardActivity.class));
-				overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
-			}else{
+				overridePendingTransition(R.anim.left_to_right,
+						R.anim.abc_fade_out);
+			} else {
 				finish();
 				startActivity(new Intent(getApplicationContext(),
 						SignUpActivity.class));
-				overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
+				overridePendingTransition(R.anim.left_to_right,
+						R.anim.abc_fade_out);
 			}
 		}
 	}
@@ -120,7 +122,7 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 
 		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 		nameValuePair.add(new BasicNameValuePair("user", userEmail));
-		nameValuePair.add(new BasicNameValuePair("passowrd", userPassword));
+		nameValuePair.add(new BasicNameValuePair("password", userPassword));
 
 		Map<String, String> values = new HashMap<String, String>();
 		values.put("user", userEmail);
@@ -144,18 +146,19 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 					JSONObject json = new JSONObject(data);
 
 					String loginStatus = json.getString("error");
-					// if (loginStatus.equalsIgnoreCase("true")) {
-					// Util.showToast(getApplicationContext(),
-					// "Email and password doesn't match");
-					// } else {
+					if (loginStatus.equalsIgnoreCase("true")) {
+						Util.showToast(getApplicationContext(),
+								"Email and password doesn't match");
+					} else {
 
-					Util.storeUserSession(getApplicationContext(), true, false);
-					finish();
-					startActivity(new Intent(getApplicationContext(),
-							SignUpActivity.class));
-					overridePendingTransition(R.anim.left_to_right,
-							R.anim.abc_fade_out);
-					// }
+						Util.storeUserSession(getApplicationContext(), true,
+								false);
+						finish();
+						startActivity(new Intent(getApplicationContext(),
+								SignUpActivity.class));
+						overridePendingTransition(R.anim.left_to_right,
+								R.anim.abc_fade_out);
+					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -293,10 +296,11 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 	public void showErrorMessage(String message) {
 		Log.d(TAG, message);
 	}
-	
-	public void directLogin(View v){
-		
-		startActivity(new Intent(getApplicationContext(), DashBoardActivity.class));
+
+	public void directLogin(View v) {
+
+		startActivity(new Intent(getApplicationContext(),
+				DashBoardActivity.class));
 	}
-	
+
 }
