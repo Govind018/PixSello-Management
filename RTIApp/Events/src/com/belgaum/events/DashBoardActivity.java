@@ -56,6 +56,7 @@ public class DashBoardActivity extends ActionBarActivity implements
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 	}
 
+	
 	@Override
 	public void onNavigationDrawerItemSelected(int position) {
 		// update the main content by replacing fragments
@@ -214,4 +215,15 @@ public class DashBoardActivity extends ActionBarActivity implements
 		}
 	}
 
+	/*@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	 Called whenever we call invalidateOptionsMenu() 
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		return super.onPrepareOptionsMenu(menu);
+	}*/
+	
 }

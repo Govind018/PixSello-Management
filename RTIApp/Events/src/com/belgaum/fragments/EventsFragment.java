@@ -6,10 +6,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,6 +35,14 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 	CustomAdapter adapter;
 
 	ArrayList<Entity> listOfEvents;
+	
+	ProgressDialog pDialog;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,6 +51,8 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 		View convertView = inflater.inflate(R.layout.fragment_events,
 				container, false);
 
+		pDialog = new ProgressDialog(getActivity());
+		pDialog.setMessage("Please Wait.");
 		list = (ListView) convertView.findViewById(R.id.list_events);
 		list.setOnItemClickListener(listListener);
 		list.setAdapter(adapter);
@@ -67,6 +81,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 	private void getAllEvents() {
 
 		if (Util.isNetWorkConnected(getActivity())) {
+			pDialog.show();
 			WebRequest.addNewRequestQueue(EventsFragment.this, Util.EVETNS_URL);
 		} else {
 			Util.showToast(getActivity(), "Internet not Connected.");
@@ -76,7 +91,17 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 	@Override
 	public void onStart() {
 		super.onStart();
+	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		menu.clear();
+		inflater.inflate(R.menu.refresh_menu, menu);
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -85,7 +110,6 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 		// Toast.makeText(getActivity(), "" + json, Toast.LENGTH_LONG).show();
 
 		System.out.println(json);
-
 		try {
 			listOfEvents = new ArrayList<Entity>();
 			JSONArray jsonArray = json.getJSONArray("details");
@@ -107,6 +131,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 						+ jsonObj.getString("imageUrl"));
 				listOfEvents.add(entity);
 			}
+			pDialog.cancel();
 
 			CustomAdapter adapter = new CustomAdapter(getActivity(),
 					R.layout.event_row, listOfEvents, "Events");
@@ -114,6 +139,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 			list.setAdapter(adapter);
 		} catch (JSONException e) {
 			e.printStackTrace();
+			pDialog.cancel();
 		}
 	}
 
@@ -121,6 +147,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 	public void showErrorMessage(String message) {
 
 		Util.showToast(getActivity(), "Network Error.");
+		pDialog.cancel();
 	}
 
 	/*

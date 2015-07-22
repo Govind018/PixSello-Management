@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,6 +34,12 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 	ListView list;
 
 	ArrayList<Entity> listOfData;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +57,12 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		getAllValues();
 
 		return convertView;
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.refresh_menu, menu);
 	}
 
 	private void getAllValues() {
