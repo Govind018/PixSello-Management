@@ -17,7 +17,7 @@
         android:layout_margin="10dp"
         android:layout_marginTop="50dp"
         android:scaleType="fitXY"
-        android:src="@drawable/user" >
+        android:src="@drawable/default_user" >
     </com.android.volley.toolbox.NetworkImageView>
 
     <TextView

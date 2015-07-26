@@ -7,6 +7,7 @@
     android:paddingLeft="3dp"
     android:paddingRight="3dp"
     android:paddingTop="5dp"
+    android:background="@drawable/screen_view_bg"
     tools:context="com.belgaum.events.LoginActivity" >
 
     <ListView

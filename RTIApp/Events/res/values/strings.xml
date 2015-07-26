@@ -51,6 +51,16 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
+    
+    <string name="aim_objectives_lable1">To develop the fellowship of young men 
+        through the medium of their business and Professional 
+        occupations and community service activities.</string>
+        
+    <string name="aim_objectives_lable2">To encourage active and responsible citizenship by cultivating the 
+        highest ideals in business, professional and civic traditions. To promote and further international understanding, 
+        friendship and cooperation</string>
+    
+    <string name="aim_objectives_lable3">To promote the extension of the Association.</string>
 
     <string-array name="search_categories">
         <item> Name </item>

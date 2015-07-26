@@ -16,7 +16,7 @@
         android:layout_height="60dp"
         android:layout_margin="10dp"
         android:layout_marginTop="50dp"
-        android:src="@drawable/user"
+        android:src="@drawable/default_user"
         android:scaleType="fitXY" >
     </com.android.volley.toolbox.NetworkImageView>
 

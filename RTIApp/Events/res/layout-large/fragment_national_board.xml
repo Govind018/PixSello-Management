@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/screen_view_bg"
     android:orientation="vertical"
     tools:context="com.belgaum.events.LoginActivity" >
 
@@ -10,9 +10,9 @@
         android:id="@+id/list_nationalboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="6dp"
         android:divider="@null" >
     </ListView>
 
