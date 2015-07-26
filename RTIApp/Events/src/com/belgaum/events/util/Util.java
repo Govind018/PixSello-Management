@@ -27,11 +27,15 @@ public class Util {
 	public static String NATIONAL_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/nationalboard2";
 
 	public static String AREA_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/areaboard2";
-	
+
 	public static String ADMIN_URL = "http://www.dhairyasheel.com/pk";
+	
+	public static String ADD_COMMENTS_URL = "http://www.dhairyasheel.com/pk/api/index.php/addcomment";
+	
+	public static String GET_COMMENTS_URL = "http://www.dhairyasheel.com/pk/api/index.php/eventdetails2";
 
 	public static final String NETWORK_ERROR_MSG = "No Network Connection.";
-	
+
 	public static final String IMAGE_URL = "http://www.dhairyasheel.com/pk/";
 
 	public static void showToast(Context context, String text) {
@@ -77,6 +81,34 @@ public class Util {
 				Context.MODE_PRIVATE);
 		return pref.getBoolean("register", false);
 
+	}
+
+	public static void storeUserDetails(Context context, String id, String name) {
+
+		try{
+			SharedPreferences pref = context.getSharedPreferences("user_details",
+					Context.MODE_PRIVATE);
+			Editor edit = pref.edit();
+			edit.putString("user_id", id);
+			edit.putString("user_name", name);
+			edit.commit();
+		}catch(Exception e){
+
+			showToast(context, "ERROR" + e.getLocalizedMessage());
+			
+		}
+	}
+
+	public static String getUserName(Context context) {
+		SharedPreferences pref = context.getSharedPreferences("user_details",
+				Context.MODE_PRIVATE);
+		return pref.getString("user_name", "");
+	}
+
+	public static String getUserId(Context context) {
+		SharedPreferences pref = context.getSharedPreferences("user_details",
+				Context.MODE_PRIVATE);
+		return pref.getString("user_id", "");
 	}
 
 	public static boolean isNetWorkConnected(Context context) {

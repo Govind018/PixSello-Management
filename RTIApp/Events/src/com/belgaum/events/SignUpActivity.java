@@ -40,6 +40,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.belgaum.events.adapter.SpinnerCustomAdapter;
 import com.belgaum.events.util.Entity;
@@ -278,9 +279,15 @@ public class SignUpActivity extends ActionBarActivity implements
 				public void onDataArrived(String data) {
 					try {
 						JSONObject json = new JSONObject(data);
+						
+						System.out.println(json + "JSON");
+						
+//						Toast.makeText(getApplicationContext(), "" + data, Toast.LENGTH_LONG).show();
 
 						boolean status = Boolean.parseBoolean(json
 								.getString("error"));
+						
+						JSONObject objDetails = new JSONObject(json.getString("details"));
 
 						if (status) {
 							Util.showToast(getApplicationContext(),
@@ -289,6 +296,7 @@ public class SignUpActivity extends ActionBarActivity implements
 							finish();
 							Util.storeUserSession(SignUpActivity.this, true,
 									true);
+							Util.storeUserDetails(SignUpActivity.this, objDetails.getString("id"), objDetails.getString("name"));
 							startActivity(new Intent(getApplicationContext(),
 									DashBoardActivity.class));
 							Util.showToast(getApplicationContext(),
@@ -303,7 +311,7 @@ public class SignUpActivity extends ActionBarActivity implements
 			postData.execute(Util.SIGNUP_URL);
 		}
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 

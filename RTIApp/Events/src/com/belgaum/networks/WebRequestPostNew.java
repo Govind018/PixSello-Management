@@ -105,7 +105,6 @@ public class WebRequestPostNew extends AsyncTask<String, Integer, String> {
 		boolean first = true;
 
 		for (NameValuePair pair : params) {
-
 			try {
 				if (first)
 					first = false;

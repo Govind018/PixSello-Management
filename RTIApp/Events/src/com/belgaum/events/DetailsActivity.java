@@ -16,12 +16,12 @@ public class DetailsActivity extends ActionBarActivity {
 	private String email;
 
 	private String mobile;
-
-	@Override
+   
+	@Override   
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail);
-
+    
 		ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -67,6 +67,18 @@ public class DetailsActivity extends ActionBarActivity {
 		// smsIntent.putExtra("sms_body","Body of Message");
 		startActivity(smsIntent);
 
+	}
+	
+	public void doShare(View v){
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(email).append("\n").append(mobile);
+		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+		smsIntent.setType("vnd.android-dir/mms-sms");
+		smsIntent.putExtra("sms_body",buffer.toString());
+		// smsIntent.putExtra("sms_body","Body of Message");
+		startActivity(smsIntent);
+		
 	}
 
 	public void doSendEmail(View v) {

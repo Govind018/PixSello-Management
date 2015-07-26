@@ -35,6 +35,36 @@ public class Entity {
 	private String post;
 	
 	private String eventDescription;
+	
+	private String senderName;
+	
+	private String recieverName;
+	
+	private String message;
+	
+	public String getSenderName() {
+		return senderName;
+	}
+
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
+
+	public String getRecieverName() {
+		return recieverName;
+	}
+
+	public void setRecieverName(String recieverName) {
+		this.recieverName = recieverName;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public String getEventDescription() {
 		return eventDescription;

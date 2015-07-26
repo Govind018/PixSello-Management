@@ -1,17 +1,5 @@
 package com.belgaum.events;
 
-import org.json.JSONObject;
-
-import com.belgaum.events.util.Util;
-import com.belgaum.fragments.AdminFragment;
-import com.belgaum.fragments.AimObjectivesFragment;
-import com.belgaum.fragments.AreaBoardFragment;
-import com.belgaum.fragments.EventsFragment;
-import com.belgaum.fragments.NationalBoardFragment;
-import com.belgaum.fragments.PostNewEventFragment;
-import com.belgaum.fragments.SearchFragment;
-import com.belgaum.networks.NetWorkLayer;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,10 +10,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.belgaum.events.util.Util;
+import com.belgaum.fragments.AimObjectivesFragment;
+import com.belgaum.fragments.AreaBoardFragment;
+import com.belgaum.fragments.EventsFragment;
+import com.belgaum.fragments.NationalBoardFragment;
+import com.belgaum.fragments.SearchFragment;
 
 public class DashBoardActivity extends ActionBarActivity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {

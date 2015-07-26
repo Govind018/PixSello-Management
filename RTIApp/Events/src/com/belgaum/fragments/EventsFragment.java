@@ -73,6 +73,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 			intent.putExtra("name", entity.getName());
 			intent.putExtra("desc", entity.getEventDescription());
 			intent.putExtra("image", entity.getImageUrl());
+			intent.putExtra("id", entity.getId());
 			startActivity(intent);
 
 		}

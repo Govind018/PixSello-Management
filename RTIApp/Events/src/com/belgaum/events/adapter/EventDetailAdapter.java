@@ -3,16 +3,18 @@ package com.belgaum.events.adapter;
 import java.util.ArrayList;
 
 import com.belgaum.events.R;
+import com.belgaum.events.util.Entity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 //Not using
-public class EventDetailAdapter extends ArrayAdapter<String> {
+public class EventDetailAdapter extends ArrayAdapter<Entity> {
 
 	Context thisContext;
 
@@ -20,10 +22,10 @@ public class EventDetailAdapter extends ArrayAdapter<String> {
 
 	int inflatableRes = 0;
 
-	ArrayList<String> details;
+	ArrayList<Entity> details;
 
 	public EventDetailAdapter(Context context, int resource,
-			ArrayList<String> objects) {
+			ArrayList<Entity> objects) {
 		super(context, resource, objects);
 		thisContext = context;
 		details = objects;
@@ -49,15 +51,19 @@ public class EventDetailAdapter extends ArrayAdapter<String> {
 			convertView.setTag(holder);
 
 			holder.textSenderName = (TextView) convertView
-					.findViewById(R.id.text_header);
+					.findViewById(R.id.text_sender_name);
 			holder.textSendMessage = (TextView) convertView
-					.findViewById(R.id.text_content);
+					.findViewById(R.id.text_sender_message);
+			holder.sentMsg = (RelativeLayout) convertView.findViewById(R.id.message_send);
+			
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
-		
+		Entity entity = details.get(position);
+		holder.textSenderName.setText(entity.getName());
+		holder.textSendMessage.setText(entity.getMessage());
 
 		return convertView;
 	}
@@ -66,6 +72,7 @@ public class EventDetailAdapter extends ArrayAdapter<String> {
 
 		TextView textSenderName;
 		TextView textSendMessage;
+		RelativeLayout sentMsg;
 
 	}
 }

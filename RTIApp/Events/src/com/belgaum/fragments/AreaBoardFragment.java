@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -35,6 +36,8 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
 	ArrayList<Entity> listOfData;
 	
+	ProgressDialog pDialog;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,6 +52,8 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 				container, false);
 
 		list = (ListView) convertView.findViewById(R.id.list_events);
+		pDialog = new ProgressDialog(getActivity());
+		pDialog.setMessage("Please Wait.");
 		list.setOnItemClickListener(listListener);
 		listOfData = new ArrayList<Entity>();
 
@@ -68,6 +73,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 	private void getAllValues() {
 
 		if (Util.isNetWorkConnected(getActivity())) {
+			pDialog.show();
 			WebRequest.addNewRequestQueue(AreaBoardFragment.this,
 					Util.AREA_BOARD_URL);
 		} else {
@@ -163,6 +169,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 						+ jsonObj.getString("imageUrl"));
 				listOfData.add(entity);
 			}
+			pDialog.cancel();
 			CustomAdapter adapter = new CustomAdapter(getActivity(),
 					R.layout.area_board_row, listOfData, "National");
 			list.setAdapter(adapter);
@@ -174,7 +181,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
 	@Override
 	public void showErrorMessage(String message) {
-
+		pDialog.cancel();
 		Util.showToast(getActivity(), "Network Error.");
 	}
 }
