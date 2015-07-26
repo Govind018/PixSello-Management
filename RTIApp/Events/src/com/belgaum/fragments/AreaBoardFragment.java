@@ -67,7 +67,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.refresh_menu, menu);
+//		inflater.inflate(R.menu.refresh_menu, menu);
 	}
 
 	private void getAllValues() {

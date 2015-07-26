@@ -104,6 +104,7 @@ public class EventDetailActivity extends ActionBarActivity {
 						entity.setMessage(json.getString("comment"));
 						details.add(entity);
 					}
+					list.setSelection(details.size()-1);
 					adapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -128,9 +129,6 @@ public class EventDetailActivity extends ActionBarActivity {
 		nameValuePairs.add(new BasicNameValuePair("event_id", eventId));
 		nameValuePairs.add(new BasicNameValuePair("member_id", Util.getUserId(getApplicationContext())));
 		
-		Util.showToast(getApplicationContext(), Util.getUserId(EventDetailActivity.this));
-		
-		
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 			
 			@Override
@@ -146,8 +144,9 @@ public class EventDetailActivity extends ActionBarActivity {
 					} else {
 						Entity entity = new Entity();
 						entity.setMessage(msg);
-						entity.setName("Govind");
+						entity.setName(Util.getUserName(EventDetailActivity.this));
 						details.add(entity);
+						list.setSelection(details.size()-1);
 						adapter.notifyDataSetChanged();
 					}
 				} catch (JSONException e) {
