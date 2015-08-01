@@ -65,7 +65,7 @@
         android:textColor="@android:color/white"
         android:textSize="23sp"
         android:textAllCaps="false"
-        android:onClick="directLogin"
+        android:onClick="doLogin"
         android:text="@string/btn_login" />
 
     <LinearLayout

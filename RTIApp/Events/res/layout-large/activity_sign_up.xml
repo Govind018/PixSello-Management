@@ -78,7 +78,7 @@
                 android:background="@drawable/edittext_background_selector"
                 android:focusableInTouchMode="true"
                 android:gravity="center"
-                android:hint="@string/edit_email"
+                android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:maxLength="30"
                 android:textColor="@android:color/white"
@@ -177,6 +177,7 @@
                 android:background="@android:drawable/btn_default"
                 android:text="@string/btn_upload"
                 android:textAllCaps="false"
+                android:onClick="doUploadImage"
                 android:textColor="@android:color/black"
                 android:textSize="23sp" />
 
