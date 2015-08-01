@@ -6,7 +6,7 @@
     <string name="action_settings">Settings</string>
     
     <!-- Login Screen -->
-    <string name="edit_email">Email</string>
+    <string name="edit_email">User</string>
     <string name="edit_password">Password</string>
     <string name="text_forgot_password">Forgot Password?</string>
     <string name="btn_login">Log In</string>
@@ -43,7 +43,7 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
     <string name="title_section1">Search</string>
-    <string name="title_section2">Aim &amp;Objectives</string>
+    <string name="title_section2">Aim &amp; Objectives</string>
     <string name="title_section3">Area 10 Board</string>
     <string name="title_section4">National Board</string>
     <string name="title_section5">Events</string>
@@ -52,7 +52,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
     
-    <string name="aim_objectives_lable1">To develop the fellowship of young men 
+    <string name="aim_objectives_lable1">
+        To develop the fellowship of young men 
         through the medium of their business and Professional 
         occupations and community service activities.</string>
         
@@ -90,6 +91,6 @@
 
     <string name="title_activity_search_list">SearchListActivity</string>
     <string name="title_activity_search_detail">SearchDetailActivity</string>
-    <color name="listItemBackground">#ff80ab</color>
+    <color name="listItemBackground">#C3C3C3</color>
 
 </resources>
