@@ -14,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,6 +39,8 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 	
 	ProgressDialog pDialog;
 	
+	CustomAdapter adapter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +59,10 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		pDialog.setMessage("Please Wait.");
 		list.setOnItemClickListener(listListener);
 		listOfData = new ArrayList<Entity>();
+		
+		adapter = new CustomAdapter(getActivity(),
+				R.layout.area_board_row, listOfData, "National");
+		list.setAdapter(adapter);
 
 		// getValues();
 
@@ -67,7 +74,17 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-//		inflater.inflate(R.menu.refresh_menu, menu);
+		inflater.inflate(R.menu.refresh, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		listOfData.clear();
+		adapter.notifyDataSetChanged();
+		getAllValues();
+		
+		return true;
 	}
 
 	private void getAllValues() {
@@ -170,10 +187,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 				listOfData.add(entity);
 			}
 			pDialog.cancel();
-			CustomAdapter adapter = new CustomAdapter(getActivity(),
-					R.layout.area_board_row, listOfData, "National");
-			list.setAdapter(adapter);
-
+			adapter.notifyDataSetChanged();
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

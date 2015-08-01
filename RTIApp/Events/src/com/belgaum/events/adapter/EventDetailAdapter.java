@@ -2,6 +2,9 @@ package com.belgaum.events.adapter;
 
 import java.util.ArrayList;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.belgaum.events.AppController;
 import com.belgaum.events.R;
 import com.belgaum.events.util.Entity;
 
@@ -23,6 +26,8 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 	int inflatableRes = 0;
 
 	ArrayList<Entity> details;
+	
+	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 	public EventDetailAdapter(Context context, int resource,
 			ArrayList<Entity> objects) {
@@ -40,30 +45,83 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public int getViewTypeCount() {
+		return 2;
+	}
 
-		ViewHolder holder = null;
-
-		if (convertView == null) {
-
-			holder = new ViewHolder();
-			convertView = inflater.inflate(inflatableRes, null);
-			convertView.setTag(holder);
-
-			holder.textSenderName = (TextView) convertView
-					.findViewById(R.id.text_sender_name);
-			holder.textSendMessage = (TextView) convertView
-					.findViewById(R.id.text_sender_message);
-			holder.sentMsg = (RelativeLayout) convertView.findViewById(R.id.message_send);
-			
-
+	@Override
+	public int getItemViewType(int position) {
+		Entity en = details.get(position);
+		if (en.isHeader()) {
+			return 0;
 		} else {
-			holder = (ViewHolder) convertView.getTag();
+			return 1;
 		}
-		
-		Entity entity = details.get(position);
-		holder.textSenderName.setText(entity.getName());
-		holder.textSendMessage.setText(entity.getMessage());
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder = null;
+		holder = new ViewHolder();
+
+		int type = getItemViewType(position);
+		if (type == 0) {
+			if (convertView == null) {
+				convertView = inflater
+						.inflate(R.layout.list_item_section, null);
+				holder.textEventName = (TextView) convertView
+						.findViewById(R.id.event_name);
+				holder.textEventDesc = (TextView) convertView
+						.findViewById(R.id.event_desc);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			
+			Entity entity = details.get(position);
+			imageLoader = AppController.getInstance().getImageLoader();
+			NetworkImageView thumbNail = (NetworkImageView) convertView
+					.findViewById(R.id.image);
+			thumbNail.setImageUrl(entity.getImageUrl(), imageLoader);
+			holder.textEventName.setText(entity.getEventName());
+			holder.textEventDesc.setText(entity.getEventDescription());
+			
+		} else {
+			if (convertView == null) {
+				convertView = inflater.inflate(inflatableRes, null);
+				holder.textSenderName = (TextView) convertView
+						.findViewById(R.id.text_sender_name);
+				holder.textSendMessage = (TextView) convertView
+						.findViewById(R.id.text_sender_message);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			Entity entity = details.get(position);
+			holder.textSenderName.setText(entity.getName());
+			holder.textSendMessage.setText(entity.getMessage());
+		}
+
+		// ViewHolder holder = null;
+		// if (convertView == null) {
+		//
+		// holder = new ViewHolder();
+		// convertView = inflater.inflate(inflatableRes, null);
+		// convertView.setTag(holder);
+		//
+		// holder.textSenderName = (TextView) convertView
+		// .findViewById(R.id.text_sender_name);
+		// holder.textSendMessage = (TextView) convertView
+		// .findViewById(R.id.text_sender_message);
+		// holder.sentMsg = (RelativeLayout)
+		// convertView.findViewById(R.id.message_send);
+		//
+		// } else {
+		// holder = (ViewHolder) convertView.getTag();
+		// }
+		// Entity entity = details.get(position);
+		// holder.textSenderName.setText(entity.getName());
+		// holder.textSendMessage.setText(entity.getMessage());
 
 		return convertView;
 	}
@@ -73,6 +131,8 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 		TextView textSenderName;
 		TextView textSendMessage;
 		RelativeLayout sentMsg;
+		TextView textEventName;
+		TextView textEventDesc;
 
 	}
 }

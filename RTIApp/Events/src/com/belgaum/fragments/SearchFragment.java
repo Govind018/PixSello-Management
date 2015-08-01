@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -54,6 +55,8 @@ public class SearchFragment extends Fragment {
 	ListView listUsers;
 
 	ArrayList<Entity> listOfUsers;
+	
+	SearchListAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +85,12 @@ public class SearchFragment extends Fragment {
 		btnStripName = convertView.findViewById(R.id.bottom_strip_name);
 		listUsers = (ListView) convertView.findViewById(R.id.list_search);
 		listUsers.setOnItemClickListener(listListener);
+		
+		listOfUsers = new ArrayList<Entity>();
+		adapter = new SearchListAdapter(
+				getActivity(), R.layout.search_item_row,
+				listOfUsers);
+		listUsers.setAdapter(adapter);
 
 		initUI();
 
@@ -121,15 +130,10 @@ public class SearchFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-
-			// Util.showToast(getActivity(), searchByKey);
 			
-//			InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//			manager.hideSoftInputFromInputMethod(v.getWindowToken(), 0);
+			InputMethodManager imm = (InputMethodManager)  getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 			
-			getActivity().getWindow().setSoftInputMode(
-		            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
 			String searchBy = editSearchKey.getText().toString();
 
 			if (searchBy.isEmpty()) {
@@ -145,6 +149,9 @@ public class SearchFragment extends Fragment {
 			ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 			nameValuePair.add(new BasicNameValuePair("searchby", searchByKey));
 			nameValuePair.add(new BasicNameValuePair("keyword", searchBy));
+			
+			listOfUsers.clear();
+			adapter.notifyDataSetChanged();
 
 			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
@@ -154,7 +161,7 @@ public class SearchFragment extends Fragment {
 					System.out.println(data);
 
 					try {
-						listOfUsers = new ArrayList<Entity>();
+						
 						JSONObject jsonObj = new JSONObject(data);
 						JSONArray jsonArray = jsonObj.getJSONArray("details");
 						System.out.println(jsonArray);
@@ -180,11 +187,13 @@ public class SearchFragment extends Fragment {
 									+ json.getString("imageUrl"));
 							listOfUsers.add(entity);
 						}
+						
+						adapter.notifyDataSetChanged();
 
-						SearchListAdapter adapter = new SearchListAdapter(
-								getActivity(), R.layout.search_item_row,
-								listOfUsers);
-						listUsers.setAdapter(adapter);
+//						SearchListAdapter adapter = new SearchListAdapter(
+//								getActivity(), R.layout.search_item_row,
+//								listOfUsers);
+//						listUsers.setAdapter(adapter);
 
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -221,7 +230,7 @@ public class SearchFragment extends Fragment {
 			searchName.setBackgroundColor(getResources().getColor(
 					R.color.tab_released));
 
-			editSearchKey.setHint("Enter Table Number");
+			editSearchKey.setHint("Enter Table");
 
 			btnStripTable.setBackgroundColor(getResources().getColor(
 					R.color.tab_strip));

@@ -32,11 +32,11 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 
 	ListView list;
 
-	CustomAdapter adapter;
-
 	ArrayList<Entity> listOfEvents;
 	
 	ProgressDialog pDialog;
+	
+	CustomAdapter adapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,10 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 		pDialog.setMessage("Please Wait.");
 		list = (ListView) convertView.findViewById(R.id.list_events);
 		list.setOnItemClickListener(listListener);
+		list.setAdapter(adapter);
+		listOfEvents = new ArrayList<Entity>();
+		adapter = new CustomAdapter(getActivity(),
+				R.layout.event_row, listOfEvents, "Events");
 		list.setAdapter(adapter);
 
 		getAllEvents();
@@ -98,11 +102,16 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		menu.clear();
-		inflater.inflate(R.menu.refresh_menu, menu);
+		inflater.inflate(R.menu.refresh, menu);
 	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item);
+		
+		listOfEvents.clear();
+		adapter.notifyDataSetChanged();
+		getAllEvents();
+		
+		return true;
 	}
 
 	@Override
@@ -112,7 +121,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 
 		System.out.println(json);
 		try {
-			listOfEvents = new ArrayList<Entity>();
+			
 			JSONArray jsonArray = json.getJSONArray("details");
 			System.out.println(jsonArray);
 
@@ -134,10 +143,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 			}
 			pDialog.cancel();
 
-			CustomAdapter adapter = new CustomAdapter(getActivity(),
-					R.layout.event_row, listOfEvents, "Events");
-
-			list.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 		} catch (JSONException e) {
 			e.printStackTrace();
 			pDialog.cancel();

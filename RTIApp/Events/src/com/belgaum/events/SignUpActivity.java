@@ -3,6 +3,7 @@ package com.belgaum.events;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,7 +41,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.belgaum.events.adapter.SpinnerCustomAdapter;
 import com.belgaum.events.util.Entity;
@@ -113,7 +113,7 @@ public class SignUpActivity extends ActionBarActivity implements
 
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 		Calendar calender = Calendar.getInstance();
@@ -258,6 +258,11 @@ public class SignUpActivity extends ActionBarActivity implements
 						"Invalid Email address.");
 				return;
 			}
+			
+			if(image_str !=null && image_str.isEmpty()){
+				Util.showToast(getApplicationContext(),"Please select Image to Upload.");
+				return;
+			}
 
 			List<NameValuePair> dataToSend = new ArrayList<NameValuePair>();
 			dataToSend.add(new BasicNameValuePair("prefix", prefixIndex));
@@ -280,23 +285,24 @@ public class SignUpActivity extends ActionBarActivity implements
 					try {
 						JSONObject json = new JSONObject(data);
 						
-						System.out.println(json + "JSON");
+						System.out.println(json + "SIGN UP JSON");
 						
 //						Toast.makeText(getApplicationContext(), "" + data, Toast.LENGTH_LONG).show();
 
-						boolean status = Boolean.parseBoolean(json
-								.getString("error"));
+//						boolean status = Boolean.parseBoolean(json
+//								.getString("error"));
 						
-						JSONObject objDetails = new JSONObject(json.getString("details"));
-
+						boolean status = json.getBoolean("error");
+						
 						if (status) {
 							Util.showToast(getApplicationContext(),
 									json.getString("message"));
 						} else {
-							finish();
+							JSONObject objDetails = new JSONObject(json.getString("details"));
 							Util.storeUserSession(SignUpActivity.this, true,
 									true);
 							Util.storeUserDetails(SignUpActivity.this, objDetails.getString("id"), objDetails.getString("name"));
+							finish();
 							startActivity(new Intent(getApplicationContext(),
 									DashBoardActivity.class));
 							Util.showToast(getApplicationContext(),
@@ -352,11 +358,26 @@ public class SignUpActivity extends ActionBarActivity implements
 
 		if (resultCode == RESULT_OK && requestCode == IMAGE_PICKER_SELECT) {
 
-			Bitmap map = getDataFromGallery(data);
-			ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-			map.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-			byte[] image = bStream.toByteArray();
-			image_str = Base64.encodeToString(image, 0);
+			Uri selectedImageURI = data.getData();
+			InputStream input;
+			try {
+				input = getContentResolver().openInputStream(selectedImageURI);
+				Bitmap map = BitmapFactory.decodeStream(input);
+				ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+				map.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+				byte[] image = bStream.toByteArray();
+				image_str = Base64.encodeToString(image, 0);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}catch (Exception e) {
+				Util.showToast(SignUpActivity.this, "Version issue");
+			}
+			
+//			Bitmap map = getDataFromGallery(data);
+//			ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+//			map.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+//			byte[] image = bStream.toByteArray();
+//			image_str = Base64.encodeToString(image, 0);
 
 			Util.showToast(getApplicationContext(), "Image Selected.");
 		}

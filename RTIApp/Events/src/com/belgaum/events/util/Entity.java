@@ -36,12 +36,40 @@ public class Entity {
 	
 	private String eventDescription;
 	
+	private String eventName;
+	
+	public String getEventName() {
+		return eventName;
+	}
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
+	}
+
 	private String senderName;
 	
 	private String recieverName;
 	
 	private String message;
 	
+	private boolean header;
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public boolean isHeader() {
+		return header;
+	}
+
+	public void setHeader(boolean header) {
+		this.header = header;
+	}
+
 	public String getSenderName() {
 		return senderName;
 	}

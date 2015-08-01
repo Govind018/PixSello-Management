@@ -12,11 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
 import com.belgaum.events.DetailsActivity;
 import com.belgaum.events.R;
@@ -34,7 +37,15 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 	ArrayList<Entity> listOfData;
 	
 	ProgressDialog pDialog;
+	
+	CustomAdapter adapter;
 
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -49,6 +60,10 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		listOfData = new ArrayList<Entity>();
 
 		// getValues();
+		
+		adapter = new CustomAdapter(getActivity(),
+				R.layout.area_board_row, listOfData, "National");
+		listNationalBoard.setAdapter(adapter);
 
 		getAllValues();
 
@@ -156,9 +171,7 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 				listOfData.add(entity);
 			}
 			pDialog.cancel();;
-			CustomAdapter adapter = new CustomAdapter(getActivity(),
-					R.layout.area_board_row, listOfData, "National");
-			listNationalBoard.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -170,5 +183,21 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		pDialog.cancel();
 		Util.showToast(getActivity(), "Network Error.");
 
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.refresh, menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		listOfData.clear();
+		adapter.notifyDataSetChanged();
+		getAllValues();
+		
+		return true;
 	}
 }

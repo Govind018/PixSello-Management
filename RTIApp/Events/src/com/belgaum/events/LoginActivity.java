@@ -64,14 +64,10 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 				finish();
 				startActivity(new Intent(getApplicationContext(),
 						DashBoardActivity.class));
-				overridePendingTransition(R.anim.left_to_right,
-						R.anim.abc_fade_out);
 			} else {
 				finish();
 				startActivity(new Intent(getApplicationContext(),
 						SignUpActivity.class));
-				overridePendingTransition(R.anim.left_to_right,
-						R.anim.abc_fade_out);
 			}
 		}
 	}
@@ -106,7 +102,7 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 		userPassword = editPassword.getText().toString();
 
 		if (TextUtils.isEmpty(userEmail)) {
-			editEmail.setError("Enter Email id");
+			editEmail.setError("Enter User");
 			return;
 		}
 
@@ -148,7 +144,7 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 					String loginStatus = json.getString("error");
 					if (loginStatus.equalsIgnoreCase("true")) {
 						Util.showToast(getApplicationContext(),
-								"Email and password doesn't match");
+								"User and password doesn't match");
 					} else {
 
 						Util.storeUserSession(getApplicationContext(), true,
@@ -168,17 +164,6 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 
 		post.execute(Util.LOGIN_URL);
 
-		// WebRequestPostLogin postData = new WebRequestPostLogin(
-		// new IWebRequest() {
-		//
-		// @Override
-		// public void onDataArrived(String data) {
-		//
-		//
-		// }
-		// }, nameValuePair, LoginActivity.this);
-		//
-		// postData.execute(url);
 	}
 
 	public void openDialog(View v) {

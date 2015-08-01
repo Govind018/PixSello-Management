@@ -16,6 +16,8 @@ public class DetailsActivity extends ActionBarActivity {
 	private String email;
 
 	private String mobile;
+	
+	private String name;
    
 	@Override   
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class DetailsActivity extends ActionBarActivity {
 		textPosition.setText(intent.getStringExtra("post"));
 		textArea.setText(intent.getStringExtra("table"));
 		
+		name = textName.getText().toString();
 		email = textEmail.getText().toString();
 		mobile = textNumber.getText().toString();
 
@@ -72,12 +75,18 @@ public class DetailsActivity extends ActionBarActivity {
 	public void doShare(View v){
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(email).append("\n").append(mobile);
-		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-		smsIntent.setType("vnd.android-dir/mms-sms");
-		smsIntent.putExtra("sms_body",buffer.toString());
-		// smsIntent.putExtra("sms_body","Body of Message");
-		startActivity(smsIntent);
+		buffer.append(name).append("\n").append(email).append("\n").append(mobile);
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		sendIntent.putExtra(Intent.EXTRA_TEXT, buffer.toString());
+		sendIntent.setType("text/plain");
+		startActivity(Intent.createChooser(sendIntent, "Choose"));
+//		
+//		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+//		smsIntent.setType("vnd.android-dir/mms-sms");
+//		smsIntent.putExtra("sms_body",buffer.toString());
+//		// smsIntent.putExtra("sms_body","Body of Message");
+//		startActivity(smsIntent);
 		
 	}
 
