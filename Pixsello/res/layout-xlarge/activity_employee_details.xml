@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/aparanji"
     tools:context="com.pixsello.management.ReportItemActivity" >
 
     <RelativeLayout
@@ -59,7 +60,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -76,12 +77,12 @@
                     android:textColor="@android:color/black"
                     android:textSize="25sp" />
 
-                <EditText
+                <EditText  
                     android:id="@+id/edit_name_alias"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -103,7 +104,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -126,7 +127,7 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
                     android:inputType="number"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -148,7 +149,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -170,7 +171,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -192,7 +193,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:inputType="textMultiLine"
                     android:lines="3"
                     android:singleLine="true" />
@@ -216,7 +217,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -238,7 +239,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -260,7 +261,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -282,7 +283,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -304,7 +305,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -326,7 +327,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -348,7 +349,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -370,7 +371,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -394,7 +395,7 @@
                     android:layout_height="45dp"
                     android:visibility="gone"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -417,7 +418,8 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
                     android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@drawable/edittext_background_selector" 
+                    />
             </TableRow>
 
             <TableRow
@@ -439,7 +441,8 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
                     android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@drawable/edittext_background_selector"
+                     />
             </TableRow>
 
             <TableRow
@@ -461,7 +464,8 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
                     android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@drawable/edittext_background_selector"
+                     />
             </TableRow>
 
             <TableRow
@@ -483,7 +487,8 @@
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
                     android:singleLine="true"
-                    android:background="@android:drawable/editbox_background" />
+                    android:background="@drawable/edittext_background_selector"
+                     />
             </TableRow>
 
             <TableRow
@@ -504,7 +509,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -526,7 +531,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -548,7 +553,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -570,7 +575,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -592,7 +597,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 
@@ -614,7 +619,7 @@
                     android:layout_width="450dp"
                     android:layout_height="45dp"
                     android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
             
@@ -635,8 +640,8 @@
                     android:id="@+id/edit_employment_satus"
                     android:layout_width="450dp"
                     android:layout_height="45dp"
-                    android:layout_marginLeft="40dp"
-                    android:background="@android:drawable/editbox_background"
+                    android:layout_marginLeft="40dp" 
+                    android:background="@drawable/edittext_background_selector"
                     android:singleLine="true" />
             </TableRow>
 

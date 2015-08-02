@@ -53,7 +53,7 @@
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
-            android:background="@android:drawable/editbox_background"
+            android:background="@drawable/edittext_background_selector"
             android:textColor="@android:color/black" />
 
         <Button
@@ -73,7 +73,7 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="BILL NO"
@@ -82,7 +82,7 @@
             android:textSize="30sp" />
 
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="220dp"
             android:layout_height="45dp"
             android:text="BILL DATE"
             android:layout_marginTop="10dp"
@@ -90,7 +90,7 @@
             android:textSize="30sp" />
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:text="SERVICE"
             android:layout_marginTop="10dp"
@@ -98,15 +98,16 @@
             android:textSize="30sp" />
 
         <TextView
-            android:layout_width="180dp"
+            android:layout_width="190dp"
             android:layout_height="45dp"
             android:text="IDENTITY"
             android:layout_marginTop="10dp"
+            android:visibility="gone"
             android:textColor="@android:color/black"
             android:textSize="30sp" />
 
         <TextView
-            android:layout_width="190dp"
+            android:layout_width="200dp"
             android:layout_height="45dp"
             android:text="AMOUNT"
             android:layout_marginTop="10dp"
@@ -114,7 +115,7 @@
             android:textSize="30sp" />
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="180dp"
             android:layout_height="45dp"
             android:text="DUE DATE"
             android:layout_marginTop="10dp"
@@ -122,7 +123,7 @@
             android:textSize="30sp" />
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="180dp"
             android:layout_height="45dp"
             android:text="STATUS"
             android:layout_marginTop="10dp"

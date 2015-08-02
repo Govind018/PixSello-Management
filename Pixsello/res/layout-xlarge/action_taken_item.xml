@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/action_row_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal"
+    android:paddingLeft="30dp" >
+
+    <TextView
+        android:id="@+id/item_action_date"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="12-12-2015"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/item_action_time"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="12:30 PM"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+                      
+    <TextView
+        android:id="@+id/item_action_taken"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Prorfsfsd"
+        android:textColor="@android:color/black"
+        android:textSize="25sp" />
+    
+</LinearLayout>

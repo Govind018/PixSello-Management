@@ -71,11 +71,13 @@
         android:textSize="23sp" />
     
     <TextView 
+        android:id="@+id/lbl_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="23sp"
-        android:text="Closed"
+        android:layout_marginLeft="3dp"
+        android:text="View"
         />
     
 </LinearLayout>

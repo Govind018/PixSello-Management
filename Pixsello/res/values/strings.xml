@@ -13,11 +13,11 @@
     <string name="report_item">REPORT AN ITEM</string>
     <string name="find_item">FIND AN ITEM</string>
     <string name="add_item">ADD AN ITEM</string>
-    <string name="lbl_description">Description of item found</string>
-    <string name="lbl_location">Location where found</string>
+    <string name="lbl_description">Description of Item </string>
+    <string name="lbl_location">Location Where Found</string>
     <string name="lbl_room_num">Room No</string>
-    <string name="lbl_staff">Staff who found it</string>
-    <string name="lbl_date_guest_stay">Approx date of guest stay</string>
+    <string name="lbl_staff">Staff Who Found It</string>
+    <string name="lbl_date_guest_stay">Approx Date of Guest Stay</string>
     <string name="lbl_request_visitors">REQUEST OF GUEST VISITORS</string>
     <string name="lbl_make_in">MAKE IN-TIME ENTRIES</string>
     <string name="lbl_make_out">MAKE OUT-TIME ENTRIES</string>
@@ -31,10 +31,10 @@
     <string name="lbl_emergency_number">EMERGENCY NUMBER</string>
     <string name="lbl_vendor_number">VENDORS NUMBER</string>
     <string name="lbl_search">SEARCH</string>
-    <string name="lbl_services">SERVICES DESCRIPTION</string>
+    <string name="lbl_services">Services Description</string>
     <string name="lbl_action">ACTION REQUIRED</string>
-    <string name="lbl_contact_person">CONTACT PERSON</string>
-    <string name="lbl_contact_number">CONTACT NUMBER</string>
+    <string name="lbl_contact_person">Contact Person</string>
+    <string name="lbl_contact_number">Contact Number</string>
     <string name="lbl_add_item">ADD ITEM</string>
     <string name="lbl_see_active_list">SEE ACTIVE LIST</string>
     <string name="lbl_list_closed">SEE LIST OF CLOSED ITEMS</string>
@@ -49,7 +49,7 @@
     <string name="lbl_trainee">Trainee</string>
     <string name="lbl_trainer">Trainer</string>
     <string name="lbl_type">Type</string>
-    <string name="lbl_time_training">Time of Training</string>
+    <string name="lbl_time_training">Duration of Training</string>
     <string name="lbl_trainee_assessment">Trainee Assessment</string>
     <string name="title_activity_lost_and_found">LostAndFoundActivity</string>
     <string name="title_activity_contact_details">ContactDetailsActivity</string>
@@ -71,7 +71,8 @@
     <string name="title_activity_training_videos">TrainingVideosActivity</string>
     <string name="title_activity_active_items_list">ActiveItemsListActivity</string>
     <string name="title_activity_closed_items">ClosedItemsActivity</string>
-
+    <string name="valid_input">1,2,3,4,5,6,7,8,9,qwertzuiopasdfghjklyxcvbnm1</string>
+    
     <string-array name="search_options">
         <item>Service Description</item>
         <item>Contact Person</item>
@@ -85,7 +86,7 @@
     </string-array>
     <string-array name="payment_types">
         <item>Month</item>
-        <item>Quatar</item>
+        <item>Quater</item>
         <item>Year</item>
     </string-array>
     <string-array name="staff_search_types">
@@ -94,6 +95,7 @@
         <item>Type</item>
     </string-array>
     <string-array name="training_hours">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -108,6 +110,7 @@
         <item>12</item>
     </string-array>
     <string-array name="training_mins">
+        <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -208,5 +211,10 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_employee_search">EmployeeSearchActivity</string>
     <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_image_preview">ImagePreviewActivity</string>
+    <string name="title_activity_feedback_details">FeedbackDetailsActivity</string>
+    <string name="title_activity_add_new_feedback">AddNewFeedbackActivity</string>
+    <string name="title_activity_previous_feedback">PreviousFeedbackActivity</string>
+    <string name="title_activity_video_player">VideoPlayerActivity</string>
 
 </resources>

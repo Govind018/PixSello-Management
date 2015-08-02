@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:text="Identity"
+            android:visibility="gone"
             android:textColor="@android:color/black"
             android:textSize="30sp" />
 
@@ -63,6 +64,7 @@
             android:layout_width="190dp"
             android:layout_height="50dp"
             android:layout_marginLeft="60dp"
+            android:visibility="gone"
             android:background="@android:drawable/btn_dropdown"
             android:textColor="@android:color/black" />
     </LinearLayout>
