@@ -38,7 +38,7 @@ public class ReportItemActivity extends ActionBarActivity {
 
 	ImageView image;
 
-	private String reportDate;
+	private String reportDate;     
 	private String reportTime;
 	private String reportDescription;
 	private String reportLocation;
@@ -160,6 +160,11 @@ public class ReportItemActivity extends ActionBarActivity {
 					|| !Uttilities.validate(staffName)) {
 				Uttilities.showToast(getApplicationContext(),
 						"Special Characters not allowed.");
+				return;
+			}
+			
+			if(!Uttilities.isNetConnected(getApplicationContext())){
+				Uttilities.showToast(getApplicationContext(), "Network Not Available.");
 				return;
 			}
 

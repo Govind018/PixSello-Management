@@ -37,7 +37,6 @@ public class ClosedItemsActivity extends Activity {
 
 	ArrayList<Entity> items;
 
-
 	Button btnSearch;
 
 	EditText dateFrom;
@@ -175,7 +174,7 @@ public class ClosedItemsActivity extends Activity {
 
 							dialog.cancel();
 							adapter = new ClosedItemsListAdapter(
-									getApplicationContext(),
+									getApplicationContext(),getFragmentManager(),
 									R.layout.closed_list_item, items);
 							listOfClosedItems.setAdapter(adapter);
 
@@ -250,7 +249,7 @@ public class ClosedItemsActivity extends Activity {
 
 						dialog.cancel();
 						adapter = new ClosedItemsListAdapter(
-								getApplicationContext(),
+								getApplicationContext(),getFragmentManager(),
 								R.layout.closed_list_item, items);
 						listOfClosedItems.setAdapter(adapter);
 

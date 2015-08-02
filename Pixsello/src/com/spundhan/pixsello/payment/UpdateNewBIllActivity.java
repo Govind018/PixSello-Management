@@ -68,12 +68,12 @@ public class UpdateNewBIllActivity extends Activity {
 		editDueDate = (EditText) findViewById(R.id.edit_due_date);
 		editAmount = (EditText) findViewById(R.id.edit_amount);
 		spinnerServices = (Spinner) findViewById(R.id.spinner_services);
-		spinnerIdentity = (Spinner) findViewById(R.id.spinner_identity);
+//		spinnerIdentity = (Spinner) findViewById(R.id.spinner_identity);
 
 		listOfServices = new ArrayList<Entity>();
 
 		servicesList = new ArrayList<String>();
-		identityList = new ArrayList<String>();
+//		identityList = new ArrayList<String>();
 
 		final Calendar c = Calendar.getInstance();
 		year = c.get(Calendar.YEAR);
@@ -136,11 +136,11 @@ public class UpdateNewBIllActivity extends Activity {
 							JSONObject obj = jsonArray.getJSONObject(i);
 							item.setServiceId(obj.getString("ServiceID"));
 							item.setServiceName(obj.getString("Nameofservice"));
-							item.setIdentity(obj.getString("Identity"));
-							item.setIdentityID(obj.getString("IdentityID"));
+//							item.setIdentity(obj.getString("Identity"));
+//							item.setIdentityID(obj.getString("IdentityID"));
 
 							servicesList.add(obj.getString("Nameofservice"));
-							identityList.add(obj.getString("Identity"));
+//							identityList.add(obj.getString("Identity"));
 							listOfServices.add(item);
 						}
 
@@ -149,12 +149,12 @@ public class UpdateNewBIllActivity extends Activity {
 								getApplicationContext(), R.layout.spinner_item,
 								servicesList);
 
-						identityAdapter = new ArrayAdapter<String>(
-								getApplicationContext(), R.layout.spinner_item,
-								identityList);
+//						identityAdapter = new ArrayAdapter<String>(
+//								getApplicationContext(), R.layout.spinner_item,
+//								identityList);
 
 						spinnerServices.setAdapter(serviceAdapter);
-						spinnerIdentity.setAdapter(identityAdapter);
+//						spinnerIdentity.setAdapter(identityAdapter);
 
 					}
 				} catch (JSONException e) {
@@ -185,8 +185,8 @@ public class UpdateNewBIllActivity extends Activity {
 				|| !billDueDate.isEmpty() || !billAmount.isEmpty()) {
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
-			nameValuePair.add(new BasicNameValuePair("IdentityID", String
-					.valueOf(identityID)));
+//			nameValuePair.add(new BasicNameValuePair("IdentityID", String
+//					.valueOf(identityID)));
 			nameValuePair.add(new BasicNameValuePair("PropertyID",
 					Uttilities.PROPERTY_ID));
 			nameValuePair.add(new BasicNameValuePair("ServiceID", String
@@ -252,7 +252,7 @@ public class UpdateNewBIllActivity extends Activity {
 			Intent intent = new Intent(getApplicationContext(),
 					PaymentActivity.class);
 			intent.putExtra("ServiceID", String.valueOf(serviceId));
-			intent.putExtra("Identity", String.valueOf(identityID));
+//			intent.putExtra("Identity", String.valueOf(identityID));
 			intent.putExtra("ServiceName", spinnerServices.getSelectedItem()
 					.toString());
 			intent.putExtra("IdentityName", spinnerIdentity.getSelectedItem()

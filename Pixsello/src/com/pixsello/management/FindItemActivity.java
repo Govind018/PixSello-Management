@@ -2,6 +2,7 @@ package com.pixsello.management;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
@@ -73,6 +74,7 @@ public class FindItemActivity extends Activity {
 		day = c.get(Calendar.DAY_OF_MONTH);
 
 		initLayout();
+		
 	}
 
 	@Override

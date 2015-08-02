@@ -25,7 +25,7 @@ import com.pixsello.management.util.Uttilities;
 public class TrainingUpdatesActivity extends Activity {
 
 	EditText editTrainingDate, editTrainigTime, editTrainee, editTrainer,
-			editOther, editAssement;
+			editOther, editAssement,editDescription;
 
 	Spinner editTrainingType;
 
@@ -40,6 +40,7 @@ public class TrainingUpdatesActivity extends Activity {
 	private String trainingHrs;
 	private String trainingMins;
 	private String assessment;
+	private String description;
 
 	String[] types;
 
@@ -61,6 +62,7 @@ public class TrainingUpdatesActivity extends Activity {
 		editHrs = (Spinner) findViewById(R.id.edit_hrs);
 		editMins = (Spinner) findViewById(R.id.edit_mins);
 		editAssement = (EditText) findViewById(R.id.stay_from_date);
+		editDescription = (EditText) findViewById(R.id.edit_description);
 
 		editTrainingType
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -72,9 +74,7 @@ public class TrainingUpdatesActivity extends Activity {
 						String type = types[position];
 
 						if (type.equalsIgnoreCase("Other")) {
-
 							editOther.setVisibility(View.VISIBLE);
-
 						} else {
 							editOther.setVisibility(View.INVISIBLE);
 						}
@@ -121,7 +121,8 @@ public class TrainingUpdatesActivity extends Activity {
 		trainingHrs = editHrs.getSelectedItem().toString();
 		trainingMins = editMins.getSelectedItem().toString();
 		assessment = editAssement.getText().toString();
-
+		description = editDescription.getText().toString();
+		
 		if (traineeName.isEmpty() || trainerName.isEmpty()
 				|| assessment.isEmpty()) {
 
@@ -136,32 +137,44 @@ public class TrainingUpdatesActivity extends Activity {
 			return;
 		}
 		
-		dialog.show();
+		if(!Uttilities.validate(traineeName) || !Uttilities.validate(traineeName) || !Uttilities.validate(description)){
+			Uttilities.showToast(getApplicationContext(),
+					"Special Characters not allowed.");
+			return;
+		}
+		
+		if(!Uttilities.isNetConnected(getApplicationContext())){
+			Uttilities.showToast(getApplicationContext(),
+					"Network not available.");
+			return;
+		}
+			dialog.show();
 
-		List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
-		nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
-		nameValuePair.add(new BasicNameValuePair("Date", trainingDate));
-		nameValuePair.add(new BasicNameValuePair("Time", trainingTime));
-		nameValuePair.add(new BasicNameValuePair("Trainee", traineeName));
-		nameValuePair.add(new BasicNameValuePair("Trainer", trainerName));
-		nameValuePair.add(new BasicNameValuePair("Type", trainingType));
-		nameValuePair.add(new BasicNameValuePair("Other", other));
-		nameValuePair.add(new BasicNameValuePair("Timeoftraineehrs",trainingHrs));
-		nameValuePair.add(new BasicNameValuePair("Timeoftraineemin",trainingMins));
-		nameValuePair.add(new BasicNameValuePair("Traineeassessment",assessment));
+			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(5);
+			nameValuePair.add(new BasicNameValuePair("PropertyID", Uttilities.getUserLoginId(getApplicationContext())));
+			nameValuePair.add(new BasicNameValuePair("Date", trainingDate));
+			nameValuePair.add(new BasicNameValuePair("Time", trainingTime));
+			nameValuePair.add(new BasicNameValuePair("Trainee", traineeName));
+			nameValuePair.add(new BasicNameValuePair("Trainer", trainerName));
+			nameValuePair.add(new BasicNameValuePair("Type", trainingType));
+			nameValuePair.add(new BasicNameValuePair("Other", other));
+			nameValuePair.add(new BasicNameValuePair("Timeoftraineehrs",trainingHrs));
+			nameValuePair.add(new BasicNameValuePair("Timeoftraineemin",trainingMins));
+			nameValuePair.add(new BasicNameValuePair("Traineeassessment",assessment));
+			nameValuePair.add(new BasicNameValuePair("description",description));
 
-		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+			WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
-			@Override
-			public void onDataArrived(String data) {
+				@Override
+				public void onDataArrived(String data) {
 
-				Uttilities.showToast(getApplicationContext(), data);
-				dialog.cancel();
-				finish();
+					Uttilities.showToast(getApplicationContext(), data);
+					dialog.cancel();
+					finish();
 
-			}
-		}, nameValuePair);
-		post.execute(Uttilities.TRAINING_UPDATE_URL);
+				}
+			}, nameValuePair);
+			post.execute(Uttilities.TRAINING_UPDATE_URL);
 	}
 
 	public void goBack(View v) {

@@ -87,6 +87,8 @@ public class Uttilities {
 	public static String PAYMENT_NEWPAYMENT_SEARCH = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getNewPaymentSearch";
 
 	public static String PAYMENT_NEWPAYMENT = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/newPayment";
+	
+	public static String CLOSED_ITEMS_DETAILS = "http://pixsello.in/qualitymaintenanceapp/index.php/webapp/getAllDetail";
 
 	// public static String PROPERTY_ID;
 
@@ -113,13 +115,13 @@ public class Uttilities {
 
 		ConnectivityManager mgr = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo nif = mgr.getActiveNetworkInfo();
+		NetworkInfo nInfo = mgr.getActiveNetworkInfo();
 
-		if (nif == null) {
-			return false;
-		} else {
+		if (nInfo != null && nInfo.isConnected()) {
 			return true;
 		}
+		
+		return false;
 	}
 
 	public static String getDate() {

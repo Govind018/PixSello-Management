@@ -10,15 +10,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -124,7 +129,7 @@ public class UpdateActionDialog extends DialogFragment {
 			
 			@Override
 			public void onClick(View v) {
-
+//				closeKB();
 				getDialog().cancel();
 				
 			}
@@ -134,7 +139,12 @@ public class UpdateActionDialog extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
-
+				
+				if(editNewUpdate.getText().toString().isEmpty()){
+					Uttilities.showToast(getActivity(), "Enter new update.");
+					return;
+				}
+				closeKB();
 				updateAction(itemId, editNewUpdate.getText().toString());
 
 			}
@@ -144,14 +154,42 @@ public class UpdateActionDialog extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
-
-				closeItem(itemId);
+				showDialog();
 			}
 		});
 
 		return convertView;
 	}
 
+	private void showDialog() {
+
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+		alertDialog.setTitle("Alert");
+		alertDialog.setMessage("Are you sure,you want to close this & shift it?");
+		alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				closeItem(itemId);
+				
+			}
+		});
+		
+		alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				dialog.cancel();				
+			}
+		});
+
+		
+		AlertDialog dialog = alertDialog.create();
+		dialog.show();
+	}
+	
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -256,6 +294,11 @@ public class UpdateActionDialog extends DialogFragment {
 		}, nameValuePair);
 
 		post.execute("http://pixsello.in/qualitymaintenanceapp/index.php/webapp/closeActionItem");
+	}
+	
+	private void closeKB(){
+		InputMethodManager imm = (InputMethodManager)  getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 	}
 	
 	public interface OnCompleteListener {

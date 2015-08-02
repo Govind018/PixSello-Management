@@ -114,6 +114,7 @@ public class PaymentStatusActivity extends Activity {
 				try {
 					jsonObj = new JSONObject(data);
 					if (jsonObj.has("error_message")) {
+						dialog.cancel();
 						Uttilities.showToast(getApplicationContext(),
 								jsonObj.getString("error_message"));
 					} else {

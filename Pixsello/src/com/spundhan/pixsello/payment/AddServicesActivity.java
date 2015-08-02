@@ -71,7 +71,7 @@ public class AddServicesActivity extends Activity {
 		setContentView(R.layout.activity_add_services);
 
 		spinnerServices = (Spinner) findViewById(R.id.edit_service);
-		editIdentity = (EditText) findViewById(R.id.edit_identity);
+//		editIdentity = (EditText) findViewById(R.id.edit_identity);
 		editDueDate = (EditText) findViewById(R.id.due_date);
 		radioRegular = (RadioButton) findViewById(R.id.radio_type_payment_regular);
 		radioRecurring = (RadioButton) findViewById(R.id.radio_type_payment_recurring);
@@ -199,7 +199,7 @@ public class AddServicesActivity extends Activity {
 		service = spinnerServices.getSelectedItem().toString() != null ? spinnerServices
 				.getSelectedItem().toString() : "";
 		serviceId = spinnerServices.getSelectedItemPosition() + 1;
-		identity = editIdentity.getText().toString();
+//		identity = editIdentity.getText().toString();
 		dueDate = editDueDate.getText().toString();
 		regularPay = (regular) ? "1" : "2";
 
@@ -225,7 +225,7 @@ public class AddServicesActivity extends Activity {
 			return;
 		}
 
-		if (!service.isEmpty() && !identity.isEmpty() && !dueDate.isEmpty()) {
+		if (!service.isEmpty() && !dueDate.isEmpty()) {
 			dialog.show();
 
 			List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>(6);
@@ -234,7 +234,7 @@ public class AddServicesActivity extends Activity {
 			nameValuePair.add(new BasicNameValuePair("ServiceID", String
 					.valueOf(serviceId)));
 			nameValuePair.add(new BasicNameValuePair("Nameofservice", service));
-			nameValuePair.add(new BasicNameValuePair("Identity", identity));
+//			nameValuePair.add(new BasicNameValuePair("Identity", identity));
 			nameValuePair
 					.add(new BasicNameValuePair("PaymentType", regularPay));
 			nameValuePair.add(new BasicNameValuePair("Recurringpaymentbase",
@@ -264,7 +264,7 @@ public class AddServicesActivity extends Activity {
 
 	private void resetFields() {
 
-		editIdentity.setText("");
+//		editIdentity.setText("");
 		editDueDate.setText("");
 		radioRegular.setChecked(false);
 		radioRecurring.setChecked(false);

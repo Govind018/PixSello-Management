@@ -54,8 +54,8 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 
 				holder.textService = (TextView) convertView
 						.findViewById(R.id.text_serivce_name);
-				holder.textIdentity = (TextView) convertView
-						.findViewById(R.id.text_identity);
+//				holder.textIdentity = (TextView) convertView
+//						.findViewById(R.id.text_identity);
 				holder.textBillDate = (TextView) convertView
 						.findViewById(R.id.text_bill_date);
 				holder.textAmount = (TextView) convertView
@@ -85,7 +85,7 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 
 			holder.textBillNumber.setText(guestDetail.getBillNum());
 			holder.textService.setText(guestDetail.getServiceName());
-			holder.textIdentity.setText(guestDetail.getIdentity());
+//			holder.textIdentity.setText(guestDetail.getIdentity());
 			holder.textBillDate.setText(guestDetail.getBillDate());
 			holder.textAmount.setText(guestDetail.getAmount());
 			holder.textDueDate.setText(guestDetail.getDueDate());
@@ -105,7 +105,7 @@ public class PaymentStatusListAdapter extends ArrayAdapter<Entity> {
 	public class ViewHolder {
 
 		TextView textService;
-		TextView textIdentity;
+//		TextView textIdentity;
 		TextView textAmount;
 		TextView textDueDate;
 		TextView textStatus;
