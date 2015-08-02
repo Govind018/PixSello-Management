@@ -10,16 +10,17 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
-    <supports-screens 
-    android:resizeable="true"
-    android:smallScreens="true" 
-    android:largeScreens="true"
-    android:xlargeScreens="true"  
-    android:normalScreens="true" 
-    android:anyDensity="true"/>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
+        android:name="com.pixsello.management.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
@@ -37,102 +38,239 @@
         </activity>
         <activity
             android:name=".LostAndFoundActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_lost_and_found"
+            android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
         </activity>
         <activity
             android:name=".ContactDetailsActivity"
-            android:label="@string/title_activity_contact_details" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_contact_details"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".GuestVisitorActivity"
-            android:label="@string/title_activity_guest_visitor" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_guest_visitor"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".action.ActionRequiredActivity"
-            android:label="@string/title_activity_action_required" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_action_required"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".training.TrainingUpdatesActivity"
-            android:label="@string/title_activity_training_updates" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_training_updates"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".PaymentDetailsActivity"
-            android:label="@string/title_activity_payment_details" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_payment_details"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".ReportItemActivity"
             android:label="@string/title_activity_report_item"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
  >
         </activity>
         <activity
             android:name=".FindItemActivity"
-            android:label="@string/title_activity_find_item" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_find_item"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".guest.MakeInEntryActivity"
-            android:label="@string/title_activity_make_in_entry" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_make_in_entry"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".guest.MakeOutEntryActivity"
-            android:label="@string/title_activity_make_out_entry" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_make_out_entry"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".guest.PastVisitorsActivity"
-            android:label="@string/title_activity_past_visitors" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_past_visitors"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".contact.AddContactNumberActivity"
-            android:label="@string/title_activity_add_contact_number" >
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_add_contact_number"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".contact.EmergencyNumbersActivity"
-            android:label="@string/title_activity_emergency_numbers" >
+            android:label="@string/title_activity_emergency_numbers"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".action.AddItemActivity"
-            android:label="@string/title_activity_add_item" >
+            android:label="@string/title_activity_add_item"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".training.TrainingActivity"
-            android:label="@string/title_activity_training" >
+            android:label="@string/title_activity_training"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".UpdateActivity"
-            android:label="@string/title_activity_update" >
+            android:label="@string/title_activity_update"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".training.StaffProfileActivity"
-            android:label="@string/title_activity_staff_profile" >
+            android:label="@string/title_activity_staff_profile"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".training.TrainingVideosActivity"
-            android:label="@string/title_activity_training_videos" >
+            android:label="@string/title_activity_training_videos"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".action.ActiveItemsListActivity"
-            android:label="@string/title_activity_active_items_list" >
+            android:label="@string/title_activity_active_items_list"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".action.ClosedItemsActivity"
-            android:label="@string/title_activity_closed_items" >
+            android:label="@string/title_activity_closed_items"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="com.spundhan.pixsello.payment.AddServicesActivity"
-            android:label="@string/title_activity_add_services" >
+            android:label="@string/title_activity_add_services"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="com.spundhan.pixsello.payment.UpdateNewBIllActivity"
-            android:label="@string/title_activity_update_new_bill" >
+            android:label="@string/title_activity_update_new_bill"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name=".PaymentActivity"
-            android:label="@string/title_activity_payment" >
+            android:name="com.spundhan.pixsello.payment.PaymentActivity"
+            android:label="@string/title_activity_payment"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.spundhan.pixsello.payment.PaymentStatusActivity"
+            android:label="@string/title_activity_payment_status"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.spundhan.pixsello.payment.NewPaymentsActivity"
+            android:label="@string/title_activity_payment_status"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.spundhan.pixsello.payment.PaymentSearchActivity"
+            android:label="@string/title_activity_payment_search"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".aparangi.AparangiActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_aparangi" >
+        </activity>
+        <activity
+            android:name=".aparangi.EmployeeDetailsActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_employee_details" >
+        </activity>
+        <activity
+            android:name=".aparangi.EmploymentDetailsActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_employment_details" >
+        </activity>
+        <activity
+            android:name=".aparangi.AssessmentActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_assessment" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".aparangi.EmployeeSearchActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_employee_search" >
         </activity>
         <activity
             android:name=".PaymentStatusActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_payment_status" >
+        </activity>
+        <activity
+            android:name=".TestActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/title_activity_test" >
+        </activity>
+        <activity
+            android:name=".ImagePreviewActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_image_preview" >
+        </activity>
+        <activity
+            android:name=".feedback.FeedbackDetailsActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_feedback_details" >
+        </activity>
+        <activity
+            android:name=".AddNewFeedbackActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_add_new_feedback" >
+        </activity>
+        <activity
+            android:name=".feedback.PreviousFeedbackActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_previous_feedback" >
+        </activity>
+        <activity
+            android:name="com.pixsello.management.training.VideoPlayerActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_video_player" >
         </activity>
     </application>
 
