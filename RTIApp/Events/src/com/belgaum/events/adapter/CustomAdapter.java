@@ -27,7 +27,7 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 	ArrayList<Entity> items;
 
 	String typeOfScreen;
-	
+
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 	public CustomAdapter(Context context, int resource,
@@ -62,21 +62,18 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 
 		Entity entity = items.get(position);
 
-//		holder.image = (ImageView) convertView.findViewById(R.id.image);
-		
-//		if (imageLoader == null)
-			imageLoader = AppController.getInstance().getImageLoader();
-			NetworkImageView thumbNail = (NetworkImageView) convertView
-					.findViewById(R.id.image);
-			
-			thumbNail.setImageUrl(entity.getImageUrl(), imageLoader);
-		
+		imageLoader = AppController.getInstance().getImageLoader();
+		NetworkImageView thumbNail = (NetworkImageView) convertView
+				.findViewById(R.id.image);
+
+		thumbNail.setImageUrl(entity.getImageUrl(), imageLoader);
+
 		if (typeOfScreen.equalsIgnoreCase("Events")) {
 			holder.textName = (TextView) convertView
 					.findViewById(R.id.text_item_name);
 			holder.textName.setText(entity.getName());
 		} else if (typeOfScreen.equalsIgnoreCase("Area")) {
-			holder.textPosition = (TextView) convertView    
+			holder.textPosition = (TextView) convertView
 					.findViewById(R.id.text_item_position);
 			holder.textName = (TextView) convertView
 					.findViewById(R.id.text_item_name);
@@ -90,7 +87,7 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 			holder.textName.setText(entity.getName());
 			holder.textPosition.setText(entity.getPost());
 		}
-		
+
 		return convertView;
 	}
 

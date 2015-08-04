@@ -1,9 +1,7 @@
 package com.belgaum.events;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -11,26 +9,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.belgaum.events.util.Util;
 import com.belgaum.networks.IWebRequest;
-import com.belgaum.networks.NetWorkLayer;
 import com.belgaum.networks.WebRequestPost;
 
-public class LoginActivity extends Activity implements NetWorkLayer {
+public class LoginActivity extends Activity  {
 
 	TextView textSignUp;
 
@@ -79,21 +70,15 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 	}
 
 	private void init() {
-
 		textSignUp = (TextView) findViewById(R.id.text_signup);
 		textSignUp.setMovementMethod(LinkMovementMethod.getInstance());
 		editEmail = (EditText) findViewById(R.id.edit_email);
 		editPassword = (EditText) findViewById(R.id.edit_password);
-		// forgotPwd = (TextView) findViewById(R.id.text_forgot);
-		// forgotPwd.setMovementMethod(LinkMovementMethod.getInstance());
-
 	}
 
 	public void openSignUpScreen(View v) {
-
 		startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
 		overridePendingTransition(R.anim.left_to_right, R.anim.abc_fade_out);
-
 	}
 
 	public void doLogin(View v) {
@@ -120,19 +105,6 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 		nameValuePair.add(new BasicNameValuePair("user", userEmail));
 		nameValuePair.add(new BasicNameValuePair("password", userPassword));
 
-		Map<String, String> values = new HashMap<String, String>();
-		values.put("user", userEmail);
-		values.put("password", userPassword);
-
-		// WebRequest.addNewRequestQueue(LoginActivity.this,
-		// Util.LOGIN_URL,values);
-		// startActivity(new Intent(
-		// getApplicationContext(),
-		// DashBoardActivity.class));
-		// overridePendingTransition(
-		// R.anim.left_to_right,
-		// R.anim.abc_fade_out);
-
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 			@Override
@@ -142,11 +114,13 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 					JSONObject json = new JSONObject(data);
 
 					String loginStatus = json.getString("error");
+					
+					//Checks for login status
 					if (loginStatus.equalsIgnoreCase("true")) {
 						Util.showToast(getApplicationContext(),
 								"User and password doesn't match");
 					} else {
-
+						//Stores User session in prefrences
 						Util.storeUserSession(getApplicationContext(), true,
 								false);
 						finish();
@@ -166,16 +140,13 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 
 	}
 
-	public void openDialog(View v) {
+/*	public void openDialog(View v) {
 
 		showResetPasswordDialog("", "");
 
 	}
 
 	public void showResetPasswordDialog(String type, String emailId) {
-
-		// progressDialog = new ProgressDialog(this);
-		// progressDialog.setMessage("Sending email.");
 
 		LayoutInflater infalter = LayoutInflater.from(this);
 		View prompt = infalter.inflate(R.layout.forgot_password_dialog, null);
@@ -268,19 +239,7 @@ public class LoginActivity extends Activity implements NetWorkLayer {
 		}, nameValuePair, LoginActivity.this, "Sending Mail.Please Wait..!");
 
 		postData.execute(Util.FORGOT_PASSWORD_URL);
-	}
-
-	@Override
-	public void parseResponse(JSONObject json) {
-
-		Log.d(TAG, "" + json);
-
-	}
-
-	@Override
-	public void showErrorMessage(String message) {
-		Log.d(TAG, message);
-	}
+	}*/
 
 	public void directLogin(View v) {
 

@@ -47,7 +47,6 @@ public class DetailsActivity extends ActionBarActivity {
 		mobile = textNumber.getText().toString();
 
 		NetworkImageView thumbNail = (NetworkImageView) findViewById(R.id.image);
-
 		thumbNail.setImageUrl(intent.getStringExtra("image"), imageLoader);
 
 	}
@@ -67,13 +66,11 @@ public class DetailsActivity extends ActionBarActivity {
 		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
 		smsIntent.setType("vnd.android-dir/mms-sms");
 		smsIntent.putExtra("address", mobile);
-		// smsIntent.putExtra("sms_body","Body of Message");
 		startActivity(smsIntent);
 
 	}
 	
 	public void doShare(View v){
-		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(name).append("\n").append(email).append("\n").append(mobile);
 		Intent sendIntent = new Intent();
@@ -81,35 +78,12 @@ public class DetailsActivity extends ActionBarActivity {
 		sendIntent.putExtra(Intent.EXTRA_TEXT, buffer.toString());
 		sendIntent.setType("text/plain");
 		startActivity(Intent.createChooser(sendIntent, "Choose"));
-//		
-//		Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-//		smsIntent.setType("vnd.android-dir/mms-sms");
-//		smsIntent.putExtra("sms_body",buffer.toString());
-//		// smsIntent.putExtra("sms_body","Body of Message");
-//		startActivity(smsIntent);
-		
 	}
 
 	public void doSendEmail(View v) {
-		
 		Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
                 "mailto", email, null));
 		startActivity(i);
-
-//		final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-//		intent.putExtra(Intent.EXTRA_EMAIL, email);
-//		intent.setType("text/plain");
-//		final PackageManager pm = getPackageManager();
-//		final List<ResolveInfo> matches = pm.queryIntentActivities(intent, 0);
-//		ResolveInfo best = null;
-//		for (final ResolveInfo info : matches)
-//			if (info.activityInfo.packageName.endsWith(".gm")
-//					|| info.activityInfo.name.toLowerCase().contains("gmail"))
-//				best = info;
-//		if (best != null)
-//			intent.setClassName(best.activityInfo.packageName,
-//					best.activityInfo.name);
-//		startActivity(intent);
 	}
 
 	@Override

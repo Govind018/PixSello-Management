@@ -74,12 +74,6 @@ public class SearchListAdapter extends ArrayAdapter<Entity> {
 		holder.textName.setText(entity.getName());
 		holder.textPost.setText(entity.getPost());
 
-		// byte[] imageAsBytes =
-		// Base64.decode(entity.getImage(),Base64.DEFAULT);
-		// Bitmap m = BitmapFactory.decodeByteArray(imageAsBytes, 0,
-		// imageAsBytes.length);
-		// holder.image.setImageBitmap(m);
-
 		return convertView;
 	}
 

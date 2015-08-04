@@ -1,7 +1,6 @@
 package com.belgaum.events;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -24,7 +23,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
@@ -49,7 +47,7 @@ import com.belgaum.networks.IWebRequest;
 import com.belgaum.networks.WebRequestPost;
 
 public class SignUpActivity extends ActionBarActivity implements
-		OnClickListener, IWebRequest {
+		OnClickListener {
 
 	EditText editName;
 
@@ -113,7 +111,6 @@ public class SignUpActivity extends ActionBarActivity implements
 
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
-//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 		Calendar calender = Calendar.getInstance();
@@ -205,7 +202,6 @@ public class SignUpActivity extends ActionBarActivity implements
 	}
 
 	private void initLayout() {
-
 		editName = (EditText) findViewById(R.id.edit_name);
 		editEmail = (EditText) findViewById(R.id.edit_email);
 		editMobile = (EditText) findViewById(R.id.edit_mobile);
@@ -215,7 +211,6 @@ public class SignUpActivity extends ActionBarActivity implements
 		editDOB.setOnClickListener(this);
 		editAnnivarsary = (Button) findViewById(R.id.edit_anniversary);
 		editAnnivarsary.setOnClickListener(this);
-
 		spinnerPrefixItems = (Spinner) findViewById(R.id.spinner_prefix);
 		spinnerPrefixItems.setOnItemSelectedListener(prefixSelectedListener);
 		spinnerTableNames = (Spinner) findViewById(R.id.spinner_table_name);
@@ -223,15 +218,12 @@ public class SignUpActivity extends ActionBarActivity implements
 	}
 
 	public void doUploadImage(View v) {
-
 		Intent i = new Intent(Intent.ACTION_PICK,
 				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 		startActivityForResult(i, IMAGE_PICKER_SELECT);
-
 	}
 
 	public void doSignUp(View v) {
-
 		name = editName.getText().toString();
 		email = editEmail.getText().toString();
 		mobile = editMobile.getText().toString();
@@ -258,9 +250,10 @@ public class SignUpActivity extends ActionBarActivity implements
 						"Invalid Email address.");
 				return;
 			}
-			
-			if(image_str !=null && image_str.isEmpty()){
-				Util.showToast(getApplicationContext(),"Please select Image to Upload.");
+
+			if (image_str != null && image_str.isEmpty()) {
+				Util.showToast(getApplicationContext(),
+						"Please select Image to Upload.");
 				return;
 			}
 
@@ -284,24 +277,22 @@ public class SignUpActivity extends ActionBarActivity implements
 				public void onDataArrived(String data) {
 					try {
 						JSONObject json = new JSONObject(data);
-						
-						System.out.println(json + "SIGN UP JSON");
-						
-//						Toast.makeText(getApplicationContext(), "" + data, Toast.LENGTH_LONG).show();
 
-//						boolean status = Boolean.parseBoolean(json
-//								.getString("error"));
-						
+						System.out.println(json + "SIGN UP JSON");
+
 						boolean status = json.getBoolean("error");
-						
+
 						if (status) {
 							Util.showToast(getApplicationContext(),
 									json.getString("message"));
 						} else {
-							JSONObject objDetails = new JSONObject(json.getString("details"));
+							JSONObject objDetails = new JSONObject(
+									json.getString("details"));
 							Util.storeUserSession(SignUpActivity.this, true,
 									true);
-							Util.storeUserDetails(SignUpActivity.this, objDetails.getString("id"), objDetails.getString("name"));
+							Util.storeUserDetails(SignUpActivity.this,
+									objDetails.getString("id"),
+									objDetails.getString("name"));
 							finish();
 							startActivity(new Intent(getApplicationContext(),
 									DashBoardActivity.class));
@@ -317,7 +308,7 @@ public class SignUpActivity extends ActionBarActivity implements
 			postData.execute(Util.SIGNUP_URL);
 		}
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -369,15 +360,15 @@ public class SignUpActivity extends ActionBarActivity implements
 				image_str = Base64.encodeToString(image, 0);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
-			}catch (Exception e) {
+			} catch (Exception e) {
 				Util.showToast(SignUpActivity.this, "Version issue");
 			}
-			
-//			Bitmap map = getDataFromGallery(data);
-//			ByteArrayOutputStream bStream = new ByteArrayOutputStream();
-//			map.compress(Bitmap.CompressFormat.PNG, 100, bStream);
-//			byte[] image = bStream.toByteArray();
-//			image_str = Base64.encodeToString(image, 0);
+
+			// Bitmap map = getDataFromGallery(data);
+			// ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+			// map.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+			// byte[] image = bStream.toByteArray();
+			// image_str = Base64.encodeToString(image, 0);
 
 			Util.showToast(getApplicationContext(), "Image Selected.");
 		}
@@ -401,65 +392,49 @@ public class SignUpActivity extends ActionBarActivity implements
 		}
 	}
 
-	private Bitmap getDataFromGallery(Intent data) { // To-do Remove this method
-
-		Uri selectedImage = data.getData();
-		Bitmap map = decodeUri(selectedImage);
-
-		return map;
-	}
-
-	/**
+	/*
+	 * private Bitmap getDataFromGallery(Intent data) { // To-do Remove this
+	 * method
+	 * 
+	 * Uri selectedImage = data.getData(); Bitmap map =
+	 * decodeUri(selectedImage);
+	 * 
+	 * return map; }
+	 *//**
 	 * @author : gmast
 	 * @param : Uri uri
 	 * @desc : Returns selected image from gallery.
 	 */
-	private Bitmap decodeUri(Uri uri) { // To-Do Optimize
-		Bitmap map = null;
-		try {
-			ParcelFileDescriptor pd = getContentResolver().openFileDescriptor(
-					uri, "r");
-			FileDescriptor descriptor = pd.getFileDescriptor();
-
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.inJustDecodeBounds = true;
-			BitmapFactory.decodeFileDescriptor(descriptor, null, options);
-
-			final int REQUIRED_SIZE = 1024;
-
-			int width = options.outWidth;
-			int height = options.outHeight;
-			int scale = 1;
-
-			while (true) {
-				if (width < REQUIRED_SIZE && height < REQUIRED_SIZE) {
-					break;
-				}
-
-				width /= 2;
-				height /= 2;
-				scale *= 2;
-			}
-
-			BitmapFactory.Options o2 = new BitmapFactory.Options();
-			o2.inSampleSize = scale;
-			map = BitmapFactory.decodeFileDescriptor(descriptor, null, o2);
-
-			System.out.println(map);
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		return map;
-
-	}
-
-	@Override
-	public void onDataArrived(String data) {
-
-	}
-
+	/*
+	 * private Bitmap decodeUri(Uri uri) { // To-Do Optimize Bitmap map = null;
+	 * try { ParcelFileDescriptor pd = getContentResolver().openFileDescriptor(
+	 * uri, "r"); FileDescriptor descriptor = pd.getFileDescriptor();
+	 * 
+	 * BitmapFactory.Options options = new BitmapFactory.Options();
+	 * options.inJustDecodeBounds = true;
+	 * BitmapFactory.decodeFileDescriptor(descriptor, null, options);
+	 * 
+	 * final int REQUIRED_SIZE = 1024;
+	 * 
+	 * int width = options.outWidth; int height = options.outHeight; int scale =
+	 * 1;
+	 * 
+	 * while (true) { if (width < REQUIRED_SIZE && height < REQUIRED_SIZE) {
+	 * break; }
+	 * 
+	 * width /= 2; height /= 2; scale *= 2; }
+	 * 
+	 * BitmapFactory.Options o2 = new BitmapFactory.Options(); o2.inSampleSize =
+	 * scale; map = BitmapFactory.decodeFileDescriptor(descriptor, null, o2);
+	 * 
+	 * System.out.println(map);
+	 * 
+	 * } catch (FileNotFoundException e) { e.printStackTrace(); }
+	 * 
+	 * return map;
+	 * 
+	 * }
+	 */
 	OnItemSelectedListener tableSelectedListener = new OnItemSelectedListener() {
 
 		@Override

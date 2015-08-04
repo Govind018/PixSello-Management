@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-//Not using
 public class EventDetailAdapter extends ArrayAdapter<Entity> {
 
 	Context thisContext;
@@ -101,27 +100,6 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 			holder.textSenderName.setText(entity.getName());
 			holder.textSendMessage.setText(entity.getMessage());
 		}
-
-		// ViewHolder holder = null;
-		// if (convertView == null) {
-		//
-		// holder = new ViewHolder();
-		// convertView = inflater.inflate(inflatableRes, null);
-		// convertView.setTag(holder);
-		//
-		// holder.textSenderName = (TextView) convertView
-		// .findViewById(R.id.text_sender_name);
-		// holder.textSendMessage = (TextView) convertView
-		// .findViewById(R.id.text_sender_message);
-		// holder.sentMsg = (RelativeLayout)
-		// convertView.findViewById(R.id.message_send);
-		//
-		// } else {
-		// holder = (ViewHolder) convertView.getTag();
-		// }
-		// Entity entity = details.get(position);
-		// holder.textSenderName.setText(entity.getName());
-		// holder.textSendMessage.setText(entity.getMessage());
 
 		return convertView;
 	}

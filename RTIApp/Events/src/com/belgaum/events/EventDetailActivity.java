@@ -61,31 +61,13 @@ public class EventDetailActivity extends ActionBarActivity {
 		getSupportActionBar().setDisplayShowTitleEnabled(false);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		// TextView eventName = (TextView) findViewById(R.id.event_name);
-		// TextView eventDesc = (TextView) findViewById(R.id.event_desc);
-		//
 		Intent intent = getIntent();
 		eventName = intent.getStringExtra("name");
 		eventDesc = intent.getStringExtra("desc");
 		eventUrl = intent.getStringExtra("image");
-
-		// eventName.setText(intent.getStringExtra("name"));
-		// eventDesc.setText(intent.getStringExtra("desc"));
 		eventId = intent.getStringExtra("id");
-		//
-		// NetworkImageView thumbNail = (NetworkImageView)
-		// findViewById(R.id.image);
-		// thumbNail.setImageUrl(intent.getStringExtra("image"), imageLoader);
 
 		details = new ArrayList<Entity>();
-//		if (details.size() == 0) {
-//			Entity entity = new Entity();
-//			entity.setHeader(true);
-//			entity.setEventName(eventName);
-//			entity.setEventDescription(eventDesc);
-//			entity.setImageUrl(eventUrl);
-//			details.add(entity);
-//		}
 		adapter = new EventDetailAdapter(getApplicationContext(),
 				R.layout.event_chat_row_new, details);
 		list.setAdapter(adapter);

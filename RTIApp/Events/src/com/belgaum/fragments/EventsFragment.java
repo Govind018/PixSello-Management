@@ -117,8 +117,6 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 	@Override
 	public void parseResponse(JSONObject json) {
 
-		// Toast.makeText(getActivity(), "" + json, Toast.LENGTH_LONG).show();
-
 		System.out.println(json);
 		try {
 			

@@ -64,8 +64,6 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 				R.layout.area_board_row, listOfData, "National");
 		list.setAdapter(adapter);
 
-		// getValues();
-
 		getAllValues();
 
 		return convertView;
@@ -117,7 +115,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		}
 	};
 
-	private void getValues() {
+	/*private void getValues() {
 
 		ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 
@@ -159,7 +157,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
 		post.execute(Util.AREA_BOARD_URL);
 	}
-
+*/
 	@Override
 	public void parseResponse(JSONObject json) {
 
