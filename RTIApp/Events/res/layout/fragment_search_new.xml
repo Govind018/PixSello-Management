@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:layout_alignParentBottom="true"
-                android:background="#FF6666" />
+                android:background="@color/action_bar_background" />
 
             <TextView
                 android:layout_width="wrap_content"
