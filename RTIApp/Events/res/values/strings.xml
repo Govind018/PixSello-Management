@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">RTI Area 10</string>
+    <string name="app_name">RTI Area X</string>
     <string name="login_app_name">Round Table India</string>
     <string name="app_tagline">Adopt Adapt Improve</string>
     <string name="hello_world">Hello world!</string>
@@ -35,12 +35,12 @@
     <string name="lbl_event_date">Date</string>
     <string name="lbl_event_time">Event Time</string>
 
-    <color name="btn_normal">#FF6666</color>
-    <color name="btn_pressed">#89FF6666</color>
+    <color name="btn_normal">#caba4c</color>
+    <color name="btn_pressed">#89caba4c</color>
     <color name="light_white">#96FFFFFF</color>
     <color name="tab_released">#E1E1E1</color>
     <color name="tab_pressed">#ADADAD</color>
-    <color name="tab_strip">#FF6666</color>
+    <color name="tab_strip">#caba4c</color>
 
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_dash_board">DashBoardActivity</string>
@@ -94,5 +94,6 @@
     <string name="title_activity_search_list">SearchListActivity</string>
     <string name="title_activity_search_detail">SearchDetailActivity</string>
     <color name="listItemBackground">#C3C3C3</color>
+    <color name="action_bar_background">#caba4c</color>
 
 </resources>
