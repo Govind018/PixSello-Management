@@ -3,6 +3,8 @@ package com.belgaum.events.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.android.gms.internal.ed;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -12,31 +14,40 @@ import android.widget.Toast;
 
 public class Util {
 
-	public static String LOGIN_URL = "http://www.dhairyasheel.com/pk/api/index.php/applogin";
-
-	public static String SIGNUP_URL = "http://www.dhairyasheel.com/pk/api/index.php/appregister2";
-
-	public static String SIGNUP_PREFIX_URL = "http://www.dhairyasheel.com/pk/api/index.php/prefixtablenumber";
-
-	public static String FORGOT_PASSWORD_URL = "http://www.dhairyasheel.com/pk/api/index.php/forgotpassword";
-
-	public static String SEARCH_URL = "http://www.dhairyasheel.com/pk/api/index.php/search2";
-
-	public static String EVETNS_URL = "http://www.dhairyasheel.com/pk/api/index.php/getallevents2";
-
-	public static String NATIONAL_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/nationalboard2";
-
-	public static String AREA_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/areaboard2";
-
-	public static String ADMIN_URL = "http://www.dhairyasheel.com/pk";
 	
-	public static String ADD_COMMENTS_URL = "http://www.dhairyasheel.com/pk/api/index.php/addcomment";
-	
-	public static String GET_COMMENTS_URL = "http://www.dhairyasheel.com/pk/api/index.php/eventdetails2";
+	public static String LOGIN_URL = "http://www.rtiarea10.co.in/api/index.php/applogin";
 
+	public static String SIGNUP_URL = "http://www.rtiarea10.co.in/api/index.php/appregister2";
+
+	public static String SIGNUP_PREFIX_URL = "http://www.rtiarea10.co.in/api/index.php/prefixtablenumber";
+
+	public static String FORGOT_PASSWORD_URL = "http://www.rtiarea10.co.in/api/index.php/forgotpassword";
+
+	public static String SEARCH_URL = "http://www.rtiarea10.co.in/api/index.php/search2";
+
+	public static String EVETNS_URL = "http://www.rtiarea10.co.in/api/index.php/getallevents2";
+
+	public static String NATIONAL_BOARD_URL = "http://www.rtiarea10.co.in/api/index.php/nationalboard2";
+
+	public static String AREA_BOARD_URL = "http://www.rtiarea10.co.in/api/index.php/areaboard2";
+
+	public static String ADMIN_URL = "http://www.rtiarea10.co.in";
+	
+	public static String ADD_COMMENTS_URL = "http://www.rtiarea10.co.in/api/index.php/addcomment";
+	
+	public static String GET_COMMENTS_URL = "http://www.rtiarea10.co.in/api/index.php/eventdetails2";
+
+	public static String GCM_URL = "http://www.rtiarea10.co.in/api/index.php/gcmid";
+	
+	public static String EVENT_DATA_URL = "http://www.rtiarea10.co.in/api/index.php/eventdetails2";
+	
 	public static final String NETWORK_ERROR_MSG = "No Network Connection.";
 
-	public static final String IMAGE_URL = "http://www.dhairyasheel.com/pk/";
+	public static final String IMAGE_URL = "http://www.rtiarea10.co.in/";
+	
+	public static final String REGISTRATION_ID = "487202621602";
+	
+	public static final String MESSAGE_KEY = "title";
 
 	public static void showToast(Context context, String text) {
 
@@ -123,6 +134,21 @@ public class Util {
 
 		return false;
 	}
+	
+	
+	public static void storeRegistrationId(String regId,Context context){
+		SharedPreferences pref = context.getSharedPreferences("gcm_details", Context.MODE_PRIVATE);
+		Editor edit = pref.edit();
+		edit.putString("register_id", regId);
+		edit.commit();
+	}
+	
+	public static String getRegId(Context context) {
+		SharedPreferences pref = context.getSharedPreferences("gcm_details",
+				Context.MODE_PRIVATE);
+		return pref.getString("register_id", "");
+	}
+	
 
 	public static boolean isValidEmail(String email) {
 		String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"

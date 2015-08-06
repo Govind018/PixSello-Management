@@ -58,7 +58,8 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		pDialog.setMessage("Please Wait.");
 		listNationalBoard.setOnItemClickListener(listListener);
 		listOfData = new ArrayList<Entity>();
-
+		
+                                     
 		// getValues();
 		
 		adapter = new CustomAdapter(getActivity(),
@@ -152,6 +153,7 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 			System.out.println(jsonArray);
 
 			if (jsonArray.length() == 0) {
+				pDialog.cancel();
 				Util.showToast(getActivity(), "No Records Found.");
 				listOfData.clear();
 				return;
@@ -170,7 +172,7 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 						+ jsonObj.getString("imageUrl"));
 				listOfData.add(entity);
 			}
-			pDialog.cancel();;
+			pDialog.cancel();
 			adapter.notifyDataSetChanged();
 
 		} catch (JSONException e) {

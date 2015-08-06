@@ -38,6 +38,16 @@ public class Entity {
 	
 	private String eventName;
 	
+	private String eventDate;
+	
+	public String getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(String eventDate) {
+		this.eventDate = eventDate;
+	}
+
 	public String getEventName() {
 		return eventName;
 	}

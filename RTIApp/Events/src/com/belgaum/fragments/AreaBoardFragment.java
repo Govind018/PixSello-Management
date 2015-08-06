@@ -2,7 +2,6 @@ package com.belgaum.fragments;
 
 import java.util.ArrayList;
 
-import org.apache.http.NameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,10 +25,8 @@ import com.belgaum.events.R;
 import com.belgaum.events.adapter.CustomAdapter;
 import com.belgaum.events.util.Entity;
 import com.belgaum.events.util.Util;
-import com.belgaum.networks.IWebRequest;
 import com.belgaum.networks.NetWorkLayer;
 import com.belgaum.networks.WebRequest;
-import com.belgaum.networks.WebRequestPost;
 
 public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
@@ -166,6 +163,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 			System.out.println(jsonArray);
 
 			if (jsonArray.length() == 0) {
+				pDialog.cancel();
 				Util.showToast(getActivity(), "No Records Found.");
 				listOfData.clear();
 				return;

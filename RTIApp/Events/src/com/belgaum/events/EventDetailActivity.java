@@ -62,17 +62,22 @@ public class EventDetailActivity extends ActionBarActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Intent intent = getIntent();
-		eventName = intent.getStringExtra("name");
-		eventDesc = intent.getStringExtra("desc");
-		eventUrl = intent.getStringExtra("image");
 		eventId = intent.getStringExtra("id");
+		
+//		if(intent.getBooleanExtra("notification", false)){
+//			eventName = intent.getStringExtra("name");
+//			eventDesc = intent.getStringExtra("desc");
+//			eventUrl = intent.getStringExtra("image");
+//		}
 
 		details = new ArrayList<Entity>();
 		adapter = new EventDetailAdapter(getApplicationContext(),
 				R.layout.event_chat_row_new, details);
 		list.setAdapter(adapter);
 
-		getComments();
+//		getComments();
+		
+		getEventsData();
 
 	}
 
@@ -123,6 +128,55 @@ public class EventDetailActivity extends ActionBarActivity {
 		}, nameValuePairs, EventDetailActivity.this, "Please Wait.");
 		post.execute(Util.GET_COMMENTS_URL);
 	}
+	
+	private void getEventsData(){
+		
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("id", eventId));
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+			@Override
+			public void onDataArrived(String data) {
+				try {
+					JSONObject jsonObj = new JSONObject(data);
+					JSONArray jsonArr = jsonObj.getJSONArray("comments");
+					int len = jsonArr.length();
+
+					if (len == 0) {
+						Entity entity = new Entity();
+						entity.setHeader(true);
+						entity.setEventName(jsonObj.getString("title"));
+						entity.setEventDescription(jsonObj.getString("desrip"));
+						entity.setImageUrl(Util.IMAGE_URL+jsonObj.getString("imageUrl"));
+						details.add(entity);
+					} else {
+						for (int i = 0; i < len; i++) {
+							Entity entity = new Entity();
+							JSONObject json = jsonArr.getJSONObject(i);
+							if (i == 0) {
+								entity.setHeader(true);
+								entity.setHeader(true);
+								entity.setEventName(jsonObj.getString("title"));
+								entity.setEventDescription(jsonObj.getString("desrip"));
+								entity.setImageUrl(Util.IMAGE_URL+jsonObj.getString("imageUrl"));
+							} else {
+								entity.setHeader(false);
+							}
+							entity.setName(json.getString("name"));
+							entity.setMessage(json.getString("comment"));
+							details.add(entity);
+						}
+					}
+					list.setSelection(0);
+					adapter.notifyDataSetChanged();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, nameValuePairs, EventDetailActivity.this, "Please Wait.");
+		post.execute(Util.EVENT_DATA_URL);
+		
+	}
 
 	public void doSend(View v) {
 
@@ -133,13 +187,14 @@ public class EventDetailActivity extends ActionBarActivity {
 		}
 
 		editMessage.setText("");
-
+		
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("comment", msg));
 		nameValuePairs.add(new BasicNameValuePair("event_id", eventId));
-		nameValuePairs.add(new BasicNameValuePair("member_id", Util
-				.getUserId(getApplicationContext())));
-
+		nameValuePairs.add(new BasicNameValuePair("member_id", Util.getUserId(getApplicationContext())));
+//		nameValuePairs.add(new BasicNameValuePair("regId", Util.getRegId(EventDetailActivity.this)));
+//		nameValuePairs.add(new BasicNameValuePair("message", msg));
+		
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 			@Override
@@ -147,6 +202,8 @@ public class EventDetailActivity extends ActionBarActivity {
 
 				try {
 					JSONObject json = new JSONObject(data);
+
+//					Util.showToast(getApplicationContext(),"" + json);
 					
 					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -191,7 +248,8 @@ public class EventDetailActivity extends ActionBarActivity {
 		case R.id.item_navigation :
 			details.clear();
 			adapter.notifyDataSetChanged();
-			getComments();
+//			getComments();
+			getEventsData();
 
 		default:
 			break;

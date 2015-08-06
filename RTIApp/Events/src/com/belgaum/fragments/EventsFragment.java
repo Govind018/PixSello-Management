@@ -1,6 +1,7 @@
 package com.belgaum.fragments;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,12 +75,12 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 
 			Entity entity = listOfEvents.get(position);
 			Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+			intent.putExtra("notification", false);
 			intent.putExtra("name", entity.getName());
 			intent.putExtra("desc", entity.getEventDescription());
 			intent.putExtra("image", entity.getImageUrl());
 			intent.putExtra("id", entity.getId());
 			startActivity(intent);
-
 		}
 	};
 
@@ -124,6 +125,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 			System.out.println(jsonArray);
 
 			if (jsonArray.length() == 0) {
+				pDialog.cancel();
 				Util.showToast(getActivity(), "No Records Found.");
 				listOfEvents.clear();
 				return;
@@ -135,12 +137,13 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 				entity.setName(jsonObj.getString("title"));
 				entity.setId(jsonObj.getString("id"));
 				entity.setEventDescription(jsonObj.getString("desrip"));
+				entity.setEventDate(jsonObj.getString("eventdate"));
 				entity.setImageUrl(Util.IMAGE_URL
 						+ jsonObj.getString("imageUrl"));
 				listOfEvents.add(entity);
 			}
 			pDialog.cancel();
-
+			Collections.reverse(listOfEvents);
 			adapter.notifyDataSetChanged();
 		} catch (JSONException e) {
 			e.printStackTrace();

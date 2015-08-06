@@ -15,6 +15,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.belgaum.events.AppController;
 import com.belgaum.events.R;
 import com.belgaum.events.util.Entity;
+import com.google.android.gms.internal.ho;
 
 public class CustomAdapter extends ArrayAdapter<Entity> {
 
@@ -69,9 +70,12 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 		thumbNail.setImageUrl(entity.getImageUrl(), imageLoader);
 
 		if (typeOfScreen.equalsIgnoreCase("Events")) {
+			holder.textEventDate = (TextView) convertView.findViewById(R.id.text_item_date);
+			holder.textEventDate.setVisibility(View.VISIBLE);
 			holder.textName = (TextView) convertView
 					.findViewById(R.id.text_item_name);
 			holder.textName.setText(entity.getName());
+			holder.textEventDate.setText(entity.getEventDate());
 		} else if (typeOfScreen.equalsIgnoreCase("Area")) {
 			holder.textPosition = (TextView) convertView
 					.findViewById(R.id.text_item_position);
@@ -79,6 +83,7 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.text_item_name);
 			holder.textName.setText(entity.getName());
 			holder.textPosition.setText(entity.getPost());
+//			holder.textEventDate.setVisibility(View.GONE);
 		} else {
 			holder.textPosition = (TextView) convertView
 					.findViewById(R.id.text_item_position);
@@ -86,6 +91,7 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 					.findViewById(R.id.text_item_name);
 			holder.textName.setText(entity.getName());
 			holder.textPosition.setText(entity.getPost());
+//			holder.textEventDate.setVisibility(View.GONE);
 		}
 
 		return convertView;
@@ -96,5 +102,6 @@ public class CustomAdapter extends ArrayAdapter<Entity> {
 		TextView textName;
 		TextView textPosition;
 		ImageView image;
+		TextView textEventDate;
 	}
 }

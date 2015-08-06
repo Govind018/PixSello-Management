@@ -32,9 +32,12 @@ public class WebRequestPost extends AsyncTask<String, Integer, String>{
 	List<NameValuePair> dataTosend;
 	ProgressDialog dialog;
 	
+	Context thisContext;
+	
 	public WebRequestPost(IWebRequest clientWebRequest,List<NameValuePair> nameValuePairs,Context context,String message){
 		webRequest = clientWebRequest;
 		dataTosend = nameValuePairs;
+		thisContext = context;
 		dialog = new ProgressDialog(context);
 		dialog.setCanceledOnTouchOutside(false);
 		dialog.setMessage(message);
@@ -62,7 +65,7 @@ public class WebRequestPost extends AsyncTask<String, Integer, String>{
  			
 			String json_obj = convertStreamToString(response.getEntity()
 					.getContent());
-                       
+			
 			System.out.println(json_obj + "JSON");
 			
 			try {

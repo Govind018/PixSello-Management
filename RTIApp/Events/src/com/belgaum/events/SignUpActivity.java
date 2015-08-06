@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,6 +33,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
@@ -44,6 +46,7 @@ import com.belgaum.events.adapter.SpinnerCustomAdapter;
 import com.belgaum.events.util.Entity;
 import com.belgaum.events.util.Util;
 import com.belgaum.networks.IWebRequest;
+import com.belgaum.networks.RegisterToGCM;
 import com.belgaum.networks.WebRequestPost;
 
 public class SignUpActivity extends ActionBarActivity implements
@@ -103,6 +106,8 @@ public class SignUpActivity extends ActionBarActivity implements
 	ArrayList<Entity> prefix;
 
 	String image_str;
+
+	ProgressDialog pDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -288,16 +293,20 @@ public class SignUpActivity extends ActionBarActivity implements
 						} else {
 							JSONObject objDetails = new JSONObject(
 									json.getString("details"));
-							Util.storeUserSession(SignUpActivity.this, true,
-									true);
-							Util.storeUserDetails(SignUpActivity.this,
-									objDetails.getString("id"),
-									objDetails.getString("name"));
-							finish();
-							startActivity(new Intent(getApplicationContext(),
-									DashBoardActivity.class));
-							Util.showToast(getApplicationContext(),
-									json.getString("message"));
+
+							// register GCM once sign up is success
+//							registerGCM(objDetails, json.getString("message"));
+
+							 Util.storeUserSession(SignUpActivity.this,
+							 true,true);
+							 Util.storeUserDetails(SignUpActivity.this,
+							 objDetails.getString("id"),
+							 objDetails.getString("name"));
+							 finish();
+							 startActivity(new Intent(getApplicationContext(),
+							 DashBoardActivity.class));
+							 Util.showToast(getApplicationContext(),
+							 json.getString("message"));
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -307,6 +316,73 @@ public class SignUpActivity extends ActionBarActivity implements
 
 			postData.execute(Util.SIGNUP_URL);
 		}
+	}
+
+	private void registerGCM(JSONObject objDetails, String message) {
+		try {
+
+			pDialog = new ProgressDialog(SignUpActivity.this);
+			pDialog.setMessage("Please Wait.");
+			pDialog.show();
+
+			final String userId = objDetails.getString("id");
+			Util.storeUserSession(SignUpActivity.this, true, true);
+			Util.storeUserDetails(SignUpActivity.this,
+					objDetails.getString("id"), objDetails.getString("name"));
+
+			RegisterToGCM gcmRegister = new RegisterToGCM(new IWebRequest() {
+
+				@Override
+				public void onDataArrived(String regId) {
+
+					Util.showToast(getApplicationContext(), "Register ID "
+							+ regId);
+					Util.storeRegistrationId(regId, SignUpActivity.this);
+
+					sendRegIdToServer(regId, userId);
+
+				}
+			}, SignUpActivity.this);
+
+			gcmRegister.execute(null, null, null);
+
+			// Util.showToast(getApplicationContext(), message);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void sendRegIdToServer(String regId, String userId) {
+
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("userid", userId));
+		nameValuePairs.add(new BasicNameValuePair("gcmid", regId));
+
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+			@Override
+			public void onDataArrived(String data) {
+
+				try {
+					JSONObject json = new JSONObject(data);
+
+					String loginStatus = json.getString("error");
+					if (loginStatus.equalsIgnoreCase("true")) {
+						pDialog.cancel();
+						Util.showToast(getApplicationContext(),
+								"Something went wrong..!");
+					} else {
+						pDialog.cancel();
+						finish();
+						startActivity(new Intent(getApplicationContext(),
+								DashBoardActivity.class));
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, nameValuePairs, SignUpActivity.this, "Please Wait.");
+		post.execute(Util.GCM_URL);
 	}
 
 	@Override
