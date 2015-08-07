@@ -34,6 +34,7 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="Business"
+                android:layout_centerHorizontal="true"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -61,6 +62,7 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="Table"
+                android:layout_centerHorizontal="true"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -88,6 +90,7 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="Name"
+                android:layout_centerHorizontal="true"
                 android:textSize="20sp" />
 
         </RelativeLayout>
@@ -96,7 +99,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@android:color/white"
+        android:background="#99FFFFFF"
         android:gravity="center" >
 
         <EditText

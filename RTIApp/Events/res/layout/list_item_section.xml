@@ -29,6 +29,16 @@
             android:scaleType="fitXY"
             android:src="@drawable/default_user" >
         </com.android.volley.toolbox.NetworkImageView>
+        
+        <TextView
+            android:id="@+id/event_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="7dp"
+            android:text="25-11-1989"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/event_desc"
