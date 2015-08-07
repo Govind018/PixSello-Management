@@ -1,6 +1,7 @@
 package com.belgaum.events.util;
 
 import java.util.List;
+import java.util.Random;
 
 import android.app.ActivityManager;
 import android.app.IntentService;
@@ -16,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -57,9 +59,11 @@ public class GCMNotificationIntentService extends IntentService {
 
 				Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
 
-//				sendNotification("" + extras.get(Util.MESSAGE_KEY));
-				
-				showNotificationMessage("RTI X",""+extras.get(Util.MESSAGE_KEY),""+extras.get("event"));
+				// sendNotification("" + extras.get(Util.MESSAGE_KEY));
+
+				// showNotificationMessage("RTI X",""+extras.get(Util.MESSAGE_KEY),""+extras.get("event"));
+				show("RTI X", "" + extras.get(Util.MESSAGE_KEY),
+						"" + extras.get("event"));
 				Log.i(TAG, "Received: " + extras.toString());
 			}
 		}
@@ -74,9 +78,9 @@ public class GCMNotificationIntentService extends IntentService {
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 				new Intent(this, GCMNotificationIntentService.class), 0);
 
-		mBuilder = new NotificationCompat.Builder(
-				this).setSmallIcon(R.drawable.app_logo)
-				.setContentTitle("RTI X")
+		mBuilder = new NotificationCompat.Builder(this)
+				.setSmallIcon(R.drawable.app_logo)
+				.setContentTitle("RTI Area X")
 				.setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
 				.setContentText(msg);
 
@@ -85,9 +89,47 @@ public class GCMNotificationIntentService extends IntentService {
 		Log.d(TAG, "Notification sent successfully.");
 	}
 
-	public void showNotificationMessage(String title, String message,String eventID) {
+	public void show(String title, String message, String eventID) {
+		int id = 1;
 
-		Intent intent = new Intent(getApplicationContext(),EventDetailActivity.class);
+		Random random = new Random();
+		int m = random.nextInt(9999 - 1000) + 1000;
+
+		int icon = R.drawable.round_test;
+		Intent resultIntent = new Intent(this, EventDetailActivity.class);
+		resultIntent.putExtra("id", eventID);
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		// Adds the back stack
+		stackBuilder.addParentStack(EventDetailActivity.class);
+		// Adds the Intent to the top of the stack
+		stackBuilder.addNextIntent(resultIntent);
+		// Gets a PendingIntent containing the entire back stack
+		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(
+				this);
+		builder.setContentIntent(resultPendingIntent)
+				.setSmallIcon(icon)
+				.setTicker(title)
+				.setWhen(0)
+				.setAutoCancel(true)
+				.setContentTitle(title)
+				.setSound(
+						RingtoneManager
+								.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+				.setLargeIcon(
+						BitmapFactory.decodeResource(this.getResources(), icon))
+				.setContentText(message);
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		mNotificationManager.notify(m, builder.build());
+
+	}
+
+	public void showNotificationMessage(String title, String message,
+			String eventID) {
+
+		Intent intent = new Intent(getApplicationContext(),
+				EventDetailActivity.class);
 		intent.putExtra("id", eventID);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -101,33 +143,35 @@ public class GCMNotificationIntentService extends IntentService {
 			int icon = R.drawable.app_logo;
 
 			int mNotificationId = 1;
-			
+
 			int numOfMessages = 0;
 
 			PendingIntent resultPendingIntent = PendingIntent.getActivity(this,
-					0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+					0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-			NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
+			// NotificationCompat.InboxStyle inboxStyle = new
+			// NotificationCompat.InboxStyle();
 
-			mBuilder = new NotificationCompat.Builder(
-					this);
+			mBuilder = new NotificationCompat.Builder(this);
 			notification = mBuilder
 					.setSmallIcon(icon)
 					.setTicker(title)
 					.setWhen(0)
 					.setAutoCancel(true)
 					.setContentTitle(title)
-					.setStyle(inboxStyle)
-					.setContentIntent(resultPendingIntent).setNumber(++numOfMessages)
-					.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+					.setContentIntent(resultPendingIntent)
+					.setNumber(++numOfMessages)
+					.setSound(
+							RingtoneManager
+									.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
 					.setLargeIcon(
 							BitmapFactory.decodeResource(this.getResources(),
 									icon)).setContentText(message).build();
 
 			mNotificationManager = (NotificationManager) this
 					.getSystemService(Context.NOTIFICATION_SERVICE);
-			mNotificationManager.notify(mNotificationId,notification);
-			
+			mNotificationManager.notify(mNotificationId, notification);
+
 		} else {
 			intent.putExtra("id", eventID);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK

@@ -7,6 +7,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.belgaum.events.AppController;
 import com.belgaum.events.R;
 import com.belgaum.events.util.Entity;
+import com.google.android.gms.internal.ho;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -25,7 +26,7 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 	int inflatableRes = 0;
 
 	ArrayList<Entity> details;
-	
+
 	ImageLoader imageLoader = AppController.getInstance().getImageLoader();
 
 	public EventDetailAdapter(Context context, int resource,
@@ -72,11 +73,13 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 						.findViewById(R.id.event_name);
 				holder.textEventDesc = (TextView) convertView
 						.findViewById(R.id.event_desc);
+				holder.textEventDate = (TextView) convertView
+						.findViewById(R.id.event_date);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			Entity entity = details.get(position);
 			imageLoader = AppController.getInstance().getImageLoader();
 			NetworkImageView thumbNail = (NetworkImageView) convertView
@@ -84,7 +87,8 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 			thumbNail.setImageUrl(entity.getImageUrl(), imageLoader);
 			holder.textEventName.setText(entity.getEventName());
 			holder.textEventDesc.setText(entity.getEventDescription());
-			
+			holder.textEventDate.setText(entity.getEventDate());
+
 		} else {
 			if (convertView == null) {
 				convertView = inflater.inflate(inflatableRes, null);
@@ -111,6 +115,7 @@ public class EventDetailAdapter extends ArrayAdapter<Entity> {
 		RelativeLayout sentMsg;
 		TextView textEventName;
 		TextView textEventDesc;
+		TextView textEventDate;
 
 	}
 }

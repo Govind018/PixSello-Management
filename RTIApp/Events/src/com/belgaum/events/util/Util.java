@@ -14,36 +14,43 @@ import android.widget.Toast;
 
 public class Util {
 
+//	dhairyasheel.com use this while notifications
 	
-	public static String LOGIN_URL = "http://www.rtiarea10.co.in/api/index.php/applogin";
+//	http://www.dhairyasheel.com/pk/
+	
+//	http://www.rtiarea10.co.in
+	
+	public static String LOGIN_URL = "http://www.dhairyasheel.com/pk/api/index.php/applogin";
 
-	public static String SIGNUP_URL = "http://www.rtiarea10.co.in/api/index.php/appregister2";
+	public static String SIGNUP_URL = "http://www.dhairyasheel.com/pk/api/index.php/appregister2";
 
-	public static String SIGNUP_PREFIX_URL = "http://www.rtiarea10.co.in/api/index.php/prefixtablenumber";
+	public static String SIGNUP_PREFIX_URL = "http://www.dhairyasheel.com/pk/api/index.php/prefixtablenumber";
 
-	public static String FORGOT_PASSWORD_URL = "http://www.rtiarea10.co.in/api/index.php/forgotpassword";
+	public static String FORGOT_PASSWORD_URL = "http://www.dhairyasheel.com/pk/api/index.php/forgotpassword";
 
-	public static String SEARCH_URL = "http://www.rtiarea10.co.in/api/index.php/search2";
+	public static String SEARCH_URL = "http://www.dhairyasheel.com/pk/api/index.php/search2";
 
-	public static String EVETNS_URL = "http://www.rtiarea10.co.in/api/index.php/getallevents2";
+	public static String EVETNS_URL = "http://www.dhairyasheel.com/pk/api/index.php/getallevents2";
 
-	public static String NATIONAL_BOARD_URL = "http://www.rtiarea10.co.in/api/index.php/nationalboard2";
+	public static String NATIONAL_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/nationalboard2";
 
-	public static String AREA_BOARD_URL = "http://www.rtiarea10.co.in/api/index.php/areaboard2";
+	public static String AREA_BOARD_URL = "http://www.dhairyasheel.com/pk/api/index.php/areaboard2";
 
 	public static String ADMIN_URL = "http://www.rtiarea10.co.in";
 	
-	public static String ADD_COMMENTS_URL = "http://www.rtiarea10.co.in/api/index.php/addcomment";
+	public static String ADD_COMMENTS_URL = "http://www.dhairyasheel.com/pk/api/index.php/addcomment";
 	
-	public static String GET_COMMENTS_URL = "http://www.rtiarea10.co.in/api/index.php/eventdetails2";
+	public static String GET_COMMENTS_URL = "http://www.dhairyasheel.com/pk/api/index.php/eventdetails2";
 
-	public static String GCM_URL = "http://www.rtiarea10.co.in/api/index.php/gcmid";
+	public static String GCM_URL = "http://www.dhairyasheel.com/pk/api/index.php/gcmid";
 	
-	public static String EVENT_DATA_URL = "http://www.rtiarea10.co.in/api/index.php/eventdetails2";
+	public static String EVENT_DATA_URL = "http://www.dhairyasheel.com/pk/api/index.php/eventdetails2";
+	
+	public static String NOTIFICATION_STATUS_URL = "http://www.dhairyasheel.com/pk/api/index.php/notificationon";
 	
 	public static final String NETWORK_ERROR_MSG = "No Network Connection.";
 
-	public static final String IMAGE_URL = "http://www.rtiarea10.co.in/";
+	public static final String IMAGE_URL = "http://www.dhairyasheel.com/pk/";
 	
 	public static final String REGISTRATION_ID = "487202621602";
 	

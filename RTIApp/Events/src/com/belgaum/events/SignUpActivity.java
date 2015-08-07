@@ -294,7 +294,7 @@ public class SignUpActivity extends ActionBarActivity implements
 							JSONObject objDetails = new JSONObject(
 									json.getString("details"));
 
-							// register GCM once sign up is success
+//							// register GCM once sign up is success
 //							registerGCM(objDetails, json.getString("message"));
 
 							 Util.storeUserSession(SignUpActivity.this,
@@ -303,10 +303,10 @@ public class SignUpActivity extends ActionBarActivity implements
 							 objDetails.getString("id"),
 							 objDetails.getString("name"));
 							 finish();
+							 Util.showToast(getApplicationContext(),
+									 json.getString("message"));
 							 startActivity(new Intent(getApplicationContext(),
 							 DashBoardActivity.class));
-							 Util.showToast(getApplicationContext(),
-							 json.getString("message"));
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();

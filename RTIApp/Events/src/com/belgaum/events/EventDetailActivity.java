@@ -147,6 +147,7 @@ public class EventDetailActivity extends ActionBarActivity {
 						entity.setHeader(true);
 						entity.setEventName(jsonObj.getString("title"));
 						entity.setEventDescription(jsonObj.getString("desrip"));
+						entity.setEventDate(jsonObj.getString("eventdate"));
 						entity.setImageUrl(Util.IMAGE_URL+jsonObj.getString("imageUrl"));
 						details.add(entity);
 					} else {
@@ -158,6 +159,7 @@ public class EventDetailActivity extends ActionBarActivity {
 								entity.setHeader(true);
 								entity.setEventName(jsonObj.getString("title"));
 								entity.setEventDescription(jsonObj.getString("desrip"));
+								entity.setEventDate(jsonObj.getString("eventdate"));
 								entity.setImageUrl(Util.IMAGE_URL+jsonObj.getString("imageUrl"));
 							} else {
 								entity.setHeader(false);
@@ -175,7 +177,6 @@ public class EventDetailActivity extends ActionBarActivity {
 			}
 		}, nameValuePairs, EventDetailActivity.this, "Please Wait.");
 		post.execute(Util.EVENT_DATA_URL);
-		
 	}
 
 	public void doSend(View v) {

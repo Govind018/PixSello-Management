@@ -1,5 +1,13 @@
 package com.belgaum.events;
 
+import java.util.ArrayList;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +18,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import com.belgaum.events.util.Util;
+import com.belgaum.fragments.Notifications;
 import com.belgaum.fragments.AimObjectivesFragment;
 import com.belgaum.fragments.AreaBoardFragment;
 import com.belgaum.fragments.EventsFragment;
@@ -17,6 +26,7 @@ import com.belgaum.fragments.NationalBoardFragment;
 import com.belgaum.fragments.SearchFragment;
 import com.belgaum.networks.IWebRequest;
 import com.belgaum.networks.RegisterToGCM;
+import com.belgaum.networks.WebRequestPost;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class DashBoardActivity extends ActionBarActivity implements
@@ -48,19 +58,64 @@ public class DashBoardActivity extends ActionBarActivity implements
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getString(R.string.title_section1);
-
+     
 		// Set up the drawer.
 		mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
 
-//		registerInBackground();
+		// register GCM once sign up is success
+//		registerGCM();
+		
+		if(!Util.getRegId(DashBoardActivity.this).isEmpty()){
+			registerGCM();
+		}
 	}
 
 	private void registerGCM() {
 
-		// gcm = GoogleCloudMessaging.getInstance(this);
-		// regId = getRegistrationId();
+		RegisterToGCM gcmRegister = new RegisterToGCM(new IWebRequest() {
 
+			@Override
+			public void onDataArrived(String regId) {
+
+//				Util.showToast(getApplicationContext(), "Register ID " + regId);
+				Util.storeRegistrationId(regId, DashBoardActivity.this);
+
+				sendRegIdToServer(regId, Util.getUserId(DashBoardActivity.this));
+
+			}
+		}, DashBoardActivity.this);
+
+		gcmRegister.execute(null, null, null);
+
+		// Util.showToast(getApplicationContext(), message);
+	}
+
+	private void sendRegIdToServer(String regId, String userId) {
+
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		nameValuePairs.add(new BasicNameValuePair("userid", userId));
+		nameValuePairs.add(new BasicNameValuePair("gcmid", regId));
+
+		WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+			@Override
+			public void onDataArrived(String data) {
+
+				try {
+					JSONObject json = new JSONObject(data);
+
+					String loginStatus = json.getString("error");
+					if (loginStatus.equalsIgnoreCase("true")) {
+						Util.showToast(getApplicationContext(),
+								"Something went wrong..!");
+					} 
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+		}, nameValuePairs, DashBoardActivity.this, "Please Wait.");
+		post.execute(Util.GCM_URL);
 	}
 
 	private void registerInBackground() {
@@ -71,7 +126,7 @@ public class DashBoardActivity extends ActionBarActivity implements
 			public void onDataArrived(String regId) {
 
 				Util.showToast(getApplicationContext(), "Register ID " + regId);
-				 Util.storeRegistrationId(regId, DashBoardActivity.this);
+				Util.storeRegistrationId(regId, DashBoardActivity.this);
 
 			}
 		}, DashBoardActivity.this);
@@ -143,15 +198,19 @@ public class DashBoardActivity extends ActionBarActivity implements
 
 		case 4:
 			fragment = new EventsFragment();
+			mTitle = getString(R.string.title_section4);
 			mTitle = getString(R.string.title_section5);
 			restoreActionBar();
 			break;
 
 		case 5:
-			// fragment = new AdminFragment();
-			// mTitle = getString(R.string.title_section6);
-			// restoreActionBar();
+			fragment = new Notifications();
+			mTitle = getString(R.string.title_section6);
+			restoreActionBar();
+			break;
 
+		case 6:
+			restoreActionBar();
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(Util.ADMIN_URL));
 			startActivity(intent);
