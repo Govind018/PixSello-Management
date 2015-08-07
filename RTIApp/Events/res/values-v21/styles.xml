@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme for API 14+. This theme completely replaces
@@ -11,7 +11,7 @@
 
         <item name="colorPrimary">#caba4c</item>
         <!-- <item name="colorPrimaryDark">#da4d3b</item> -->
-        <item name="colorAccent">#FF80AB</item>
+        <item name="colorAccent">#caba4c</item>
         <item  name="android:activatedBackgroundIndicator">@drawable/list_item_background</item>
         <item name="android:dropDownListViewStyle">@style/mySpinnerStyle</item>
     </style>

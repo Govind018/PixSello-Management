@@ -49,7 +49,8 @@
     <string name="title_section3">Area 10 Board</string>
     <string name="title_section4">National Board</string>
     <string name="title_section5">Events</string>
-    <string name="title_section6">Admin</string>
+    <string name="title_section6">Notifications</string>
+    <string name="title_section7">Admin</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
