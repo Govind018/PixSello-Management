@@ -17,14 +17,14 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/tab_released"
-            android:gravity="center" >
+             >
 
             <View
                 android:id="@+id/bottom_strip_business"
                 android:layout_width="match_parent"
                 android:layout_height="6dp"
                 android:layout_alignParentBottom="true"
-                android:background="#FF6666" />
+                android:background="@color/action_bar_background" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,8 +32,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="12dp"
-                android:gravity="center"
                 android:text="Business"
+                android:layout_centerHorizontal="true"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -61,6 +61,7 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:text="Table"
+                android:layout_centerHorizontal="true"
                 android:textSize="20sp" />
         </RelativeLayout>
 
@@ -86,6 +87,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="12dp"
+                android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:text="Name"
                 android:textSize="20sp" />
@@ -96,7 +98,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@android:color/white"
+        android:background="#99FFFFFF"
         android:gravity="center" >
 
         <EditText
