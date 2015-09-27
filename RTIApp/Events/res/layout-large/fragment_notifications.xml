@@ -21,7 +21,6 @@
     <CheckBox
         android:id="@+id/chk_notifications"
         android:layout_width="wrap_content"
-        android:checked="true"
         android:checkMark="@drawable/list_item_background"
         android:layout_height="wrap_content" />
 
