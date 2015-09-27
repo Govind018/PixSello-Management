@@ -1,5 +1,6 @@
 package com.belgaum.events.util;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -158,5 +159,28 @@ public class Util {
 		Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
+	}
+	
+	public static void saveTables(Context context,ArrayList<String> defaultTables){
+		
+		SharedPreferences pref = context.getSharedPreferences("tables", 0);
+		SharedPreferences.Editor editor = pref.edit();
+		editor.putInt("tables_size", defaultTables.size());
+		for(int i = 0; i < defaultTables.size(); i++){
+			editor.putString("tables_size_"+i, defaultTables.get(i));
+		}
+		editor.commit();
+	}
+	
+	public static ArrayList<String> getTables(Context context){
+		
+		ArrayList<String> tables = new ArrayList<String>();
+		SharedPreferences pref = context.getSharedPreferences("tables", 0);
+		int size = pref.getInt("tables_size", 0);
+		for(int i = 0; i< size; i++){
+			tables.add(pref.getString("tables_size_"+i, null));
+		}
+		
+		return tables;
 	}
 }

@@ -70,6 +70,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		pDialog.setMessage("Please Wait.");
 		list.setOnItemClickListener(listListener);
 		listOfData = new ArrayList<Entity>();
+		listOfSearchData = new ArrayList<Entity>();
 
 		adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,
 				listOfData, "National");

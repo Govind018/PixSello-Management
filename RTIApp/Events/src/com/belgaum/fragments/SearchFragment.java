@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,6 +72,11 @@ public class SearchFragment extends Fragment {
 				container, false);
 
 		autoTextView = (AutoCompleteTextView) convertView.findViewById(R.id.edit_autocomplete);
+		autoTextView.addTextChangedListener(listener);
+		
+		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1,Util.getTables(getActivity()));
+		autoTextView.setAdapter(adapter1);
 		
 		searchBusiness = (RelativeLayout) convertView
 				.findViewById(R.id.search_business);
@@ -101,7 +109,27 @@ public class SearchFragment extends Fragment {
 
 		return convertView;
 	}
+	
 
+	TextWatcher listener = new TextWatcher() {
+		
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+		}
+		
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+		}
+		
+		@Override
+		public void afterTextChanged(Editable s) {
+			
+		}
+	};
+	
+	
 	OnItemClickListener listListener = new OnItemClickListener() {
 
 		@Override
