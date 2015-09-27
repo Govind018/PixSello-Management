@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -57,6 +58,8 @@ public class SearchFragment extends Fragment {
 	ArrayList<Entity> listOfUsers;
 	
 	SearchListAdapter adapter;
+	
+	AutoCompleteTextView autoTextView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +68,8 @@ public class SearchFragment extends Fragment {
 		View convertView = inflater.inflate(R.layout.fragment_search_new,
 				container, false);
 
+		autoTextView = (AutoCompleteTextView) convertView.findViewById(R.id.edit_autocomplete);
+		
 		searchBusiness = (RelativeLayout) convertView
 				.findViewById(R.id.search_business);
 		searchBusiness.setOnClickListener(businessListener);
@@ -231,6 +236,9 @@ public class SearchFragment extends Fragment {
 					R.color.tab_released));
 
 			editSearchKey.setHint("Enter Table");
+			
+			autoTextView.setVisibility(View.VISIBLE);
+			editSearchKey.setVisibility(View.GONE);
 
 			btnStripTable.setBackgroundColor(getResources().getColor(
 					R.color.tab_strip));
@@ -256,6 +264,9 @@ public class SearchFragment extends Fragment {
 					R.color.tab_released));
 
 			editSearchKey.setHint("Enter Name");
+			
+			autoTextView.setVisibility(View.GONE);
+			editSearchKey.setVisibility(View.VISIBLE);
 
 			btnStripTable.setBackgroundColor(getResources().getColor(
 					R.color.tab_pressed));
@@ -277,6 +288,9 @@ public class SearchFragment extends Fragment {
 				R.color.tab_released));
 
 		editSearchKey.setHint("Enter Business");
+		
+		autoTextView.setVisibility(View.GONE);
+		editSearchKey.setVisibility(View.VISIBLE);
 
 		btnStripBusiness.setBackgroundColor(getResources().getColor(
 				R.color.tab_strip));

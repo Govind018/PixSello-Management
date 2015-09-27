@@ -15,7 +15,6 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.belgaum.events.AppController;
 import com.belgaum.events.R;
 import com.belgaum.events.util.Entity;
-import com.google.android.gms.internal.ho;
 
 public class CustomAdapter extends ArrayAdapter<Entity> {
 

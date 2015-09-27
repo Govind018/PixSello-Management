@@ -11,6 +11,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,7 +63,8 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 		adapter = new CustomAdapter(getActivity(),
 				R.layout.event_row, listOfEvents, "Events");
 		list.setAdapter(adapter);
-
+		ActionBar actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+		actionBar.setDisplayShowCustomEnabled(false);
 		getAllEvents();
 
 		return convertView;

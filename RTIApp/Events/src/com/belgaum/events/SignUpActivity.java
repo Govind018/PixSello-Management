@@ -33,7 +33,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
@@ -260,6 +259,10 @@ public class SignUpActivity extends ActionBarActivity implements
 				Util.showToast(getApplicationContext(),
 						"Please select Image to Upload.");
 				return;
+			}
+			
+			if(anv.isEmpty()){
+				anv = "00-00-0000";
 			}
 
 			List<NameValuePair> dataToSend = new ArrayList<NameValuePair>();

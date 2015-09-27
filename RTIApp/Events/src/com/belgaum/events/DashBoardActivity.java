@@ -7,7 +7,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,11 +17,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import com.belgaum.events.util.Util;
-import com.belgaum.fragments.Notifications;
 import com.belgaum.fragments.AimObjectivesFragment;
 import com.belgaum.fragments.AreaBoardFragment;
 import com.belgaum.fragments.EventsFragment;
 import com.belgaum.fragments.NationalBoardFragment;
+import com.belgaum.fragments.Notifications;
 import com.belgaum.fragments.SearchFragment;
 import com.belgaum.networks.IWebRequest;
 import com.belgaum.networks.RegisterToGCM;
@@ -66,7 +65,8 @@ public class DashBoardActivity extends ActionBarActivity implements
 		// register GCM once sign up is success
 //		registerGCM();
 		
-		if(!Util.getRegId(DashBoardActivity.this).isEmpty()){
+		if(Util.getRegId(DashBoardActivity.this).isEmpty()){
+//			Util.showToast(getApplicationContext(), "REgister");
 			registerGCM();
 		}
 	}
@@ -99,13 +99,14 @@ public class DashBoardActivity extends ActionBarActivity implements
 
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
-			@Override
+			@Override                      
 			public void onDataArrived(String data) {
 
 				try {
 					JSONObject json = new JSONObject(data);
 
 					String loginStatus = json.getString("error");
+//					Util.showToast(getApplicationContext(), loginStatus);
 					if (loginStatus.equalsIgnoreCase("true")) {
 						Util.showToast(getApplicationContext(),
 								"Something went wrong..!");

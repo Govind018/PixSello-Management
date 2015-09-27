@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -47,6 +50,8 @@ public class EventDetailActivity extends ActionBarActivity {
 
 	String eventUrl;
 
+	BroadcastReceiver mReciever;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,23 +68,43 @@ public class EventDetailActivity extends ActionBarActivity {
 
 		Intent intent = getIntent();
 		eventId = intent.getStringExtra("id");
-		
-//		if(intent.getBooleanExtra("notification", false)){
-//			eventName = intent.getStringExtra("name");
-//			eventDesc = intent.getStringExtra("desc");
-//			eventUrl = intent.getStringExtra("image");
-//		}
+
+		// if(intent.getBooleanExtra("notification", false)){
+		// eventName = intent.getStringExtra("name");
+		// eventDesc = intent.getStringExtra("desc");
+		// eventUrl = intent.getStringExtra("image");
+		// }
 
 		details = new ArrayList<Entity>();
 		adapter = new EventDetailAdapter(getApplicationContext(),
 				R.layout.event_chat_row_new, details);
 		list.setAdapter(adapter);
 
-//		getComments();
-		
+		list.setOnItemClickListener(listener);
+
+		// getComments();
+
 		getEventsData();
 
 	}
+
+	OnItemClickListener listener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+
+			if (position == 0) {
+				Entity en = details.get(position);
+				Intent intent = new Intent(EventDetailActivity.this,
+						ImagePreviewActivity.class);
+				intent.putExtra("image", en.getImageUrl());
+				intent.putExtra("title", en.getEventName());
+				overridePendingTransition(R.anim.zoom, 0);
+				startActivity(intent);
+			}
+		}
+	};
 
 	private void getComments() {
 
@@ -128,9 +153,9 @@ public class EventDetailActivity extends ActionBarActivity {
 		}, nameValuePairs, EventDetailActivity.this, "Please Wait.");
 		post.execute(Util.GET_COMMENTS_URL);
 	}
-	
-	private void getEventsData(){
-		
+
+	private void getEventsData() {
+
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("id", eventId));
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
@@ -148,7 +173,8 @@ public class EventDetailActivity extends ActionBarActivity {
 						entity.setEventName(jsonObj.getString("title"));
 						entity.setEventDescription(jsonObj.getString("desrip"));
 						entity.setEventDate(jsonObj.getString("eventdate"));
-						entity.setImageUrl(Util.IMAGE_URL+jsonObj.getString("imageUrl"));
+						entity.setImageUrl(Util.IMAGE_URL
+								+ jsonObj.getString("imageUrl"));
 						details.add(entity);
 					} else {
 						for (int i = 0; i < len; i++) {
@@ -158,9 +184,12 @@ public class EventDetailActivity extends ActionBarActivity {
 								entity.setHeader(true);
 								entity.setHeader(true);
 								entity.setEventName(jsonObj.getString("title"));
-								entity.setEventDescription(jsonObj.getString("desrip"));
-								entity.setEventDate(jsonObj.getString("eventdate"));
-								entity.setImageUrl(Util.IMAGE_URL+jsonObj.getString("imageUrl"));
+								entity.setEventDescription(jsonObj
+										.getString("desrip"));
+								entity.setEventDate(jsonObj
+										.getString("eventdate"));
+								entity.setImageUrl(Util.IMAGE_URL
+										+ jsonObj.getString("imageUrl"));
 							} else {
 								entity.setHeader(false);
 							}
@@ -188,14 +217,16 @@ public class EventDetailActivity extends ActionBarActivity {
 		}
 
 		editMessage.setText("");
-		
+
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		nameValuePairs.add(new BasicNameValuePair("comment", msg));
 		nameValuePairs.add(new BasicNameValuePair("event_id", eventId));
-		nameValuePairs.add(new BasicNameValuePair("member_id", Util.getUserId(getApplicationContext())));
-//		nameValuePairs.add(new BasicNameValuePair("regId", Util.getRegId(EventDetailActivity.this)));
-//		nameValuePairs.add(new BasicNameValuePair("message", msg));
-		
+		nameValuePairs.add(new BasicNameValuePair("member_id", Util
+				.getUserId(getApplicationContext())));
+		// nameValuePairs.add(new BasicNameValuePair("regId",
+		// Util.getRegId(EventDetailActivity.this)));
+		// nameValuePairs.add(new BasicNameValuePair("message", msg));
+
 		WebRequestPost post = new WebRequestPost(new IWebRequest() {
 
 			@Override
@@ -204,8 +235,8 @@ public class EventDetailActivity extends ActionBarActivity {
 				try {
 					JSONObject json = new JSONObject(data);
 
-//					Util.showToast(getApplicationContext(),"" + json);
-					
+					// Util.showToast(getApplicationContext(),"" + json);
+
 					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
@@ -225,7 +256,6 @@ public class EventDetailActivity extends ActionBarActivity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-
 			}
 		}, nameValuePairs, EventDetailActivity.this, "Please Wait.");
 
@@ -245,11 +275,11 @@ public class EventDetailActivity extends ActionBarActivity {
 		case android.R.id.home:
 			finish();
 			break;
-			
-		case R.id.item_navigation :
+
+		case R.id.item_navigation:
 			details.clear();
 			adapter.notifyDataSetChanged();
-//			getComments();
+			// getComments();
 			getEventsData();
 
 		default:
@@ -258,8 +288,8 @@ public class EventDetailActivity extends ActionBarActivity {
 
 		return super.onOptionsItemSelected(item);
 	}
-	
-	public void rowSe(View v){
+
+	public void rowSe(View v) {
 		list.setSelection(details.size() - 1);
 	}
 }

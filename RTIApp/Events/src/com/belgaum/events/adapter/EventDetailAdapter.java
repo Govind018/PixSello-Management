@@ -2,13 +2,6 @@ package com.belgaum.events.adapter;
 
 import java.util.ArrayList;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-import com.belgaum.events.AppController;
-import com.belgaum.events.R;
-import com.belgaum.events.util.Entity;
-import com.google.android.gms.internal.ho;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
+import com.belgaum.events.AppController;
+import com.belgaum.events.R;
+import com.belgaum.events.util.Entity;
 
 public class EventDetailAdapter extends ArrayAdapter<Entity> {
 

@@ -32,6 +32,8 @@ public class GCMNotificationIntentService extends IntentService {
 	private NotificationManager mNotificationManager;
 	NotificationCompat.Builder mBuilder;
 	Notification notification;
+	
+	public static final String MESSAGE_RECIEVE = "com.belgaum.events.messages";
 
 	public GCMNotificationIntentService() {
 		super("GcmIntentService");
@@ -62,7 +64,7 @@ public class GCMNotificationIntentService extends IntentService {
 				// sendNotification("" + extras.get(Util.MESSAGE_KEY));
 
 				// showNotificationMessage("RTI X",""+extras.get(Util.MESSAGE_KEY),""+extras.get("event"));
-				show("RTI X", "" + extras.get(Util.MESSAGE_KEY),
+				show(getResources().getString(R.string.app_name), "" + extras.get(Util.MESSAGE_KEY),
 						"" + extras.get("event"));
 				Log.i(TAG, "Received: " + extras.toString());
 			}
@@ -118,7 +120,7 @@ public class GCMNotificationIntentService extends IntentService {
 						RingtoneManager
 								.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
 				.setLargeIcon(
-						BitmapFactory.decodeResource(this.getResources(), icon))
+						BitmapFactory.decodeResource(this.getResources(), R.drawable.notification_icon))
 				.setContentText(message);
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		mNotificationManager.notify(m, builder.build());
@@ -173,6 +175,10 @@ public class GCMNotificationIntentService extends IntentService {
 			mNotificationManager.notify(mNotificationId, notification);
 
 		} else {
+//			Intent broadcastIntent = new Intent(MESSAGE_RECIEVE);
+//			broadcastIntent.putExtra("eventId", eventID);
+//			sendBroadcast(broadcastIntent);
+			
 			intent.putExtra("id", eventID);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
 					| Intent.FLAG_ACTIVITY_SINGLE_TOP);

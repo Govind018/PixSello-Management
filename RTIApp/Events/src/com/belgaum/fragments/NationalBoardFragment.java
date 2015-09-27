@@ -7,10 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.belgaum.events.DetailsActivity;
@@ -36,16 +44,24 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 	ListView listNationalBoard;
 	ArrayList<Entity> listOfData;
 	
+	ArrayList<Entity> listOfSearchData;
+
 	ProgressDialog pDialog;
-	
+
 	CustomAdapter adapter;
 
+	MenuItem menuItem;
+	
+	boolean isSearchEnabled = false;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		    
+
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -58,26 +74,95 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		pDialog.setMessage("Please Wait.");
 		listNationalBoard.setOnItemClickListener(listListener);
 		listOfData = new ArrayList<Entity>();
-		
-                                     
+		listOfSearchData = new ArrayList<Entity>();
+
 		// getValues();
-		
-		adapter = new CustomAdapter(getActivity(),
-				R.layout.area_board_row, listOfData, "National");
+
+		adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,
+				listOfData, "National");
 		listNationalBoard.setAdapter(adapter);
 
 		getAllValues();
 
 		return convertView;
 	}
+
+	private void setActionBar(boolean status) {
+		
+		// custom action bar
+		LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT, Gravity.RIGHT
+						| Gravity.CENTER_VERTICAL);
+		LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		View customNav = inflater.inflate(R.layout.action_bar_layout, null);
+		EditText search = (EditText) customNav.findViewById(R.id.edit_search);
+		search.addTextChangedListener(listener);
+		
+		ActionBar actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+		
+		actionBar.setCustomView(customNav);
+		actionBar.setDisplayShowCustomEnabled(status);
+
+	}
 	
+	TextWatcher listener = new TextWatcher() {
+		
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			
+			if (!s.toString().isEmpty()) {
+				listOfSearchData.clear();
+				sortData(s.toString());
+				isSearchEnabled = true;
+			} else {
+			
+			}
+		}
+		
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+		}
+		
+		@Override
+		public void afterTextChanged(Editable s) {
+			
+		}
+	};
+	
+	private void sortData(String input) {
+
+		if (!input.isEmpty()) {
+
+			for (Entity data : listOfData) {
+
+				if (data.getPost().startsWith(input)) {
+					listOfSearchData.add(data);
+				}else if (data.getName().contains(input)){
+					listOfSearchData.add(data);
+				}
+			}
+		}
+
+		adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,
+				listOfSearchData, "National");
+		listNationalBoard.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+
+	}
+
 	OnItemClickListener listListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-
-			Entity entity = listOfData.get(position);
+			Entity entity; 
+			if(!isSearchEnabled){
+				entity = listOfData.get(position);
+			}else{
+				entity = listOfSearchData.get(position);
+			}
 			Intent intent = new Intent(getActivity(), DetailsActivity.class);
 			intent.putExtra("name", entity.getName());
 			intent.putExtra("email", entity.getEmail());
@@ -173,6 +258,10 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 				listOfData.add(entity);
 			}
 			pDialog.cancel();
+			listOfSearchData.clear();
+			adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,
+					listOfData, "National");
+			listNationalBoard.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
 
 		} catch (JSONException e) {
@@ -186,20 +275,39 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		Util.showToast(getActivity(), "Network Error.");
 
 	}
-	
+
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.refresh, menu);
+		inflater.inflate(R.menu.national, menu);
+		
+		menuItem = menu.findItem(R.id.item_navigation);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
-		listOfData.clear();
-		adapter.notifyDataSetChanged();
-		getAllValues();
-		
+		switch (item.getItemId()) {
+		case R.id.item_navigation:
+			listOfData.clear();
+			adapter.notifyDataSetChanged();
+			getAllValues();
+			break;
+
+		case R.id.item_search:
+			if(!isSearchEnabled){
+				menuItem.setVisible(false);
+				setActionBar(true);
+				isSearchEnabled = true;
+			}else{
+				menuItem.setVisible(true);
+				setActionBar(false);
+				isSearchEnabled = false;
+				getAllValues();
+			}
+		default:
+			break;
+		}
 		return true;
 	}
 }
