@@ -23,10 +23,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.belgaum.events.DetailsActivity;
@@ -50,7 +52,8 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 
 	CustomAdapter adapter;
 
-	MenuItem menuItem;
+	MenuItem menuItemRefresh;
+	MenuItem menuItemSearch;
 	
 	boolean isSearchEnabled = false;
 	
@@ -99,12 +102,31 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		EditText search = (EditText) customNav.findViewById(R.id.edit_search);
 		search.addTextChangedListener(listener);
 		
+		ImageView imageClose = (ImageView) customNav.findViewById(R.id.close_image);
+		imageClose.setOnClickListener(clickListener);
+		
 		ActionBar actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
 		
 		actionBar.setCustomView(customNav);
 		actionBar.setDisplayShowCustomEnabled(status);
 
 	}
+	
+	OnClickListener clickListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+
+			menuItemRefresh.setVisible(true);
+			menuItemSearch.setVisible(true);
+			setActionBar(false);
+			isSearchEnabled = false;
+			adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,listOfData, "National");
+			listNationalBoard.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
+			
+		}
+	};
 	
 	TextWatcher listener = new TextWatcher() {
 		
@@ -145,11 +167,9 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 			}
 		}
 
-		adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,
-				listOfSearchData, "National");
+		adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,listOfSearchData, "National");
 		listNationalBoard.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
-
 	}
 
 	OnItemClickListener listListener = new OnItemClickListener() {
@@ -179,6 +199,7 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 
 		if (Util.isNetWorkConnected(getActivity())) {
 			pDialog.show();
+			pDialog.setCanceledOnTouchOutside(false);
 			WebRequest.addNewRequestQueue(NationalBoardFragment.this,
 					Util.NATIONAL_BOARD_URL);
 		} else {
@@ -212,14 +233,8 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 						JSONObject json = jsonArray.getJSONObject(i);
 						entity.setName(json.getString("name"));
 						entity.setPost(json.getString("post"));
-						// entity.setEmail(json.getString("email"));
-						// entity.setMobile(json.getString("mobile"));
-						// entity.setBusiness(json.getString("business"));
 						listOfData.add(entity);
 					}
-
-					// adapter.notifyDataSetChanged();
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -281,7 +296,8 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.national, menu);
 		
-		menuItem = menu.findItem(R.id.item_navigation);
+		menuItemRefresh = menu.findItem(R.id.item_navigation);
+		menuItemSearch = menu.findItem(R.id.item_search);
 	}
 
 	@Override
@@ -296,14 +312,15 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 
 		case R.id.item_search:
 			if(!isSearchEnabled){
-				menuItem.setVisible(false);
+				menuItemRefresh.setVisible(false);
+				menuItemSearch.setVisible(false);
 				setActionBar(true);
 				isSearchEnabled = true;
 			}else{
-				menuItem.setVisible(true);
+				menuItemRefresh.setVisible(true);
+				menuItemSearch.setVisible(true);
 				setActionBar(false);
 				isSearchEnabled = false;
-				getAllValues();
 			}
 		default:
 			break;

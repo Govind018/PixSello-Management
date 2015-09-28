@@ -36,11 +36,11 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 	ListView list;
 
 	ArrayList<Entity> listOfEvents;
-	
+
 	ProgressDialog pDialog;
-	
+
 	CustomAdapter adapter;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,10 +60,11 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 		list.setOnItemClickListener(listListener);
 		list.setAdapter(adapter);
 		listOfEvents = new ArrayList<Entity>();
-		adapter = new CustomAdapter(getActivity(),
-				R.layout.event_row, listOfEvents, "Events");
+		adapter = new CustomAdapter(getActivity(), R.layout.event_row,
+				listOfEvents, "Events");
 		list.setAdapter(adapter);
-		ActionBar actionBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+		ActionBar actionBar = ((ActionBarActivity) getActivity())
+				.getSupportActionBar();
 		actionBar.setDisplayShowCustomEnabled(false);
 		getAllEvents();
 
@@ -91,6 +92,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 
 		if (Util.isNetWorkConnected(getActivity())) {
 			pDialog.show();
+			pDialog.setCanceledOnTouchOutside(false);
 			WebRequest.addNewRequestQueue(EventsFragment.this, Util.EVETNS_URL);
 		} else {
 			Util.showToast(getActivity(), "Internet not Connected.");
@@ -108,13 +110,14 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 		menu.clear();
 		inflater.inflate(R.menu.refresh, menu);
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		
+
 		listOfEvents.clear();
 		adapter.notifyDataSetChanged();
 		getAllEvents();
-		
+
 		return true;
 	}
 
@@ -123,7 +126,7 @@ public class EventsFragment extends Fragment implements NetWorkLayer {
 
 		System.out.println(json);
 		try {
-			
+
 			JSONArray jsonArray = json.getJSONArray("details");
 			System.out.println(jsonArray);
 

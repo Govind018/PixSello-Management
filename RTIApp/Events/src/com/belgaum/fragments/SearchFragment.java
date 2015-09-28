@@ -59,10 +59,12 @@ public class SearchFragment extends Fragment {
 	ListView listUsers;
 
 	ArrayList<Entity> listOfUsers;
-	
+
 	SearchListAdapter adapter;
-	
+
 	AutoCompleteTextView autoTextView;
+	
+	String searchBy;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,13 +73,15 @@ public class SearchFragment extends Fragment {
 		View convertView = inflater.inflate(R.layout.fragment_search_new,
 				container, false);
 
-		autoTextView = (AutoCompleteTextView) convertView.findViewById(R.id.edit_autocomplete);
+		autoTextView = (AutoCompleteTextView) convertView
+				.findViewById(R.id.edit_autocomplete);
 		autoTextView.addTextChangedListener(listener);
-		
+
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1,Util.getTables(getActivity()));
+				android.R.layout.simple_list_item_1,
+				Util.getTables(getActivity()));
 		autoTextView.setAdapter(adapter1);
-		
+
 		searchBusiness = (RelativeLayout) convertView
 				.findViewById(R.id.search_business);
 		searchBusiness.setOnClickListener(businessListener);
@@ -98,38 +102,36 @@ public class SearchFragment extends Fragment {
 		btnStripName = convertView.findViewById(R.id.bottom_strip_name);
 		listUsers = (ListView) convertView.findViewById(R.id.list_search);
 		listUsers.setOnItemClickListener(listListener);
-		
+
 		listOfUsers = new ArrayList<Entity>();
-		adapter = new SearchListAdapter(
-				getActivity(), R.layout.search_item_row,
-				listOfUsers);
+		adapter = new SearchListAdapter(getActivity(),
+				R.layout.search_item_row, listOfUsers);
 		listUsers.setAdapter(adapter);
 
 		initUI();
 
 		return convertView;
 	}
-	
 
-	TextWatcher listener = new TextWatcher() {
-		
+		TextWatcher listener = new TextWatcher() {
+
 		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+
 		}
-		
+
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
 				int after) {
 		}
-		
+
 		@Override
 		public void afterTextChanged(Editable s) {
 			
 		}
 	};
-	
-	
+
 	OnItemClickListener listListener = new OnItemClickListener() {
 
 		@Override
@@ -163,11 +165,20 @@ public class SearchFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			
-			InputMethodManager imm = (InputMethodManager)  getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+			InputMethodManager imm = (InputMethodManager) getActivity()
+					.getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+			String temp = autoTextView.getText().toString();
 			
-			String searchBy = editSearchKey.getText().toString();
+			if(!temp.isEmpty()){
+				searchBy = temp;
+				temp ="";
+				autoTextView.setText("");
+			}else{
+				searchBy = editSearchKey.getText().toString();
+			}
 
 			if (searchBy.isEmpty()) {
 				Util.showToast(getActivity(), "Please Enter key to search.");
@@ -182,7 +193,7 @@ public class SearchFragment extends Fragment {
 			ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 			nameValuePair.add(new BasicNameValuePair("searchby", searchByKey));
 			nameValuePair.add(new BasicNameValuePair("keyword", searchBy));
-			
+
 			listOfUsers.clear();
 			adapter.notifyDataSetChanged();
 
@@ -194,7 +205,7 @@ public class SearchFragment extends Fragment {
 					System.out.println(data);
 
 					try {
-						
+
 						JSONObject jsonObj = new JSONObject(data);
 						JSONArray jsonArray = jsonObj.getJSONArray("details");
 						System.out.println(jsonArray);
@@ -220,13 +231,13 @@ public class SearchFragment extends Fragment {
 									+ json.getString("imageUrl"));
 							listOfUsers.add(entity);
 						}
-						
+
 						adapter.notifyDataSetChanged();
 
-//						SearchListAdapter adapter = new SearchListAdapter(
-//								getActivity(), R.layout.search_item_row,
-//								listOfUsers);
-//						listUsers.setAdapter(adapter);
+						// SearchListAdapter adapter = new SearchListAdapter(
+						// getActivity(), R.layout.search_item_row,
+						// listOfUsers);
+						// listUsers.setAdapter(adapter);
 
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -264,7 +275,7 @@ public class SearchFragment extends Fragment {
 					R.color.tab_released));
 
 			editSearchKey.setHint("Enter Table");
-			
+
 			autoTextView.setVisibility(View.VISIBLE);
 			editSearchKey.setVisibility(View.GONE);
 
@@ -292,7 +303,7 @@ public class SearchFragment extends Fragment {
 					R.color.tab_released));
 
 			editSearchKey.setHint("Enter Name");
-			
+
 			autoTextView.setVisibility(View.GONE);
 			editSearchKey.setVisibility(View.VISIBLE);
 
@@ -316,7 +327,7 @@ public class SearchFragment extends Fragment {
 				R.color.tab_released));
 
 		editSearchKey.setHint("Enter Business");
-		
+
 		autoTextView.setVisibility(View.GONE);
 		editSearchKey.setVisibility(View.VISIBLE);
 

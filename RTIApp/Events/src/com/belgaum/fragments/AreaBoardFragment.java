@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
-import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,16 +15,17 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.belgaum.events.DetailsActivity;
@@ -46,7 +46,8 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
 	CustomAdapter adapter;
 
-	MenuItem menuItem;
+	MenuItem menuItemRefresh;
+	MenuItem menuItemSearch;
 
 	boolean isSearchEnabled = false;
 
@@ -90,6 +91,10 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		EditText search = (EditText) customNav.findViewById(R.id.edit_search);
 		search.addTextChangedListener(listener);
 
+		ImageView imageClose = (ImageView) customNav
+				.findViewById(R.id.close_image);
+		imageClose.setOnClickListener(clickListener);
+
 		ActionBar actionBar = ((ActionBarActivity) getActivity())
 				.getSupportActionBar();
 
@@ -97,6 +102,21 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		actionBar.setDisplayShowCustomEnabled(status);
 
 	}
+
+	OnClickListener clickListener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+
+			menuItemRefresh.setVisible(true);
+			menuItemSearch.setVisible(true);
+			setActionBar(false);
+			isSearchEnabled = false;
+			adapter = new CustomAdapter(getActivity(), R.layout.area_board_row,listOfData, "National");
+			list.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
+		}
+	};
 
 	TextWatcher listener = new TextWatcher() {
 
@@ -149,8 +169,9 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
 		inflater.inflate(R.menu.national, menu);
-		menuItem = menu.findItem(R.id.item_navigation);
-		
+
+		menuItemRefresh = menu.findItem(R.id.item_navigation);
+		menuItemSearch = menu.findItem(R.id.item_search);
 	}
 
 	@Override
@@ -164,15 +185,16 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 			break;
 
 		case R.id.item_search:
-			if(!isSearchEnabled){
-				menuItem.setVisible(false);
+			if (!isSearchEnabled) {
+				menuItemRefresh.setVisible(false);
+				menuItemSearch.setVisible(false);
 				setActionBar(true);
 				isSearchEnabled = true;
-			}else{
-				menuItem.setVisible(true);
+			} else {
+				menuItemRefresh.setVisible(true);
+				menuItemSearch.setVisible(true);
 				setActionBar(false);
 				isSearchEnabled = false;
-				getAllValues();
 			}
 		default:
 			break;
@@ -184,6 +206,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
 		if (Util.isNetWorkConnected(getActivity())) {
 			pDialog.show();
+			pDialog.setCanceledOnTouchOutside(false);
 			WebRequest.addNewRequestQueue(AreaBoardFragment.this,
 					Util.AREA_BOARD_URL);
 		} else {
@@ -196,13 +219,13 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Entity entity; 
-			if(!isSearchEnabled){
-				entity = listOfData.get(position);	
-			}else{
+			Entity entity;
+			if (!isSearchEnabled) {
+				entity = listOfData.get(position);
+			} else {
 				entity = listOfSearchData.get(position);
 			}
-			
+
 			Intent intent = new Intent(getActivity(), DetailsActivity.class);
 			intent.putExtra("name", entity.getName());
 			intent.putExtra("email", entity.getEmail());
