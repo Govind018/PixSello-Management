@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.belgaum.events"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="3"
+    android:versionName="1.2" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -18,12 +18,14 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <permission
+    <!--
+         <permission
         android:name="com.belgaum.events.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+    -->
 
     <application
-        android:name="com.belgaum.events.AppController"
+        android:name=".AppController"
         android:allowBackup="true"
         android:icon="@drawable/round_logo2"
         android:label="@string/app_name"
@@ -54,12 +56,14 @@
         <activity
             android:name=".EventDetailActivity"
             android:label="@string/title_activity_event_detail"
-            android:parentActivityName=".DashBoardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >
-            <meta-data
+
+            <!--
+                 <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DashBoardActivity" />
+            -->
         </activity>
         <activity
             android:name=".SearchListActivity"
@@ -73,7 +77,7 @@
         </activity>
 
         <receiver
-            android:name="com.belgaum.events.GcmBroadcastReceiver"
+            android:name=".GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -83,7 +87,12 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="com.belgaum.events.util.GCMNotificationIntentService" />
+        <service android:name=".util.GCMNotificationIntentService" />
+
+        <activity
+            android:name=".ImagePreviewActivity"
+            android:label="@string/title_activity_image_preview" >
+        </activity>
     </application>
 
 </manifest>
