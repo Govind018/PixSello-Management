@@ -20,8 +20,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -90,7 +91,7 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 		View customNav = inflater.inflate(R.layout.action_bar_layout, null);
 		EditText search = (EditText) customNav.findViewById(R.id.edit_search);
 		search.addTextChangedListener(listener);
-
+		
 		ImageView imageClose = (ImageView) customNav
 				.findViewById(R.id.close_image);
 		imageClose.setOnClickListener(clickListener);
@@ -107,7 +108,8 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
 		@Override
 		public void onClick(View v) {
-
+			
+			Util.closeKB(getActivity());
 			menuItemRefresh.setVisible(true);
 			menuItemSearch.setVisible(true);
 			setActionBar(false);
@@ -150,9 +152,9 @@ public class AreaBoardFragment extends Fragment implements NetWorkLayer {
 
 			for (Entity data : listOfData) {
 
-				if (data.getPost().startsWith(input)) {
+				if (data.getPost().toUpperCase().contains(input.toUpperCase())) { 
 					listOfSearchData.add(data);
-				} else if (data.getName().contains(input)) {
+				} else if (data.getName().toUpperCase().contains(input.toUpperCase())) {
 					listOfSearchData.add(data);
 				}
 			}

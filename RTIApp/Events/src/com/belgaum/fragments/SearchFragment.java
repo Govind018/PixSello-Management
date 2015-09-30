@@ -30,7 +30,9 @@ import android.widget.RelativeLayout;
 
 import com.belgaum.events.DetailsActivity;
 import com.belgaum.events.R;
+import com.belgaum.events.SignUpActivity;
 import com.belgaum.events.adapter.SearchListAdapter;
+import com.belgaum.events.adapter.SpinnerCustomAdapter;
 import com.belgaum.events.util.Entity;
 import com.belgaum.events.util.Util;
 import com.belgaum.networks.IWebRequest;
@@ -63,8 +65,12 @@ public class SearchFragment extends Fragment {
 	SearchListAdapter adapter;
 
 	AutoCompleteTextView autoTextView;
-	
+
 	String searchBy;
+	
+	ArrayList<String> tables;
+	
+	ArrayAdapter<String> tablesAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,10 +83,11 @@ public class SearchFragment extends Fragment {
 				.findViewById(R.id.edit_autocomplete);
 		autoTextView.addTextChangedListener(listener);
 
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_list_item_1,
-				Util.getTables(getActivity()));
-		autoTextView.setAdapter(adapter1);
+		tables = new ArrayList<String>();
+		
+		tablesAdapter = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1,tables);
+		autoTextView.setAdapter(tablesAdapter);
 
 		searchBusiness = (RelativeLayout) convertView
 				.findViewById(R.id.search_business);
@@ -110,10 +117,44 @@ public class SearchFragment extends Fragment {
 
 		initUI();
 
+		getTableData();
+
 		return convertView;
 	}
 
-		TextWatcher listener = new TextWatcher() {
+	private void getTableData() {
+		
+			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+			WebRequestPost post = new WebRequestPost(new IWebRequest() {
+
+				@Override
+				public void onDataArrived(String data) {
+					try {
+
+						JSONObject jsonObjDetails = new JSONObject(data);
+						JSONObject objDetails = jsonObjDetails.getJSONObject("details");
+						JSONArray arrayTable = objDetails.getJSONArray("table");
+
+						for (int i = 0; i < arrayTable.length(); i++) {
+							JSONObject obj = arrayTable.getJSONObject(i);
+							tables.add(obj.getString("name"));
+						}
+						
+						tablesAdapter.notifyDataSetChanged();
+
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}, nameValuePairs,getActivity(), "");
+
+			post.execute(Util.SIGNUP_PREFIX_URL);
+
+
+	}
+
+	TextWatcher listener = new TextWatcher() {
 
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before,
@@ -128,7 +169,7 @@ public class SearchFragment extends Fragment {
 
 		@Override
 		public void afterTextChanged(Editable s) {
-			
+
 		}
 	};
 
@@ -171,12 +212,12 @@ public class SearchFragment extends Fragment {
 			imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
 			String temp = autoTextView.getText().toString();
-			
-			if(!temp.isEmpty()){
+
+			if (!temp.isEmpty()) {
 				searchBy = temp;
-				temp ="";
+				temp = "";
 				autoTextView.setText("");
-			}else{
+			} else {
 				searchBy = editSearchKey.getText().toString();
 			}
 

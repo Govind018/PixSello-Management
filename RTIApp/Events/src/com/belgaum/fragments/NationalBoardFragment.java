@@ -116,7 +116,7 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 		
 		@Override
 		public void onClick(View v) {
-
+			Util.closeKB(getActivity());
 			menuItemRefresh.setVisible(true);
 			menuItemSearch.setVisible(true);
 			setActionBar(false);
@@ -159,9 +159,9 @@ public class NationalBoardFragment extends Fragment implements NetWorkLayer {
 
 			for (Entity data : listOfData) {
 
-				if (data.getPost().startsWith(input)) {
+				if (data.getPost().toUpperCase().startsWith(input.toUpperCase())) {
 					listOfSearchData.add(data);
-				}else if (data.getName().contains(input)){
+				}else if (data.getName().toUpperCase().contains(input.toUpperCase())){
 					listOfSearchData.add(data);
 				}
 			}

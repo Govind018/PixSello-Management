@@ -170,12 +170,6 @@ public class SignUpActivity extends ActionBarActivity implements
 						entity.setTableName(obj.getString("name"));
 						tables.add(entity);
 					}
-					ArrayList<String> temp = new ArrayList<String>();
-					for (Entity en : tables){
-						temp.add(en.getTableName());
-					}
-					
-					Util.saveTables(getApplicationContext(), temp);
 
 					JSONArray arrayPrefix = objDetails.getJSONArray("prefix");
 
